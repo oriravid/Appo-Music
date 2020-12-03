@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.app {
+    height: 100vh;
+    display: flex;
+}

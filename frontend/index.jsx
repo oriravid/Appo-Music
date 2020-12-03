@@ -1,7 +1,24 @@
+//ext
 import React from "react";
 import ReactDOM from "react-dom";
-// import Root from "./components/root";
+//int
+import createStore from "./store/store";
+import Root from "./components/root";
 
 document.addEventListener("DOMContentLoaded", () => {
-    ReactDOM.render(<h1>Hello</h1>, document.getElementById("root"));
+    let preloadedState = undefined;
+
+    if (window.currentUser) {
+        preloadedState = {
+            session: {
+                currentUser: window.currentUser,
+            },
+        };
+    }
+
+    const store = createStore(preloadedState);
+    ReactDOM.render(<Root store={store} />, document.getElementById("root"));
+
+    //testing!!!
+    window.store = store;
 });

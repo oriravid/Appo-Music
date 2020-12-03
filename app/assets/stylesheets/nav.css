@@ -1,0 +1,5 @@
+.nav {
+  background-color: pink;
+  flex-basis: 16rem;
+  flex-grow: 1;
+}
