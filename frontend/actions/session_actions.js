@@ -1,5 +1,5 @@
 //int - utils
-import * as APIUtil from "../utils/session_util";
+import * as SessionAPI from "../utils/session_api_utils";
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
@@ -26,16 +26,16 @@ export const clearErrors = () => ({
 
 //Thunk Actions
 export const signup = (formUser) => (dispatch) =>
-    APIUtil.postUser(formUser).then(
+    SessionAPI.postUser(formUser).then(
         (user) => dispatch(receiveCurrentUser(user)),
         (error) => dispatch(receiveErrors(error.responseJSON))
     );
 
 export const signin = (formUser) => (dispatch) =>
-    APIUtil.postSession(formUser).then(
+    SessionAPI.postSession(formUser).then(
         (user) => dispatch(receiveCurrentUser(user)),
         (error) => dispatch(receiveErrors(error.responseJSON))
     );
 
 export const logout = () => (dispatch) =>
-    APIUtil.deleteSession().then(() => dispatch(logoutCurrentUser()));
+    SessionAPI.deleteSession().then(() => dispatch(logoutCurrentUser()));

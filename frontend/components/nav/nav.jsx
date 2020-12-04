@@ -2,23 +2,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//int
+import PlaylistsContainer from "./playlists/playlists_index_container";
+
 export default ({ currentUser, logout }) => {
     const display = currentUser ? (
         <React.Fragment>
             <Link className="btn wide" to="/library">
                 Library
             </Link>
-            <div className="playlists">
-                <h2>Playlists</h2>
-                <ul>
-                    <li>Temp Playlist 1</li>
-                    <li>Temp Playlist 2</li>
-                    <li>Temp Playlist 3</li>
-                    <li>Temp Playlist 4</li>
-                    <li>Temp Playlist 5</li>
-                    <li>Temp Playlist 6</li>
-                </ul>
-            </div>
+            <PlaylistsContainer />
             <div className="current-user">
                 <p onClick={logout}>？</p>
                 <p>{currentUser.username.toUpperCase()}</p>
