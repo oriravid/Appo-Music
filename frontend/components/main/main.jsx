@@ -5,8 +5,16 @@ import React from "react";
 export default ({ currentUser }) => {
     return (
         <div className="main">
-            <div className="music-player">Music Player</div>
-            <div className="main-inner">Main Inner</div>
+            <div className="music-player">music-player</div>
+            <div className="main-inner">
+                main-inner
+                <br />
+                path "/"
+                <br />
+                logged out: browseContainer
+                <br />
+                logged in: libraryContainer
+            </div>
         </div>
     );
 };

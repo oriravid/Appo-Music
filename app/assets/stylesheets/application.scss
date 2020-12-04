@@ -1,0 +1,67 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+@import "_variables";
+
+html {
+    font-family: "Open Sans", Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+}
+
+h2 {
+}
+
+.app {
+    height: 100vh;
+    display: flex;
+}
+
+.input-container {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid $border-color;
+    margin: 10px 0;
+    padding: 5px 10px;
+    display: flex;
+}
+
+.input-container:focus-within {
+    border: 1px solid $main-color;
+}
+
+.input-container input {
+    width: 100%;
+    border: none;
+}
+
+.input-container input:focus {
+    outline: none;
+}
+
+.btn {
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    background-color: $main-color;
+    border: 1px solid $border-color;
+}
+
+.btn.wide {
+    width: 100%;
+}

@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 //int
 import Main from "./main";
 
-const mapStateToProps = (state) => ({
+const mapSTP = (state) => ({
     currentUser: state.session.currentUser,
 });
 
-export default connect(mapStateToProps)(Main);
+export default connect(mapSTP)(Main);

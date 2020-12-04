@@ -1,4 +1,6 @@
-.session-modal {
+@import "_variables";
+
+.session-form-modal {
     position: fixed;
     z-index: 1;
     left: 0;
@@ -13,6 +15,41 @@
     justify-content: center;
 }
 
-.session-content {
+.session-form-content {
     background-color: #fff;
+    text-align: center;
+    width: 800px;
+    height: 560px;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $border-color;
+    box-shadow: $box-shadow;
+    position: relative;
+}
+
+.session-form .input-container {
+    width: 300px;
+    margin: 0;
+    padding: 10px;
+}
+
+.session-form .input-container:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.session-form .input-container:nth-child(2) {
+    border-radius: 0 0 10px 10px;
+}
+
+.session-form .input-container input {
+    font-size: 18px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

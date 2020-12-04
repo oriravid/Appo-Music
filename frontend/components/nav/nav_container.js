@@ -3,14 +3,14 @@ import React from "react";
 import { connect } from "react-redux";
 //int
 import Nav from "./nav";
-import { logout } from "../../actions/session";
+import { logout } from "../../actions/session_actions";
 
-const mapStateToProps = (state) => ({
+const mapSTP = (state) => ({
     currentUser: state.session.currentUser,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDTP = (dispatch) => ({
     logout: () => dispatch(logout()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default connect(mapSTP, mapDTP)(Nav);

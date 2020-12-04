@@ -1,0 +1,10 @@
+@import "_variables";
+
+.music-player {
+    background-color: #fff;
+    border-bottom: 1px solid $border-color;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

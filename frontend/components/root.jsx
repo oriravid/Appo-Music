@@ -8,7 +8,7 @@ import App from "./app";
 export default ({ store }) => (
     <Provider store={store}>
         <HashRouter>
-            <App />
+            <App store={store} />
         </HashRouter>
     </Provider>
 );

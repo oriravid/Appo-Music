@@ -4,30 +4,11 @@ import { Link } from "react-router-dom";
 
 export default ({ currentUser, logout }) => {
     const display = currentUser ? (
-        <div>
-            <p>Hello, {currentUser.username}</p>
-            <button onClick={logout}>Log Out</button>
-        </div>
-    ) : (
-        <div>
-            <Link className="btn" to="/signup">
-                Sign Up
+        <React.Fragment>
+            <Link className="btn wide" to="/library">
+                Library
             </Link>
-            <Link className="btn" to="/signin">
-                Sign In
-            </Link>
-        </div>
-    );
-
-    return (
-        <div className="nav">
-            <h1 className="logo">APPO MUSIC</h1>
-            <form>
-                <input type="text" placeholder="search"></input>
-            </form>
-            <div>{display}</div>
-            <div>
-                <button>Library</button>
+            <div className="playlists">
                 <h2>Playlists</h2>
                 <ul>
                     <li>Temp Playlist 1</li>
@@ -38,6 +19,28 @@ export default ({ currentUser, logout }) => {
                     <li>Temp Playlist 6</li>
                 </ul>
             </div>
+            <div className="current-user">
+                <p onClick={logout}>？</p>
+                <p>{currentUser.username.toUpperCase()}</p>
+            </div>
+        </React.Fragment>
+    ) : (
+        <React.Fragment>
+            <Link className="btn wide" to="/signin">
+                Sign In
+            </Link>
+            <div className="trial-container">Trial Container</div>
+        </React.Fragment>
+    );
+
+    return (
+        <div className="nav">
+            <h1 className="logo">APPO MUSIC</h1>
+            <div className="input-container">
+                <p>？</p>
+                <input type="text" placeholder="Search"></input>
+            </div>
+            {display}
         </div>
     );
 };
