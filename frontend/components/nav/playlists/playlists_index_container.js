@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PlaylistsIndex from "./playlists_index";
 import {
     getUserPlaylists,
+    createNewPlaylist,
     clearUserPlaylists,
 } from "../../../actions/playlist_actions";
 
@@ -14,6 +15,7 @@ const mapSTP = (state) => ({
 
 const mapDTP = (dispatch) => ({
     getUserPlaylists: (userId) => dispatch(getUserPlaylists(userId)),
+    createNewPlaylist: (playlist) => dispatch(createNewPlaylist(playlist)),
     clearUserPlaylists: () => dispatch(clearUserPlaylists()),
 });
 

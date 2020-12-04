@@ -13,9 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
             session: {
                 currentUser: window.currentUser,
             },
-            ui: {
-                modal: false,
-            },
         };
         delete window.currentUser;
     }

@@ -4,15 +4,14 @@ class Api::PlaylistsController < ApplicationController
     # .order(:title)
   end
 
-  # def create
-  #   @playlist = Playlist.new(playlist_params)
-  #   if @playlist.save
-  #     # render "api/playlists/show"
-  #     render json: @playlist
-  #   else
-  #     render json: @playlist.errors.full_messages, status: 422
-  #   end
-  # end
+  def create
+    @playlist = Playlist.new(playlist_params)
+    if @playlist.save
+      render "api/playlists/show"
+    else
+      render json: @playlist.errors.full_messages, status: 422
+    end
+  end
   
   # def update
   #   @playlist = selected_playlist

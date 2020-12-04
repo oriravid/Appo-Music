@@ -1,6 +1,5 @@
 //ext
 import React from "react";
-import { Redirect } from "react-router-dom";
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -60,7 +59,7 @@ class SessionForm extends React.Component {
     }
 
     // componentDidMount() {
-    //     this.props.toggleModal();
+    //     this.props.openModal();
     // }
 
     // componentWillUnmount() {

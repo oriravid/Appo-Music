@@ -4,12 +4,12 @@ export const getUserPlaylists = (userId) =>
         method: "GET",
     });
 
-// export const postPlaylist = (playlist) =>
-//     $.ajax({
-//         url: "/api/playlists",
-//         method: "POST",
-//         data: { playlist },
-//     });
+export const createNewPlaylist = (playlist) =>
+    $.ajax({
+        url: "/api/playlists",
+        method: "POST",
+        data: { playlist },
+    });
 
 // export const patchPlaylist = (playlist) =>
 //     $.ajax({

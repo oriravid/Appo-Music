@@ -1,15 +1,17 @@
 //int
-import { TOGGLE_MODAL } from "../actions/ui_actions";
+import { OPEN_MODAL, CLOSE_MODAL } from "../actions/ui_actions";
 
-const _defaultUI = {
+const _initialState = {
     modal: false,
 };
 
-export default (state = _defaultUI, action) => {
+export default (state = _initialState, action) => {
     Object.freeze(state);
     switch (action.type) {
-        case TOGGLE_MODAL:
-            return { modal: !state.modal };
+        case OPEN_MODAL:
+            return { modal: true };
+        case CLOSE_MODAL:
+            return { modal: false };
         default:
             return state;
     }
