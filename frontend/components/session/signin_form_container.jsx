@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 //int
 import SessionForm from "./session_form";
 import { signin, clearErrors } from "../../actions/session_actions";
-import { toggleModal } from "../../actions/ui_actions";
+// import { toggleModal } from "../../actions/ui_actions";
 
 const mapSTP = ({ errors }) => {
     return {
@@ -19,7 +19,7 @@ const mapDTP = (dispatch) => {
     return {
         processForm: (user) => dispatch(signin(user)),
         clearErrors: () => dispatch(clearErrors()),
-        toggleModal: () => dispatch(toggleModal()),
+        // toggleModal: () => dispatch(toggleModal()),
     };
 };
 

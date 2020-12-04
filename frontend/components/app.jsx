@@ -9,13 +9,11 @@ import MainContainer from "./main/main_container";
 //int - utils
 import { AuthRoute, ProtectedRoute } from "../utils/route_utils";
 
-export default ({ store }) => {
-    // console.log(store.getState());
+export default () => {
     return (
         <div className="app">
             <Route path="/" component={NavContainer} />
             <Route path="/" component={MainContainer} />
-            {/* {console.log(store.getState().ui.modal)} */}
             <AuthRoute exact path="/signup" component={SignupFormContainer} />
             <AuthRoute exact path="/signin" component={SigninFormContainer} />
         </div>

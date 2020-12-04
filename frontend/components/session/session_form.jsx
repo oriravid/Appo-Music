@@ -50,7 +50,7 @@ class SessionForm extends React.Component {
             return (
                 <ul className="session-errors-list">
                     {this.props.errors.map((error, idx) => (
-                        <li classNAme="session-error" key={`error-${idx}`}>
+                        <li className="session-error" key={`error-${idx}`}>
                             {error}
                         </li>
                     ))}
@@ -59,9 +59,9 @@ class SessionForm extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.props.toggleModal();
-    }
+    // componentDidMount() {
+    //     this.props.toggleModal();
+    // }
 
     // componentWillUnmount() {
     //     if (this.props.errors) {
@@ -70,6 +70,7 @@ class SessionForm extends React.Component {
     // }
 
     render() {
+        console.log(this.props.modal);
         const buttonText =
             this.props.formType === "signin" ? "Sign In" : "Register";
         return (
