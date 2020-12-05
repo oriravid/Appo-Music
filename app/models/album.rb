@@ -13,7 +13,7 @@
 #
 class Album < ApplicationRecord
     validates :artist_id, :title, :genre, :release_date, :description, presence: true
-    validates :artist_id, uniqueness: { scope: :title }
+    validates :title, uniqueness: { scope: :artist_id }
 
     belongs_to :artist,
         foreign_key: :artist_id,

@@ -9,9 +9,15 @@
 #  updated_at :datetime         not null
 #
 class Playlist < ApplicationRecord
-    # validations
     validates :user_id, :title, presence: true
 
-    # assosciations
     belongs_to :user
+
+    has_many :playlist_tracks,
+        foreign_key: :playlist_id,
+        class_name: :PlaylistTrack
+
+    has_many :tracks,
+        through: :playlist_tracks,
+        source: :track
 end

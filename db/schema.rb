@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_05_024508) do
+ActiveRecord::Schema.define(version: 2020_12_05_051039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2020_12_05_024508) do
     t.index ["name"], name: "index_artists_on_name", unique: true
   end
 
+  create_table "playlist_tracks", force: :cascade do |t|
+    t.integer "playlist_id", null: false
+    t.integer "track_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["playlist_id"], name: "index_playlist_tracks_on_playlist_id"
+    t.index ["track_id"], name: "index_playlist_tracks_on_track_id"
+  end
+
   create_table "playlists", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "title", null: false
@@ -51,6 +60,14 @@ ActiveRecord::Schema.define(version: 2020_12_05_024508) do
     t.datetime "updated_at", null: false
     t.index ["album_id"], name: "index_tracks_on_album_id"
     t.index ["title"], name: "index_tracks_on_title"
+  end
+
+  create_table "user_saves", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "track_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "track_id"], name: "index_user_saves_on_user_id_and_track_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

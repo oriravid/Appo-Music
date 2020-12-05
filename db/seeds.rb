@@ -6,13 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create( username: "demo", password: "demodemo")
-
-Playlist.create([
-    {user_id: 1, title: "Beach bash 2015"},
-    {user_id: 1, title: "Graduation"},
-    {user_id: 1, title: "House party"},
-    {user_id: 1, title: "Rap Slapz"},
+User.create([
+    {username: "demo", password: "demodemo"},
+    {username: "ori_the_creator", password: "imobdeep"}
 ])
 
 Artist.create([
@@ -53,4 +49,26 @@ Track.create([
     {album_id: 2, title: "Dreaming With a Broken Heart", track_number: 10},
     {album_id: 2, title: "In Repair", track_number: 11},
     {album_id: 2, title: "I'm Gonna Find Another You", track_number: 12},
+])
+
+Playlist.create([
+    {user_id: 1, title: "Beach bash 2015"},
+    {user_id: 1, title: "Graduation"},
+    {user_id: 1, title: "House party"},
+    {user_id: 1, title: "Rap Slapz"},
+])
+
+PlaylistTrack.create([
+    {playlist_id: 1, track_id: 1},
+    {playlist_id: 1, track_id: 2},
+    {playlist_id: 1, track_id: 3},
+    {playlist_id: 2, track_id: 3},
+    {playlist_id: 2, track_id: 4},
+    {playlist_id: 2, track_id: 5},
+])
+
+UserSave.create([
+    {user_id: 1, track_id: 11},
+    {user_id: 1, track_id: 15},
+    {user_id: 1, track_id: 4},  
 ])
