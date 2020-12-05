@@ -58,18 +58,13 @@ class SessionForm extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //     this.props.openModal();
-    // }
-
-    // componentWillUnmount() {
-    //     if (this.props.errors) {
-    //         this.props.clearErrors();
-    //     }
-    // }
+    componentWillUnmount() {
+        if (this.props.errors.length) {
+            this.props.clearErrors();
+        }
+    }
 
     render() {
-        console.log(this.props.modal);
         const buttonText =
             this.props.formType === "signin" ? "Sign In" : "Register";
         return (

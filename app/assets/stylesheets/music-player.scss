@@ -7,4 +7,43 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    position: relative;
+}
+
+.music-player > .controls,
+.music-player > .display,
+.music-player > .volume {
+    width: 33.33%;
+    text-align: center;
+}
+
+.music-player > .controls {
+}
+
+.music-player > .display {
+    border: 1px solid $border-color;
+    display: flex;
+    height: 45px;
+}
+
+.music-player > .display > .display-inner {
+    display: flex;
+    flex-flow: column nowrap;
+    flex-grow: 2;
+}
+
+img.album-artwork {
+    width: 45px;
+}
+
+.display-inner > .song-info {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.display-inner > .slider {
+    background-color: black;
+    height: 3px;
 }

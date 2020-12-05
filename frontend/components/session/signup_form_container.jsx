@@ -4,8 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 //int
 import SessionForm from "./session_form";
-import { signup } from "../../actions/session_actions";
-import { openModal, closeModal } from "../../actions/ui_actions";
+import { signup, clearErrors } from "../../actions/session_actions";
 
 const mapSTP = ({ errors, ui }) => {
     return {
@@ -20,8 +19,6 @@ const mapDTP = (dispatch) => {
     return {
         processForm: (user) => dispatch(signup(user)),
         clearErrors: () => dispatch(clearErrors()),
-        openModal: () => dispatch(openModal()),
-        closeModal: () => dispatch(openModal()),
     };
 };
 

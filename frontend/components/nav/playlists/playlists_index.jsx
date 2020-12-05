@@ -40,14 +40,12 @@ class PlaylistsIndex extends Component {
 
     render() {
         const { playlists } = this.props;
-        let playlistItems;
-        if (Object.keys(playlists).length !== 0) {
-            playlistItems = Object.values(playlists)
-                .sort((a, b) => (a.title > b.title ? 1 : -1))
-                .map((playlist) => (
-                    <PlaylistIndexItem key={playlist.id} playlist={playlist} />
-                ));
-        }
+        if (!playlists) return null;
+        const playlistItems = Object.values(playlists)
+            .sort((a, b) => (a.title > b.title ? 1 : -1))
+            .map((playlist) => (
+                <PlaylistIndexItem key={playlist.id} playlist={playlist} />
+            ));
 
         return (
             <div className="playlists">

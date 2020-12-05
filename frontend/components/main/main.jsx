@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Switch } from "react-router-dom";
 //int - components
+import MusicPlayer from "./music_player";
 import Playlist from "./playlist";
 //int - utils
 import { ProtectedRoute } from "../../utils/route_utils";
@@ -14,7 +15,7 @@ const mapSTP = (state) => ({
 const Main = ({ currentUser }) => {
     return (
         <div className="main">
-            <div className="music-player">music-player</div>
+            <MusicPlayer />
             <div className="main-inner">
                 <Switch>
                     <ProtectedRoute

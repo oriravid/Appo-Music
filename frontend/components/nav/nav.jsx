@@ -1,11 +1,13 @@
 //ext
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
-//int
+//int - components
 import PlaylistsContainer from "./playlists/playlists_index_container";
+//int - actions
+import { logout } from "../../actions/session_actions";
 
-export default ({ currentUser, logout }) => {
+const Nav = ({ currentUser, logout }) => {
     const display = currentUser ? (
         <React.Fragment>
             <Link className="btn wide" to="/library">
@@ -37,3 +39,13 @@ export default ({ currentUser, logout }) => {
         </div>
     );
 };
+
+const mapSTP = (state) => ({
+    currentUser: state.session.currentUser,
+});
+
+const mapDTP = (dispatch) => ({
+    logout: () => dispatch(logout()),
+});
+
+export default connect(mapSTP, mapDTP)(Nav);
