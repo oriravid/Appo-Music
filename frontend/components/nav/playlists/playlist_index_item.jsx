@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const PlaylistIndexItem = ({ playlist }) => {
     return (
-        <Link to={`/playlists/${playlist.id}/`}>
-            <li className="playlist-item">
-                <span>？</span>
+        <NavLink to={`/playlists/${playlist.id}/`}>
+            <li className="nav-section-list-item">
+                <img src={"/assets/icons/playlist.svg"} className="icon" />
                 <span>{playlist.title}</span>
             </li>
-        </Link>
+        </NavLink>
     );
 };
 

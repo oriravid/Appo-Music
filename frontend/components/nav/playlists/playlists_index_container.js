@@ -16,7 +16,7 @@ const mapSTP = (state) => ({
 const mapDTP = (dispatch) => ({
     getUserPlaylists: (userId) => dispatch(getUserPlaylists(userId)),
     createNewPlaylist: (playlist) => dispatch(createNewPlaylist(playlist)),
-    clearUserPlaylists: () => dispatch(clearUserPlaylists()),
+    // clearUserPlaylists: () => dispatch(clearUserPlaylists()),
 });
 
 export default connect(mapSTP, mapDTP)(PlaylistsIndex);

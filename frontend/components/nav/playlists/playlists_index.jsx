@@ -34,9 +34,9 @@ class PlaylistsIndex extends Component {
         this.props.getUserPlaylists(this.props.currentUser.id);
     }
 
-    componentWillUnmount() {
-        this.props.clearUserPlaylists();
-    }
+    // componentWillUnmount() {
+    //     this.props.clearUserPlaylists();
+    // }
 
     render() {
         const { playlists } = this.props;
@@ -48,19 +48,19 @@ class PlaylistsIndex extends Component {
             ));
 
         return (
-            <div className="playlists">
+            <div className="nav-section">
                 <h2>Playlists</h2>
-                <ul className="playlists-list">
+                <ul className="nav-section-list">
                     {playlistItems}
-                    <li className="playlist-item">
-                        <span>？</span>
+                    <li className="nav-section-list-item">
+                        <img src={"/assets/icons/add.svg"} className="icon" />
                         <input
                             id="new-playlist-field"
                             type="text"
                             value={this.state.title}
                             onChange={this.handleInput("title")}
                             onKeyPress={this.handleEnter}
-                            placeholder="Create New..."
+                            placeholder="Create New"
                             autoComplete="off"
                         ></input>
                     </li>

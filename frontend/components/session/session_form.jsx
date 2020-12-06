@@ -1,5 +1,7 @@
 //ext
 import React from "react";
+//int - util
+import * as icons from "../../utils/icons";
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -20,7 +22,9 @@ class SessionForm extends React.Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
+        if (e) {
+            e.preventDefault();
+        }
         const user = Object.assign({}, this.state);
         this.props.processForm(user);
     }
@@ -29,19 +33,31 @@ class SessionForm extends React.Component {
         e.preventDefault();
         const usernameField = document.getElementById("username-field");
         const passwordField = document.getElementById("password-field");
-        const demoPassword = ["d", "e", "m", "o", "d", "e", "m", "o"];
+        const demoPassword = ["J", "*", "B", "x", ".", "Y", "8", "6", "!", "R"];
 
-        usernameField.value = "demo";
+        usernameField.value = "Demo";
         passwordField.value = "";
 
-        demoPassword.forEach((letter) => {
-            passwordField.value += letter;
+        demoPassword.forEach((letter, index) => {
+            setTimeout(() => (passwordField.value += letter), 150 * index);
         });
 
-        this.setState({
-            username: usernameField.value,
-            password: passwordField.value,
-        });
+        setTimeout(
+            () => (
+                this.setState({
+                    username: usernameField.value,
+                    password: passwordField.value,
+                }),
+                this.handleSubmit()
+            ),
+            1750
+        );
+    }
+
+    handleClose(e) {
+        if (e.currentTarget === e.target || e.key === "Escape") {
+            this.props.history.push("/");
+        }
     }
 
     renderErrors() {
@@ -49,7 +65,10 @@ class SessionForm extends React.Component {
             return (
                 <ul className="session-errors-list">
                     {this.props.errors.map((error, idx) => (
-                        <li className="session-error" key={`error-${idx}`}>
+                        <li
+                            className="session-error error"
+                            key={`error-${idx}`}
+                        >
                             {error}
                         </li>
                     ))}
@@ -65,47 +84,73 @@ class SessionForm extends React.Component {
     }
 
     render() {
-        const buttonText =
-            this.props.formType === "signin" ? "Sign In" : "Register";
+        let headerText, introText;
+        if (this.props.formType === "signin") {
+            headerText = "Sign In";
+            introText = "Welcome back.";
+        } else {
+            headerText = "Register";
+            introText = "Please fill in your information below.";
+        }
+
         return (
-            <div className="session-form-modal">
+            <div
+                className="session-form-modal"
+                onClick={this.handleClose.bind(this)}
+            >
                 <div className="session-form-content">
-                    <span className="close">？</span>
-                    <h1>Appo Music</h1>
-                    <h2>{buttonText}</h2>
-                    <p>Welcome back.</p>
-                    <form onSubmit={this.handleSubmit} className="session-form">
+                    <img
+                        src={"/assets/icons/close.svg"}
+                        className="icon close"
+                        onClick={this.handleClose.bind(this)}
+                    />
+                    <div className="session-form-text">
+                        <h1 className="logo">Appo Music</h1>
+                        <h2>{headerText}</h2>
+                        <p>{introText}</p>
+                    </div>
+                    <div className="session-form">
+                        <form
+                            onSubmit={this.handleSubmit}
+                            className="session-form"
+                        >
+                            <div className="input-container">
+                                <input
+                                    id="username-field"
+                                    type="text"
+                                    value={this.state.username}
+                                    onChange={this.handleInput("username")}
+                                    placeholder="Username"
+                                    autoComplete="off"
+                                />
+                            </div>
+                            <div className="input-container">
+                                <input
+                                    id="password-field"
+                                    type="password"
+                                    value={this.state.password}
+                                    onChange={this.handleInput("password")}
+                                    placeholder="Password"
+                                    autoComplete="off"
+                                />
+                                <span onClick={this.handleSubmit}>
+                                    {icons.go}
+                                </span>
+                            </div>
+                            <input type="submit" value={headerText} />
+                        </form>
+                    </div>
+                    <div className="session-errors-container">
                         {this.renderErrors()}
-                        <div className="input-container">
-                            <input
-                                id="username-field"
-                                type="text"
-                                value={this.state.username}
-                                onChange={this.handleInput("username")}
-                                placeholder="Username"
-                                autoComplete="off"
-                            />
-                        </div>
-                        <div className="input-container">
-                            <input
-                                id="password-field"
-                                type="password"
-                                value={this.state.password}
-                                onChange={this.handleInput("password")}
-                                placeholder="Password"
-                                autoComplete="off"
-                            />
-                        </div>
-                        <input type="submit" value={buttonText} />
-                    </form>
-                    {this.props.navLink}
-                    {this.props.formType === "signin" ? (
-                        <button onClick={this.handleDemoLogin}>
-                            Demo Login
-                        </button>
-                    ) : (
-                        ""
-                    )}
+                    </div>
+                    <div className="session-form-options">
+                        {this.props.formType === "signin" ? (
+                            <p onClick={this.handleDemoLogin}>Demo Login</p>
+                        ) : (
+                            <br />
+                        )}
+                        {this.props.navLink}
+                    </div>
                 </div>
             </div>
         );

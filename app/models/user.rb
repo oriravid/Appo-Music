@@ -16,7 +16,7 @@ class User < ApplicationRecord
     #validations
     validates :username, presence: true, uniqueness: true 
     validates :session_token, presence: true, uniqueness: true
-    validates :password, length: { minimum: 6 }, allow_nil: true
+    validates :password, length: { minimum: 6, too_short: "must be at least 6 characters" }, allow_nil: true
     validates :password_digest, presence: true
 
     # associations

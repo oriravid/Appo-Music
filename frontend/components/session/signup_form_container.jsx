@@ -6,12 +6,11 @@ import { Link } from "react-router-dom";
 import SessionForm from "./session_form";
 import { signup, clearErrors } from "../../actions/session_actions";
 
-const mapSTP = ({ errors, ui }) => {
+const mapSTP = ({ errors }) => {
     return {
         errors: errors.session,
         formType: "signup",
         navLink: <Link to="/signin">Existing User Login</Link>,
-        modal: ui.modal,
     };
 };
 

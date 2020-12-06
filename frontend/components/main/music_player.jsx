@@ -14,11 +14,31 @@ class MusicPlayer extends React.Component {
         return (
             <div className="music-player">
                 <div className="controls">
-                    <span>SH</span>
-                    <span>PR</span>
-                    <span>PL</span>
-                    <span>NX</span>
-                    <span>LP</span>
+                    <img
+                        src={"/assets/icons/shuffle.svg"}
+                        className="icon"
+                        onClick={() => console.log("Shuffle")}
+                    />
+                    <img
+                        src={"/assets/icons/previous.svg"}
+                        className="icon"
+                        onClick={() => console.log("Previous")}
+                    />
+                    <img
+                        src={"/assets/icons/play.svg"}
+                        className="icon"
+                        onClick={() => console.log("Play")}
+                    />
+                    <img
+                        src={"/assets/icons/next.svg"}
+                        className="icon"
+                        onClick={() => console.log("Next")}
+                    />
+                    <img
+                        src={"/assets/icons/loop.svg"}
+                        className="icon"
+                        onClick={() => console.log("Loop")}
+                    />
                 </div>
                 <div className="display">
                     <img src="/" className="album-artwork" />
@@ -31,7 +51,11 @@ class MusicPlayer extends React.Component {
                     </div>
                 </div>
                 <div className="volume">
-                    <span>？</span>
+                    <img
+                        src={"/assets/icons/volume.svg"}
+                        className="icon"
+                        onClick={() => console.log("Volume")}
+                    />
                     <input
                         className="volume-scrubber"
                         min="0"

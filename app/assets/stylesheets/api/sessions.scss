@@ -30,26 +30,86 @@
     position: relative;
 }
 
-.session-form .input-container {
-    width: 300px;
-    margin: 0;
-    padding: 10px;
-}
-
-.session-form .input-container:first-child {
-    border-radius: 10px 10px 0 0;
-}
-
-.session-form .input-container:nth-child(2) {
-    border-radius: 0 0 10px 10px;
-}
-
-.session-form .input-container input {
-    font-size: 18px;
+.session-form-content .icon {
+    width: 35px;
 }
 
 .close {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+
+.session-form-text .logo,
+.session-form-text h2,
+.session-form-text p {
+    margin-bottom: 20px;
+}
+
+.session-form-text {
+    margin: 120px 0 10px 0;
+}
+
+.session-form {
+    margin-bottom: 5px;
+}
+
+.session-form .input-container {
+    width: 300px;
+    margin: 0;
+    padding: 0px;
+    position: relative;
+}
+
+.session-form .input-container:focus-within {
+    z-index: 1;
+    box-shadow: 0 0 0 2px $main-color-opac;
+}
+
+.session-form .input-container:first-child {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.session-form .input-container:nth-child(2) {
+    border-radius: 0 0 10px 10px;
+}
+
+.session-form .input-container .icon {
+    width: 30px;
+    height: 30px;
+    transform: rotate(-90deg);
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.session-form .input-container .icon:hover,
+.session-form-options p:first-child:hover {
+    cursor: pointer;
+}
+
+.session-form .input-container input {
+    font-size: 18px;
+    margin: 10px;
+}
+
+.session-form input[type="submit"] {
+    display: none;
+}
+
+.session-errors-list {
+    flex-grow: 1;
+}
+
+.session-form-options {
+    margin-bottom: 50px;
+    margin-top: auto;
+}
+
+.session-form-options p:first-child {
+    margin-bottom: 10px;
+    color: $link;
 }
