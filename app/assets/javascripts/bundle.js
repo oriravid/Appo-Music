@@ -98,10 +98,14 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 /*! namespace exports */
 /*! export RECEIVE_NEW_PLAYLIST [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export RECEIVE_USER_PLAYLISTS [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export REMOVE_PLAYLIST [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export createNewPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export deletePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export getUserPlaylists [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export receiveNewPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export receiveUserPlaylists [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export removePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export updatePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -111,16 +115,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_USER_PLAYLISTS": () => /* binding */ RECEIVE_USER_PLAYLISTS,
 /* harmony export */   "RECEIVE_NEW_PLAYLIST": () => /* binding */ RECEIVE_NEW_PLAYLIST,
+/* harmony export */   "REMOVE_PLAYLIST": () => /* binding */ REMOVE_PLAYLIST,
 /* harmony export */   "receiveUserPlaylists": () => /* binding */ receiveUserPlaylists,
 /* harmony export */   "receiveNewPlaylist": () => /* binding */ receiveNewPlaylist,
+/* harmony export */   "removePlaylist": () => /* binding */ removePlaylist,
 /* harmony export */   "getUserPlaylists": () => /* binding */ getUserPlaylists,
-/* harmony export */   "createNewPlaylist": () => /* binding */ createNewPlaylist
+/* harmony export */   "createNewPlaylist": () => /* binding */ createNewPlaylist,
+/* harmony export */   "updatePlaylist": () => /* binding */ updatePlaylist,
+/* harmony export */   "deletePlaylist": () => /* binding */ deletePlaylist
 /* harmony export */ });
 /* harmony import */ var _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/playlists_api_utils */ "./frontend/utils/playlists_api_utils.js");
 //int - utils
 
 var RECEIVE_USER_PLAYLISTS = "RECEIVE_USER_PLAYLISTS";
-var RECEIVE_NEW_PLAYLIST = "RECEIVE_NEW_PLAYLIST"; // export const CLEAR_USER_PLAYLISTS = "CLEAR_USER_PLAYLISTS";
+var RECEIVE_NEW_PLAYLIST = "RECEIVE_NEW_PLAYLIST";
+var REMOVE_PLAYLIST = "REMOVE_PLAYLIST"; // export const CLEAR_USER_PLAYLISTS = "CLEAR_USER_PLAYLISTS";
 
 var receiveUserPlaylists = function receiveUserPlaylists(playlists) {
   return {
@@ -132,6 +141,12 @@ var receiveNewPlaylist = function receiveNewPlaylist(playlist) {
   return {
     type: RECEIVE_NEW_PLAYLIST,
     playlist: playlist
+  };
+};
+var removePlaylist = function removePlaylist(playlistId) {
+  return {
+    type: REMOVE_PLAYLIST,
+    playlistId: playlistId
   };
 }; // export const clearUserPlaylists = () => ({
 //     type: CLEAR_USER_PLAYLISTS,
@@ -149,6 +164,20 @@ var createNewPlaylist = function createNewPlaylist(playlist) {
   return function (dispatch) {
     return _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__.createNewPlaylist(playlist).then(function (playlist) {
       return dispatch(receiveNewPlaylist(playlist));
+    });
+  };
+};
+var updatePlaylist = function updatePlaylist(playlist) {
+  return function (dispatch) {
+    return _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__.updatePlaylist(playlist).then(function (playlist) {
+      return dispatch(receiveNewPlaylist(playlist));
+    });
+  };
+};
+var deletePlaylist = function deletePlaylist(playlistId) {
+  return function (dispatch) {
+    return _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__.deletePlaylist(playlistId).then(function (playlistId) {
+      return dispatch(removePlaylist(playlistId));
     });
   };
 };
@@ -622,6 +651,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/playlist_actions */ "./frontend/actions/playlist_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -647,12 +677,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 //ext
 
 
+ //int
 
-var mapSTP = function mapSTP(state) {
-  return {
-    playlists: state.entities.playlists
-  };
-};
+
 
 var Playlist = /*#__PURE__*/function (_Component) {
   _inherits(Playlist, _Component);
@@ -662,8 +689,12 @@ var Playlist = /*#__PURE__*/function (_Component) {
   function Playlist(props) {
     _classCallCheck(this, Playlist);
 
-    return _super.call(this, props);
-  }
+    return _super.call(this, props); // this.handleDelete.bind(this);
+  } // handleDelete(playlistId) {
+  //     this.props.history.push("/");
+  //     this.props.deletePlaylist(playlistId);
+  // }
+
 
   _createClass(Playlist, [{
     key: "render",
@@ -671,16 +702,30 @@ var Playlist = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           playlists = _this$props.playlists,
           match = _this$props.match;
-      if (Object.keys(playlists).length === 0) return null;
       var playlist = playlists[match.params.playlistId];
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title);
+      if (Object.keys(playlists).length === 0) return null;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title));
     }
   }]);
 
   return Playlist;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapSTP)(Playlist));
+var mapSTP = function mapSTP(state) {
+  return {
+    playlists: state.entities.playlists
+  };
+};
+
+var mapDTP = function mapDTP(dispatch) {
+  return {
+    deletePlaylist: function deletePlaylist(playlistId) {
+      return dispatch((0,_actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__.deletePlaylist)(playlistId));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapSTP, mapDTP)(Playlist));
 
 /***/ }),
 
@@ -1376,9 +1421,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _utils_session_api_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/session_api_utils */ "./frontend/utils/session_api_utils.js");
+/* harmony import */ var _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/playlist_actions */ "./frontend/actions/playlist_actions.js");
 //ext
 
  //int
+
 
 
 
@@ -1402,6 +1449,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.store = store;
   window.postUser = _utils_session_api_utils__WEBPACK_IMPORTED_MODULE_4__.postUser;
+  window.updatePlaylist = _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_5__.updatePlaylist;
+  window.deletePlaylist = _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_5__.deletePlaylist;
 });
 
 /***/ }),
@@ -1510,14 +1559,18 @@ __webpack_require__.r(__webpack_exports__);
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
+  var nextState = Object.assign({}, state);
 
   switch (action.type) {
     case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_USER_PLAYLISTS:
       return action.playlists;
 
     case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_NEW_PLAYLIST:
-      var nextState = Object.assign({}, state);
       nextState[action.playlist.id] = action.playlist;
+      return nextState;
+
+    case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_PLAYLIST:
+      delete nextState[action.playlistId];
       return nextState;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__.LOGOUT_CURRENT_USER:
@@ -1811,7 +1864,9 @@ var go = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
   \***********************************************/
 /*! namespace exports */
 /*! export createNewPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export deletePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export getUserPlaylists [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export updatePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -1820,7 +1875,9 @@ var go = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getUserPlaylists": () => /* binding */ getUserPlaylists,
-/* harmony export */   "createNewPlaylist": () => /* binding */ createNewPlaylist
+/* harmony export */   "createNewPlaylist": () => /* binding */ createNewPlaylist,
+/* harmony export */   "updatePlaylist": () => /* binding */ updatePlaylist,
+/* harmony export */   "deletePlaylist": () => /* binding */ deletePlaylist
 /* harmony export */ });
 var getUserPlaylists = function getUserPlaylists(userId) {
   return $.ajax({
@@ -1836,22 +1893,27 @@ var createNewPlaylist = function createNewPlaylist(playlist) {
       playlist: playlist
     }
   });
-}; // export const patchPlaylist = (playlist) =>
-//     $.ajax({
-//         url: `/api/playlists/${playlist.id}`,
-//         method: "PATCH",
-//         data: { playlist },
-//     });
-// export const getSinglePlaylist = (id) =>
+};
+var updatePlaylist = function updatePlaylist(playlist) {
+  return $.ajax({
+    url: "/api/playlists/".concat(playlist.id),
+    method: "PATCH",
+    data: {
+      playlist: playlist
+    }
+  });
+}; // export const getSinglePlaylist = (id) =>
 //     $.ajax({
 //         url: `/api/playlists/${id}`,
 //         method: "GET",
 //     });
-// export const deleteSinglePlaylist = (id) =>
-//     $.ajax({
-//         url: `/api/playlists/${id}`,
-//         method: "DELETE",
-//     });
+
+var deletePlaylist = function deletePlaylist(id) {
+  return $.ajax({
+    url: "/api/playlists/".concat(id),
+    method: "DELETE"
+  });
+};
 
 /***/ }),
 

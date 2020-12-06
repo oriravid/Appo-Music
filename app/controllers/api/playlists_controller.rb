@@ -13,17 +13,16 @@ class Api::PlaylistsController < ApplicationController
     end
   end
   
-  # def update
-  #   @playlist = selected_playlist
-  #   if @playlist && @playlist.update_attributes(playlist_params)
-  #     # render :show
-  #     render json: @playlist
-  #   elsif !@playlist
-  #     render json: ['Playlist not found'], status: 400
-  #   else
-  #     render json: @playlist.errors.full_messages, status: 401
-  #   end
-  # end
+  def update
+    @playlist = selected_playlist
+    if @playlist && @playlist.update_attributes(playlist_params)
+      render "api/playlists/show"
+    elsif !@playlist
+      render json: ['Playlist not found'], status: 400
+    else
+      render json: @playlist.errors.full_messages, status: 401
+    end
+  end
   
   # def show
   #   @playlist = selected_playlist
@@ -36,16 +35,15 @@ class Api::PlaylistsController < ApplicationController
   # end
 
   
-  # def destroy
-  #   @playlist = selected_playlist
-  #   if @playlist
-  #     @playlist.destroy
-  #     # render :show
-  #     render json: @playlist
-  #   else
-  #     render json: ['Playlist not found']
-  #   end
-  # end
+  def destroy
+    @playlist = selected_playlist
+    if @playlist
+      @playlist.destroy
+      render json: @playlist.id
+    else
+      render json: ['Playlist not found']
+    end
+  end
   
   private
 

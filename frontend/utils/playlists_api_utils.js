@@ -11,12 +11,12 @@ export const createNewPlaylist = (playlist) =>
         data: { playlist },
     });
 
-// export const patchPlaylist = (playlist) =>
-//     $.ajax({
-//         url: `/api/playlists/${playlist.id}`,
-//         method: "PATCH",
-//         data: { playlist },
-//     });
+export const updatePlaylist = (playlist) =>
+    $.ajax({
+        url: `/api/playlists/${playlist.id}`,
+        method: "PATCH",
+        data: { playlist },
+    });
 
 // export const getSinglePlaylist = (id) =>
 //     $.ajax({
@@ -24,8 +24,8 @@ export const createNewPlaylist = (playlist) =>
 //         method: "GET",
 //     });
 
-// export const deleteSinglePlaylist = (id) =>
-//     $.ajax({
-//         url: `/api/playlists/${id}`,
-//         method: "DELETE",
-//     });
+export const deletePlaylist = (id) =>
+    $.ajax({
+        url: `/api/playlists/${id}`,
+        method: "DELETE",
+    });

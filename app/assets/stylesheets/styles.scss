@@ -114,6 +114,8 @@ h3 {
     padding: 15px 25px;
     background-color: #f9f9f9;
     border-right: 1px solid $border-color;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .nav h1.logo {
@@ -156,9 +158,19 @@ h3 {
     margin-bottom: 5px;
 }
 
+.nav-section-list {
+    overflow: hidden;
+}
+
 .nav-section-list-item {
     padding: 5px 7.5px;
     border-radius: 7.5px;
+}
+
+.nav-section-list span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .nav-section-list a.active .nav-section-list-item {
