@@ -1,15 +1,16 @@
 //ext
 import React from "react";
 import { connect } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 //int - components
 import PlaylistsContainer from "./playlists/playlists_index_container";
 //int - actions
 import { logout } from "../../actions/session_actions";
+import { openModal } from "../../actions/modal_actions";
 //int - util
 import * as icons from "../../utils/icons";
 
-const Nav = ({ currentUser, logout }) => {
+const Nav = ({ currentUser, logout, openModal }) => {
     const display = currentUser ? (
         <React.Fragment>
             <div className="nav-section-container">
@@ -31,7 +32,7 @@ const Nav = ({ currentUser, logout }) => {
                     <li className="nav-section-list-item">
                         <img
                             src={"/assets/icons/signout.svg"}
-                            className="icon"
+                            className="icon pointer"
                             onClick={logout}
                         />
                         <span>Hello, {currentUser.username}</span>
@@ -44,12 +45,13 @@ const Nav = ({ currentUser, logout }) => {
             <div className="nav-section-container">
                 <div className="nav-section">
                     <ul className="nav-section-list">
-                        <NavLink to="/signin">
-                            <li className="nav-section-list-item">
-                                {icons.login}
-                                <span>Sign In</span>
-                            </li>
-                        </NavLink>
+                        <li
+                            className="nav-section-list-item pointer"
+                            onClick={() => openModal("signin")}
+                        >
+                            {icons.login}
+                            <span>Sign In</span>
+                        </li>
                         <NavLink to="/browse">
                             <li className="nav-section-list-item">
                                 {icons.browse}
@@ -62,9 +64,9 @@ const Nav = ({ currentUser, logout }) => {
             <div className="trial-container">
                 <h2>All the music you love.</h2>
                 <span>Sign up today and get 3 months on us.</span>
-                <Link to="/signup">
-                    <div className="btn wide">Try It Free</div>
-                </Link>
+                <div className="btn wide" onClick={() => openModal("signup")}>
+                    Try It Free
+                </div>
             </div>
         </React.Fragment>
     );
@@ -87,6 +89,7 @@ const mapSTP = (state) => ({
 
 const mapDTP = (dispatch) => ({
     logout: () => dispatch(logout()),
+    openModal: (modal) => dispatch(openModal(modal)),
 });
 
 export default connect(mapSTP, mapDTP)(Nav);

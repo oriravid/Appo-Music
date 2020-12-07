@@ -52,6 +52,10 @@ h3 {
     display: flex;
 }
 
+.pointer:hover {
+    cursor: pointer;
+}
+
 .input-container {
     width: 100%;
     background-color: #fff;
@@ -223,10 +227,6 @@ h3 {
 
 .current-user .icon {
     transform: scaleX(-1);
-}
-
-.current-user .icon:hover {
-    cursor: pointer;
 }
 
 .trial-container {
