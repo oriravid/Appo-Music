@@ -1,6 +1,8 @@
 //ext
 import React, { Component } from "react";
 import { connect } from "react-redux";
+//int - actions
+import { next, previous } from "../../actions/music_actions";
 
 class MusicControls extends Component {
     constructor(props) {
@@ -36,13 +38,13 @@ class MusicControls extends Component {
                     <img
                         src={"/assets/icons/previous.svg"}
                         className="icon"
-                        onClick={() => console.log("Previous")}
+                        onClick={this.props.previous}
                     />
                     {playpause}
                     <img
                         src={"/assets/icons/next.svg"}
                         className="icon"
-                        onClick={() => console.log("Next")}
+                        onClick={this.props.next}
                     />
                     <img
                         src={"/assets/icons/loop.svg"}
@@ -59,4 +61,9 @@ const mapSTP = ({ music }) => ({
     music: music,
 });
 
-export default connect(mapSTP)(MusicControls);
+const mapDTP = (dispatch) => ({
+    next: () => dispatch(next()),
+    previous: () => dispatch(previous()),
+});
+
+export default connect(mapSTP, mapDTP)(MusicControls);

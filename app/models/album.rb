@@ -10,6 +10,7 @@
 #  description  :text             not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  url          :string           not null
 #
 class Album < ApplicationRecord
     validates :artist_id, :title, :genre, :release_date, :description, presence: true

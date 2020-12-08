@@ -7,6 +7,7 @@ import Root from "./components/root";
 
 //testing!!
 import { postUser } from "./utils/session_api_utils";
+import { getAllAlbums, getUserAlbums } from "./actions/album_actions";
 import { updatePlaylist, deletePlaylist } from "./actions/playlist_actions";
 import { addTrack, addTracks, play, pause } from "./actions/music_actions";
 
@@ -34,4 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addTracks = addTracks;
     window.play = play;
     window.pause = pause;
+    window.getAllAlbums = getAllAlbums;
+    window.getUserAlbums = getUserAlbums;
 });

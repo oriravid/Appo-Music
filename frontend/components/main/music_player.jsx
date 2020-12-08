@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 //int - components
 import MusicControls from "./music_controls";
-import MusicDisplay from "./music_display";
 //int - actions
 import { play, pause } from "../../actions/music_actions";
 
@@ -13,6 +12,8 @@ class MusicPlayer extends React.Component {
 
         this.state = {
             duration: null,
+            shuffle: false,
+            repeat: false,
         };
     }
 
@@ -55,9 +56,11 @@ class MusicPlayer extends React.Component {
     }
 
     render() {
-        const src = `${
-            this.props.music.queue[this.props.music.queueIndex].url
-        }`;
+        const currentTrack = this.props.music.queue[
+            this.props.music.queueIndex
+        ];
+        const url = `${currentTrack.url}`;
+        const title = currentTrack.title;
 
         return (
             <div className="music-player">
@@ -65,32 +68,50 @@ class MusicPlayer extends React.Component {
                     ref={(audio) => {
                         this.audio = audio;
                     }}
-                    src={src}
+                    src={url}
                 />
                 <MusicControls
                     play={this.handlePlay.bind(this)}
                     pause={this.handlePause.bind(this)}
                 />
-                <MusicDisplay />
-                <input
-                    ref={(scrub) => {
-                        this.scrub = scrub;
-                    }}
-                    type="range"
-                    min="0"
-                    max={this.state.duration}
-                    onChange={this.handleUserScrub.bind(this)}
-                />
-                <input
-                    ref={(volume) => {
-                        this.volume = volume;
-                    }}
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.05"
-                    onChange={this.handleVolume.bind(this)}
-                />
+                <div className="display">
+                    <img src="/" className="album-artwork" />
+                    <div className="display-inner">
+                        <div className="song-info">
+                            <span>{title}</span>
+                            <br />
+                            <span>Artist - Album</span>
+                        </div>
+                        <div className="slider">
+                            <input
+                                ref={(scrub) => {
+                                    this.scrub = scrub;
+                                }}
+                                type="range"
+                                min="0"
+                                max={this.state.duration}
+                                onChange={this.handleUserScrub.bind(this)}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="volume">
+                    <img
+                        src={"/assets/icons/volume.svg"}
+                        className="icon"
+                        onClick={() => console.log("Volume")}
+                    />
+                    <input
+                        ref={(volume) => {
+                            this.volume = volume;
+                        }}
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        onChange={this.handleVolume.bind(this)}
+                    />
+                </div>
             </div>
         );
     }
@@ -106,36 +127,3 @@ const mapDTP = (dispatch) => ({
 });
 
 export default connect(mapSTP, mapDTP)(MusicPlayer);
-
-{
-    /*
-                <div className="display">
-                    <img src="/" className="album-artwork" />
-                    <div className="display-inner">
-                        <div className="song-info">
-                            <span>Song Title</span>
-                            <span>Artist - Album</span>
-                        </div>
-                        <div className="slider"></div>
-                    </div>
-                </div>
-                <div className="volume">
-                    <img
-                        src={"/assets/icons/volume.svg"}
-                        className="icon"
-                        onClick={() => console.log("Volume")}
-                    />
-                    <input
-                        className="volume-scrubber"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        // style="--volume: 0%"
-                        role="slider"
-                        aria-label="Volume"
-                        // aria-valuetext="0%"
-                        aria-orientation="horizontal"
-                        type="range"
-                    ></input>
-                </div> */
-}

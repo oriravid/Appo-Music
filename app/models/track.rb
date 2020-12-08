@@ -9,6 +9,7 @@
 #  play_count   :integer          default(0), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  url          :string           not null
 #
 class Track < ApplicationRecord
     validates :album_id, :title, :track_number, :play_count, presence: true
