@@ -7,7 +7,6 @@ import MusicPlayer from "./music_player";
 import Playlist from "./playlist";
 import Library from "./library";
 import Browse from "./browse";
-import NotFound from "./not_found";
 //int - utils
 import { ProtectedRoute } from "../../utils/route_utils";
 
@@ -28,15 +27,13 @@ const Main = () => {
                         component={Library}
                     />
                     <Route path="/" component={Browse} />
-                    <Route path="/404" component={NotFound} />
-                    <Redirect to="/404" />
                 </Switch>
             </div>
         </div>
     );
 };
 
-const mapSTP = (state) => ({
-    currentUser: state.session.currentUser,
+const mapSTP = ({ session }) => ({
+    currentUser: session.currentUser,
 });
 export default connect(mapSTP)(Main);

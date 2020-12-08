@@ -5,8 +5,10 @@ import ReactDOM from "react-dom";
 import createStore from "./store/store";
 import Root from "./components/root";
 
+//testing!!
 import { postUser } from "./utils/session_api_utils";
 import { updatePlaylist, deletePlaylist } from "./actions/playlist_actions";
+import { addTrack, addTracks, play, pause } from "./actions/music_actions";
 
 document.addEventListener("DOMContentLoaded", () => {
     let preloadedState = undefined;
@@ -28,4 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.postUser = postUser;
     window.updatePlaylist = updatePlaylist;
     window.deletePlaylist = deletePlaylist;
+    window.addTrack = addTrack;
+    window.addTracks = addTracks;
+    window.play = play;
+    window.pause = pause;
 });

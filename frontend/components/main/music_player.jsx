@@ -1,5 +1,11 @@
-//int
+//ext
 import React, { Component } from "react";
+import { connect } from "react-redux";
+//int - components
+import MusicControls from "./music_controls";
+import MusicDisplay from "./music_display";
+//int - actions
+import { play, pause } from "../../actions/music_actions";
 
 class MusicPlayer extends React.Component {
     constructor(props) {
@@ -10,36 +16,99 @@ class MusicPlayer extends React.Component {
         };
     }
 
+    handlePlay() {
+        this.audio.play();
+        this.props.play();
+    }
+
+    handlePause() {
+        this.audio.pause();
+        this.props.pause();
+    }
+
+    handleUserScrub(e) {
+        clearInterval(this.currentTimeInterval);
+        this.audio.currentTime = e.target.value;
+    }
+
+    handleVolume(e) {
+        this.audio.volume = e.target.value;
+    }
+
+    componentDidMount() {
+        this.scrub.value = 0;
+        this.currentTimeInterval = null;
+
+        this.audio.onloadedmetadata = function () {
+            this.setState({ duration: this.audio.duration });
+        }.bind(this);
+
+        this.audio.onplay = () => {
+            this.currentTimeInterval = setInterval(() => {
+                this.scrub.value = this.audio.currentTime;
+            }, 500);
+        };
+
+        this.audio.onpause = () => {
+            clearInterval(this.currentTimeInterval);
+        };
+    }
+
     render() {
+        const src = `${
+            this.props.music.queue[this.props.music.queueIndex].url
+        }`;
+
         return (
             <div className="music-player">
-                <div className="controls">
-                    <img
-                        src={"/assets/icons/shuffle.svg"}
-                        className="icon"
-                        onClick={() => console.log("Shuffle")}
-                    />
-                    <img
-                        src={"/assets/icons/previous.svg"}
-                        className="icon"
-                        onClick={() => console.log("Previous")}
-                    />
-                    <img
-                        src={"/assets/icons/play.svg"}
-                        className="icon"
-                        onClick={() => console.log("Play")}
-                    />
-                    <img
-                        src={"/assets/icons/next.svg"}
-                        className="icon"
-                        onClick={() => console.log("Next")}
-                    />
-                    <img
-                        src={"/assets/icons/loop.svg"}
-                        className="icon"
-                        onClick={() => console.log("Loop")}
-                    />
-                </div>
+                <audio
+                    ref={(audio) => {
+                        this.audio = audio;
+                    }}
+                    src={src}
+                />
+                <MusicControls
+                    play={this.handlePlay.bind(this)}
+                    pause={this.handlePause.bind(this)}
+                />
+                <MusicDisplay />
+                <input
+                    ref={(scrub) => {
+                        this.scrub = scrub;
+                    }}
+                    type="range"
+                    min="0"
+                    max={this.state.duration}
+                    onChange={this.handleUserScrub.bind(this)}
+                />
+                <input
+                    ref={(volume) => {
+                        this.volume = volume;
+                    }}
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    onChange={this.handleVolume.bind(this)}
+                />
+            </div>
+        );
+    }
+}
+
+const mapSTP = ({ music }) => ({
+    music: music,
+});
+
+const mapDTP = (dispatch) => ({
+    play: () => dispatch(play()),
+    pause: () => dispatch(pause()),
+});
+
+export default connect(mapSTP, mapDTP)(MusicPlayer);
+
+{
+    /*
                 <div className="display">
                     <img src="/" className="album-artwork" />
                     <div className="display-inner">
@@ -68,10 +137,5 @@ class MusicPlayer extends React.Component {
                         aria-orientation="horizontal"
                         type="range"
                     ></input>
-                </div>
-            </div>
-        );
-    }
+                </div> */
 }
-
-export default MusicPlayer;
