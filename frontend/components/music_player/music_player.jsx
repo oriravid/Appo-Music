@@ -1,10 +1,7 @@
 //ext
 import React, { Component } from "react";
-import { connect } from "react-redux";
 //int - components
 import MusicControls from "./music_controls";
-//int - actions
-import { play, pause } from "../../actions/music_actions";
 
 class MusicPlayer extends React.Component {
     constructor(props) {
@@ -117,13 +114,4 @@ class MusicPlayer extends React.Component {
     }
 }
 
-const mapSTP = ({ music }) => ({
-    music: music,
-});
-
-const mapDTP = (dispatch) => ({
-    play: () => dispatch(play()),
-    pause: () => dispatch(pause()),
-});
-
-export default connect(mapSTP, mapDTP)(MusicPlayer);
+export default MusicPlayer;

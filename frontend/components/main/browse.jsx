@@ -1,7 +1,7 @@
 //ext
 import React, { Component } from "react";
 //int
-import AlbumsIndex from "./albums_index";
+import AlbumsIndexContainer from "../albums/albums_index_container";
 
 class Browse extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ class Browse extends Component {
         return (
             <React.Fragment>
                 <h1>I am the /browse container!</h1>
-                <AlbumsIndex />
+                <AlbumsIndexContainer />
             </React.Fragment>
         );
     }

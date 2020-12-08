@@ -2,15 +2,15 @@
 import React from "react";
 import { Route } from "react-router-dom";
 //int - components
-import Nav from "./nav/nav";
-import Main from "./main/main";
+import NavContainer from "./nav/nav_container";
+import MainContainer from "./main/main_container";
 import Modal from "./modal/modal";
 
 export default () => {
     return (
         <div className="app">
-            <Route path="/" component={Nav} />
-            <Route path="/" component={Main} />
+            <Route path="/" component={NavContainer} />
+            <Route path="/" component={MainContainer} />
             <Modal />
         </div>
     );

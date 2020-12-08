@@ -1,12 +1,9 @@
 //ext
 import React from "react";
-import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 //int - components
-import PlaylistsContainer from "./playlists/playlists_index_container";
-//int - actions
-import { logout } from "../../actions/session_actions";
-import { openModal } from "../../actions/modal_actions";
+import PlaylistsIndexContainer from "../playlists/playlists_index_container";
+
 //int - util
 import * as icons from "../../utils/icons";
 
@@ -25,7 +22,7 @@ const Nav = ({ currentUser, logout, openModal }) => {
                         </NavLink>
                     </ul>
                 </div>
-                <PlaylistsContainer />
+                <PlaylistsIndexContainer />
             </div>
             <div className="current-user">
                 <ul className="nav-section-list">
@@ -83,13 +80,4 @@ const Nav = ({ currentUser, logout, openModal }) => {
     );
 };
 
-const mapSTP = (state) => ({
-    currentUser: state.session.currentUser,
-});
-
-const mapDTP = (dispatch) => ({
-    logout: () => dispatch(logout()),
-    openModal: (modal) => dispatch(openModal(modal)),
-});
-
-export default connect(mapSTP, mapDTP)(Nav);
+export default Nav;

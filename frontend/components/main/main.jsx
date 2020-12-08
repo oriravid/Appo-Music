@@ -1,10 +1,9 @@
 //ext
 import React from "react";
-import { connect } from "react-redux";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 //int - components
-import MusicPlayer from "./music_player";
-import Playlist from "./playlist";
+import MusicPlayerContainer from "../music_player/music_player_container";
+import PlaylistShowContainer from "../playlists/playlist_show_container";
 import Library from "./library";
 import Browse from "./browse";
 //int - utils
@@ -13,13 +12,13 @@ import { ProtectedRoute } from "../../utils/route_utils";
 const Main = () => {
     return (
         <div className="main">
-            <MusicPlayer />
+            <MusicPlayerContainer />
             <div className="main-content">
                 <Switch>
                     <ProtectedRoute
                         exact
                         path="/playlists/:playlistId"
-                        component={Playlist}
+                        component={PlaylistShowContainer}
                     />
                     <ProtectedRoute
                         exact
@@ -33,7 +32,4 @@ const Main = () => {
     );
 };
 
-const mapSTP = ({ session }) => ({
-    currentUser: session.currentUser,
-});
-export default connect(mapSTP)(Main);
+export default Main;
