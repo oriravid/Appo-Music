@@ -14,13 +14,11 @@ class MusicPlayer extends React.Component {
         };
     }
 
-    handlePlay() {
-        this.audio.play();
+    statePlay() {
         this.props.play();
     }
 
-    handlePause() {
-        this.audio.pause();
+    statePause() {
         this.props.pause();
     }
 
@@ -34,44 +32,43 @@ class MusicPlayer extends React.Component {
     }
 
     componentDidMount() {
-        this.scrub.value = 0;
-        this.currentTimeInterval = null;
+        if (this.props.music.on) {
+            this.scrub.value = 0;
+            this.currentTimeInterval = null;
 
-        this.audio.onloadedmetadata = function () {
-            this.setState({ duration: this.audio.duration });
-        }.bind(this);
+            this.audio.onloadedmetadata = function () {
+                this.setState({ duration: this.audio.duration });
+            }.bind(this);
 
-        this.audio.onplay = () => {
-            this.currentTimeInterval = setInterval(() => {
-                this.scrub.value = this.audio.currentTime;
-            }, 500);
-        };
+            this.audio.onplay = () => {
+                this.currentTimeInterval = setInterval(() => {
+                    this.scrub.value = this.audio.currentTime;
+                }, 500);
+            };
 
-        this.audio.onpause = () => {
-            clearInterval(this.currentTimeInterval);
-        };
+            this.audio.onpause = () => {
+                clearInterval(this.currentTimeInterval);
+            };
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.props.music.playing) {
+            this.audio.play();
+        } else {
+            this.audio.pause();
+        }
     }
 
     render() {
-        const currentTrack = this.props.music.queue[
-            this.props.music.queueIndex
-        ];
-        const url = `${currentTrack.url}`;
-        const title = currentTrack.title;
+        const { music, currentTrack } = this.props;
 
-        return (
-            <div className="music-player">
-                <audio
-                    ref={(audio) => {
-                        this.audio = audio;
-                    }}
-                    src={url}
-                />
-                <MusicControls
-                    play={this.handlePlay.bind(this)}
-                    pause={this.handlePause.bind(this)}
-                />
-                <div className="display">
+        if (music.on) {
+            var url = `${currentTrack.url}`;
+            var title = currentTrack.title;
+
+            var display = (
+                <React.Fragment>
                     <img src="/" className="album-artwork" />
                     <div className="display-inner">
                         <div className="song-info">
@@ -91,7 +88,29 @@ class MusicPlayer extends React.Component {
                             />
                         </div>
                     </div>
-                </div>
+                </React.Fragment>
+            );
+        } else {
+            var display = (
+                <React.Fragment>
+                    <p>LOGO</p>
+                </React.Fragment>
+            );
+        }
+
+        return (
+            <div className="music-player">
+                <audio
+                    ref={(audio) => {
+                        this.audio = audio;
+                    }}
+                    src={url}
+                />
+                <MusicControls
+                    play={this.statePlay.bind(this)}
+                    pause={this.statePause.bind(this)}
+                />
+                <div className="display">{display}</div>
                 <div className="volume">
                     <img
                         src={"/assets/icons/volume.svg"}

@@ -24,7 +24,7 @@ class AlbumsIndex extends Component {
                         <AlbumsIndexItem
                             key={album.id}
                             album={album}
-                            artist={artists[album.artist_id]}
+                            artist={artists[album.artistId]}
                         />
                     ))}
                 </ul>

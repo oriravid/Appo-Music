@@ -9,26 +9,10 @@ import {
 } from "../actions/music_actions";
 
 const initialState = {
+    on: false,
     playing: false,
     queueIndex: 0,
-    queue: [
-        {
-            album_id: 1,
-            title: "hello",
-            url:
-                "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
-        },
-        {
-            album_id: 1,
-            title: "asdasdas",
-            url:
-                "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-        },
-    ],
-    // time: {
-    //     current: null,
-    //     max: null,
-    // },
+    queue: [],
 };
 
 export default (state = initialState, action) => {
@@ -37,12 +21,16 @@ export default (state = initialState, action) => {
 
     switch (action.type) {
         case ADD_TRACK:
-            nextState.queue.unshift(action.track);
+            nextState.on = true;
             nextState.playing = true;
+            nextState.queueIndex = 0;
+            nextState.queue.unshift(action.track);
             return nextState;
         case ADD_TRACKS:
-            nextState.queue = action.tracks;
+            nextState.on = true;
             nextState.playing = true;
+            nextState.queueIndex = 0;
+            nextState.queue = action.tracks;
             return nextState;
         case PLAY:
             nextState.playing = true;

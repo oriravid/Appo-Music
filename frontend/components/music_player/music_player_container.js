@@ -5,8 +5,9 @@ import MusicPlayer from "./music_player";
 //int - actions
 import { play, pause } from "../../actions/music_actions";
 
-const mapSTP = ({ music }) => ({
+const mapSTP = ({ music, artists, albums, tracks }) => ({
     music: music,
+    currentTrack: music.queue[music.queueIndex],
 });
 
 const mapDTP = (dispatch) => ({

@@ -6,18 +6,29 @@ import TrackListItem from "../tracks/track_list_item";
 //int - utils
 import * as icons from "../../utils/icons";
 import { dateFormatter, timeAdder } from "../../utils/various";
-import { openModal } from "../../actions/modal_actions";
 
 class AlbumShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedSong: null,
+            selectedTrackId: null,
+            hoveredTrackId: null,
         };
     }
 
     componentDidMount() {
         this.props.getAlbumDetails(this.props.match.params.albumId);
+    }
+
+    handlePlay() {
+        const { hoveredTrackId } = this.state;
+        const { tracks, addTracks } = this.props;
+
+        if (hoveredTrackId) {
+            addTracks(tracks.filter((track) => track.id >= hoveredTrackId));
+        } else {
+            addTracks(tracks);
+        }
     }
 
     render() {
@@ -26,17 +37,33 @@ class AlbumShow extends Component {
 
         const trackItems = tracks.map((track, index) => {
             let trackClasses = "track-row";
-            if (this.state.selectedSong === index) {
+            let hovered = null;
+
+            if (this.state.selectedTrackId === track.id) {
                 trackClasses += " selected";
+            }
+
+            if (this.state.hoveredTrackId === track.id) {
+                hovered = "true";
             }
 
             return (
                 <div
                     className={trackClasses}
                     key={track.id}
-                    onClick={() => this.setState({ selectedSong: index })}
+                    onClick={() => this.setState({ selectedTrackId: track.id })}
+                    onMouseEnter={() =>
+                        this.setState({ hoveredTrackId: track.id })
+                    }
+                    onMouseLeave={() => this.setState({ hoveredTrackId: null })}
+                    onDoubleClick={this.handlePlay.bind(this)}
                 >
-                    <TrackListItem track={track} index={index + 1} />
+                    <TrackListItem
+                        track={track}
+                        index={index + 1}
+                        hovered={hovered}
+                        handlePlay={this.handlePlay.bind(this)}
+                    />
                 </div>
             );
         });
@@ -55,9 +82,12 @@ class AlbumShow extends Component {
                             </Link>
                         </h2>
                         <h3>
-                            {album.genre} • {album.release_date.slice(0, 4)}
+                            {album.genre} • {album.releaseDate.slice(0, 4)}
                         </h3>
-                        <div className="btn">
+                        <div
+                            className="btn"
+                            onClick={this.handlePlay.bind(this)}
+                        >
                             {icons.playwht}
                             Play
                         </div>
@@ -68,7 +98,7 @@ class AlbumShow extends Component {
                                     {album.description}
                                 </p>
                                 <button
-                                    className="more"
+                                    className="more pointer"
                                     onClick={() =>
                                         this.props.openModal({
                                             title: album.title,
@@ -94,7 +124,7 @@ class AlbumShow extends Component {
                         </p>
                         <p>
                             RELEASED{" "}
-                            {dateFormatter(album.release_date).toUpperCase()}
+                            {dateFormatter(album.releaseDate).toUpperCase()}
                         </p>
                     </div>
                 </div>
