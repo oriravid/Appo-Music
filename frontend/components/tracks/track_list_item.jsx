@@ -5,17 +5,21 @@ import * as icons from "../../utils/icons";
 
 const TrackListItem = ({ track, index, handlePlay, hovered, selected }) => {
     var leftcol = index;
-    var addcol = icons.add("icon color");
+    var addcol = icons.add("icon ms color");
     var rightcol = track.duration;
 
     if (hovered) {
         if (selected) {
-            var leftcol = icons.play("icon white");
-            var addcol = icons.add("icon white");
-            var rightcol = icons.list("icon white");
+            var leftcol = icons.play("icon ms white");
+            var addcol = icons.add("icon ms white");
+            var rightcol = icons.list("icon ms white");
         } else {
-            var leftcol = icons.play("icon color");
-            var rightcol = icons.list("icon color");
+            var leftcol = icons.play("icon ms color");
+            var rightcol = icons.list("icon ms color");
+        }
+    } else {
+        if (selected) {
+            var addcol = icons.add("icon ms white");
         }
     }
 

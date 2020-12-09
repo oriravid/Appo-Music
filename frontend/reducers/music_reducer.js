@@ -5,14 +5,15 @@ import {
     PLAY,
     PAUSE,
     NEXT,
-    PREVIOUS,
+    PREV,
 } from "../actions/music_actions";
 
 const initialState = {
     on: false,
-    playing: false,
-    queueIndex: 0,
     queue: [],
+    index: 0,
+    currentTrack: null,
+    playing: false,
 };
 
 export default (state = initialState, action) => {
@@ -20,37 +21,39 @@ export default (state = initialState, action) => {
     let nextState = { ...state };
 
     switch (action.type) {
-        case ADD_TRACK:
-            nextState.on = true;
-            nextState.playing = true;
-            nextState.queueIndex = 0;
-            nextState.queue.unshift(action.track);
-            return nextState;
         case ADD_TRACKS:
             nextState.on = true;
-            nextState.playing = true;
-            nextState.queueIndex = 0;
             nextState.queue = action.tracks;
+            nextState.index = 0;
+            nextState.currentTrack = nextState.queue[nextState.index];
+            nextState.playing = true;
             return nextState;
         case PLAY:
-            nextState.playing = true;
-            return nextState;
+            if (state.queue.length) {
+                nextState.on = true;
+                nextState.playing = true;
+                return nextState;
+            } else {
+                return nextState;
+            }
         case PAUSE:
             nextState.playing = false;
             return nextState;
         case NEXT:
-            if (nextState.queueIndex + 1 >= nextState.queue.length) {
-                return initialState;
-            } else {
-                nextState.queueIndex += 1;
+            if (state.index + 1 < state.queue.length) {
+                nextState.index += 1;
+                nextState.currentTrack = state.queue[nextState.index];
                 return nextState;
+            } else {
+                return initialState;
             }
-        case PREVIOUS:
-            if (nextState.queueIndex - 1 < 0) {
-                return initialState;
-            } else {
-                nextState.queueIndex -= 1;
+        case PREV:
+            if (state.index - 1 >= 0) {
+                nextState.index -= 1;
+                nextState.currentTrack = state.queue[nextState.index];
                 return nextState;
+            } else {
+                return initialState;
             }
         default:
             return state;

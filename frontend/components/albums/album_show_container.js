@@ -8,12 +8,12 @@ import { addTracks } from "../../actions/music_actions";
 import { openModal } from "../../actions/modal_actions";
 
 const mapSTP = (store, ownProps) => {
-    if (Object.keys(store.entities.albums).length) {
-        var album = store.entities.albums[ownProps.match.params.albumId];
-        var artist = store.entities.artists[album.artistId];
-    } else {
-        var album;
-        var artist;
+    const albumId = ownProps.match.params.albumId;
+    let album, artist;
+
+    if (store.entities.albums[albumId]) {
+        album = store.entities.albums[albumId];
+        artist = store.entities.artists[album.artistId];
     }
 
     return {

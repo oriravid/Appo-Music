@@ -99,6 +99,7 @@ h3 {
 
 .icon {
     width: 20px;
+    height: 20px;
     opacity: 0.55;
 }
 
@@ -109,6 +110,28 @@ h3 {
 .icon.white {
     fill: white;
     opacity: 1;
+}
+
+.icon.sml {
+    width: 16px;
+    height: 16px;
+    margin: 0 5px;
+}
+
+.icon.ms {
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
+}
+
+.icon.med {
+    width: 28px;
+    height: 28px;
+}
+
+.icon.lrg {
+    width: 34px;
+    height: 34px;
 }
 
 // app
@@ -314,6 +337,10 @@ h3 {
 }
 
 .music-player > .controls {
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .music-player > .display {
@@ -343,6 +370,12 @@ img.album-artwork {
 .display-inner > .slider {
     background-color: black;
     height: 3px;
+}
+
+.music-player > .volume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 // Main Content
@@ -505,7 +538,10 @@ img.album-artwork {
 }
 
 .track-index {
-    flex-basis: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 35px;
     color: $gray-text;
 }
 
@@ -513,7 +549,17 @@ img.album-artwork {
     flex-grow: 1;
 }
 
+.track-save {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 35px;
+}
+
 .track-duration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-basis: 70px;
     color: $gray-text;
 }

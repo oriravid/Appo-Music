@@ -1,5 +1,9 @@
 import React from "react";
 
+// export const LRG = "0 0 34 34";
+// export const MED = "0 0 30 30";
+// export const SML = "0 0 24 24";
+
 export const add = (classes) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"

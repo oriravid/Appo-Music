@@ -3,7 +3,7 @@ export const ADD_TRACKS = "ADD_TRACKS";
 export const PLAY = "PLAY";
 export const PAUSE = "PAUSE";
 export const NEXT = "NEXT";
-export const PREVIOUS = "PREVIOUS";
+export const PREV = "PREV";
 
 export const addTrack = (track) => ({
     type: ADD_TRACK,
@@ -27,6 +27,6 @@ export const next = () => ({
     type: NEXT,
 });
 
-export const previous = () => ({
-    type: PREVIOUS,
+export const prev = () => ({
+    type: PREV,
 });

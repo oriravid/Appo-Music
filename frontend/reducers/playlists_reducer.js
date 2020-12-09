@@ -4,7 +4,7 @@ import {
     RECEIVE_NEW_PLAYLIST,
     REMOVE_PLAYLIST,
 } from "../actions/playlist_actions";
-import { LOGOUT_CURRENT_USER } from "../actions/session_actions";
+import { SIGNOUT_CURRENT_USER } from "../actions/session_actions";
 
 export default (state = {}, action) => {
     Object.freeze(state);
@@ -19,7 +19,7 @@ export default (state = {}, action) => {
         case REMOVE_PLAYLIST:
             delete nextState[action.playlistId];
             return nextState;
-        case LOGOUT_CURRENT_USER:
+        case SIGNOUT_CURRENT_USER:
             return {};
         default:
             return state;
