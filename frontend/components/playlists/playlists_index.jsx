@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 //int
 import PlaylistIndexItem from "./playlist_index_item";
+//int - util
+import * as icons from "../../utils/icons";
 
 class PlaylistsIndex extends Component {
     constructor(props) {
@@ -53,7 +55,7 @@ class PlaylistsIndex extends Component {
                 <ul className="nav-section-list">
                     {playlistItems}
                     <li className="nav-section-list-item">
-                        <img src={"/assets/icons/add.svg"} className="icon" />
+                        {icons.add("icon")}
                         <input
                             id="new-playlist-field"
                             type="text"

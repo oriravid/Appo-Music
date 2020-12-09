@@ -6,6 +6,8 @@ import { closeModal } from "../../actions/modal_actions";
 import SigninFormContainer from "./signin_form_container";
 import SignupFormContainer from "./signup_form_container";
 import ExtendedText from "./extended_text";
+//int - util
+import * as icons from "../../utils/icons";
 
 const Modal = ({ modal, closeModal }) => {
     if (!modal) {
@@ -36,11 +38,7 @@ const Modal = ({ modal, closeModal }) => {
                 className={`modal-container ${modalClass}`}
                 onClick={(e) => e.stopPropagation()}
             >
-                <img
-                    src={"/assets/icons/close.svg"}
-                    className="icon close pointer"
-                    onClick={closeModal}
-                />
+                {icons.close("icon close pointer", closeModal)}
                 {component}
             </div>
         </div>

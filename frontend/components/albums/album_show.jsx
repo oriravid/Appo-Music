@@ -38,9 +38,11 @@ class AlbumShow extends Component {
         const trackItems = tracks.map((track, index) => {
             let trackClasses = "track-row";
             let hovered = null;
+            let selected = null;
 
             if (this.state.selectedTrackId === track.id) {
                 trackClasses += " selected";
+                selected = true;
             }
 
             if (this.state.hoveredTrackId === track.id) {
@@ -62,6 +64,7 @@ class AlbumShow extends Component {
                         track={track}
                         index={index + 1}
                         hovered={hovered}
+                        selected={selected}
                         handlePlay={this.handlePlay.bind(this)}
                     />
                 </div>
@@ -88,7 +91,7 @@ class AlbumShow extends Component {
                             className="btn"
                             onClick={this.handlePlay.bind(this)}
                         >
-                            {icons.playwht}
+                            {icons.play("icon white")}
                             Play
                         </div>
                         <div className="text-container">

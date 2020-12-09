@@ -120,7 +120,7 @@ class SessionForm extends React.Component {
                                 onClick={this.handleSubmit}
                                 className="pointer"
                             >
-                                {icons.go}
+                                {icons.go("icon color")}
                             </span>
                         </div>
                         <input type="submit" value={headerText} />

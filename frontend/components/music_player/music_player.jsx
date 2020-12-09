@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 //int - components
 import MusicControls from "./music_controls";
+//int - util
+import * as icons from "../../utils/icons";
 
 class MusicPlayer extends React.Component {
     constructor(props) {
@@ -108,11 +110,7 @@ class MusicPlayer extends React.Component {
                     </div>
                 </div>
                 <div className="volume">
-                    <img
-                        src={"/assets/icons/volume.svg"}
-                        className="icon"
-                        onClick={() => console.log("Volume")}
-                    />
+                    {icons.volume("icon", () => console.log("volume"))}
                     <input
                         ref={(volume) => {
                             this.volume = volume;

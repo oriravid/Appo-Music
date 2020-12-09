@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 //int - containers
 import Nav from "./nav";
 //int - actions
-import { logout } from "../../actions/session_actions";
+import { signout } from "../../actions/session_actions";
 import { openModal } from "../../actions/modal_actions";
 
 const mapSTP = (state) => ({
@@ -11,7 +11,7 @@ const mapSTP = (state) => ({
 });
 
 const mapDTP = (dispatch) => ({
-    logout: () => dispatch(logout()),
+    signout: () => dispatch(signout()),
     openModal: (modal) => dispatch(openModal(modal)),
 });
 

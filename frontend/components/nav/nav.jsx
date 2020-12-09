@@ -3,11 +3,10 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 //int - components
 import PlaylistsIndexContainer from "../playlists/playlists_index_container";
-
 //int - util
 import * as icons from "../../utils/icons";
 
-const Nav = ({ currentUser, logout, openModal }) => {
+const Nav = ({ currentUser, signout, openModal }) => {
     const display = currentUser ? (
         <React.Fragment>
             <div className="nav-section-container">
@@ -16,7 +15,7 @@ const Nav = ({ currentUser, logout, openModal }) => {
                     <ul className="nav-section-list">
                         <NavLink to="/library">
                             <li className="nav-section-list-item">
-                                {icons.recent}
+                                {icons.recent("icon color")}
                                 <span>Recently Added</span>
                             </li>
                         </NavLink>
@@ -27,11 +26,7 @@ const Nav = ({ currentUser, logout, openModal }) => {
             <div className="current-user">
                 <ul className="nav-section-list">
                     <li className="nav-section-list-item">
-                        <img
-                            src={"/assets/icons/signout.svg"}
-                            className="icon pointer"
-                            onClick={logout}
-                        />
+                        {icons.signout("icon pointer", signout)}
                         <span>Hello, {currentUser.username}</span>
                     </li>
                 </ul>
@@ -46,12 +41,12 @@ const Nav = ({ currentUser, logout, openModal }) => {
                             className="nav-section-list-item pointer"
                             onClick={() => openModal("signin")}
                         >
-                            {icons.login}
+                            {icons.signin("icon color")}
                             <span>Sign In</span>
                         </li>
                         <NavLink to="/browse">
                             <li className="nav-section-list-item">
-                                {icons.browse}
+                                {icons.browse("icon color")}
                                 <span>Browse</span>
                             </li>
                         </NavLink>
@@ -74,7 +69,7 @@ const Nav = ({ currentUser, logout, openModal }) => {
                 <h1 className="logo">Appo Music</h1>
             </Link>
             <div className="input-container search">
-                <img src={"/assets/icons/search.svg"} className="icon" />
+                {icons.search("icon")}
                 <input type="text" placeholder="Search"></input>
             </div>
             {display}

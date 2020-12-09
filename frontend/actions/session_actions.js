@@ -2,7 +2,7 @@
 import * as SessionAPI from "../utils/session_api_utils";
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
-export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
+export const SIGNOUT_CURRENT_USER = "SIGNOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS";
 
@@ -11,8 +11,8 @@ export const receiveCurrentUser = (user) => ({
     user: user,
 });
 
-export const logoutCurrentUser = () => ({
-    type: LOGOUT_CURRENT_USER,
+export const signoutCurrentUser = () => ({
+    type: SIGNOUT_CURRENT_USER,
 });
 
 export const receiveErrors = (errors) => ({
@@ -37,5 +37,5 @@ export const signin = (formUser) => (dispatch) =>
         (error) => dispatch(receiveErrors(error.responseJSON))
     );
 
-export const logout = () => (dispatch) =>
-    SessionAPI.deleteSession().then(() => dispatch(logoutCurrentUser()));
+export const signout = () => (dispatch) =>
+    SessionAPI.deleteSession().then(() => dispatch(signoutCurrentUser()));
