@@ -47,11 +47,6 @@ h3 {
     font-size: 14px;
 }
 
-.app {
-    height: 100vh;
-    display: flex;
-}
-
 .pointer:hover {
     cursor: pointer;
 }
@@ -81,12 +76,15 @@ h3 {
 }
 
 .btn {
-    display: inline-block;
-    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    height: 30px;
+    min-width: 90px;
     text-align: center;
-    padding: 10px 0;
-    border-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
     color: white;
     text-decoration: none;
     font-weight: 600;
@@ -106,6 +104,19 @@ h3 {
 
 .icon.color {
     fill: $main-color;
+}
+
+.icon.white {
+    fill: white;
+    opacity: 1;
+}
+
+// app
+///////////////////////////////////////////////////////////////////////////////
+
+.app {
+    display: flex;
+    height: 100vh;
 }
 
 // Nav
@@ -274,35 +285,25 @@ h3 {
 ///////////////////////////////////////////////////////////////////////////////
 
 .main {
-    flex-basis: 0;
+    height: 100%;
     flex-grow: 999;
     min-width: 50%;
-}
-
-// Main Content
-///////////////////////////////////////////////////////////////////////////////
-
-.main-content {
-    height: calc(100% - 55px);
-    padding: 20px;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    position: relative;
 }
 
 // Music Player
 ///////////////////////////////////////////////////////////////////////////////
 
 .music-player {
-    background-color: #fff;
-    border-bottom: 1px solid $border-color;
+    position: sticky;
+    top: 0;
     height: 55px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    position: relative;
+    background-color: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid $border-color;
+    z-index: 1;
 }
 
 .music-player > .controls,
@@ -319,6 +320,7 @@ h3 {
     border: 1px solid $border-color;
     display: flex;
     height: 45px;
+    background-color: white;
 }
 
 .music-player > .display > .display-inner {
@@ -341,4 +343,194 @@ img.album-artwork {
 .display-inner > .slider {
     background-color: black;
     height: 3px;
+}
+
+// Main Content
+///////////////////////////////////////////////////////////////////////////////
+
+.main-content {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: absolute;
+    top: 0;
+    padding: 95px 40px 40px 40px;
+}
+
+.main-content-inner {
+    position: relative;
+}
+
+// Album
+
+.album-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+}
+
+.album-cover-container {
+    width: 25%;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    min-width: 200px;
+    max-width: 380px;
+    margin-right: 20px;
+}
+
+.album-cover {
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: $box-shadow-2;
+}
+
+.album-header-tracks {
+    flex: 1;
+}
+
+.album-header {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    margin: 0 20px;
+}
+
+.album-header h1 {
+    font-size: 24px;
+    margin-bottom: 1px;
+}
+
+.album-header h2 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.album-header h2 a {
+    color: $main-color;
+}
+
+.album-header h3 {
+    color: $gray-text;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.album-header .btn {
+    margin: 15px 0;
+}
+
+.text-container {
+    position: relative;
+    max-width: 540px;
+    margin-top: 20px;
+}
+
+.text-cutoff {
+    display: block;
+    overflow: hidden;
+    word-break: break-word;
+    height: 70px;
+    font-size: 12px;
+}
+
+.text-cutoff strong {
+    font-weight: 500;
+    margin-right: 5px;
+    color: $gray-text;
+}
+
+.more {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    appearance: none;
+    padding: 0;
+    padding-left: 20px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 40%,
+        rgba(255, 255, 255, 1) 100%
+    );
+
+    border: none;
+    font-size: 12px;
+    color: $main-color;
+}
+
+.more:focus {
+    outline: none;
+}
+
+.tracks-list {
+    margin-top: 20px;
+    display: table;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.track-row {
+    display: table-row;
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid $border-color;
+    border-radius: 6px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.track-row:first-child {
+    border-top: 1px solid $border-color;
+}
+
+.track-row:hover {
+    background-color: #fbfbfb;
+    border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+}
+
+.track-row.selected {
+    background-color: $main-color;
+    color: white;
+}
+
+.track-index {
+    flex-basis: 27px;
+    color: $gray-text;
+}
+
+.track-title {
+    flex-grow: 1;
+}
+
+.track-duration {
+    flex-basis: 70px;
+    color: $gray-text;
+}
+
+.track-row.selected .track-index,
+.track-row.selected .track-duration {
+    color: white;
+}
+
+.album-meta {
+    text-align: center;
+    color: $gray-text;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 20px 20px 0;
+}
+
+.album-meta p:last-child {
+    color: $gray-text-2;
 }

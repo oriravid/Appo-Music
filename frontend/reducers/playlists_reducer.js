@@ -3,7 +3,6 @@ import {
     RECEIVE_USER_PLAYLISTS,
     RECEIVE_NEW_PLAYLIST,
     REMOVE_PLAYLIST,
-    // CLEAR_USER_PLAYLISTS,
 } from "../actions/playlist_actions";
 import { LOGOUT_CURRENT_USER } from "../actions/session_actions";
 

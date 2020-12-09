@@ -90,11 +90,6 @@ class SessionForm extends React.Component {
 
         return (
             <React.Fragment>
-                <img
-                    src={"/assets/icons/close.svg"}
-                    className="icon close pointer"
-                    onClick={this.props.closeModal}
-                />
                 <div className="session-form-text">
                     <h1 className="logo">Appo Music</h1>
                     <h2>{headerText}</h2>

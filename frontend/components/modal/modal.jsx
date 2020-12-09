@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { closeModal } from "../../actions/modal_actions";
 import SigninFormContainer from "./signin_form_container";
 import SignupFormContainer from "./signup_form_container";
+import ExtendedText from "./extended_text";
 
 const Modal = ({ modal, closeModal }) => {
     if (!modal) {
@@ -12,7 +13,7 @@ const Modal = ({ modal, closeModal }) => {
     }
 
     let component, modalClass;
-    switch (modal) {
+    switch (modal.modal) {
         case "signin":
             component = <SigninFormContainer />;
             modalClass = "session";
@@ -20,6 +21,10 @@ const Modal = ({ modal, closeModal }) => {
         case "signup":
             component = <SignupFormContainer />;
             modalClass = "session";
+            break;
+        case "text":
+            component = <ExtendedText />;
+            modalClass = "extended-text";
             break;
         default:
             return null;
@@ -31,6 +36,11 @@ const Modal = ({ modal, closeModal }) => {
                 className={`modal-container ${modalClass}`}
                 onClick={(e) => e.stopPropagation()}
             >
+                <img
+                    src={"/assets/icons/close.svg"}
+                    className="icon close pointer"
+                    onClick={closeModal}
+                />
                 {component}
             </div>
         </div>

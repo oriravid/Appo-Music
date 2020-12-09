@@ -4,13 +4,12 @@ import React, { Component } from "react";
 class PlaylistShow extends Component {
     constructor(props) {
         super(props);
-        this.state = this.props.playlist;
 
         this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
-        this.setState(this.props.playlist);
+        //fetch playlist details here
     }
 
     handleDelete() {
@@ -19,10 +18,12 @@ class PlaylistShow extends Component {
     }
 
     render() {
-        if (!this.state) return null;
+        const { playlist } = this.props;
+        if (!playlist) return null;
+
         return (
             <div>
-                <h1>{this.state.title}</h1>
+                <h1>{playlist.title}</h1>
                 <p onClick={this.handleDelete}>DELETE ME</p>
             </div>
         );

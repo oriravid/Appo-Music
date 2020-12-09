@@ -1,6 +1,6 @@
 //ext
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 //int - components
 import PlaylistsIndexContainer from "../playlists/playlists_index_container";
 
@@ -70,7 +70,9 @@ const Nav = ({ currentUser, logout, openModal }) => {
 
     return (
         <div className="nav">
-            <h1 className="logo">Appo Music</h1>
+            <Link to="/">
+                <h1 className="logo">Appo Music</h1>
+            </Link>
             <div className="input-container search">
                 <img src={"/assets/icons/search.svg"} className="icon" />
                 <input type="text" placeholder="Search"></input>

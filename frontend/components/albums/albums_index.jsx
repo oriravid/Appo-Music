@@ -13,14 +13,19 @@ class AlbumsIndex extends Component {
     }
 
     render() {
-        if (!this.props.albums.length) return null;
+        const { albums, artists } = this.props;
+        if (!albums.length) return null;
 
         return (
             <div className="albums-container">
-                <h1>Albums go here!</h1>
+                <h1>Albums</h1>
                 <ul>
-                    {this.props.albums.map((album) => (
-                        <AlbumsIndexItem key={album.id} album={album} />
+                    {albums.map((album) => (
+                        <AlbumsIndexItem
+                            key={album.id}
+                            album={album}
+                            artist={artists[album.artist_id]}
+                        />
                     ))}
                 </ul>
             </div>

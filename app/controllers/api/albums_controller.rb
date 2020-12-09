@@ -7,14 +7,18 @@ class Api::AlbumsController < ApplicationController
         @albums = Album.all
     end
   end
-  
-#   private
 
-#   def selected_album
-#     Album.find(params[:id])
-#   end
+  def show
+    @album = selected_album
+  end
   
-#   def playlist_params
-#     params.require(:album).permit(:user_id)
-#   end
+  private
+
+  def selected_album
+    Album.find(params[:id])
+  end
+  
+  def playlist_params
+    params.require(:album).permit(:id, :user_id)
+  end
 end

@@ -6,7 +6,8 @@ import AlbumsIndex from "./albums_index";
 import { getAllAlbums, getUserAlbums } from "../../actions/album_actions";
 
 const mapSTP = ({ entities }) => ({
-    albums: Object.keys(entities.albums),
+    albums: Object.values(entities.albums),
+    artists: entities.artists,
 });
 
 const mapDTP = (dispatch) => ({

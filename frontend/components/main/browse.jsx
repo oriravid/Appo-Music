@@ -11,7 +11,7 @@ class Browse extends Component {
     render() {
         return (
             <React.Fragment>
-                <h1>I am the /browse container!</h1>
+                <h1>Browse</h1>
                 <AlbumsIndexContainer />
             </React.Fragment>
         );
