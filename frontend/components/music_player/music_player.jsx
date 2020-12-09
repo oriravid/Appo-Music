@@ -8,9 +8,10 @@ class MusicPlayer extends React.Component {
         super(props);
 
         this.state = {
+            index: 0,
             duration: null,
-            shuffle: false,
-            repeat: false,
+            // shuffle: false,
+            // repeat: false,
         };
     }
 
@@ -31,25 +32,27 @@ class MusicPlayer extends React.Component {
         this.audio.volume = e.target.value;
     }
 
+    handleEnd() {
+        console.log("END!");
+    }
+
     componentDidMount() {
-        if (this.props.music.on) {
-            this.scrub.value = 0;
-            this.currentTimeInterval = null;
+        this.scrub.value = 0;
+        this.currentTimeInterval = null;
 
-            this.audio.onloadedmetadata = function () {
-                this.setState({ duration: this.audio.duration });
-            }.bind(this);
+        this.audio.onloadedmetadata = function () {
+            this.setState({ duration: this.audio.duration });
+        }.bind(this);
 
-            this.audio.onplay = () => {
-                this.currentTimeInterval = setInterval(() => {
-                    this.scrub.value = this.audio.currentTime;
-                }, 500);
-            };
+        this.audio.onplay = () => {
+            this.currentTimeInterval = setInterval(() => {
+                this.scrub.value = this.audio.currentTime;
+            }, 500);
+        };
 
-            this.audio.onpause = () => {
-                clearInterval(this.currentTimeInterval);
-            };
-        }
+        this.audio.onpause = () => {
+            clearInterval(this.currentTimeInterval);
+        };
     }
 
     componentDidUpdate() {
@@ -63,12 +66,27 @@ class MusicPlayer extends React.Component {
     render() {
         const { music, currentTrack } = this.props;
 
-        if (music.on) {
-            var url = `${currentTrack.url}`;
-            var title = currentTrack.title;
+        let url = "";
+        let title = "";
 
-            var display = (
-                <React.Fragment>
+        if (currentTrack) {
+            url = `${currentTrack.url}`;
+            title = currentTrack.title;
+        }
+
+        return (
+            <div className="music-player">
+                <audio
+                    ref={(audio) => {
+                        this.audio = audio;
+                    }}
+                    src={url}
+                />
+                <MusicControls
+                    play={this.statePlay.bind(this)}
+                    pause={this.statePause.bind(this)}
+                />
+                <div className="display">
                     <img src="/" className="album-artwork" />
                     <div className="display-inner">
                         <div className="song-info">
@@ -88,29 +106,7 @@ class MusicPlayer extends React.Component {
                             />
                         </div>
                     </div>
-                </React.Fragment>
-            );
-        } else {
-            var display = (
-                <React.Fragment>
-                    <p>LOGO</p>
-                </React.Fragment>
-            );
-        }
-
-        return (
-            <div className="music-player">
-                <audio
-                    ref={(audio) => {
-                        this.audio = audio;
-                    }}
-                    src={url}
-                />
-                <MusicControls
-                    play={this.statePlay.bind(this)}
-                    pause={this.statePause.bind(this)}
-                />
-                <div className="display">{display}</div>
+                </div>
                 <div className="volume">
                     <img
                         src={"/assets/icons/volume.svg"}
