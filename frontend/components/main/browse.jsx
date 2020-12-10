@@ -11,8 +11,25 @@ class Browse extends Component {
     render() {
         return (
             <React.Fragment>
-                <h1>Browse</h1>
-                <AlbumsIndexContainer />
+                <div className="header-section">
+                    <h1>Browse</h1>
+                </div>
+                <div className="featured-section">
+                    <div className="featured-container">
+                        <h2>Featured 1</h2>
+                    </div>
+                    <div className="featured-container">
+                        <h2>Featured 2</h2>
+                    </div>
+                </div>
+                <div className="album-shelf vertical">
+                    <h2>New Music</h2>
+                    <AlbumsIndexContainer />
+                </div>
+                <div className="album-shelf vertical">
+                    <h2>Popular</h2>
+                    <AlbumsIndexContainer />
+                </div>
             </React.Fragment>
         );
     }

@@ -13,7 +13,6 @@ const mapSTP = ({ entities }) => ({
 const mapDTP = (dispatch) => ({
     getAllAlbums: () => dispatch(getAllAlbums()),
     getUserAlbums: (userId) => dispatch(getUserAlbums(userId)),
-    
 });
 
 export default connect(mapSTP, mapDTP)(AlbumsIndex);

@@ -17,8 +17,7 @@ class AlbumsIndex extends Component {
         if (!albums.length) return null;
 
         return (
-            <div className="albums-container">
-                <h1>Albums</h1>
+            <React.Fragment>
                 <ul>
                     {albums.map((album) => (
                         <AlbumsIndexItem
@@ -28,7 +27,7 @@ class AlbumsIndex extends Component {
                         />
                     ))}
                 </ul>
-            </div>
+            </React.Fragment>
         );
     }
 }
