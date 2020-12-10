@@ -1,4 +1,4 @@
-//int
+//int - actions
 import {
     ADD_TRACK,
     ADD_TRACKS,
@@ -6,14 +6,21 @@ import {
     PAUSE,
     NEXT,
     PREV,
+    TOGGLE_LOOP,
+    TOGGLE_SHUFFLE,
 } from "../actions/music_actions";
+//int - util
+import { indexPicker } from "../utils/various";
 
 const initialState = {
     on: false,
     queue: [],
     index: 0,
+    playedIndecies: [],
     currentTrack: null,
     playing: false,
+    loop: false,
+    shuffle: false,
 };
 
 export default (state = initialState, action) => {
@@ -28,37 +35,88 @@ export default (state = initialState, action) => {
             nextState.currentTrack = nextState.queue[nextState.index];
             nextState.playing = true;
             return nextState;
+
         case PLAY:
             if (state.queue.length) {
                 nextState.on = true;
+                nextState.currentTrack = nextState.queue[nextState.index];
                 nextState.playing = true;
                 return nextState;
             } else {
                 return nextState;
             }
+
         case PAUSE:
             nextState.playing = false;
             return nextState;
+
         case NEXT:
-            if (state.index + 1 < state.queue.length) {
-                nextState.index += 1;
-                nextState.currentTrack = state.queue[nextState.index];
-                return nextState;
+            if (state.on) {
+                nextState.playing = true;
+                if (state.playedIndecies.length < state.queue.length - 1) {
+                    var nsPlayedIndecies = state.playedIndecies;
+                    nsPlayedIndecies.push(state.index);
+                    nextState.playedIndecies = nsPlayedIndecies;
+
+                    if (state.shuffle) {
+                        nextState.index = indexPicker(
+                            state.queue.length,
+                            nsPlayedIndecies
+                        );
+                    } else {
+                        nextState.index += 1;
+                    }
+
+                    nextState.currentTrack = state.queue[nextState.index];
+                    return nextState;
+                } else {
+                    nextState.index = 0;
+                    nextState.playedIndecies = [];
+
+                    if (state.loop) {
+                        nextState.currentTrack = state.queue[nextState.index];
+                        return nextState;
+                    } else {
+                        nextState.on = false;
+                        nextState.currentTrack = null;
+                        nextState.playing = false;
+                        return nextState;
+                    }
+                }
             } else {
-                nextState.on = false;
-                nextState.index = 0;
-                nextState.currentTrack = null;
-                nextState.playing = false;
                 return nextState;
             }
+
         case PREV:
-            if (state.index - 1 >= 0) {
-                nextState.index -= 1;
-                nextState.currentTrack = state.queue[nextState.index];
-                return nextState;
+            if (state.on) {
+                nextState.playing = true;
+                if (state.playedIndecies.length > 0) {
+                    var nsPlayedIndecies = state.playedIndecies;
+                    var lastIndex = nsPlayedIndecies.pop();
+                    nextState.playedIndecies = nsPlayedIndecies;
+
+                    nextState.index = lastIndex;
+
+                    nextState.currentTrack = state.queue[nextState.index];
+                    return nextState;
+                } else {
+                    nextState.on = false;
+                    nextState.currentTrack = null;
+                    nextState.playing = false;
+                    return nextState;
+                }
             } else {
-                return initialState;
+                return nextState;
             }
+
+        case TOGGLE_LOOP:
+            nextState.loop = !state.loop;
+            return nextState;
+
+        case TOGGLE_SHUFFLE:
+            nextState.shuffle = !state.shuffle;
+            return nextState;
+
         default:
             return state;
     }

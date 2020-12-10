@@ -209,12 +209,16 @@ var closeModal = function closeModal() {
 /*! export PAUSE [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export PLAY [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export PREV [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export TOGGLE_LOOP [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export TOGGLE_SHUFFLE [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export addTrack [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export addTracks [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export next [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export pause [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export play [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export prev [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export toggleLoop [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export toggleShuffle [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -228,12 +232,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PAUSE": () => /* binding */ PAUSE,
 /* harmony export */   "NEXT": () => /* binding */ NEXT,
 /* harmony export */   "PREV": () => /* binding */ PREV,
+/* harmony export */   "TOGGLE_LOOP": () => /* binding */ TOGGLE_LOOP,
+/* harmony export */   "TOGGLE_SHUFFLE": () => /* binding */ TOGGLE_SHUFFLE,
 /* harmony export */   "addTrack": () => /* binding */ addTrack,
 /* harmony export */   "addTracks": () => /* binding */ addTracks,
 /* harmony export */   "play": () => /* binding */ play,
 /* harmony export */   "pause": () => /* binding */ pause,
 /* harmony export */   "next": () => /* binding */ next,
-/* harmony export */   "prev": () => /* binding */ prev
+/* harmony export */   "prev": () => /* binding */ prev,
+/* harmony export */   "toggleLoop": () => /* binding */ toggleLoop,
+/* harmony export */   "toggleShuffle": () => /* binding */ toggleShuffle
 /* harmony export */ });
 var ADD_TRACK = "ADD_TRACK";
 var ADD_TRACKS = "ADD_TRACKS";
@@ -241,6 +249,8 @@ var PLAY = "PLAY";
 var PAUSE = "PAUSE";
 var NEXT = "NEXT";
 var PREV = "PREV";
+var TOGGLE_LOOP = "TOGGLE_LOOP";
+var TOGGLE_SHUFFLE = "TOGGLE_SHUFFLE";
 var addTrack = function addTrack(track) {
   return {
     type: ADD_TRACK,
@@ -271,6 +281,16 @@ var next = function next() {
 var prev = function prev() {
   return {
     type: PREV
+  };
+};
+var toggleLoop = function toggleLoop() {
+  return {
+    type: TOGGLE_LOOP
+  };
+};
+var toggleShuffle = function toggleShuffle() {
+  return {
+    type: TOGGLE_SHUFFLE
   };
 };
 
@@ -314,8 +334,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var RECEIVE_USER_PLAYLISTS = "RECEIVE_USER_PLAYLISTS";
 var RECEIVE_NEW_PLAYLIST = "RECEIVE_NEW_PLAYLIST";
-var REMOVE_PLAYLIST = "REMOVE_PLAYLIST"; // export const CLEAR_USER_PLAYLISTS = "CLEAR_USER_PLAYLISTS";
-
+var REMOVE_PLAYLIST = "REMOVE_PLAYLIST";
 var receiveUserPlaylists = function receiveUserPlaylists(playlists) {
   return {
     type: RECEIVE_USER_PLAYLISTS,
@@ -333,10 +352,7 @@ var removePlaylist = function removePlaylist(playlistId) {
     type: REMOVE_PLAYLIST,
     playlistId: playlistId
   };
-}; // export const clearUserPlaylists = () => ({
-//     type: CLEAR_USER_PLAYLISTS,
-// });
-// Thunk Actions
+}; // Thunk Actions
 
 var getUserPlaylists = function getUserPlaylists(userId) {
   return function (dispatch) {
@@ -1697,48 +1713,39 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     key: "handleVolume",
     value: function handleVolume(e) {
       this.audio.volume = e.target.value;
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
+    } // componentDidMount() {}
 
-      this.audio.onloadedmetadata = function () {
-        this.setState({
-          duration: this.audio.duration
-        });
-      }.bind(this);
-
-      this.audio.onplay = function () {
-        _this2.timeSetter = setInterval(function () {
-          _this2.scrub.value = _this2.audio.currentTime;
-        }, 500);
-      };
-
-      this.audio.onpause = function () {
-        clearInterval(_this2.timeSetter);
-      };
-
-      this.audio.onended = function () {
-        _this2.props.next();
-      };
-    }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (this.props.music.on) {
-        this.scrub.value = 0;
-        this.timeSetter = null;
+      var _this2 = this;
 
+      if (this.props.music.on) {
+        // this.timeSetter = null;
+        // this.scrub.value = this.scrub.value || 0;
         if (this.props.currentTrack !== prevProps.currentTrack) {
           this.audio.src = this.props.currentTrack.url;
         }
+
+        this.audio.onloadedmetadata = function () {
+          this.setState({
+            duration: this.audio.duration
+          });
+        }.bind(this);
       }
 
       if (this.props.music.playing) {
         this.audio.play();
+        this.timeSetter = setInterval(function () {
+          _this2.scrub.value = _this2.audio.currentTime;
+        }, 500);
+
+        this.audio.onended = function () {
+          _this2.props.next();
+        };
       } else {
         this.audio.pause();
+        clearInterval(this.timeSetter);
       }
     }
   }, {
@@ -1796,13 +1803,21 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       } else {
         var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "display off"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "A"));
-      }
+        }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.fire());
+      } //icon conditional styling
+
+
+      var sActive = "",
+          lActive = "",
+          disabled = "";
+      if (music.shuffle) sActive = " color";
+      if (music.loop) lActive = " color";
+      if (!music.on) disabled = " disabled"; //play pause icons conditional display
 
       if (music.playing === false) {
-        var playpause = _utils_icons__WEBPACK_IMPORTED_MODULE_1__.play("icon lrg", this.props.play);
+        var playpause = _utils_icons__WEBPACK_IMPORTED_MODULE_1__.play("icon lrg".concat(disabled), this.props.play);
       } else {
-        var playpause = _utils_icons__WEBPACK_IMPORTED_MODULE_1__.pause("icon lrg", this.props.pause);
+        var playpause = _utils_icons__WEBPACK_IMPORTED_MODULE_1__.pause("icon lrg".concat(disabled), this.props.pause);
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1816,11 +1831,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         src: trackUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "controls"
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.shuffle("icon sml", function () {
-        return console.log("shuffle");
-      }), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.previous("icon med", this.props.prev), playpause, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.next("icon med", this.props.next), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.loop("icon sml", function () {
-        return console.log("loop");
-      })), display, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.shuffle("icon sml".concat(sActive), this.props.toggleShuffle), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.previous("icon med".concat(disabled), this.props.prev), playpause, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.next("icon med".concat(disabled), this.props.next), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.loop("icon sml".concat(lActive), this.props.toggleLoop)), display, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "volume"
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.volume("icon", function () {
         return console.log("volume");
@@ -1902,6 +1913,12 @@ var mapDTP = function mapDTP(dispatch) {
     },
     prev: function prev() {
       return dispatch((0,_actions_music_actions__WEBPACK_IMPORTED_MODULE_2__.prev)());
+    },
+    toggleLoop: function toggleLoop() {
+      return dispatch((0,_actions_music_actions__WEBPACK_IMPORTED_MODULE_2__.toggleLoop)());
+    },
+    toggleShuffle: function toggleShuffle() {
+      return dispatch((0,_actions_music_actions__WEBPACK_IMPORTED_MODULE_2__.toggleShuffle)());
     }
   };
 };
@@ -1984,9 +2001,9 @@ var Nav = function Nav(_ref) {
     className: "nav"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
     to: "/"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "logo"
-  }, "Appo Music")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, _utils_icons__WEBPACK_IMPORTED_MODULE_2__.fire(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Music"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "input-container search"
   }, _utils_icons__WEBPACK_IMPORTED_MODULE_2__.search("icon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "text",
@@ -2786,20 +2803,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/music_actions */ "./frontend/actions/music_actions.js");
+/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/various */ "./frontend/utils/various.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//int
+//int - actions
+ //int - util
+
 
 var initialState = {
   on: false,
   queue: [],
   index: 0,
+  playedIndecies: [],
   currentTrack: null,
-  playing: false
+  playing: false,
+  loop: false,
+  shuffle: false
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -2820,6 +2843,7 @@ var initialState = {
     case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.PLAY:
       if (state.queue.length) {
         nextState.on = true;
+        nextState.currentTrack = nextState.queue[nextState.index];
         nextState.playing = true;
         return nextState;
       } else {
@@ -2831,26 +2855,68 @@ var initialState = {
       return nextState;
 
     case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.NEXT:
-      if (state.index + 1 < state.queue.length) {
-        nextState.index += 1;
-        nextState.currentTrack = state.queue[nextState.index];
-        return nextState;
+      if (state.on) {
+        nextState.playing = true;
+
+        if (state.playedIndecies.length < state.queue.length - 1) {
+          var nsPlayedIndecies = state.playedIndecies;
+          nsPlayedIndecies.push(state.index);
+          nextState.playedIndecies = nsPlayedIndecies;
+
+          if (state.shuffle) {
+            nextState.index = (0,_utils_various__WEBPACK_IMPORTED_MODULE_1__.indexPicker)(state.queue.length, nsPlayedIndecies);
+          } else {
+            nextState.index += 1;
+          }
+
+          nextState.currentTrack = state.queue[nextState.index];
+          return nextState;
+        } else {
+          nextState.index = 0;
+          nextState.playedIndecies = [];
+
+          if (state.loop) {
+            nextState.currentTrack = state.queue[nextState.index];
+            return nextState;
+          } else {
+            nextState.on = false;
+            nextState.currentTrack = null;
+            nextState.playing = false;
+            return nextState;
+          }
+        }
       } else {
-        nextState.on = false;
-        nextState.index = 0;
-        nextState.currentTrack = null;
-        nextState.playing = false;
         return nextState;
       }
 
     case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.PREV:
-      if (state.index - 1 >= 0) {
-        nextState.index -= 1;
-        nextState.currentTrack = state.queue[nextState.index];
-        return nextState;
+      if (state.on) {
+        nextState.playing = true;
+
+        if (state.playedIndecies.length > 0) {
+          var nsPlayedIndecies = state.playedIndecies;
+          var lastIndex = nsPlayedIndecies.pop();
+          nextState.playedIndecies = nsPlayedIndecies;
+          nextState.index = lastIndex;
+          nextState.currentTrack = state.queue[nextState.index];
+          return nextState;
+        } else {
+          nextState.on = false;
+          nextState.currentTrack = null;
+          nextState.playing = false;
+          return nextState;
+        }
       } else {
-        return initialState;
+        return nextState;
       }
+
+    case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_LOOP:
+      nextState.loop = !state.loop;
+      return nextState;
+
+    case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_SHUFFLE:
+      nextState.shuffle = !state.shuffle;
+      return nextState;
 
     default:
       return state;
@@ -3177,12 +3243,14 @@ var getAlbumDetails = function getAlbumDetails(albumId) {
 /*! export arrow [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export browse [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export close [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export fire [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export go [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export list [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export loop [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export next [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export pause [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export play [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export playCircle [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export playlist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export previous [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export recent [provided] [no usage info] [missing usage info prevents renaming] */
@@ -3204,12 +3272,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "arrow": () => /* binding */ arrow,
 /* harmony export */   "browse": () => /* binding */ browse,
 /* harmony export */   "close": () => /* binding */ close,
+/* harmony export */   "fire": () => /* binding */ fire,
 /* harmony export */   "go": () => /* binding */ go,
 /* harmony export */   "list": () => /* binding */ list,
 /* harmony export */   "loop": () => /* binding */ loop,
 /* harmony export */   "next": () => /* binding */ next,
 /* harmony export */   "pause": () => /* binding */ pause,
 /* harmony export */   "play": () => /* binding */ play,
+/* harmony export */   "playCircle": () => /* binding */ playCircle,
 /* harmony export */   "playlist": () => /* binding */ playlist,
 /* harmony export */   "previous": () => /* binding */ previous,
 /* harmony export */   "recent": () => /* binding */ recent,
@@ -3294,6 +3364,20 @@ var close = function close(classes, action) {
     fill: "none"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
     d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+  }));
+};
+var fire = function fire(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24",
+    className: classes
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"
   }));
 };
 var go = function go(classes) {
@@ -3388,6 +3472,20 @@ var play = function play(classes, action) {
     fill: "none"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
     d: "M8 5v14l11-7z"
+  }));
+};
+var playCircle = function playCircle(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24",
+    className: classes
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"
   }));
 };
 var playlist = function playlist(classes) {
@@ -3715,7 +3813,9 @@ var deleteSession = function deleteSession() {
   !*** ./frontend/utils/various.js ***!
   \***********************************/
 /*! namespace exports */
+/*! export arrayShuffler [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export dateFormatter [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export indexPicker [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeAdder [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
@@ -3725,7 +3825,9 @@ var deleteSession = function deleteSession() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "dateFormatter": () => /* binding */ dateFormatter,
-/* harmony export */   "timeAdder": () => /* binding */ timeAdder
+/* harmony export */   "timeAdder": () => /* binding */ timeAdder,
+/* harmony export */   "indexPicker": () => /* binding */ indexPicker,
+/* harmony export */   "arrayShuffler": () => /* binding */ arrayShuffler
 /* harmony export */ });
 //input yyyy-dd-mm
 //prettier-ignore
@@ -3774,6 +3876,27 @@ var timeAdder = function timeAdder(times) {
   } else {
     return "1 Hour ".concat(totalMinutes - 60, " Minutes");
   }
+}; // picks an index from the queue that hansn't been played yet
+
+var indexPicker = function indexPicker(queueLength, playedIndecies) {
+  var newIndex = Math.floor(Math.random() * Math.floor(queueLength));
+
+  if (playedIndecies.includes(newIndex)) {
+    return indexPicker(queueLength, playedIndecies);
+  } else {
+    return newIndex;
+  }
+}; // shuffles queue when shuffle toggled on
+
+var arrayShuffler = function arrayShuffler(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+
+  return array;
 };
 
 /***/ }),

@@ -100,7 +100,7 @@ h3 {
 .icon {
     width: 20px;
     height: 20px;
-    opacity: 0.55;
+    opacity: 0.65;
 }
 
 .icon.color {
@@ -110,6 +110,10 @@ h3 {
 .icon.white {
     fill: white;
     opacity: 1;
+}
+
+.icon.disabled {
+    opacity: 0.4;
 }
 
 .icon.sml {
@@ -156,8 +160,30 @@ h3 {
     overflow: hidden;
 }
 
-.nav h1.logo {
-    font-size: 24px;
+.nav .logo {
+    display: flex;
+    align-items: flex-end;
+    height: 20px;
+    margin: 4px 0 0 2px;
+    opacity: 0.85;
+}
+
+.nav .logo h1 {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 0.88;
+    letter-spacing: -0.5px;
+    margin: 0;
+    color: black;
+    text-shadow: $box-shadow;
+}
+
+.nav .logo svg {
+    width: 20px;
+    height: 20px;
+    margin-right: -2px;
+    -webkit-filter: drop-shadow($box-shadow);
+    filter: drop-shadow($box-shadow);
 }
 
 .input-container.search {
@@ -363,9 +389,10 @@ h3 {
     justify-content: center;
 }
 
-.music-player-inner > .display.off h2 {
-    opacity: 0.3;
-    margin: 0;
+.music-player-inner > .display.off svg {
+    opacity: 0.5;
+    -webkit-filter: drop-shadow($box-shadow-2);
+    filter: drop-shadow($box-shadow-2);
 }
 
 .music-player-inner > .display > .display-inner {

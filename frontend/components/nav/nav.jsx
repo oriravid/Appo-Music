@@ -66,7 +66,10 @@ const Nav = ({ currentUser, signout, openModal }) => {
     return (
         <div className="nav">
             <Link to="/">
-                <h1 className="logo">Appo Music</h1>
+                <div className="logo">
+                    {icons.fire()}
+                    <h1>Music</h1>
+                </div>
             </Link>
             <div className="input-container search">
                 {icons.search("icon")}

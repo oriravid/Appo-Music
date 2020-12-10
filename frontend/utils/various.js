@@ -50,3 +50,25 @@ export const timeAdder = (times) => {
         return `1 Hour ${totalMinutes - 60} Minutes`;
     }
 };
+
+// picks an index from the queue that hansn't been played yet
+export const indexPicker = (queueLength, playedIndecies) => {
+    var newIndex = Math.floor(Math.random() * Math.floor(queueLength));
+    if (playedIndecies.includes(newIndex)) {
+        return indexPicker(queueLength, playedIndecies);
+    } else {
+        return newIndex;
+    }
+};
+
+// shuffles queue when shuffle toggled on
+export const arrayShuffler = (array) => {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    return array;
+};

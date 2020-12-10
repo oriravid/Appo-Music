@@ -22,40 +22,35 @@ class MusicPlayer extends React.Component {
         this.audio.volume = e.target.value;
     }
 
-    componentDidMount() {
-        this.audio.onloadedmetadata = function () {
-            this.setState({ duration: this.audio.duration });
-        }.bind(this);
-
-        this.audio.onplay = () => {
-            this.timeSetter = setInterval(() => {
-                this.scrub.value = this.audio.currentTime;
-            }, 500);
-        };
-
-        this.audio.onpause = () => {
-            clearInterval(this.timeSetter);
-        };
-
-        this.audio.onended = () => {
-            this.props.next();
-        };
-    }
+    // componentDidMount() {}
 
     componentDidUpdate(prevProps) {
         if (this.props.music.on) {
-            this.scrub.value = 0;
-            this.timeSetter = null;
+            // this.timeSetter = null;
+            // this.scrub.value = this.scrub.value || 0;
 
             if (this.props.currentTrack !== prevProps.currentTrack) {
                 this.audio.src = this.props.currentTrack.url;
             }
+
+            this.audio.onloadedmetadata = function () {
+                this.setState({ duration: this.audio.duration });
+            }.bind(this);
         }
 
         if (this.props.music.playing) {
             this.audio.play();
+
+            this.timeSetter = setInterval(() => {
+                this.scrub.value = this.audio.currentTime;
+            }, 500);
+
+            this.audio.onended = () => {
+                this.props.next();
+            };
         } else {
             this.audio.pause();
+            clearInterval(this.timeSetter);
         }
     }
 
@@ -113,17 +108,25 @@ class MusicPlayer extends React.Component {
                 </div>
             );
         } else {
-            var display = (
-                <div className="display off">
-                    <h2>A</h2>
-                </div>
-            );
+            var display = <div className="display off">{icons.fire()}</div>;
         }
 
+        //icon conditional styling
+        var sActive = "",
+            lActive = "",
+            disabled = "";
+        if (music.shuffle) sActive = " color";
+        if (music.loop) lActive = " color";
+        if (!music.on) disabled = " disabled";
+
+        //play pause icons conditional display
         if (music.playing === false) {
-            var playpause = icons.play("icon lrg", this.props.play);
+            var playpause = icons.play(`icon lrg${disabled}`, this.props.play);
         } else {
-            var playpause = icons.pause("icon lrg", this.props.pause);
+            var playpause = icons.pause(
+                `icon lrg${disabled}`,
+                this.props.pause
+            );
         }
 
         return (
@@ -137,13 +140,17 @@ class MusicPlayer extends React.Component {
                     />
 
                     <div className="controls">
-                        {icons.shuffle("icon sml", () =>
-                            console.log("shuffle")
+                        {icons.shuffle(
+                            `icon sml${sActive}`,
+                            this.props.toggleShuffle
                         )}
-                        {icons.previous("icon med", this.props.prev)}
+                        {icons.previous(`icon med${disabled}`, this.props.prev)}
                         {playpause}
-                        {icons.next("icon med", this.props.next)}
-                        {icons.loop("icon sml", () => console.log("loop"))}
+                        {icons.next(`icon med${disabled}`, this.props.next)}
+                        {icons.loop(
+                            `icon sml${lActive}`,
+                            this.props.toggleLoop
+                        )}
                     </div>
 
                     {display}

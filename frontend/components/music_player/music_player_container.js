@@ -3,7 +3,14 @@ import { connect } from "react-redux";
 //int - components
 import MusicPlayer from "./music_player";
 //int - actions
-import { play, pause, next, prev } from "../../actions/music_actions";
+import {
+    play,
+    pause,
+    next,
+    prev,
+    toggleLoop,
+    toggleShuffle,
+} from "../../actions/music_actions";
 
 const mapSTP = ({ music, entities }) => {
     let currentTrack, currentAlbum, currentArtist;
@@ -27,6 +34,8 @@ const mapDTP = (dispatch) => ({
     pause: () => dispatch(pause()),
     next: () => dispatch(next()),
     prev: () => dispatch(prev()),
+    toggleLoop: () => dispatch(toggleLoop()),
+    toggleShuffle: () => dispatch(toggleShuffle()),
 });
 
 export default connect(mapSTP, mapDTP)(MusicPlayer);
