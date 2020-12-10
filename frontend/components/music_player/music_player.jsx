@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 //int - util
 import * as icons from "../../utils/icons";
+import { timeFormatter } from "../../utils/various";
 
 class MusicPlayer extends React.Component {
     constructor(props) {
@@ -10,21 +11,33 @@ class MusicPlayer extends React.Component {
 
         this.state = {
             duration: null,
+            currentTime: null,
+            timeLeft: null,
         };
     }
 
     handleScrub(e) {
-        clearInterval(this.timeSetter);
+        // clearInterval(this.timeSetter);
         this.audio.currentTime = e.target.value;
+        // this.handleInterval();
+    }
+
+    handleInterval() {
+        this.timeSetter = setInterval(() => {
+            this.scrub.value = this.audio.currentTime;
+            this.setState({
+                currentTime: this.audio.currentTime,
+                timeLeft: this.state.duration - this.audio.currentTime,
+            });
+        }, 500);
     }
 
     handleVolume(e) {
         this.audio.volume = e.target.value;
     }
 
-    // componentDidMount() {}
-
     componentDidUpdate(prevProps) {
+        clearInterval(this.timeSetter);
         if (this.props.music.on) {
             // this.timeSetter = null;
             // this.scrub.value = this.scrub.value || 0;
@@ -41,16 +54,13 @@ class MusicPlayer extends React.Component {
         if (this.props.music.playing) {
             this.audio.play();
 
-            this.timeSetter = setInterval(() => {
-                this.scrub.value = this.audio.currentTime;
-            }, 500);
+            this.handleInterval();
 
             this.audio.onended = () => {
                 this.props.next();
             };
         } else {
             this.audio.pause();
-            clearInterval(this.timeSetter);
         }
     }
 
@@ -103,6 +113,10 @@ class MusicPlayer extends React.Component {
                                 onChange={this.handleScrub.bind(this)}
                                 className="slider-input pointer"
                             />
+                        </div>
+                        <div className="times">
+                            <span>{timeFormatter(this.state.currentTime)}</span>
+                            <span>-{timeFormatter(this.state.timeLeft)}</span>
                         </div>
                     </div>
                 </div>

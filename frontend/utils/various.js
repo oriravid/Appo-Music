@@ -51,6 +51,23 @@ export const timeAdder = (times) => {
     }
 };
 
+export const timeFormatter = (time) => {
+    var seconds = Math.ceil(time);
+    if (seconds < 10) {
+        return `0:0${seconds}`;
+    } else if (seconds < 60) {
+        return `0:${seconds}`;
+    } else {
+        var minutes = Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        if (seconds < 10) {
+            return `${minutes}:0${seconds}`;
+        } else {
+            return `${minutes}:${seconds}`;
+        }
+    }
+};
+
 // picks an index from the queue that hansn't been played yet
 export const indexPicker = (queueLength, playedIndecies) => {
     var newIndex = Math.floor(Math.random() * Math.floor(queueLength));

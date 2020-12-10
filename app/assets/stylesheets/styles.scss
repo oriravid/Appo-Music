@@ -429,6 +429,24 @@ img.album-artwork {
     text-decoration: underline;
 }
 
+.display-inner > .times {
+    padding: 0 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: $gray-text;
+    opacity: 0;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    transition: opacity 0.4s;
+}
+
+.music-player-inner:hover .times {
+    opacity: 0.75;
+}
+
 .display-inner > .slider {
     position: absolute;
     left: 0;

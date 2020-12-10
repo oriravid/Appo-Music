@@ -1656,8 +1656,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
+/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/various */ "./frontend/utils/various.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1686,6 +1687,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   _inherits(MusicPlayer, _React$Component);
 
@@ -1698,7 +1700,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      duration: null
+      duration: null,
+      currentTime: null,
+      timeLeft: null
     };
     return _this;
   }
@@ -1706,19 +1710,34 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   _createClass(MusicPlayer, [{
     key: "handleScrub",
     value: function handleScrub(e) {
-      clearInterval(this.timeSetter);
-      this.audio.currentTime = e.target.value;
+      // clearInterval(this.timeSetter);
+      this.audio.currentTime = e.target.value; // this.handleInterval();
+    }
+  }, {
+    key: "handleInterval",
+    value: function handleInterval() {
+      var _this2 = this;
+
+      this.timeSetter = setInterval(function () {
+        _this2.scrub.value = _this2.audio.currentTime;
+
+        _this2.setState({
+          currentTime: _this2.audio.currentTime,
+          timeLeft: _this2.state.duration - _this2.audio.currentTime
+        });
+      }, 500);
     }
   }, {
     key: "handleVolume",
     value: function handleVolume(e) {
       this.audio.volume = e.target.value;
-    } // componentDidMount() {}
-
+    }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this2 = this;
+      var _this3 = this;
+
+      clearInterval(this.timeSetter);
 
       if (this.props.music.on) {
         // this.timeSetter = null;
@@ -1736,22 +1755,19 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.music.playing) {
         this.audio.play();
-        this.timeSetter = setInterval(function () {
-          _this2.scrub.value = _this2.audio.currentTime;
-        }, 500);
+        this.handleInterval();
 
         this.audio.onended = function () {
-          _this2.props.next();
+          _this3.props.next();
         };
       } else {
         this.audio.pause();
-        clearInterval(this.timeSetter);
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$props = this.props,
           music = _this$props.music,
@@ -1784,22 +1800,24 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           className: "track-title"
         }, trackTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
           className: "artist-album"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
           to: "/artists/".concat(artistId)
-        }, artistName), " — ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+        }, artistName), " — ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
           to: "/albums/".concat(albumId)
         }, albumTitle))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "slider"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           ref: function ref(scrub) {
-            _this3.scrub = scrub;
+            _this4.scrub = scrub;
           },
           type: "range",
           min: "0",
           max: this.state.duration,
           onChange: this.handleScrub.bind(this),
           className: "slider-input pointer"
-        }))));
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "times"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.currentTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "-", (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.timeLeft)))));
       } else {
         var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "display off"
@@ -1826,7 +1844,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         className: "music-player-inner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("audio", {
         ref: function ref(audio) {
-          _this3.audio = audio;
+          _this4.audio = audio;
         },
         src: trackUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1837,7 +1855,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         return console.log("volume");
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         ref: function ref(volume) {
-          _this3.volume = volume;
+          _this4.volume = volume;
         },
         type: "range",
         min: "0",
@@ -3817,6 +3835,7 @@ var deleteSession = function deleteSession() {
 /*! export dateFormatter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export indexPicker [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeAdder [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export timeFormatter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -3826,6 +3845,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "dateFormatter": () => /* binding */ dateFormatter,
 /* harmony export */   "timeAdder": () => /* binding */ timeAdder,
+/* harmony export */   "timeFormatter": () => /* binding */ timeFormatter,
 /* harmony export */   "indexPicker": () => /* binding */ indexPicker,
 /* harmony export */   "arrayShuffler": () => /* binding */ arrayShuffler
 /* harmony export */ });
@@ -3875,6 +3895,24 @@ var timeAdder = function timeAdder(times) {
     return "1 Hour";
   } else {
     return "1 Hour ".concat(totalMinutes - 60, " Minutes");
+  }
+};
+var timeFormatter = function timeFormatter(time) {
+  var seconds = Math.ceil(time);
+
+  if (seconds < 10) {
+    return "0:0".concat(seconds);
+  } else if (seconds < 60) {
+    return "0:".concat(seconds);
+  } else {
+    var minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+
+    if (seconds < 10) {
+      return "".concat(minutes, ":0").concat(seconds);
+    } else {
+      return "".concat(minutes, ":").concat(seconds);
+    }
   }
 }; // picks an index from the queue that hansn't been played yet
 
