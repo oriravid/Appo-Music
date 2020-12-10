@@ -298,6 +298,7 @@ h3 {
     );
     color: rgba(0, 0, 0, 0.6);
     font-weight: 700;
+    height: 40px;
     margin-top: 20px;
     font-size: 18px;
     text-transform: uppercase;
@@ -320,39 +321,57 @@ h3 {
 .music-player {
     position: sticky;
     top: 0;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid $border-color;
+}
+
+.music-player-inner {
     height: 55px;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: rgba(255, 255, 255, 0.97);
-    border-bottom: 1px solid $border-color;
-    z-index: 1;
+    max-width: 1680px;
+    margin: 0 auto;
 }
 
-.music-player > .controls,
-.music-player > .display,
-.music-player > .volume {
+.music-player-inner > .controls,
+.music-player-inner > .display,
+.music-player-inner > .volume {
     width: 33.33%;
     text-align: center;
 }
 
-.music-player > .controls {
+.music-player-inner > .controls {
+    flex: 0 2 30%;
     padding: 0 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.music-player > .display {
+.music-player-inner > .display {
+    flex: 2 1 40%;
     border: 1px solid $border-color;
     display: flex;
     height: 45px;
     background-color: white;
 }
 
-.music-player > .display > .display-inner {
+.music-player-inner > .display.off {
+    align-items: center;
+    justify-content: center;
+}
+
+.music-player-inner > .display.off h2 {
+    opacity: 0.3;
+    margin: 0;
+}
+
+.music-player-inner > .display > .display-inner {
+    position: relative;
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column;
     flex-grow: 2;
 }
 
@@ -363,19 +382,107 @@ img.album-artwork {
 .display-inner > .song-info {
     height: 42px;
     display: flex;
+    flex-flow: column;
     align-items: center;
     justify-content: center;
+    font-size: 12px;
+    line-height: 1em;
+}
+
+.display-inner > .song-info > .track-title {
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.display-inner > .song-info > .artist-album a {
+    color: $gray-text;
+}
+
+.display-inner > .song-info > .artist-album a:hover {
+    text-decoration: underline;
 }
 
 .display-inner > .slider {
-    background-color: black;
-    height: 3px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
-.music-player > .volume {
+.display-inner > .slider > .slider-input {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    appearance: none;
+    overflow: visible;
+    background-color: transparent;
+    border: 0;
+    color: inherit;
+    position: relative;
+    z-index: 2;
+    margin: 0;
+}
+
+.slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 4px;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.slider-input::-moz-range-thumb {
+    width: 4px;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.music-player-inner > .volume {
+    flex: 0 2 30%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.volume-input {
+    padding: 0;
+    width: 70px;
+    height: 3px;
+    border-radius: 10px;
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    overflow: visible;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 0;
+    color: inherit;
+}
+
+.volume-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12.5px;
+    height: 12.5px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid $border-color;
+    box-shadow: $box-shadow;
+}
+
+.volume-input::-moz-range-thumb {
+    width: 12.5px;
+    height: 12.5px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid $border-color;
+    box-shadow: $box-shadow;
+}
+
+.slider-input:focus,
+.volume-input:focus {
+    outline: none;
 }
 
 // Main Content
@@ -393,6 +500,8 @@ img.album-artwork {
 
 .main-content-inner {
     position: relative;
+    max-width: 1680px;
+    margin: 0 auto;
 }
 
 // Album
@@ -537,7 +646,7 @@ img.album-artwork {
     color: white;
 }
 
-.track-index {
+.track-row > .track-index {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -545,18 +654,18 @@ img.album-artwork {
     color: $gray-text;
 }
 
-.track-title {
+.track-row > .track-title {
     flex-grow: 1;
 }
 
-.track-save {
+.track-row > .track-save {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-basis: 35px;
 }
 
-.track-duration {
+.track-row > .track-duration {
     display: flex;
     align-items: center;
     justify-content: center;

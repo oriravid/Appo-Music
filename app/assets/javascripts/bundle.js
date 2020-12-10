@@ -1614,43 +1614,6 @@ var mapDTP = function mapDTP(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/music_player/music_controls.jsx":
-/*!*************************************************************!*\
-  !*** ./frontend/components/music_player/music_controls.jsx ***!
-  \*************************************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements:  */
-/***/ (() => {
-
-// //ext
-// import React, { Component } from "react";
-// import { connect } from "react-redux";
-// //int - actions
-// import { next, previous } from "../../actions/music_actions";
-// //int - util
-// import * as icons from "../../utils/icons";
-// class MusicControls extends Component {
-//     constructor(props) {
-//         super(props);
-//     }
-//     render() {
-//         return (
-//             <React.Fragment>
-//             </React.Fragment>
-//         );
-//     }
-// }
-// const mapSTP = ({ music }) => ({
-//     music: music,
-// });
-// const mapDTP = (dispatch) => ({
-//     next: () => dispatch(next()),
-//     previous: () => dispatch(previous()),
-// });
-// export default connect(mapSTP, mapDTP)(MusicControls);
-
-/***/ }),
-
 /***/ "./frontend/components/music_player/music_player.jsx":
 /*!***********************************************************!*\
   !*** ./frontend/components/music_player/music_player.jsx ***!
@@ -1658,7 +1621,7 @@ var mapDTP = function mapDTP(dispatch) {
 /*! namespace exports */
 /*! export default [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -1667,9 +1630,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _music_controls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./music_controls */ "./frontend/components/music_player/music_controls.jsx");
-/* harmony import */ var _music_controls__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_music_controls__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1693,7 +1655,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 //ext
- //int - components
 
  //int - util
 
@@ -1728,11 +1689,6 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       this.audio.volume = e.target.value;
     }
   }, {
-    key: "handleEnd",
-    value: function handleEnd() {
-      console.log("END!");
-    }
-  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -1746,12 +1702,15 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       this.audio.onplay = function () {
         _this2.timeSetter = setInterval(function () {
           _this2.scrub.value = _this2.audio.currentTime;
-          console.log(_this2.audio.currentTime);
         }, 500);
       };
 
       this.audio.onpause = function () {
         clearInterval(_this2.timeSetter);
+      };
+
+      this.audio.onended = function () {
+        _this2.props.next();
       };
     }
   }, {
@@ -1760,16 +1719,16 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       if (this.props.music.on) {
         this.scrub.value = 0;
         this.timeSetter = null;
+
+        if (this.props.currentTrack !== prevProps.currentTrack) {
+          this.audio.src = this.props.currentTrack.url;
+        }
       }
 
       if (this.props.music.playing) {
         this.audio.play();
       } else {
         this.audio.pause();
-      }
-
-      if (this.props.currentTrack !== prevProps.currentTrack) {
-        this.audio.src = this.props.currentTrack.url;
       }
     }
   }, {
@@ -1779,27 +1738,40 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
       var _this$props = this.props,
           music = _this$props.music,
-          currentTrack = _this$props.currentTrack;
+          currentTrack = _this$props.currentTrack,
+          currentAlbum = _this$props.currentAlbum,
+          currentArtist = _this$props.currentArtist;
+      var trackUrl, trackTitle, albumId, albumUrl, albumTitle, artistId, artistName;
 
       if (currentTrack) {
-        var url = "".concat(currentTrack.url);
-        var title = currentTrack.title;
-      } else {
-        var url,
-            title = "";
+        trackUrl = currentTrack.url;
+        trackTitle = currentTrack.title;
+        albumId = currentAlbum.id;
+        albumUrl = currentAlbum.url;
+        albumTitle = currentAlbum.title;
+        artistId = currentArtist.id;
+        artistName = currentArtist.name;
       }
 
       if (music.on) {
         var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "display"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          src: "/",
+          src: albumUrl,
           className: "album-artwork"
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "display-inner"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "song-info"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Artist - Album")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          className: "track-title"
+        }, trackTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          className: "artist-album"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+          to: "/artists/".concat(artistId)
+        }, artistName), " — ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+          to: "/albums/".concat(albumId)
+        }, albumTitle))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "slider"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           ref: function ref(scrub) {
@@ -1808,36 +1780,39 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           type: "range",
           min: "0",
           max: this.state.duration,
-          onChange: this.handleScrub.bind(this)
+          onChange: this.handleScrub.bind(this),
+          className: "slider-input pointer"
         }))));
       } else {
         var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "display"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "MUSIC OFF"));
+          className: "display off"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "A"));
       }
 
       if (music.playing === false) {
-        var playpause = _utils_icons__WEBPACK_IMPORTED_MODULE_2__.play("icon lrg", this.props.play);
+        var playpause = _utils_icons__WEBPACK_IMPORTED_MODULE_1__.play("icon lrg", this.props.play);
       } else {
-        var playpause = _utils_icons__WEBPACK_IMPORTED_MODULE_2__.pause("icon lrg", this.props.pause);
+        var playpause = _utils_icons__WEBPACK_IMPORTED_MODULE_1__.pause("icon lrg", this.props.pause);
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "music-player"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "music-player-inner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("audio", {
         ref: function ref(audio) {
           _this3.audio = audio;
         },
-        src: url
+        src: trackUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "controls"
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_2__.shuffle("icon sml", function () {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.shuffle("icon sml", function () {
         return console.log("shuffle");
-      }), _utils_icons__WEBPACK_IMPORTED_MODULE_2__.previous("icon med", this.props.prev), playpause, _utils_icons__WEBPACK_IMPORTED_MODULE_2__.next("icon med", this.props.next), _utils_icons__WEBPACK_IMPORTED_MODULE_2__.loop("icon sml", function () {
+      }), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.previous("icon med", this.props.prev), playpause, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.next("icon med", this.props.next), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.loop("icon sml", function () {
         return console.log("loop");
       })), display, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "volume"
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_2__.volume("icon", function () {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.volume("icon", function () {
         return console.log("volume");
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         ref: function ref(volume) {
@@ -1847,8 +1822,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         min: "0",
         max: "1",
         step: "0.05",
-        onChange: this.handleVolume.bind(this)
-      })));
+        onChange: this.handleVolume.bind(this),
+        className: "volume-input pointer"
+      }))));
     }
   }]);
 
@@ -1885,10 +1861,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapSTP = function mapSTP(_ref) {
-  var music = _ref.music;
+  var music = _ref.music,
+      entities = _ref.entities;
+  var currentTrack, currentAlbum, currentArtist;
+
+  if (music.currentTrack) {
+    currentTrack = music.currentTrack;
+    currentAlbum = entities.albums[currentTrack.albumId];
+    currentArtist = entities.artists[currentAlbum.artistId];
+  }
+
   return {
     music: music,
-    currentTrack: music.currentTrack
+    currentTrack: currentTrack,
+    currentAlbum: currentAlbum,
+    currentArtist: currentArtist
   };
 };
 
@@ -2793,7 +2780,11 @@ var initialState = {
         nextState.currentTrack = state.queue[nextState.index];
         return nextState;
       } else {
-        return initialState;
+        nextState.on = false;
+        nextState.index = 0;
+        nextState.currentTrack = null;
+        nextState.playing = false;
+        return nextState;
       }
 
     case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.PREV:

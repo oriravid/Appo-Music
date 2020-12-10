@@ -1,7 +1,6 @@
 //ext
 import React, { Component } from "react";
-//int - components
-import MusicControls from "./music_controls";
+import { Link } from "react-router-dom";
 //int - util
 import * as icons from "../../utils/icons";
 
@@ -23,10 +22,6 @@ class MusicPlayer extends React.Component {
         this.audio.volume = e.target.value;
     }
 
-    handleEnd() {
-        console.log("END!");
-    }
-
     componentDidMount() {
         this.audio.onloadedmetadata = function () {
             this.setState({ duration: this.audio.duration });
@@ -35,12 +30,15 @@ class MusicPlayer extends React.Component {
         this.audio.onplay = () => {
             this.timeSetter = setInterval(() => {
                 this.scrub.value = this.audio.currentTime;
-                console.log(this.audio.currentTime);
             }, 500);
         };
 
         this.audio.onpause = () => {
             clearInterval(this.timeSetter);
+        };
+
+        this.audio.onended = () => {
+            this.props.next();
         };
     }
 
@@ -48,6 +46,10 @@ class MusicPlayer extends React.Component {
         if (this.props.music.on) {
             this.scrub.value = 0;
             this.timeSetter = null;
+
+            if (this.props.currentTrack !== prevProps.currentTrack) {
+                this.audio.src = this.props.currentTrack.url;
+            }
         }
 
         if (this.props.music.playing) {
@@ -55,32 +57,45 @@ class MusicPlayer extends React.Component {
         } else {
             this.audio.pause();
         }
-
-        if (this.props.currentTrack !== prevProps.currentTrack) {
-            this.audio.src = this.props.currentTrack.url;
-        }
     }
 
     render() {
-        const { music, currentTrack } = this.props;
+        const { music, currentTrack, currentAlbum, currentArtist } = this.props;
+
+        let trackUrl,
+            trackTitle,
+            albumId,
+            albumUrl,
+            albumTitle,
+            artistId,
+            artistName;
 
         if (currentTrack) {
-            var url = `${currentTrack.url}`;
-            var title = currentTrack.title;
-        } else {
-            var url,
-                title = "";
+            trackUrl = currentTrack.url;
+            trackTitle = currentTrack.title;
+            albumId = currentAlbum.id;
+            albumUrl = currentAlbum.url;
+            albumTitle = currentAlbum.title;
+            artistId = currentArtist.id;
+            artistName = currentArtist.name;
         }
 
         if (music.on) {
             var display = (
                 <div className="display">
-                    <img src="/" className="album-artwork" />
+                    <img src={albumUrl} className="album-artwork" />
                     <div className="display-inner">
                         <div className="song-info">
-                            <span>{title}</span>
-                            <br />
-                            <span>Artist - Album</span>
+                            <span className="track-title">{trackTitle}</span>
+                            <span className="artist-album">
+                                <Link to={`/artists/${artistId}`}>
+                                    {artistName}
+                                </Link>
+                                {" — "}
+                                <Link to={`/albums/${albumId}`}>
+                                    {albumTitle}
+                                </Link>
+                            </span>
                         </div>
                         <div className="slider">
                             <input
@@ -91,6 +106,7 @@ class MusicPlayer extends React.Component {
                                 min="0"
                                 max={this.state.duration}
                                 onChange={this.handleScrub.bind(this)}
+                                className="slider-input pointer"
                             />
                         </div>
                     </div>
@@ -98,8 +114,8 @@ class MusicPlayer extends React.Component {
             );
         } else {
             var display = (
-                <div className="display">
-                    <h2>MUSIC OFF</h2>
+                <div className="display off">
+                    <h2>A</h2>
                 </div>
             );
         }
@@ -112,35 +128,40 @@ class MusicPlayer extends React.Component {
 
         return (
             <div className="music-player">
-                <audio
-                    ref={(audio) => {
-                        this.audio = audio;
-                    }}
-                    src={url}
-                />
-
-                <div className="controls">
-                    {icons.shuffle("icon sml", () => console.log("shuffle"))}
-                    {icons.previous("icon med", this.props.prev)}
-                    {playpause}
-                    {icons.next("icon med", this.props.next)}
-                    {icons.loop("icon sml", () => console.log("loop"))}
-                </div>
-
-                {display}
-
-                <div className="volume">
-                    {icons.volume("icon", () => console.log("volume"))}
-                    <input
-                        ref={(volume) => {
-                            this.volume = volume;
+                <div className="music-player-inner">
+                    <audio
+                        ref={(audio) => {
+                            this.audio = audio;
                         }}
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        onChange={this.handleVolume.bind(this)}
+                        src={trackUrl}
                     />
+
+                    <div className="controls">
+                        {icons.shuffle("icon sml", () =>
+                            console.log("shuffle")
+                        )}
+                        {icons.previous("icon med", this.props.prev)}
+                        {playpause}
+                        {icons.next("icon med", this.props.next)}
+                        {icons.loop("icon sml", () => console.log("loop"))}
+                    </div>
+
+                    {display}
+
+                    <div className="volume">
+                        {icons.volume("icon", () => console.log("volume"))}
+                        <input
+                            ref={(volume) => {
+                                this.volume = volume;
+                            }}
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.05"
+                            onChange={this.handleVolume.bind(this)}
+                            className="volume-input pointer"
+                        />
+                    </div>
                 </div>
             </div>
         );

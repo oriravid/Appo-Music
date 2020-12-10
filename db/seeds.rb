@@ -52,7 +52,7 @@ Track.create([
     {album_id: 1, track_number: 12, duration: "5:48", title: "2009", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"},
     {album_id: 1, track_number: 13, duration: "4:12", title: "So It Goes", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"},
 
-    {album_id: 2, track_number: 1, duration: "3:20", title: "Waiting On the World to Change", url: "/assets/music/01.mp3"},
+    {album_id: 2, track_number: 1, duration: "3:20", title: "Waiting On the World to Change", url: "/assets/music/01.wav"},
     {album_id: 2, track_number: 2, duration: "4:52", title: "I Don't Trust Myself (With Loving You)", url: "/assets/music/02.mp3"},
     {album_id: 2, track_number: 3, duration: "4:02", title: "Belief", url: "/assets/music/03.mp3"},
     {album_id: 2, track_number: 4, duration: "4:05", title: "Gravity", url: "/assets/music/04.mp3"},
@@ -63,7 +63,7 @@ Track.create([
     {album_id: 2, track_number: 9, duration: "4:18", title: "Bold As Love", url: "/assets/music/09.mp3"},
     {album_id: 2, track_number: 10, duration: "4:07", title: "Dreaming With a Broken Heart", url: "/assets/music/10.mp3"},
     {album_id: 2, track_number: 11, duration: "6:09", title: "In Repair", url: "/assets/music/11.mp3"},
-    {album_id: 2, track_number: 12, duration: "2:42", title: "I'm Gonna Find Another You", url: "/assets/music/12.mp3"},
+    {album_id: 2, track_number: 12, duration: "2:42", title: "I'm Gonna Find Another You", url: "/assets/music/01.wav"},
 ])
 
 Playlist.create([

@@ -45,7 +45,11 @@ export default (state = initialState, action) => {
                 nextState.currentTrack = state.queue[nextState.index];
                 return nextState;
             } else {
-                return initialState;
+                nextState.on = false;
+                nextState.index = 0;
+                nextState.currentTrack = null;
+                nextState.playing = false;
+                return nextState;
             }
         case PREV:
             if (state.index - 1 >= 0) {

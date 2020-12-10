@@ -5,10 +5,20 @@ import MusicPlayer from "./music_player";
 //int - actions
 import { play, pause, next, prev } from "../../actions/music_actions";
 
-const mapSTP = ({ music }) => {
+const mapSTP = ({ music, entities }) => {
+    let currentTrack, currentAlbum, currentArtist;
+
+    if (music.currentTrack) {
+        currentTrack = music.currentTrack;
+        currentAlbum = entities.albums[currentTrack.albumId];
+        currentArtist = entities.artists[currentAlbum.artistId];
+    }
+
     return {
         music: music,
-        currentTrack: music.currentTrack,
+        currentTrack: currentTrack,
+        currentAlbum: currentAlbum,
+        currentArtist: currentArtist,
     };
 };
 
