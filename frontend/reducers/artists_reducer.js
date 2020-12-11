@@ -1,4 +1,5 @@
 //int
+import { RECEIVE_ARTIST_DETAILS } from "../actions/artist_actions";
 import {
     RECEIVE_ALBUMS,
     RECEIVE_ALBUM_DETAILS,
@@ -6,13 +7,26 @@ import {
 
 export default (state = {}, action) => {
     Object.freeze(state);
+    var nextState = { ...state };
+
     switch (action.type) {
-        case RECEIVE_ALBUMS:
-            return Object.assign({}, state, action.payload.artists);
-        case RECEIVE_ALBUM_DETAILS:
-            let nextState = Object.assign({}, state);
-            nextState[action.payload.artist.id] = action.payload.artist;
+        case RECEIVE_ARTIST_DETAILS:
+            nextState[action.payload.artist.id] = {
+                ...state[action.payload.artist.id],
+                ...action.payload.artist,
+            };
             return nextState;
+
+        case RECEIVE_ALBUM_DETAILS:
+            nextState[action.payload.artist.id] = {
+                ...state[action.payload.artist.id],
+                ...action.payload.artist,
+            };
+            return nextState;
+
+        case RECEIVE_ALBUMS:
+            return { ...action.payload.artists, ...state };
+
         default:
             return state;
     }

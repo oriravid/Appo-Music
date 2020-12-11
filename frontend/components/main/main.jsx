@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import MusicPlayerContainer from "../music_player/music_player_container";
 import AlbumShowContainer from "../albums/album_show_container";
 import PlaylistShowContainer from "../playlists/playlist_show_container";
+import ArtistShowContainer from "../artists/artist_show_container";
 import Library from "./library";
 import Browse from "./browse";
 //int - utils
@@ -20,6 +21,10 @@ const Main = () => {
                         <Route
                             path="/albums/:albumId"
                             component={AlbumShowContainer}
+                        />
+                        <Route
+                            path="/artists/:artistId"
+                            component={ArtistShowContainer}
                         />
                         <ProtectedRoute
                             path="/playlists/:playlistId"

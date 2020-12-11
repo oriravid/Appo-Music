@@ -184,6 +184,42 @@ export const playCircle = (classes, action) => (
     </svg>
 );
 
+export const playCircleFill = (classes, action) => (
+    <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        className={classes}
+    >
+        <g>
+            <rect
+                fill="none"
+                id="canvas_background"
+                height="602"
+                width="802"
+                y="-1"
+                x="-1"
+            />
+        </g>
+        <g>
+            <path id="svg_1" fill="none" d="m0,0l24,0l0,24l-24,0l0,-24z" />
+            <rect
+                id="svg_3"
+                height="13.36898"
+                width="11.01604"
+                y="5.20354"
+                x="6.38503"
+                fill="#fff"
+            />
+            <path
+                id="svg_2"
+                d="m12,2c-5.52,0 -10,4.48 -10,10s4.48,10 10,10s10,-4.48 10,-10s-4.48,-10 -10,-10zm-2,14.5l0,-9l6,4.5l-6,4.5z"
+            />
+        </g>
+    </svg>
+);
+
 export const playlist = (classes) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"

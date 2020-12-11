@@ -15,6 +15,7 @@ import {
 } from "./actions/album_actions";
 import { updatePlaylist, deletePlaylist } from "./actions/playlist_actions";
 import { addTrack, addTracks, play, pause } from "./actions/music_actions";
+import { getArtistDetails } from "./actions/artist_actions";
 
 document.addEventListener("DOMContentLoaded", () => {
     let preloadedState = undefined;
@@ -42,4 +43,5 @@ document.addEventListener("DOMContentLoaded", () => {
     window.pause = pause;
     window.getAlbumDetails = getAlbumDetails;
     window.increasePlayCount = increasePlayCount;
+    window.getArtistDetails = getArtistDetails;
 });

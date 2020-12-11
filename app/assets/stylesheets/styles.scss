@@ -347,7 +347,7 @@ h3 {
 .music-player {
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     background-color: rgba(255, 255, 255, 0.97);
     border-bottom: 1px solid $border-color;
 }
@@ -550,6 +550,7 @@ img.album-artwork {
 }
 
 // Album
+///////////////////////////////////////////////////////////////////////////////
 
 .album-container {
     display: flex;
@@ -772,4 +773,62 @@ img.album-artwork {
 
 .album-shelf.vertical h2 {
     font-size: 19px;
+}
+
+// Artist
+///////////////////////////////////////////////////////////////////////////////
+
+.artist-header {
+    position: relative;
+    height: calc(100vw / 3.35);
+    min-height: 325px;
+    max-height: 650px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: -40px -40px 0 -40px;
+    padding: 25px 40px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.artist-header::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -40px;
+    bottom: 0;
+    left: -40px;
+    height: 150px;
+    top: initial;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.36) 0,
+        rgba(0, 0, 0, 0.25) 36%,
+        rgba(0, 0, 0, 0) 100%
+    );
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.36) 0px,
+        rgba(0, 0, 0, 0.25) 36%,
+        rgba(0, 0, 0, 0) 100%
+    );
+}
+
+.artist-header .icon {
+    height: 45px;
+    width: 45px;
+    z-index: 1;
+    opacity: 1;
+    -webkit-filter: drop-shadow($box-shadow-3);
+    filter: drop-shadow($box-shadow-3);
+    margin-right: 5px;
+}
+
+.artist-header h1 {
+    margin: 0;
+    color: white;
+    z-index: 1;
+    text-shadow: $box-shadow-3;
 }

@@ -7,6 +7,7 @@
 #                 api_album GET    /api/albums/:id(.:format)                                                                api/albums#show {:format=>:json}
 #                 api_track PATCH  /api/tracks/:id(.:format)                                                                api/tracks#update {:format=>:json}
 #                           PUT    /api/tracks/:id(.:format)                                                                api/tracks#update {:format=>:json}
+#                api_artist GET    /api/artists/:id(.:format)                                                               api/artists#show {:format=>:json}
 #        api_user_playlists GET    /api/users/:user_id/playlists(.:format)                                                  api/playlists#index {:format=>:json}
 #                 api_users POST   /api/users(.:format)                                                                     api/users#create {:format=>:json}
 #             api_playlists POST   /api/playlists(.:format)                                                                 api/playlists#create {:format=>:json}
@@ -14,7 +15,7 @@
 #              api_playlist PATCH  /api/playlists/:id(.:format)                                                             api/playlists#update {:format=>:json}
 #                           PUT    /api/playlists/:id(.:format)                                                             api/playlists#update {:format=>:json}
 #                           DELETE /api/playlists/:id(.:format)                                                             api/playlists#destroy {:format=>:json}
-#                      root GET    /                                                                                        root#root                                          active_storage/direct_uploads#create
+#                      root GET    /                                                                                        root#root
 
 Rails.application.routes.draw do
 
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :albums, only: [:index, :show]
     resources :tracks, only: [:update]
+    resources :artists, only: [:show]
 
     resources :users, only: [:create] do
       resources :playlists, only: [:index]
