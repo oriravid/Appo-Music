@@ -31,7 +31,7 @@ class Browse extends Component {
                     <h1>Browse</h1>
                 </div>
                 <div className="featured-section">
-                    <Link to="/albums/1">
+                    <Link to="/albums/8">
                         <div className="featured-container">
                             <p>NEW ALBUM</p>
                             <h2>weird!</h2>

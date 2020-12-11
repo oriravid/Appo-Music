@@ -24,7 +24,6 @@ class ArtistShow extends Component {
         //sort by playCount
         const sortedTracks = tracks.sort(popularSorter);
         const topTracks = sortedTracks.slice(0, 6);
-        console.log(topTracks);
 
         return (
             <React.Fragment>

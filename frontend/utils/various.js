@@ -84,7 +84,7 @@ export const timeAdder = (times) => {
         counter += sec;
     });
 
-    const totalMinutes = Math.ceil(counter / 60);
+    const totalMinutes = Math.floor(counter / 60);
 
     if (totalMinutes < 60) {
         return `${totalMinutes} Minutes`;
