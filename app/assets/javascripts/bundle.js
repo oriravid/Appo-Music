@@ -991,7 +991,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
-/* harmony import */ var _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/tracks_api_utils */ "./frontend/utils/tracks_api_utils.js");
+/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/various */ "./frontend/utils/various.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1043,9 +1043,14 @@ var ArtistShow = /*#__PURE__*/function (_Component) {
           artist = _this$props.artist,
           albums = _this$props.albums,
           tracks = _this$props.tracks;
-      if (!artist || !albums || !tracks) return null;
-      var sortedAlbums = albums.sort(_utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_2__.dateSorter);
-      var latestAlbum = sortedAlbums[0];
+      if (!artist || !albums || !tracks) return null; //sort by releaseDate
+
+      var sortedAlbums = albums.sort(_utils_various__WEBPACK_IMPORTED_MODULE_2__.dateSorter);
+      var latestAlbum = sortedAlbums[0]; //sort by playCount
+
+      var sortedTracks = tracks.sort(_utils_various__WEBPACK_IMPORTED_MODULE_2__.trackSorter);
+      var topTracks = sortedTracks.slice(0, 6);
+      console.log(topTracks);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "artist-header",
         style: {
@@ -1053,7 +1058,13 @@ var ArtistShow = /*#__PURE__*/function (_Component) {
         }
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.playCircleFill("icon color"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, artist.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "artist-new"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "NEW MUSIC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, latestAlbum.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "WEEEE"));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Latest Release"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, latestAlbum.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "top-songs"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Top Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, topTracks.map(function (track) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          key: track.id
+        }, track.title);
+      }))));
     }
   }]);
 
@@ -1099,7 +1110,7 @@ var mapSTP = function mapSTP(store, ownProps) {
     albums = Object.values(store.entities.albums).filter(function (album) {
       return album.artistId == artistId;
     });
-    tracks = store.entities.tracks;
+    tracks = Object.values(store.entities.tracks);
   }
 
   return {
@@ -4149,6 +4160,7 @@ var increasePlayCount = function increasePlayCount(trackId) {
 /*! export indexPicker [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeAdder [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeFormatter [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export trackSorter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -4156,14 +4168,41 @@ var increasePlayCount = function increasePlayCount(trackId) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "dateSorter": () => /* binding */ dateSorter,
 /* harmony export */   "dateFormatter": () => /* binding */ dateFormatter,
 /* harmony export */   "timeFormatter": () => /* binding */ timeFormatter,
 /* harmony export */   "timeAdder": () => /* binding */ timeAdder,
 /* harmony export */   "indexPicker": () => /* binding */ indexPicker,
-/* harmony export */   "dateSorter": () => /* binding */ dateSorter
+/* harmony export */   "trackSorter": () => /* binding */ trackSorter
 /* harmony export */ });
-//input yyyy-dd-mm
+// release date comparison, input array of objects
+// releaseDate: "YYYY-MM-DD"
+var dateSorter = function dateSorter(album1, album2) {
+  var date1 = album1.releaseDate.split("-");
+  var date2 = album2.releaseDate.split("-");
+
+  if (date1[0] > date2[0]) {
+    return -1;
+  } else if (date1[0] < date2[0]) {
+    return 1;
+  }
+
+  if (date1[1] > date2[1]) {
+    return -1;
+  } else if (date1[0] < date2[0]) {
+    return 1;
+  }
+
+  if (date1[2] > date2[2]) {
+    return -1;
+  } else if (date1[0] < date2[0]) {
+    return 1;
+  }
+
+  return 0;
+}; //input yyyy-mm-dd
 //prettier-ignore
+
 var dateFormatter = function dateFormatter(date) {
   var months = {
     "01": "January",
@@ -4247,28 +4286,12 @@ var indexPicker = function indexPicker(queueLength, playedIndecies) {
 //     }
 //     return array;
 // };
-// release date comparison, input array of objects
-// releaseDate: "YYYY-MM-DD"
+// play count comparison, input array of objects
 
-var dateSorter = function dateSorter(album1, album2) {
-  var date1 = album1.releaseDate.split("-");
-  var date2 = album2.releaseDate.split("-");
-
-  if (date1[0] > date2[0]) {
+var trackSorter = function trackSorter(track1, track2) {
+  if (track1.playCount > track2.playCount) {
     return -1;
-  } else if (date1[0] < date2[0]) {
-    return 1;
-  }
-
-  if (date1[1] > date2[1]) {
-    return -1;
-  } else if (date1[0] < date2[0]) {
-    return 1;
-  }
-
-  if (date1[2] > date2[2]) {
-    return -1;
-  } else if (date1[0] < date2[0]) {
+  } else if (track1.playCount < track2.playCount) {
     return 1;
   }
 

@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 //int - util
 import * as icons from "../../utils/icons";
-import { dateSorter } from "../../utils/tracks_api_utils";
+import { dateSorter, trackSorter } from "../../utils/various";
 
 class ArtistShow extends Component {
     constructor(props) {
@@ -17,8 +17,14 @@ class ArtistShow extends Component {
         const { artist, albums, tracks } = this.props;
         if (!artist || !albums || !tracks) return null;
 
+        //sort by releaseDate
         const sortedAlbums = albums.sort(dateSorter);
         const latestAlbum = sortedAlbums[0];
+
+        //sort by playCount
+        const sortedTracks = tracks.sort(trackSorter);
+        const topTracks = sortedTracks.slice(0, 6);
+        console.log(topTracks);
 
         return (
             <React.Fragment>
@@ -30,10 +36,17 @@ class ArtistShow extends Component {
                     <h1>{artist.name}</h1>
                 </div>
                 <div className="artist-new">
-                    <h1>NEW MUSIC</h1>
-                    <h2>{latestAlbum.title}</h2>
+                    <h2>Latest Release</h2>
+                    <h3>{latestAlbum.title}</h3>
                 </div>
-                <p>WEEEE</p>
+                <div className="top-songs">
+                    <h2>Top Songs</h2>
+                    <ul>
+                        {topTracks.map((track) => (
+                            <li key={track.id}>{track.title}</li>
+                        ))}
+                    </ul>
+                </div>
             </React.Fragment>
         );
     }

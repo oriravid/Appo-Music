@@ -19,7 +19,7 @@ const mapSTP = (store, ownProps) => {
             (album) => album.artistId == artistId
         );
 
-        tracks = store.entities.tracks;
+        tracks = Object.values(store.entities.tracks);
     }
 
     return {
