@@ -4,6 +4,9 @@
 #               api_session DELETE /api/session(.:format)                                                                   api/sessions#destroy {:format=>:json}
 #                           POST   /api/session(.:format)                                                                   api/sessions#create {:format=>:json}
 #                api_albums GET    /api/albums(.:format)                                                                    api/albums#index {:format=>:json}
+#                 api_album GET    /api/albums/:id(.:format)                                                                api/albums#show {:format=>:json}
+#                 api_track PATCH  /api/tracks/:id(.:format)                                                                api/tracks#update {:format=>:json}
+#                           PUT    /api/tracks/:id(.:format)                                                                api/tracks#update {:format=>:json}
 #        api_user_playlists GET    /api/users/:user_id/playlists(.:format)                                                  api/playlists#index {:format=>:json}
 #                 api_users POST   /api/users(.:format)                                                                     api/users#create {:format=>:json}
 #             api_playlists POST   /api/playlists(.:format)                                                                 api/playlists#create {:format=>:json}
@@ -11,7 +14,7 @@
 #              api_playlist PATCH  /api/playlists/:id(.:format)                                                             api/playlists#update {:format=>:json}
 #                           PUT    /api/playlists/:id(.:format)                                                             api/playlists#update {:format=>:json}
 #                           DELETE /api/playlists/:id(.:format)                                                             api/playlists#destroy {:format=>:json}
-#                      root GET    /                                                                                        root#root
+#                      root GET    /                                                                                        root#root                                          active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
 
@@ -19,6 +22,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     resource :session, only: [:create, :destroy]
     resources :albums, only: [:index, :show]
+    resources :tracks, only: [:update]
 
     resources :users, only: [:create] do
       resources :playlists, only: [:index]

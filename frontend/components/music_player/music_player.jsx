@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 //int - util
 import * as icons from "../../utils/icons";
 import { timeFormatter } from "../../utils/various";
+import { increasePlayCount } from "../../utils/tracks_api_utils";
 
 class MusicPlayer extends React.Component {
     constructor(props) {
@@ -16,12 +17,6 @@ class MusicPlayer extends React.Component {
         };
     }
 
-    handleScrub(e) {
-        // clearInterval(this.timeSetter);
-        this.audio.currentTime = e.target.value;
-        // this.handleInterval();
-    }
-
     handleInterval() {
         this.timeSetter = setInterval(() => {
             this.scrub.value = this.audio.currentTime;
@@ -30,6 +25,28 @@ class MusicPlayer extends React.Component {
                 timeLeft: this.state.duration - this.audio.currentTime,
             });
         }, 500);
+    }
+
+    handleScrub(e) {
+        // clearInterval(this.timeSetter);
+        this.audio.currentTime = e.target.value;
+        // this.handleInterval();
+    }
+
+    handlePrev() {
+        if (this.state.currentTime > this.state.timeLeft) {
+            increasePlayCount(this.props.currentTrack.id);
+        }
+
+        this.props.prev();
+    }
+
+    handleNext() {
+        if (this.state.currentTime > this.state.timeLeft) {
+            increasePlayCount(this.props.currentTrack.id);
+        }
+
+        this.props.next();
     }
 
     handleVolume(e) {
@@ -57,7 +74,7 @@ class MusicPlayer extends React.Component {
             this.handleInterval();
 
             this.audio.onended = () => {
-                this.props.next();
+                this.handleNext();
             };
         } else {
             this.audio.pause();
@@ -158,9 +175,15 @@ class MusicPlayer extends React.Component {
                             `icon sml${sActive}`,
                             this.props.toggleShuffle
                         )}
-                        {icons.previous(`icon med${disabled}`, this.props.prev)}
+                        {icons.previous(
+                            `icon med${disabled}`,
+                            this.handlePrev.bind(this)
+                        )}
                         {playpause}
-                        {icons.next(`icon med${disabled}`, this.props.next)}
+                        {icons.next(
+                            `icon med${disabled}`,
+                            this.handleNext.bind(this)
+                        )}
                         {icons.loop(
                             `icon sml${lActive}`,
                             this.props.toggleLoop

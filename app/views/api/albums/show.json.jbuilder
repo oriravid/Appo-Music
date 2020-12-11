@@ -1,5 +1,12 @@
 json.album do 
+
+    album_plays = 0
+    @album.tracks.each do |track|
+        album_plays += track.play_count
+    end
+
     json.extract! @album, :id, :artist_id, :title, :genre, :release_date, :description, :url
+    json.play_count album_plays
 end
 
 json.artist do

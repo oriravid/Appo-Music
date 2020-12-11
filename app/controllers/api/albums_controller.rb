@@ -1,6 +1,5 @@
 class Api::AlbumsController < ApplicationController
   def index
-    print params
     if params[:user_id]
         @albums = User.find(params[:user_id]).saved_track_albums.uniq
     else

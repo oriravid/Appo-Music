@@ -7,6 +7,7 @@ import Root from "./components/root";
 
 //testing!!
 import { postUser } from "./utils/session_api_utils";
+import { increasePlayCount } from "./utils/tracks_api_utils";
 import {
     getAllAlbums,
     getUserAlbums,
@@ -40,4 +41,5 @@ document.addEventListener("DOMContentLoaded", () => {
     window.play = play;
     window.pause = pause;
     window.getAlbumDetails = getAlbumDetails;
+    window.increasePlayCount = increasePlayCount;
 });
