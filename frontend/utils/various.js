@@ -17,8 +17,8 @@ export const dateFormatter = (date) => {
     };
 
     const parts = date.split("-");
-    var month = parts[2],
-        day = parts[1],
+    var month = parts[1],
+        day = parts[2],
         year = parts[0];
 
     if (day[0] == 0) {
@@ -26,6 +26,23 @@ export const dateFormatter = (date) => {
     }
 
     return (`${months[month]} ${day}, ${year}`)
+};
+
+export const timeFormatter = (time) => {
+    var seconds = Math.ceil(time);
+    if (seconds < 10) {
+        return `0:0${seconds}`;
+    } else if (seconds < 60) {
+        return `0:${seconds}`;
+    } else {
+        var minutes = Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        if (seconds < 10) {
+            return `${minutes}:0${seconds}`;
+        } else {
+            return `${minutes}:${seconds}`;
+        }
+    }
 };
 
 // array of times input
@@ -51,23 +68,6 @@ export const timeAdder = (times) => {
     }
 };
 
-export const timeFormatter = (time) => {
-    var seconds = Math.ceil(time);
-    if (seconds < 10) {
-        return `0:0${seconds}`;
-    } else if (seconds < 60) {
-        return `0:${seconds}`;
-    } else {
-        var minutes = Math.floor(seconds / 60);
-        seconds = seconds % 60;
-        if (seconds < 10) {
-            return `${minutes}:0${seconds}`;
-        } else {
-            return `${minutes}:${seconds}`;
-        }
-    }
-};
-
 // picks an index from the queue that hansn't been played yet
 export const indexPicker = (queueLength, playedIndecies) => {
     var newIndex = Math.floor(Math.random() * Math.floor(queueLength));
@@ -79,13 +79,40 @@ export const indexPicker = (queueLength, playedIndecies) => {
 };
 
 // shuffles queue when shuffle toggled on
-export const arrayShuffler = (array) => {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+// export const arrayShuffler = (array) => {
+//     for (var i = array.length - 1; i > 0; i--) {
+//         var j = Math.floor(Math.random() * (i + 1));
+//         var temp = array[i];
+//         array[i] = array[j];
+//         array[j] = temp;
+//     }
+
+//     return array;
+// };
+
+// release date comparison, input array of objects
+// releaseDate: "YYYY-MM-DD"
+export const dateSorter = (album1, album2) => {
+    const date1 = album1.releaseDate.split("-");
+    const date2 = album2.releaseDate.split("-");
+
+    if (date1[0] > date2[0]) {
+        return -1;
+    } else if (date1[0] < date2[0]) {
+        return 1;
     }
 
-    return array;
+    if (date1[1] > date2[1]) {
+        return -1;
+    } else if (date1[0] < date2[0]) {
+        return 1;
+    }
+
+    if (date1[2] > date2[2]) {
+        return -1;
+    } else if (date1[0] < date2[0]) {
+        return 1;
+    }
+
+    return 0;
 };

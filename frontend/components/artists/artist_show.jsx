@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 //int - util
 import * as icons from "../../utils/icons";
+import { dateSorter } from "../../utils/tracks_api_utils";
 
 class ArtistShow extends Component {
     constructor(props) {
@@ -16,6 +17,9 @@ class ArtistShow extends Component {
         const { artist, albums, tracks } = this.props;
         if (!artist || !albums || !tracks) return null;
 
+        const sortedAlbums = albums.sort(dateSorter);
+        const latestAlbum = sortedAlbums[0];
+
         return (
             <React.Fragment>
                 <div
@@ -27,6 +31,7 @@ class ArtistShow extends Component {
                 </div>
                 <div className="artist-new">
                     <h1>NEW MUSIC</h1>
+                    <h2>{latestAlbum.title}</h2>
                 </div>
                 <p>WEEEE</p>
             </React.Fragment>

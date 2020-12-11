@@ -6,16 +6,7 @@ import createStore from "./store/store";
 import Root from "./components/root";
 
 //testing!!
-import { postUser } from "./utils/session_api_utils";
-import { increasePlayCount } from "./utils/tracks_api_utils";
-import {
-    getAllAlbums,
-    getUserAlbums,
-    getAlbumDetails,
-} from "./actions/album_actions";
-import { updatePlaylist, deletePlaylist } from "./actions/playlist_actions";
-import { addTrack, addTracks, play, pause } from "./actions/music_actions";
-import { getArtistDetails } from "./actions/artist_actions";
+import { dateSorter } from "./utils/various";
 
 document.addEventListener("DOMContentLoaded", () => {
     let preloadedState = undefined;
@@ -34,14 +25,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //testing!!!
     window.store = store;
-    window.postUser = postUser;
-    window.updatePlaylist = updatePlaylist;
-    window.deletePlaylist = deletePlaylist;
-    window.addTrack = addTrack;
-    window.addTracks = addTracks;
-    window.play = play;
-    window.pause = pause;
-    window.getAlbumDetails = getAlbumDetails;
-    window.increasePlayCount = increasePlayCount;
-    window.getArtistDetails = getArtistDetails;
+    window.dateSorter = dateSorter;
 });

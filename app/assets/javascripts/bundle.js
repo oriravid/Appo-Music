@@ -991,6 +991,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
+/* harmony import */ var _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/tracks_api_utils */ "./frontend/utils/tracks_api_utils.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1018,6 +1019,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ArtistShow = /*#__PURE__*/function (_Component) {
   _inherits(ArtistShow, _Component);
 
@@ -1042,6 +1044,8 @@ var ArtistShow = /*#__PURE__*/function (_Component) {
           albums = _this$props.albums,
           tracks = _this$props.tracks;
       if (!artist || !albums || !tracks) return null;
+      var sortedAlbums = albums.sort(_utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_2__.dateSorter);
+      var latestAlbum = sortedAlbums[0];
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "artist-header",
         style: {
@@ -1049,7 +1053,7 @@ var ArtistShow = /*#__PURE__*/function (_Component) {
         }
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.playCircleFill("icon color"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, artist.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "artist-new"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "NEW MUSIC")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "WEEEE"));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "NEW MUSIC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, latestAlbum.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "WEEEE"));
     }
   }]);
 
@@ -2792,23 +2796,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
-/* harmony import */ var _utils_session_api_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/session_api_utils */ "./frontend/utils/session_api_utils.js");
-/* harmony import */ var _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/tracks_api_utils */ "./frontend/utils/tracks_api_utils.js");
-/* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/album_actions */ "./frontend/actions/album_actions.js");
-/* harmony import */ var _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./actions/playlist_actions */ "./frontend/actions/playlist_actions.js");
-/* harmony import */ var _actions_music_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./actions/music_actions */ "./frontend/actions/music_actions.js");
-/* harmony import */ var _actions_artist_actions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./actions/artist_actions */ "./frontend/actions/artist_actions.js");
+/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/various */ "./frontend/utils/various.js");
 //ext
 
  //int
 
 
  //testing!!
-
-
-
-
-
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -2829,16 +2823,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }), document.getElementById("root")); //testing!!!
 
   window.store = store;
-  window.postUser = _utils_session_api_utils__WEBPACK_IMPORTED_MODULE_4__.postUser;
-  window.updatePlaylist = _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_7__.updatePlaylist;
-  window.deletePlaylist = _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_7__.deletePlaylist;
-  window.addTrack = _actions_music_actions__WEBPACK_IMPORTED_MODULE_8__.addTrack;
-  window.addTracks = _actions_music_actions__WEBPACK_IMPORTED_MODULE_8__.addTracks;
-  window.play = _actions_music_actions__WEBPACK_IMPORTED_MODULE_8__.play;
-  window.pause = _actions_music_actions__WEBPACK_IMPORTED_MODULE_8__.pause;
-  window.getAlbumDetails = _actions_album_actions__WEBPACK_IMPORTED_MODULE_6__.getAlbumDetails;
-  window.increasePlayCount = _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_5__.increasePlayCount;
-  window.getArtistDetails = _actions_artist_actions__WEBPACK_IMPORTED_MODULE_9__.getArtistDetails;
+  window.dateSorter = _utils_various__WEBPACK_IMPORTED_MODULE_4__.dateSorter;
 });
 
 /***/ }),
@@ -4159,8 +4144,8 @@ var increasePlayCount = function increasePlayCount(trackId) {
   !*** ./frontend/utils/various.js ***!
   \***********************************/
 /*! namespace exports */
-/*! export arrayShuffler [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export dateFormatter [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export dateSorter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export indexPicker [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeAdder [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeFormatter [provided] [no usage info] [missing usage info prevents renaming] */
@@ -4172,10 +4157,10 @@ var increasePlayCount = function increasePlayCount(trackId) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "dateFormatter": () => /* binding */ dateFormatter,
-/* harmony export */   "timeAdder": () => /* binding */ timeAdder,
 /* harmony export */   "timeFormatter": () => /* binding */ timeFormatter,
+/* harmony export */   "timeAdder": () => /* binding */ timeAdder,
 /* harmony export */   "indexPicker": () => /* binding */ indexPicker,
-/* harmony export */   "arrayShuffler": () => /* binding */ arrayShuffler
+/* harmony export */   "dateSorter": () => /* binding */ dateSorter
 /* harmony export */ });
 //input yyyy-dd-mm
 //prettier-ignore
@@ -4195,8 +4180,8 @@ var dateFormatter = function dateFormatter(date) {
     "12": "December"
   };
   var parts = date.split("-");
-  var month = parts[2],
-      day = parts[1],
+  var month = parts[1],
+      day = parts[2],
       year = parts[0];
 
   if (day[0] == 0) {
@@ -4204,6 +4189,24 @@ var dateFormatter = function dateFormatter(date) {
   }
 
   return "".concat(months[month], " ").concat(day, ", ").concat(year);
+};
+var timeFormatter = function timeFormatter(time) {
+  var seconds = Math.ceil(time);
+
+  if (seconds < 10) {
+    return "0:0".concat(seconds);
+  } else if (seconds < 60) {
+    return "0:".concat(seconds);
+  } else {
+    var minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+
+    if (seconds < 10) {
+      return "".concat(minutes, ":0").concat(seconds);
+    } else {
+      return "".concat(minutes, ":").concat(seconds);
+    }
+  }
 }; // array of times input
 
 var timeAdder = function timeAdder(times) {
@@ -4224,24 +4227,6 @@ var timeAdder = function timeAdder(times) {
   } else {
     return "1 Hour ".concat(totalMinutes - 60, " Minutes");
   }
-};
-var timeFormatter = function timeFormatter(time) {
-  var seconds = Math.ceil(time);
-
-  if (seconds < 10) {
-    return "0:0".concat(seconds);
-  } else if (seconds < 60) {
-    return "0:".concat(seconds);
-  } else {
-    var minutes = Math.floor(seconds / 60);
-    seconds = seconds % 60;
-
-    if (seconds < 10) {
-      return "".concat(minutes, ":0").concat(seconds);
-    } else {
-      return "".concat(minutes, ":").concat(seconds);
-    }
-  }
 }; // picks an index from the queue that hansn't been played yet
 
 var indexPicker = function indexPicker(queueLength, playedIndecies) {
@@ -4253,16 +4238,41 @@ var indexPicker = function indexPicker(queueLength, playedIndecies) {
     return newIndex;
   }
 }; // shuffles queue when shuffle toggled on
+// export const arrayShuffler = (array) => {
+//     for (var i = array.length - 1; i > 0; i--) {
+//         var j = Math.floor(Math.random() * (i + 1));
+//         var temp = array[i];
+//         array[i] = array[j];
+//         array[j] = temp;
+//     }
+//     return array;
+// };
+// release date comparison, input array of objects
+// releaseDate: "YYYY-MM-DD"
 
-var arrayShuffler = function arrayShuffler(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
+var dateSorter = function dateSorter(album1, album2) {
+  var date1 = album1.releaseDate.split("-");
+  var date2 = album2.releaseDate.split("-");
+
+  if (date1[0] > date2[0]) {
+    return -1;
+  } else if (date1[0] < date2[0]) {
+    return 1;
   }
 
-  return array;
+  if (date1[1] > date2[1]) {
+    return -1;
+  } else if (date1[0] < date2[0]) {
+    return 1;
+  }
+
+  if (date1[2] > date2[2]) {
+    return -1;
+  } else if (date1[0] < date2[0]) {
+    return 1;
+  }
+
+  return 0;
 };
 
 /***/ }),
