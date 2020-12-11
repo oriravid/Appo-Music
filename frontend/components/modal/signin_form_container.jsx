@@ -24,7 +24,7 @@ const mapDTP = (dispatch) => {
                     e.preventDefault(), dispatch(openModal("signup"))
                 )}
             >
-                Create New Account
+                Create New User
             </a>
         ),
         processForm: (user) => dispatch(signin(user)),

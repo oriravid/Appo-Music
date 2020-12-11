@@ -205,10 +205,6 @@ h3 {
     scrollbar-width: none;
 }
 
-.nav-section-container::-webkit-scrollbar {
-    display: none;
-}
-
 .nav-section {
     margin-bottom: 20px;
 }
@@ -293,12 +289,12 @@ h3 {
     position: absolute;
     bottom: 25px;
     width: calc(100% - 50px);
-    background: rgb(23, 137, 138);
+    background: rgb(62, 156, 181);
     background: linear-gradient(
         160deg,
-        rgba(23, 137, 138, 0.9) 0%,
-        rgba(38, 175, 176, 1) 65%,
-        rgba(23, 137, 138, 0.6) 100%
+        rgba(50, 136, 160, 0.9) 0%,
+        rgba(62, 156, 181, 1) 65%,
+        rgba(62, 156, 181, 0.6) 100%
     );
     padding: 25px;
     border-radius: 10px;
@@ -746,34 +742,145 @@ img.album-artwork {
 
 .featured-section {
     padding: 20px 0;
-    display: flex;
-    align-items: stretch;
     border-bottom: 1px solid $border-color;
 }
 
 .featured-container {
-    flex: 1;
-    background-color: rgba(0, 0, 0, 0.788);
-    color: white;
-    height: 250px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: $box-shadow;
+    display: inline-block;
+    width: calc(50% - 20px);
+    object-fit: cover;
+}
+
+.featured-container:hover img {
+    filter: brightness(0.8);
 }
 
 .featured-container:first-child {
     margin-right: 20px;
 }
 
-.album-shelf.vertical {
-    padding: 20px 0;
+.featured-container p {
+    font-size: 11px;
+    color: $main-color;
+    font-weight: 600;
+    margin-bottom: 2.5px;
+}
+
+.featured-container h2 {
+    color: $text-color;
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: 0.00005em;
+    margin-bottom: 2.5px;
+}
+
+.featured-container h2:nth-child(3) {
+    color: $gray-text;
+    margin-bottom: 10px;
+}
+
+.featured-container img {
+    width: 100%;
+    height: calc(100vw / 5.5);
+    max-height: 300px;
+    border-radius: 10px;
+    box-shadow: $box-shadow;
+    object-fit: cover;
+    filter: none;
+    transition: filter 0.2s;
+}
+
+.albums-slider {
+    position: relative;
+    padding: 10px 0 20px 0;
     border-bottom: 1px solid $border-color;
 }
 
-.album-shelf.vertical h2 {
+.albums-slider::before {
+    content: "";
+    position: absolute;
+    left: -15px;
+    background: linear-gradient(to right, white, transparent);
+    height: 100%;
+    width: 1.5%;
+    z-index: 2;
+}
+
+.albums-slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 15px;
+    background: linear-gradient(to left, white, transparent);
+    height: 100%;
+    width: 1.5%;
+    z-index: 2;
+}
+
+.albums-slider h2 {
     font-size: 19px;
+}
+
+.albums-slider-list {
+    margin: -15px;
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    overflow-x: scroll;
+}
+
+.albums-slider-list-item {
+    margin-right: 20px;
+    position: relative;
+}
+
+.albums-slider-list-item:hover img {
+    filter: brightness(0.8);
+}
+
+.albums-slider-list-item img {
+    width: (13vw);
+    min-width: 145px;
+    max-width: 250px;
+    border-radius: 3px;
+    box-shadow: $box-shadow-light;
+    border: 1px solid $border-color-light;
+    filter: none;
+    transition: filter 0.2s;
+}
+
+.albums-slider-list-item span {
+    display: block;
+    font-size: 13px;
+}
+
+.albums-slider-list-item .album {
+    color: $text-color;
+}
+
+.albums-slider-list-item .artist {
+    color: $gray-text;
+}
+
+.albums-slider-list-item span:hover {
+    text-decoration: underline;
+}
+
+.albums-slider-list-item .icon {
+    height: 35px;
+    width: 35px;
+    position: absolute;
+    left: 7px;
+    bottom: 50px;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.albums-slider-list-item:hover .icon {
+    opacity: 1;
 }
 
 // Artist

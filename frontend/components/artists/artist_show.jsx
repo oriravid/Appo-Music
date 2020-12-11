@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 //int - util
 import * as icons from "../../utils/icons";
-import { dateSorter, trackSorter } from "../../utils/various";
+import { dateSorter, popularSorter } from "../../utils/various";
 
 class ArtistShow extends Component {
     constructor(props) {
@@ -22,7 +22,7 @@ class ArtistShow extends Component {
         const latestAlbum = sortedAlbums[0];
 
         //sort by playCount
-        const sortedTracks = tracks.sort(trackSorter);
+        const sortedTracks = tracks.sort(popularSorter);
         const topTracks = sortedTracks.slice(0, 6);
         console.log(topTracks);
 

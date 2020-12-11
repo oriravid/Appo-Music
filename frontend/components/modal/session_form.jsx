@@ -91,7 +91,7 @@ class SessionForm extends React.Component {
         return (
             <React.Fragment>
                 <div className="session-form-text">
-                    <h1 className="logo">Appo Music</h1>
+                    {icons.fire()}
                     <h2>{headerText}</h2>
                     <p>{introText}</p>
                 </div>
@@ -132,7 +132,7 @@ class SessionForm extends React.Component {
                 <div className="session-form-options">
                     {this.props.formType === "signin" ? (
                         <p onClick={this.handleDemoLogin} className="pointer">
-                            Demo Login
+                            Demo User
                         </p>
                     ) : (
                         <br />

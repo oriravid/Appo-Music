@@ -18,6 +18,6 @@ class Api::AlbumsController < ApplicationController
   end
   
   def playlist_params
-    params.require(:album).permit(:id, :user_id)
+    params.require(:album).permit(:id, :user_id, :request_type)
   end
 end

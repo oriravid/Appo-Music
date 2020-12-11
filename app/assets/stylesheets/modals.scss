@@ -5,7 +5,7 @@
 
 .modal-background {
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     left: 0;
     top: 0;
     width: 100%;
@@ -52,7 +52,15 @@
     padding: 0px;
 }
 
-.session-form-text .logo,
+.session-form-text svg {
+    height: 50px;
+    width: 50px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+    -webkit-filter: drop-shadow($box-shadow);
+    filter: drop-shadow($box-shadow);
+}
+
 .session-form-text h2,
 .session-form-text p {
     margin-bottom: 20px;

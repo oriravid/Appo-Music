@@ -118,10 +118,10 @@ export const indexPicker = (queueLength, playedIndecies) => {
 // };
 
 // play count comparison, input array of objects
-export const trackSorter = (track1, track2) => {
-    if (track1.playCount > track2.playCount) {
+export const popularSorter = (obj1, obj2) => {
+    if (obj1.playCount > obj2.playCount) {
         return -1;
-    } else if (track1.playCount < track2.playCount) {
+    } else if (obj1.playCount < obj2.playCount) {
         return 1;
     }
     return 0;

@@ -1,18 +1,18 @@
 //ext
 import { connect } from "react-redux";
 //int - containers
-import AlbumsIndex from "./albums_index";
+import Browse from "./browse";
 //int - actions
-import { getAllAlbums, getUserAlbums } from "../../actions/album_actions";
+import { getAllAlbums } from "../../actions/album_actions";
 
 const mapSTP = ({ entities }) => ({
     albums: Object.values(entities.albums),
     artists: entities.artists,
+    tracks: Object.values(entities.tracks),
 });
 
 const mapDTP = (dispatch) => ({
     getAllAlbums: () => dispatch(getAllAlbums()),
-    getUserAlbums: (userId) => dispatch(getUserAlbums(userId)),
 });
 
-export default connect(mapSTP, mapDTP)(AlbumsIndex);
+export default connect(mapSTP, mapDTP)(Browse);

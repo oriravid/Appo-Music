@@ -1,9 +1,14 @@
-$main-color: rgba(23, 137, 138, 1);
-$main-color-opac: rgba(23, 137, 138, 0.6);
+// $main-color: rgba(23, 137, 138, 1);
+// $main-color-opac: rgba(23, 137, 138, 0.6);
+$main-color: rgba(62, 156, 181, 1);
+$main-color-opac: rgba(62, 156, 181, 0.6);
 $border-color: #e0e0e0;
+$border-color-light: rgba(224, 224, 224, 0.75);
 $box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
 $box-shadow-2: 5px 5px 20px rgba(0, 0, 0, 0.3);
 $box-shadow-3: 5px 5px 20px rgba(0, 0, 0, 0.5);
+$box-shadow-light: 5px 5px 20px rgba(0, 0, 0, 0.1);
+$text-color: rgba(0, 0, 0, 0.8);
 $error: rgb(190, 40, 40);
 $link: #0070c9;
 $gray-text: rgba(60, 60, 67, 0.6);
