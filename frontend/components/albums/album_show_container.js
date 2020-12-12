@@ -20,6 +20,7 @@ const mapSTP = (store, ownProps) => {
         album: album,
         artist: artist,
         tracks: Object.values(store.entities.tracks),
+        selectedTrackId: ownProps.location.trackId,
     };
 };
 

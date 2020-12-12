@@ -18,6 +18,10 @@ class AlbumShow extends Component {
 
     componentDidMount() {
         this.props.getAlbumDetails(this.props.match.params.albumId);
+
+        if (this.props.selectedTrackId) {
+            this.setState({ selectedTrackId: this.props.selectedTrackId });
+        }
     }
 
     handlePlay() {

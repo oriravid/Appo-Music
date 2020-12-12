@@ -996,15 +996,61 @@ img.album-artwork {
 
 .top-songs {
     flex: 2.75;
+    max-height: 293px;
 }
 
 .top-songs-list {
-    // display: flex;
-    // flex-flow: column wrap;
-    // height: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    height: calc(100% - 37px);
+    margin-left: -20px;
 }
 
 .top-songs-list-item {
+    flex-basis: 33.333%;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 5px;
+    background-color: rgba(72, 72, 78, 0);
+    transition: background-color 0.2s;
+}
+
+.top-songs-list-item:hover {
+    background-color: rgba(72, 72, 78, 0.1);
+}
+
+.top-songs-list-item .track-number {
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: -10px;
+    margin-right: 20px;
+    color: white;
+    // -webkit-text-stroke-width: 1px;
+    // -webkit-text-stroke-color: black;
+    text-shadow: 1px 1px $main-color, 2px 2px $main-color, 3px 3px $main-color,
+        4px 4px $main-color, 5px 5px $main-color, 6px 6px $main-color,
+        $box-shadow;
+}
+
+.top-songs-list-item a {
+    display: flex;
+    flex-flow: column nowrap;
+    color: $text-color;
+    // align-items: center;
+}
+
+.top-songs-list-item a:hover {
+    text-decoration: underline;
+}
+
+.top-songs-list-item .track-title {
+    font-weight: 600;
+}
+
+.top-songs-list-item .album-title {
+    color: $gray-text;
 }
 
 .text-container.artist {
@@ -1016,4 +1062,53 @@ img.album-artwork {
 .text-cutoff.artist {
     font-size: 14px;
     height: 82px;
+}
+
+// Footer
+///////////////////////////////////////////////////////////////////////////////
+
+footer {
+    margin-top: 30px;
+    font-size: 12px;
+}
+
+.copyright {
+    color: $gray-text;
+    margin-bottom: 5px;
+}
+
+.copyright a {
+    color: $text-color;
+    transition: 0.2s;
+}
+
+.footer-links {
+    display: flex;
+}
+
+.footer-link {
+    display: inline-flex;
+    line-height: 1;
+    vertical-align: middle;
+    margin-top: 6px;
+}
+
+.footer-link a {
+    color: $text-color;
+    margin-right: 10px;
+    transition: 0.2s;
+}
+
+.footer-link a:hover,
+.copyright a:hover {
+    color: $main-color;
+    text-decoration: underline;
+}
+
+.footer-link::after {
+    content: "";
+    height: 100%;
+    -webkit-border-start: 1px solid $border-color;
+    border-inline-start: 1px solid $border-color;
+    padding-inline-end: 10px;
 }

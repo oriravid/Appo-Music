@@ -591,6 +591,12 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.getAlbumDetails(this.props.match.params.albumId);
+
+      if (this.props.selectedTrackId) {
+        this.setState({
+          selectedTrackId: this.props.selectedTrackId
+        });
+      }
     }
   }, {
     key: "handlePlay",
@@ -746,7 +752,8 @@ var mapSTP = function mapSTP(store, ownProps) {
   return {
     album: album,
     artist: artist,
-    tracks: Object.values(store.entities.tracks)
+    tracks: Object.values(store.entities.tracks),
+    selectedTrackId: ownProps.location.trackId
   };
 };
 
@@ -1031,15 +1038,24 @@ var ArtistShow = /*#__PURE__*/function (_Component) {
 
       var sortedTracks = tracks.sort(_utils_various__WEBPACK_IMPORTED_MODULE_4__.popularSorter);
 
-      var topTracks = _toConsumableArray(sortedTracks.slice(0, 6)).map(function (track) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-          to: "/albums/".concat(track.albumId),
+      var topTracks = _toConsumableArray(sortedTracks.slice(0, 6));
+
+      var topTracksList = _toConsumableArray(sortedTracks.slice(0, 6)).map(function (track, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          className: "top-songs-list-item",
           key: track.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          className: "top-songs-list-item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          className: "track-number"
+        }, index + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+          to: {
+            pathname: "/albums/".concat(track.albumId),
+            trackId: track.id
+          }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
           className: "track-title"
-        }, track.title)));
+        }, track.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          className: "album-title"
+        }, "Album Title")));
       });
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1047,7 +1063,9 @@ var ArtistShow = /*#__PURE__*/function (_Component) {
         style: {
           backgroundImage: "url(".concat(artist.url, ")")
         }
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_3__.playCircleFill("icon color"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, artist.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_3__.playCircleFill("icon color pointer", function () {
+        return addTracks(topTracks);
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, artist.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "artist-highlights"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "latest-release"
@@ -1071,9 +1089,9 @@ var ArtistShow = /*#__PURE__*/function (_Component) {
         className: "tracks"
       }, latestAlbumTracks.length + " Songs"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "top-songs"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Top Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Top Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ol", {
         className: "top-songs-list"
-      }, topTracks))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_albums_albums_slider__WEBPACK_IMPORTED_MODULE_1__.default, {
+      }, topTracksList))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_albums_albums_slider__WEBPACK_IMPORTED_MODULE_1__.default, {
         title: "Albums",
         albums: sortedAlbums,
         tracks: tracks
@@ -1342,6 +1360,60 @@ var mapDTP = function mapDTP(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/main/footer.jsx":
+/*!*********************************************!*\
+  !*** ./frontend/components/main/footer.jsx ***!
+  \*********************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+//ext
+
+
+var Footer = function Footer() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "copyright"
+  }, "Copyright \xA9 2020", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "www.apple.com",
+    target: "blank"
+  }, "Apple Inc."), " ", "All rights reserved."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    className: "footer-links"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    className: "footer-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#"
+  }, "Internet Service Terms")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    className: "footer-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#"
+  }, "Appo Music & Privacy")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    className: "footer-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#"
+  }, "Cookie Warning")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    className: "footer-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#"
+  }, "Support")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    className: "footer-link"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "#"
+  }, "Feedback"))));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Footer);
+
+/***/ }),
+
 /***/ "./frontend/components/main/library.jsx":
 /*!**********************************************!*\
   !*** ./frontend/components/main/library.jsx ***!
@@ -1430,17 +1502,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _music_player_music_player_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../music_player/music_player_container */ "./frontend/components/music_player/music_player_container.js");
 /* harmony import */ var _albums_album_show_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../albums/album_show_container */ "./frontend/components/albums/album_show_container.js");
 /* harmony import */ var _playlists_playlist_show_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../playlists/playlist_show_container */ "./frontend/components/playlists/playlist_show_container.js");
 /* harmony import */ var _artists_artist_show_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../artists/artist_show_container */ "./frontend/components/artists/artist_show_container.js");
 /* harmony import */ var _browse_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./browse_container */ "./frontend/components/main/browse_container.js");
 /* harmony import */ var _library__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./library */ "./frontend/components/main/library.jsx");
-/* harmony import */ var _utils_route_utils__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/route_utils */ "./frontend/utils/route_utils.jsx");
+/* harmony import */ var _footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./footer */ "./frontend/components/main/footer.jsx");
+/* harmony import */ var _utils_route_utils__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../utils/route_utils */ "./frontend/utils/route_utils.jsx");
 //ext
 
  //int - components
+
 
 
 
@@ -1458,30 +1532,30 @@ var Main = function Main() {
     className: "main-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "main-content-inner"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "/albums/:albumId",
     component: _albums_album_show_container__WEBPACK_IMPORTED_MODULE_2__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "/artists/:artistId",
     component: _artists_artist_show_container__WEBPACK_IMPORTED_MODULE_4__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_7__.ProtectedRoute, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_8__.ProtectedRoute, {
     path: "/playlists/:playlistId",
     component: _playlists_playlist_show_container__WEBPACK_IMPORTED_MODULE_3__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_7__.ProtectedRoute, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_utils_route_utils__WEBPACK_IMPORTED_MODULE_8__.ProtectedRoute, {
     path: "/library/",
     component: _library__WEBPACK_IMPORTED_MODULE_6__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "/browse",
     component: _browse_container__WEBPACK_IMPORTED_MODULE_5__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     exact: true,
     path: "/",
     render: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Redirect, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Redirect, {
         to: "/browse"
       });
     }
-  })))));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_footer__WEBPACK_IMPORTED_MODULE_7__.default, null))));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Main);

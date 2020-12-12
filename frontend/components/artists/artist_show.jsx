@@ -30,13 +30,24 @@ class ArtistShow extends Component {
 
         //sort by playCount
         const sortedTracks = tracks.sort(popularSorter);
-        var topTracks = [...sortedTracks.slice(0, 6)].map((track) => (
-            <Link to={`/albums/${track.albumId}`} key={track.id}>
-                <li className="top-songs-list-item">
-                    <span className="track-title">{track.title}</span>
+        const topTracks = [...sortedTracks.slice(0, 6)];
+        const topTracksList = [...sortedTracks.slice(0, 6)].map(
+            (track, index) => (
+                <li className="top-songs-list-item" key={track.id}>
+                    <span className="track-number">{index + 1}</span>
+                    <Link
+                        to={{
+                            pathname: `/albums/${track.albumId}`,
+                            trackId: track.id,
+                        }}
+                    >
+                        <span className="track-title">{track.title}</span>
+                        <span className="album-title">Album Title</span>
+                        {/* <span className="album-title">{albums[track.albumId]}</span> */}
+                    </Link>
                 </li>
-            </Link>
-        ));
+            )
+        );
 
         return (
             <React.Fragment>
@@ -44,7 +55,9 @@ class ArtistShow extends Component {
                     className="artist-header"
                     style={{ backgroundImage: `url(${artist.url})` }}
                 >
-                    {icons.playCircleFill("icon color")}
+                    {icons.playCircleFill("icon color pointer", () =>
+                        addTracks(topTracks)
+                    )}
                     <h1>{artist.name}</h1>
                 </div>
                 <div className="artist-highlights">
@@ -74,7 +87,7 @@ class ArtistShow extends Component {
                     </div>
                     <div className="top-songs">
                         <h2>Top Songs</h2>
-                        <ul className="top-songs-list">{topTracks}</ul>
+                        <ol className="top-songs-list">{topTracksList}</ol>
                     </div>
                 </div>
                 <AlbumsSlider
