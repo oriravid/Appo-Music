@@ -8,6 +8,14 @@ import { addTracks } from "../../actions/music_actions";
 import * as icons from "../../utils/icons";
 
 const AlbumsSliderItem = ({ album, artist, tracks, addTracks }) => {
+    if (artist) {
+        var bottomLink = `/artists/${artist.id}`;
+        var bottomText = artist.name;
+    } else {
+        var bottomLink = `/albums/${album.id}`;
+        var bottomText = album.releaseDate.split("-")[0];
+    }
+
     return (
         <li className="albums-slider-list-item">
             <Link to={`/albums/${album.id}`}>
@@ -20,8 +28,8 @@ const AlbumsSliderItem = ({ album, artist, tracks, addTracks }) => {
             <Link to={`/albums/${album.id}`}>
                 <span className="album">{album.title}</span>
             </Link>
-            <Link to={`/artists/${artist.id}`}>
-                <span className="artist">{artist.name}</span>
+            <Link to={bottomLink}>
+                <span className="artist">{bottomText}</span>
             </Link>
         </li>
     );

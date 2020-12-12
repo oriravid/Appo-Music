@@ -8,7 +8,7 @@ const AlbumsSlider = ({ title, albums, artists, tracks }) => {
         <AlbumsSliderItem
             key={album.id}
             album={album}
-            artist={artists[album.artistId]}
+            artist={artists ? artists[album.artistId] : undefined}
             tracks={tracks.filter((track) => track.albumId == album.id)}
         />
     ));

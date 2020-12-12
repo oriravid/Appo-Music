@@ -2,10 +2,10 @@
 import { connect } from "react-redux";
 //int - containers
 import ArtistShow from "./artist_show";
-// //int - actions
+//int - actions
+import { addTracks } from "../../actions/music_actions";
 import { getArtistDetails } from "../../actions/artist_actions";
-// import { addTracks } from "../../actions/music_actions";
-// import { openModal } from "../../actions/modal_actions";
+import { openModal } from "../../actions/modal_actions";
 
 const mapSTP = (store, ownProps) => {
     const artistId = ownProps.match.params.artistId;
@@ -32,7 +32,8 @@ const mapSTP = (store, ownProps) => {
 const mapDTP = (dispatch) => {
     return {
         getArtistDetails: (artistId) => dispatch(getArtistDetails(artistId)),
-        // openModal: (data) => dispatch(openModal("text", data)),
+        addTracks: (tracks) => dispatch(addTracks(tracks)),
+        openModal: (data) => dispatch(openModal("text", data)),
     };
 };
 

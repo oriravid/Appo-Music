@@ -144,7 +144,7 @@ Track.create([
     {album_id: 3, track_number: 2, duration: "5:05", title: "Dang! (feat. Anderson .Paak)", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
     {album_id: 3, track_number: 3, duration: "5:26", title: "Stay", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", play_count: 60},
     {album_id: 3, track_number: 4, duration: "4:47", title: "Skin", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"},
-    {album_id: 3, track_number: 5, duration: "8:00", title: "Cinderella (feat. Ty Dolla $ign", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", play_count: 40},
+    {album_id: 3, track_number: 5, duration: "8:00", title: "Cinderella (feat. Ty Dolla $ign)", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", play_count: 40},
     {album_id: 3, track_number: 6, duration: "3:11", title: "Planet God Damn (feat. Njomza)", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"},
     {album_id: 3, track_number: 7, duration: "4:32", title: "Soulmate", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3"},
     {album_id: 3, track_number: 8, duration: "5:19", title: "We (feat. CeeLo Green)", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"},
