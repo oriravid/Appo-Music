@@ -1383,9 +1383,9 @@ var Footer = function Footer() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
     className: "copyright"
   }, "Copyright \xA9 2020", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "www.apple.com",
+    href: "#",
     target: "blank"
-  }, "Apple Inc."), " ", "All rights reserved."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+  }, "Appo Inc."), " ", "All rights reserved."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: "footer-links"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "footer-link"
@@ -1871,7 +1871,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "session-form-text"
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.fire(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, headerText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, introText)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.cloud(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, headerText), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, introText)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "session-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit,
@@ -2245,7 +2245,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       } else {
         var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "display off"
-        }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.fire());
+        }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.cloud());
       } //icon conditional styling
 
 
@@ -2445,7 +2445,7 @@ var Nav = function Nav(_ref) {
     to: "/"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "logo"
-  }, _utils_icons__WEBPACK_IMPORTED_MODULE_2__.fire(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Music"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, _utils_icons__WEBPACK_IMPORTED_MODULE_2__.cloud(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Music"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "input-container search"
   }, _utils_icons__WEBPACK_IMPORTED_MODULE_2__.search("icon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "text",
@@ -3732,17 +3732,22 @@ var getArtistDetails = function getArtistDetails(artistId) {
 /*! export arrow [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export browse [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export close [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export cloud [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export cloudCircle [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export cloudFull [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export fire [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export go [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export list [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export loop [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export next [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export next2 [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export pause [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export play [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export playCircle [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export playCircleFill [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export playlist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export previous [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export previous2 [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export recent [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export repeat [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export search [provided] [no usage info] [missing usage info prevents renaming] */
@@ -3762,16 +3767,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "arrow": () => /* binding */ arrow,
 /* harmony export */   "browse": () => /* binding */ browse,
 /* harmony export */   "close": () => /* binding */ close,
+/* harmony export */   "cloud": () => /* binding */ cloud,
+/* harmony export */   "cloudFull": () => /* binding */ cloudFull,
+/* harmony export */   "cloudCircle": () => /* binding */ cloudCircle,
 /* harmony export */   "fire": () => /* binding */ fire,
 /* harmony export */   "go": () => /* binding */ go,
 /* harmony export */   "list": () => /* binding */ list,
 /* harmony export */   "loop": () => /* binding */ loop,
+/* harmony export */   "next2": () => /* binding */ next2,
 /* harmony export */   "next": () => /* binding */ next,
 /* harmony export */   "pause": () => /* binding */ pause,
 /* harmony export */   "play": () => /* binding */ play,
 /* harmony export */   "playCircle": () => /* binding */ playCircle,
 /* harmony export */   "playCircleFill": () => /* binding */ playCircleFill,
 /* harmony export */   "playlist": () => /* binding */ playlist,
+/* harmony export */   "previous2": () => /* binding */ previous2,
 /* harmony export */   "previous": () => /* binding */ previous,
 /* harmony export */   "recent": () => /* binding */ recent,
 /* harmony export */   "repeat": () => /* binding */ repeat,
@@ -3857,6 +3867,47 @@ var close = function close(classes, action) {
     d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
   }));
 };
+var cloud = function cloud(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24",
+    className: classes
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z"
+  }));
+};
+var cloudFull = function cloudFull(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24",
+    className: classes
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"
+  }));
+};
+var cloudCircle = function cloudCircle(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    className: classes
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.5 14H8c-1.66 0-3-1.34-3-3s1.34-3 3-3l.14.01C8.58 8.28 10.13 7 12 7c2.21 0 4 1.79 4 4h.5c1.38 0 2.5 1.12 2.5 2.5S17.88 16 16.5 16z"
+  }));
+};
 var fire = function fire(classes, action) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -3920,7 +3971,7 @@ var loop = function loop(classes, action) {
     d: "M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"
   }));
 };
-var next = function next(classes, action) {
+var next2 = function next2(classes, action) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24",
@@ -3933,6 +3984,21 @@ var next = function next(classes, action) {
     fill: "none"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
     d: "M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"
+  }));
+};
+var next = function next(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24",
+    className: classes,
+    onClick: action
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"
   }));
 };
 var pause = function pause(classes, action) {
@@ -4036,7 +4102,7 @@ var playlist = function playlist(classes) {
     d: "M-122-114h-5v8.18c-0.31-0.11-0.65-0.18-1-0.18c-1.66,0-3,1.34-3,3s1.34,3,3,3s3-1.34,3-3v-9h3V-114 L-122-114z M-129-114h-12v2h12V-114L-129-114z M-129-110h-12v2h12V-110L-129-110z M-133-106h-8v2h8V-106L-133-106z M-129-103 c0-0.55,0.45-1,1-1c0.55,0,1,0.45,1,1s-0.45,1-1,1C-128.55-102-129-102.45-129-103z"
   })))));
 };
-var previous = function previous(classes, action) {
+var previous2 = function previous2(classes, action) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24",
@@ -4049,6 +4115,21 @@ var previous = function previous(classes, action) {
     fill: "none"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
     d: "M6 6h2v12H6zm3.5 6l8.5 6V6z"
+  }));
+};
+var previous = function previous(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24",
+    className: classes,
+    onClick: action
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"
   }));
 };
 var recent = function recent(classes) {

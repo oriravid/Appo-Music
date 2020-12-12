@@ -70,6 +70,44 @@ export const close = (classes, action) => (
     </svg>
 );
 
+export const cloud = (classes, action) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        className={classes}
+    >
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h.71C7.37 7.69 9.48 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3s-1.34 3-3 3z" />
+    </svg>
+);
+
+export const cloudFull = (classes, action) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        className={classes}
+    >
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+    </svg>
+);
+
+export const cloudCircle = (classes, action) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        className={classes}
+    >
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.5 14H8c-1.66 0-3-1.34-3-3s1.34-3 3-3l.14.01C8.58 8.28 10.13 7 12 7c2.21 0 4 1.79 4 4h.5c1.38 0 2.5 1.12 2.5 2.5S17.88 16 16.5 16z" />
+    </svg>
+);
+
 export const fire = (classes, action) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +167,7 @@ export const loop = (classes, action) => (
     </svg>
 );
 
-export const next = (classes, action) => (
+export const next2 = (classes, action) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"
@@ -140,6 +178,20 @@ export const next = (classes, action) => (
     >
         <path d="M0 0h24v24H0z" fill="none" />
         <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+    </svg>
+);
+
+export const next = (classes, action) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        className={classes}
+        onClick={action}
+    >
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z" />
     </svg>
 );
 
@@ -246,7 +298,7 @@ export const playlist = (classes) => (
     </svg>
 );
 
-export const previous = (classes, action) => (
+export const previous2 = (classes, action) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         height="24"
@@ -257,6 +309,20 @@ export const previous = (classes, action) => (
     >
         <path d="M0 0h24v24H0z" fill="none" />
         <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
+    </svg>
+);
+
+export const previous = (classes, action) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        className={classes}
+        onClick={action}
+    >
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z" />
     </svg>
 );
 

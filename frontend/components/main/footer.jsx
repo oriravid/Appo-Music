@@ -6,8 +6,8 @@ const Footer = () => {
         <footer>
             <p className="copyright">
                 Copyright © 2020{" "}
-                <a href="www.apple.com" target="blank">
-                    Apple Inc.
+                <a href="#" target="blank">
+                    Appo Inc.
                 </a>{" "}
                 All rights reserved.
             </p>

@@ -67,7 +67,7 @@ const Nav = ({ currentUser, signout, openModal }) => {
         <div className="nav">
             <Link to="/">
                 <div className="logo">
-                    {icons.fire()}
+                    {icons.cloud()}
                     <h1>Music</h1>
                 </div>
             </Link>

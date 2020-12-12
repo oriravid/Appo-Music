@@ -165,7 +165,7 @@ h3 {
     align-items: flex-end;
     height: 20px;
     margin: 4px 0 0 2px;
-    opacity: 0.85;
+    opacity: 1;
 }
 
 .nav .logo h1 {
@@ -179,9 +179,10 @@ h3 {
 }
 
 .nav .logo svg {
-    width: 20px;
-    height: 20px;
-    margin-right: -2px;
+    width: 23px;
+    height: 23px;
+    margin-right: 3px;
+    margin-bottom: -2px;
     -webkit-filter: drop-shadow($box-shadow);
     filter: drop-shadow($box-shadow);
 }
@@ -1069,7 +1070,7 @@ img.album-artwork {
 
 footer {
     margin-top: 30px;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .copyright {
@@ -1079,6 +1080,7 @@ footer {
 
 .copyright a {
     color: $text-color;
+    font-weight: 600;
     transition: 0.2s;
 }
 
@@ -1111,4 +1113,8 @@ footer {
     -webkit-border-start: 1px solid $border-color;
     border-inline-start: 1px solid $border-color;
     padding-inline-end: 10px;
+}
+
+.footer-link:last-child::after {
+    display: none;
 }

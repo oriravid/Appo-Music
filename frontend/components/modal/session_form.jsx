@@ -91,7 +91,7 @@ class SessionForm extends React.Component {
         return (
             <React.Fragment>
                 <div className="session-form-text">
-                    {icons.fire()}
+                    {icons.cloud()}
                     <h2>{headerText}</h2>
                     <p>{introText}</p>
                 </div>

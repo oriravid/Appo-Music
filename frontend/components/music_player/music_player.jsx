@@ -139,7 +139,7 @@ class MusicPlayer extends React.Component {
                 </div>
             );
         } else {
-            var display = <div className="display off">{icons.fire()}</div>;
+            var display = <div className="display off">{icons.cloud()}</div>;
         }
 
         //icon conditional styling
