@@ -1,3 +1,5 @@
+////////////// SORTING //////////////
+
 // release date comparison, input array of objects
 // releaseDate: "YYYY-MM-DD"
 export const dateSorter = (album1, album2) => {
@@ -24,6 +26,18 @@ export const dateSorter = (album1, album2) => {
 
     return 0;
 };
+
+// play count comparison, input array of objects
+export const popularSorter = (obj1, obj2) => {
+    if (obj1.playCount > obj2.playCount) {
+        return -1;
+    } else if (obj1.playCount < obj2.playCount) {
+        return 1;
+    }
+    return 0;
+};
+
+////////////// FORMATTING //////////////
 
 //input yyyy-mm-dd
 //prettier-ignore
@@ -72,6 +86,8 @@ export const timeFormatter = (time) => {
     }
 };
 
+////////////// OTHER //////////////
+
 // array of times input
 export const timeAdder = (times) => {
     let counter = 0;
@@ -104,25 +120,3 @@ export const indexPicker = (queueLength, playedIndecies) => {
         return newIndex;
     }
 };
-
-// shuffles queue when shuffle toggled on
-// export const arrayShuffler = (array) => {
-//     for (var i = array.length - 1; i > 0; i--) {
-//         var j = Math.floor(Math.random() * (i + 1));
-//         var temp = array[i];
-//         array[i] = array[j];
-//         array[j] = temp;
-//     }
-
-//     return array;
-// };
-
-// play count comparison, input array of objects
-// export const popularSorter = (obj1, obj2) => {
-//     if (obj1.playCount > obj2.playCount) {
-//         return -1;
-//     } else if (obj1.playCount < obj2.playCount) {
-//         return 1;
-//     }
-//     return 0;
-// };

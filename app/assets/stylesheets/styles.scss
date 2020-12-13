@@ -843,10 +843,6 @@ img.album-artwork {
     align-items: flex-start;
 }
 
-.album-item:hover .album-cover img {
-    filter: brightness(0.8);
-}
-
 .album-item:hover .album-cover .icon {
     opacity: 1;
 }
@@ -865,6 +861,12 @@ img.album-artwork {
 .album-item .album-cover img {
     vertical-align: bottom;
     width: 100%;
+    filter: none;
+    transition: filter 0.2s;
+}
+
+.album-item:hover .album-cover img {
+    filter: brightness(0.8);
 }
 
 .album-item .album-cover .icon {

@@ -3074,6 +3074,7 @@ __webpack_require__.r(__webpack_exports__);
  //testing!!
 
 
+ // import { saveTrack, unsaveTrack } from "./utils/user_api_utils";
 
 document.addEventListener("DOMContentLoaded", function () {
   var preloadedState = undefined;
@@ -3094,7 +3095,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.store = store;
   window.dateSorter = _utils_various__WEBPACK_IMPORTED_MODULE_4__.dateSorter;
-  window.getAlbumTracks = _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_5__.getAlbumTracks;
+  window.getAlbumTracks = _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_5__.getAlbumTracks; // window.saveTrack = saveTrack;
+
+  window.unsaveTrack = unsaveTrack;
 });
 
 /***/ }),
@@ -4513,6 +4516,7 @@ var increasePlayCount = function increasePlayCount(trackId) {
 /*! export dateFormatter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export dateSorter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export indexPicker [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export popularSorter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeAdder [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeFormatter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
@@ -4523,11 +4527,13 @@ var increasePlayCount = function increasePlayCount(trackId) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "dateSorter": () => /* binding */ dateSorter,
+/* harmony export */   "popularSorter": () => /* binding */ popularSorter,
 /* harmony export */   "dateFormatter": () => /* binding */ dateFormatter,
 /* harmony export */   "timeFormatter": () => /* binding */ timeFormatter,
 /* harmony export */   "timeAdder": () => /* binding */ timeAdder,
 /* harmony export */   "indexPicker": () => /* binding */ indexPicker
 /* harmony export */ });
+////////////// SORTING //////////////
 // release date comparison, input array of objects
 // releaseDate: "YYYY-MM-DD"
 var dateSorter = function dateSorter(album1, album2) {
@@ -4553,7 +4559,18 @@ var dateSorter = function dateSorter(album1, album2) {
   }
 
   return 0;
-}; //input yyyy-mm-dd
+}; // play count comparison, input array of objects
+
+var popularSorter = function popularSorter(obj1, obj2) {
+  if (obj1.playCount > obj2.playCount) {
+    return -1;
+  } else if (obj1.playCount < obj2.playCount) {
+    return 1;
+  }
+
+  return 0;
+}; ////////////// FORMATTING //////////////
+//input yyyy-mm-dd
 //prettier-ignore
 
 var dateFormatter = function dateFormatter(date, _short) {
@@ -4599,7 +4616,8 @@ var timeFormatter = function timeFormatter(time) {
       return "".concat(minutes, ":").concat(seconds);
     }
   }
-}; // array of times input
+}; ////////////// OTHER //////////////
+// array of times input
 
 var timeAdder = function timeAdder(times) {
   var counter = 0;
@@ -4629,25 +4647,7 @@ var indexPicker = function indexPicker(queueLength, playedIndecies) {
   } else {
     return newIndex;
   }
-}; // shuffles queue when shuffle toggled on
-// export const arrayShuffler = (array) => {
-//     for (var i = array.length - 1; i > 0; i--) {
-//         var j = Math.floor(Math.random() * (i + 1));
-//         var temp = array[i];
-//         array[i] = array[j];
-//         array[j] = temp;
-//     }
-//     return array;
-// };
-// play count comparison, input array of objects
-// export const popularSorter = (obj1, obj2) => {
-//     if (obj1.playCount > obj2.playCount) {
-//         return -1;
-//     } else if (obj1.playCount < obj2.playCount) {
-//         return 1;
-//     }
-//     return 0;
-// };
+};
 
 /***/ }),
 

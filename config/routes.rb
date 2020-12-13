@@ -10,6 +10,8 @@
 #                           PUT    /api/tracks/:id(.:format)                                                                api/tracks#update {:format=>:json}
 #                api_artist GET    /api/artists/:id(.:format)                                                               api/artists#show {:format=>:json}
 #        api_user_playlists GET    /api/users/:user_id/playlists(.:format)                                                  api/playlists#index {:format=>:json}
+#       api_user_user_saves POST   /api/users/:user_id/user_saves(.:format)                                                 api/user_saves#create {:format=>:json}
+#        api_user_user_safe DELETE /api/users/:user_id/user_saves/:id(.:format)                                             api/user_saves#destroy {:format=>:json}
 #                 api_users POST   /api/users(.:format)                                                                     api/users#create {:format=>:json}
 #             api_playlists POST   /api/playlists(.:format)                                                                 api/playlists#create {:format=>:json}
 #         edit_api_playlist GET    /api/playlists/:id/edit(.:format)                                                        api/playlists#edit {:format=>:json}
@@ -29,12 +31,14 @@ Rails.application.routes.draw do
 
     resources :tracks, only: [:update]
     resources :artists, only: [:show]
-
+    
     resources :users, only: [:create] do
       resources :playlists, only: [:index]
     end
-
     resources :playlists, except: [:index, :show, :new]
+    
+    # resources :user_saves, only: [:create, :destroy]
+
   end
   
   root to: 'root#root'
