@@ -3,12 +3,13 @@ import React from "react";
 import { connect } from "react-redux";
 //int - actions
 import { pause, play } from "../../actions/music_actions";
+import { saveTrack } from "../../actions/save_actions";
 //int - utils
 import * as icons from "../../utils/icons";
 
 const TrackListItem = (props) => {
     const { track, hovered, selected, playing } = props;
-    const { resume, pause, handlePlay, handleMenu } = props;
+    const { resume, pause, saveTrack, handlePlay, handleMenu } = props;
     const { currentTrack, currentUser } = props;
 
     let classes;
@@ -18,7 +19,12 @@ const TrackListItem = (props) => {
 
     var colA = track.trackNumber;
     var colB = track.title;
-    var colC = icons.add(classes);
+    var colC = icons.add(classes, () => saveTrack(track.id));
+
+    if (track.saved) {
+        colC = "";
+    }
+
     var colD = track.duration;
 
     if (hovered) {
@@ -51,6 +57,7 @@ const mapSTP = (state) => ({
 const mapDTP = (dispatch) => ({
     pause: () => dispatch(pause()),
     resume: () => dispatch(play()),
+    saveTrack: (trackId) => dispatch(saveTrack(trackId)),
 });
 
 export default connect(mapSTP, mapDTP)(TrackListItem);
