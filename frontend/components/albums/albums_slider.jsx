@@ -1,16 +1,17 @@
 //ext
-import React, { Component } from "react";
+import React from "react";
 //int - components
-import AlbumsSliderItem from "../albums/albums_slider_item";
+import AlbumItem from "../albums/album_item";
 
-const AlbumsSlider = ({ title, albums, artists, tracks }) => {
+const AlbumsSlider = ({ title, albums, artists }) => {
     const albumsList = albums.map((album) => (
-        <AlbumsSliderItem
-            key={album.id}
-            album={album}
-            artist={artists ? artists[album.artistId] : undefined}
-            tracks={tracks.filter((track) => track.albumId == album.id)}
-        />
+        <li key={album.id} className="albums-slider-list-item">
+            <AlbumItem
+                album={album}
+                artist={artists ? artists[album.artistId] : undefined}
+                info={"ver"}
+            />
+        </li>
     ));
 
     return (

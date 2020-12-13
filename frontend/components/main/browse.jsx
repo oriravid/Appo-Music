@@ -16,13 +16,13 @@ class Browse extends Component {
     }
 
     render() {
-        const { albums, artists, tracks } = this.props;
+        const { albums, artists } = this.props;
         if (!albums.length) return null;
 
         //sort by releaseDate
         const newAlbums = [...albums].sort(dateSorter);
 
-        // //sort by playCount
+        //sort by playCount
         const popularAlbums = [...albums].sort(popularSorter);
 
         return (
@@ -54,13 +54,11 @@ class Browse extends Component {
                     title={"New Music"}
                     albums={newAlbums}
                     artists={artists}
-                    tracks={tracks}
                 />
                 <AlbumsSlider
                     title={"Popular"}
                     albums={popularAlbums}
                     artists={artists}
-                    tracks={tracks}
                 />
             </React.Fragment>
         );

@@ -8,24 +8,10 @@ import { getArtistDetails } from "../../actions/artist_actions";
 import { openModal } from "../../actions/modal_actions";
 
 const mapSTP = (store, ownProps) => {
-    const artistId = ownProps.match.params.artistId;
-
-    let artist, albums, tracks;
-
-    if (store.entities.artists[artistId]) {
-        artist = store.entities.artists[artistId];
-
-        albums = Object.values(store.entities.albums).filter(
-            (album) => album.artistId == artistId
-        );
-
-        tracks = Object.values(store.entities.tracks);
-    }
-
     return {
-        artist: artist,
-        albums: albums,
-        tracks: tracks,
+        artist: store.entities.artists[ownProps.match.params.artistId],
+        albums: store.entities.albums,
+        tracks: Object.values(store.entities.tracks),
     };
 };
 

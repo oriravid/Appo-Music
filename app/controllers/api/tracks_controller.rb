@@ -1,4 +1,8 @@
 class Api::TracksController < ApplicationController
+  def index
+    @tracks = Track.where(album_id: params[:album_id])
+  end
+
   def update
     @track = selected_track
     new_play_count = @track.play_count + 1
@@ -15,6 +19,6 @@ class Api::TracksController < ApplicationController
   end
   
   def playlist_params
-    params.require(:track).permit(:id)
+    params.require(:track).permit(:id, :album_id)
   end
 end

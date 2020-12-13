@@ -27,7 +27,7 @@ export const dateSorter = (album1, album2) => {
 
 //input yyyy-mm-dd
 //prettier-ignore
-export const dateFormatter = (date) => {
+export const dateFormatter = (date, short) => {
     const months = {
         "01": "January",
         "02": "February",
@@ -52,7 +52,7 @@ export const dateFormatter = (date) => {
         day = day[1]
     }
 
-    return (`${months[month]} ${day}, ${year}`)
+    return `${short ? months[month].slice(0,3) : months[month]} ${day}, ${year}`;
 };
 
 export const timeFormatter = (time) => {
@@ -118,11 +118,11 @@ export const indexPicker = (queueLength, playedIndecies) => {
 // };
 
 // play count comparison, input array of objects
-export const popularSorter = (obj1, obj2) => {
-    if (obj1.playCount > obj2.playCount) {
-        return -1;
-    } else if (obj1.playCount < obj2.playCount) {
-        return 1;
-    }
-    return 0;
-};
+// export const popularSorter = (obj1, obj2) => {
+//     if (obj1.playCount > obj2.playCount) {
+//         return -1;
+//     } else if (obj1.playCount < obj2.playCount) {
+//         return 1;
+//     }
+//     return 0;
+// };

@@ -834,64 +834,113 @@ img.album-artwork {
     overflow-x: scroll;
 }
 
-.albums-slider-list-item,
-.latest-release {
+// Album Item
+///////////////////////////////////////////////////////////////////////////////
+
+.album-item {
     margin-right: 20px;
-    position: relative;
+    display: flex;
+    align-items: flex-start;
 }
 
-.albums-slider-list-item:hover img,
-.latest-release-album:hover img {
+.album-item:hover .album-cover img {
     filter: brightness(0.8);
 }
 
-.albums-slider-list-item img,
-.latest-release-album img {
+.album-item:hover .album-cover .icon {
+    opacity: 1;
+}
+
+.album-item .album-cover {
+    position: relative;
     width: (13vw);
     min-width: 145px;
     max-width: 250px;
+    overflow: hidden;
     border-radius: 3px;
     box-shadow: $box-shadow-light;
     border: 1px solid $border-color-light;
-    filter: none;
-    transition: filter 0.2s;
 }
 
-.albums-slider-list-item span {
-    display: block;
-    font-size: 13px;
+.album-item .album-cover img {
+    vertical-align: bottom;
+    width: 100%;
 }
 
-.albums-slider-list-item .album,
-.latest-release .album {
-    color: $text-color;
-}
-
-.albums-slider-list-item .artist,
-.latest-release .tracks {
-    color: $gray-text;
-}
-
-.albums-slider-list-item span:hover {
-    text-decoration: underline;
-}
-
-.albums-slider-list-item .icon,
-.latest-release .icon {
+.album-item .album-cover .icon {
     height: 45px;
     width: 45px;
     position: absolute;
-    left: 7px;
-    bottom: 50px;
+    left: 7.5px;
+    bottom: 7.5px;
     opacity: 0;
     transition: opacity 0.75s;
     -webkit-filter: drop-shadow($box-shadow);
     filter: drop-shadow($box-shadow);
 }
 
-.albums-slider-list-item:hover .icon,
-.latest-release-album:hover .icon {
-    opacity: 1;
+.album-item .album-info .album-title {
+    color: $text-color;
+}
+
+.album-item .album-info .album-title:hover {
+    text-decoration: underline;
+}
+
+.album-item.ver .album-info .artist-or-date,
+.album-item.hor .album-info .album-tracks {
+    color: $gray-text;
+}
+
+//Horizontal
+
+.album-item.hor {
+    flex-flow: row nowrap;
+    align-items: stretch;
+}
+
+.album-item.hor .album-cover {
+    flex-grow: 1;
+    min-width: 175px;
+    max-width: 275px;
+}
+
+.album-item.hor .album-info {
+    flex-grow: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    margin-left: 30px;
+}
+
+.album-item.hor .album-info .album-date {
+    font-size: 14px;
+    font-weight: 600;
+    color: $main-color;
+    margin-bottom: 5px;
+}
+
+.album-item.hor .album-info .album-tracks {
+    margin-top: 3px;
+}
+
+//Vertical
+
+.album-item.ver {
+    flex-flow: column nowrap;
+}
+
+.album-item.ver .album-info {
+    margin-top: 5px;
+}
+
+.album-item.ver .album-info span {
+    display: block;
+    font-size: 13px;
+}
+
+.album-item.ver .album-info .artist-or-date:hover {
+    text-decoration: underline;
 }
 
 // Artist
@@ -958,7 +1007,6 @@ img.album-artwork {
     padding: 30px 0;
     border-bottom: 1px solid $border-color;
     display: flex;
-    // align-items: stretch;
 }
 
 .artist-highlights h2 {
@@ -969,50 +1017,27 @@ img.album-artwork {
 
 .latest-release {
     flex: 1.75;
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.latest-release-album .icon {
-    bottom: 14px;
-}
-
-.latest-release-info {
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    margin-left: 30px;
-}
-
-.latest-release-info .date {
-    font-size: 14px;
-    font-weight: 600;
-    color: $main-color;
-    margin-bottom: 5px;
-}
-
-.latest-release-info .album:hover {
-    text-decoration: underline;
 }
 
 .top-songs {
     flex: 2.75;
-    max-height: 293px;
 }
 
 .top-songs-list {
+    height: 100%;
+    max-height: 275px;
     display: flex;
     flex-flow: column wrap;
     justify-content: space-between;
-    height: calc(100% - 37px);
     margin-left: -20px;
 }
 
 .top-songs-list-item {
-    flex-basis: 33.333%;
+    flex: 1 0 33.3333%;
+    width: 50%;
+    padding: 0 20px;
     display: flex;
     align-items: center;
-    padding: 0 20px;
     border-radius: 5px;
     background-color: rgba(72, 72, 78, 0);
     transition: background-color 0.2s;
@@ -1023,34 +1048,23 @@ img.album-artwork {
 }
 
 .top-songs-list-item .track-number {
-    font-size: 40px;
+    font-size: 45px;
     font-weight: 700;
     margin-top: -10px;
     margin-right: 20px;
     color: white;
-    // -webkit-text-stroke-width: 1px;
-    // -webkit-text-stroke-color: black;
     text-shadow: 1px 1px $main-color, 2px 2px $main-color, 3px 3px $main-color,
         4px 4px $main-color, 5px 5px $main-color, 6px 6px $main-color,
         $box-shadow;
 }
 
-.top-songs-list-item a {
-    display: flex;
-    flex-flow: column nowrap;
+.top-songs-list-item .track-info .track-title {
+    display: block;
     color: $text-color;
-    // align-items: center;
-}
-
-.top-songs-list-item a:hover {
-    text-decoration: underline;
-}
-
-.top-songs-list-item .track-title {
     font-weight: 600;
 }
 
-.top-songs-list-item .album-title {
+.top-songs-list-item .track-info .album-title {
     color: $gray-text;
 }
 

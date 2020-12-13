@@ -3,6 +3,7 @@
 #                    Prefix Verb   URI Pattern                                                                              Controller#Action
 #               api_session DELETE /api/session(.:format)                                                                   api/sessions#destroy {:format=>:json}
 #                           POST   /api/session(.:format)                                                                   api/sessions#create {:format=>:json}
+#          api_album_tracks GET    /api/albums/:album_id/tracks(.:format)                                                   api/tracks#index {:format=>:json}
 #                api_albums GET    /api/albums(.:format)                                                                    api/albums#index {:format=>:json}
 #                 api_album GET    /api/albums/:id(.:format)                                                                api/albums#show {:format=>:json}
 #                 api_track PATCH  /api/tracks/:id(.:format)                                                                api/tracks#update {:format=>:json}
@@ -22,7 +23,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api, defaults: { format: :json } do
     resource :session, only: [:create, :destroy]
-    resources :albums, only: [:index, :show]
+    resources :albums, only: [:index, :show] do
+      resources :tracks, only: [:index]
+    end
+
     resources :tracks, only: [:update]
     resources :artists, only: [:show]
 

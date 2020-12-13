@@ -1,6 +1,7 @@
 class Api::ArtistsController < ApplicationController
   def show
     @artist = selected_artist
+    @top_tracks = @artist.tracks.order(play_count: :desc).limit(6)
   end
   
   private
