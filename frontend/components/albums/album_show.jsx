@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 //int - components
 import TrackListItem from "../tracks/track_list_item";
+import TrackMenu from "../tracks/track_menu";
 //int - utils
 import * as icons from "../../utils/icons";
 import { dateFormatter, timeAdder } from "../../utils/various";
@@ -13,15 +14,8 @@ class AlbumShow extends Component {
         this.state = {
             selectedTrackId: null,
             hoveredTrackId: null,
+            menuTrackId: null,
         };
-    }
-
-    componentDidMount() {
-        this.props.getAlbumDetails(this.props.match.params.albumId);
-
-        if (this.props.selectedTrackId) {
-            this.setState({ selectedTrackId: this.props.selectedTrackId });
-        }
     }
 
     handlePlay() {
@@ -35,23 +29,41 @@ class AlbumShow extends Component {
         }
     }
 
+    handleTrackMenu() {
+        const { hoveredTrackId } = this.state;
+
+        this.setState({ menuTrackId: hoveredTrackId });
+
+        document.addEventListener(
+            "mousedown",
+            () => this.setState({ menuTrackId: null }),
+            { once: true }
+        );
+    }
+
+    componentDidMount() {
+        this.props.getAlbumDetails(this.props.match.params.albumId);
+
+        if (this.props.selectedTrackId) {
+            this.setState({ selectedTrackId: this.props.selectedTrackId });
+        }
+    }
+
     render() {
         const { album, tracks, artist } = this.props;
         if (!album || !album.description) return null;
 
-        const trackItems = tracks.map((track, index) => {
-            let trackClasses = "track-row";
-            let hovered = null;
-            let selected = null;
+        const trackItems = tracks.map((track) => {
+            let trackClasses, trackMenu;
+            this.state.selectedTrackId == track.id
+                ? (trackClasses = "track-row selected")
+                : (trackClasses = "track-row");
 
-            if (this.state.selectedTrackId === track.id) {
-                trackClasses += " selected";
-                selected = true;
-            }
-
-            if (this.state.hoveredTrackId === track.id) {
-                hovered = "true";
-            }
+            this.state.menuTrackId == track.id
+                ? (trackMenu = (
+                      <TrackMenu trackId={track.id} location={"album"} />
+                  ))
+                : (trackMenu = "");
 
             return (
                 <div
@@ -64,12 +76,13 @@ class AlbumShow extends Component {
                     onMouseLeave={() => this.setState({ hoveredTrackId: null })}
                     onDoubleClick={this.handlePlay.bind(this)}
                 >
+                    {trackMenu}
                     <TrackListItem
                         track={track}
-                        index={index + 1}
-                        hovered={hovered}
-                        selected={selected}
+                        hovered={this.state.hoveredTrackId == track.id}
+                        selected={this.state.selectedTrackId == track.id}
                         handlePlay={this.handlePlay.bind(this)}
+                        handleMenu={this.handleTrackMenu.bind(this)}
                     />
                 </div>
             );

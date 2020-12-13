@@ -707,10 +707,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _tracks_track_list_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tracks/track_list_item */ "./frontend/components/tracks/track_list_item.jsx");
-/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
-/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/various */ "./frontend/utils/various.js");
+/* harmony import */ var _tracks_track_menu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tracks/track_menu */ "./frontend/components/tracks/track_menu.jsx");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
+/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/various */ "./frontend/utils/various.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -737,6 +738,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
  //int - components
 
+
  //int - utils
 
 
@@ -755,23 +757,13 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       selectedTrackId: null,
-      hoveredTrackId: null
+      hoveredTrackId: null,
+      menuTrackId: null
     };
     return _this;
   }
 
   _createClass(AlbumShow, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.getAlbumDetails(this.props.match.params.albumId);
-
-      if (this.props.selectedTrackId) {
-        this.setState({
-          selectedTrackId: this.props.selectedTrackId
-        });
-      }
-    }
-  }, {
     key: "handlePlay",
     value: function handlePlay() {
       var hoveredTrackId = this.state.hoveredTrackId;
@@ -788,54 +780,75 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
       }
     }
   }, {
+    key: "handleTrackMenu",
+    value: function handleTrackMenu() {
+      var _this2 = this;
+
+      var hoveredTrackId = this.state.hoveredTrackId;
+      this.setState({
+        menuTrackId: hoveredTrackId
+      });
+      document.addEventListener("mousedown", function () {
+        return _this2.setState({
+          menuTrackId: null
+        });
+      }, {
+        once: true
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getAlbumDetails(this.props.match.params.albumId);
+
+      if (this.props.selectedTrackId) {
+        this.setState({
+          selectedTrackId: this.props.selectedTrackId
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _this$props2 = this.props,
           album = _this$props2.album,
           tracks = _this$props2.tracks,
           artist = _this$props2.artist;
       if (!album || !album.description) return null;
-      var trackItems = tracks.map(function (track, index) {
-        var trackClasses = "track-row";
-        var hovered = null;
-        var selected = null;
-
-        if (_this2.state.selectedTrackId === track.id) {
-          trackClasses += " selected";
-          selected = true;
-        }
-
-        if (_this2.state.hoveredTrackId === track.id) {
-          hovered = "true";
-        }
-
+      var trackItems = tracks.map(function (track) {
+        var trackClasses, trackMenu;
+        _this3.state.selectedTrackId == track.id ? trackClasses = "track-row selected" : trackClasses = "track-row";
+        _this3.state.menuTrackId == track.id ? trackMenu = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_menu__WEBPACK_IMPORTED_MODULE_2__.default, {
+          trackId: track.id,
+          location: "album"
+        }) : trackMenu = "";
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: trackClasses,
           key: track.id,
           onClick: function onClick() {
-            return _this2.setState({
+            return _this3.setState({
               selectedTrackId: track.id
             });
           },
           onMouseEnter: function onMouseEnter() {
-            return _this2.setState({
+            return _this3.setState({
               hoveredTrackId: track.id
             });
           },
           onMouseLeave: function onMouseLeave() {
-            return _this2.setState({
+            return _this3.setState({
               hoveredTrackId: null
             });
           },
-          onDoubleClick: _this2.handlePlay.bind(_this2)
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_list_item__WEBPACK_IMPORTED_MODULE_1__.default, {
+          onDoubleClick: _this3.handlePlay.bind(_this3)
+        }, trackMenu, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_list_item__WEBPACK_IMPORTED_MODULE_1__.default, {
           track: track,
-          index: index + 1,
-          hovered: hovered,
-          selected: selected,
-          handlePlay: _this2.handlePlay.bind(_this2)
+          hovered: _this3.state.hoveredTrackId == track.id,
+          selected: _this3.state.selectedTrackId == track.id,
+          handlePlay: _this3.handlePlay.bind(_this3),
+          handleMenu: _this3.handleTrackMenu.bind(_this3)
         }));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -849,19 +862,19 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
         className: "album-header-tracks"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "album-header"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, album.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, album.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
         to: "/artists/".concat(artist.id)
       }, artist.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, album.genre, " \u2022 ", album.releaseDate.slice(0, 4)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "btn",
         onClick: this.handlePlay.bind(this)
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_2__.play("icon white"), "Play"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_3__.play("icon white"), "Play"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "text-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "text-cutoff"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("strong", null, "About"), album.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "more pointer",
         onClick: function onClick() {
-          return _this2.props.openModal({
+          return _this3.props.openModal({
             title: album.title,
             sub: artist.name,
             text: album.description
@@ -871,9 +884,9 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
         className: "tracks-list"
       }, trackItems), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "album-meta"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, tracks.length, " SONGS,", " ", (0,_utils_various__WEBPACK_IMPORTED_MODULE_3__.timeAdder)(Object.values(tracks).map(function (track) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, tracks.length, " SONGS,", " ", (0,_utils_various__WEBPACK_IMPORTED_MODULE_4__.timeAdder)(Object.values(tracks).map(function (track) {
         return track.duration;
-      })).toUpperCase()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "RELEASED", " ", (0,_utils_various__WEBPACK_IMPORTED_MODULE_3__.dateFormatter)(album.releaseDate).toUpperCase()))));
+      })).toUpperCase()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "RELEASED", " ", (0,_utils_various__WEBPACK_IMPORTED_MODULE_4__.dateFormatter)(album.releaseDate).toUpperCase()))));
     }
   }]);
 
@@ -2967,63 +2980,42 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var TrackListItem = function TrackListItem(_ref) {
-  var track = _ref.track,
-      index = _ref.index,
-      resume = _ref.resume,
-      pause = _ref.pause,
-      handlePlay = _ref.handlePlay,
-      hovered = _ref.hovered,
-      selected = _ref.selected,
-      currentTrack = _ref.currentTrack,
-      playing = _ref.playing,
-      currentUser = _ref.currentUser;
-  var leftcol = index;
-  var addcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.add("icon ms color");
-  var rightcol = track.duration;
+var TrackListItem = function TrackListItem(props) {
+  var track = props.track,
+      hovered = props.hovered,
+      selected = props.selected,
+      playing = props.playing;
+  var resume = props.resume,
+      pause = props.pause,
+      handlePlay = props.handlePlay,
+      handleMenu = props.handleMenu;
+  var currentTrack = props.currentTrack,
+      currentUser = props.currentUser;
+  var classes;
+  selected ? classes = "icon ms white pointer" : classes = "icon ms color pointer";
+  var colA = track.trackNumber;
+  var colB = track.title;
+  var colC = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.add(classes);
+  var colD = track.duration;
 
   if (hovered) {
-    if (selected) {
-      var leftcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.play("icon ms white", handlePlay);
-      var addcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.add("icon ms white");
-      var rightcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.list("icon ms white");
-    } else {
-      var leftcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.play("icon ms color", handlePlay);
-      var rightcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.list("icon ms color");
-    }
-  } else {
-    if (selected) {
-      var addcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.add("icon ms white");
-    }
+    colA = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.play(classes, handlePlay);
+    colD = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.list(classes, handleMenu);
   }
 
-  if (currentTrack) {
-    if (currentTrack.id == track.id) {
-      if (playing) {
-        if (selected) {
-          leftcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.pause("icon ms white", pause);
-        } else {
-          leftcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.pause("icon ms color", pause);
-        }
-      } else {
-        if (selected) {
-          leftcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.play("icon ms white", resume);
-        } else {
-          leftcol = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.play("icon ms color", resume);
-        }
-      }
-    }
+  if (currentTrack && currentTrack.id == track.id) {
+    playing ? colA = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.pause(classes, pause) : colA = _utils_icons__WEBPACK_IMPORTED_MODULE_3__.play(classes, resume);
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "track-index pointer"
-  }, leftcol), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "track-index"
+  }, colA), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "track-title"
-  }, track.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "track-save"
-  }, addcol), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, colB), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "track-save "
+  }, colC), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "track-duration"
-  }, rightcol));
+  }, colD));
 };
 
 var mapSTP = function mapSTP(state) {
@@ -3046,6 +3038,49 @@ var mapDTP = function mapDTP(dispatch) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapSTP, mapDTP)(TrackListItem));
+
+/***/ }),
+
+/***/ "./frontend/components/tracks/track_menu.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/tracks/track_menu.jsx ***!
+  \***************************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+//ext
+
+
+var TrackMenu = function TrackMenu(_ref) {
+  var trackId = _ref.trackId,
+      location = _ref.location;
+
+  if (location === "album") {
+    var optionA = "Add to Playlist";
+    var optionB = "Remove from Library";
+  } else if (location === "playlist") {
+    var optionA = "Remove from Playlist";
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    className: "track-menu"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    className: "track-menu-item"
+  }, optionA), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+    className: "track-menu-item"
+  }, optionB));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TrackMenu);
 
 /***/ }),
 
@@ -4002,14 +4037,15 @@ var go = function go(classes) {
     d: "M12,4c4.41,0,8,3.59,8,8s-3.59,8-8,8s-8-3.59-8-8S7.59,4,12,4 M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10 c5.52,0,10-4.48,10-10C22,6.48,17.52,2,12,2L12,2z M13,12l0-4h-2l0,4H8l4,4l4-4H13z"
   })));
 };
-var list = function list(classes) {
+var list = function list(classes, action) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "0 0 24 24",
     fill: "black",
     width: "18px",
     height: "18px",
-    className: classes
+    className: classes,
+    onClick: action
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("g", {
     fill: "none"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {

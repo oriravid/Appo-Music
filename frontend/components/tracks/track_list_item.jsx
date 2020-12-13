@@ -6,61 +6,38 @@ import { pause, play } from "../../actions/music_actions";
 //int - utils
 import * as icons from "../../utils/icons";
 
-const TrackListItem = ({
-    track,
-    index,
-    resume,
-    pause,
-    handlePlay,
-    hovered,
-    selected,
-    currentTrack,
-    playing,
-    currentUser,
-}) => {
-    var leftcol = index;
-    var addcol = icons.add("icon ms color");
-    var rightcol = track.duration;
+const TrackListItem = (props) => {
+    const { track, hovered, selected, playing } = props;
+    const { resume, pause, handlePlay, handleMenu } = props;
+    const { currentTrack, currentUser } = props;
+
+    let classes;
+    selected
+        ? (classes = "icon ms white pointer")
+        : (classes = "icon ms color pointer");
+
+    var colA = track.trackNumber;
+    var colB = track.title;
+    var colC = icons.add(classes);
+    var colD = track.duration;
 
     if (hovered) {
-        if (selected) {
-            var leftcol = icons.play("icon ms white", handlePlay);
-            var addcol = icons.add("icon ms white");
-            var rightcol = icons.list("icon ms white");
-        } else {
-            var leftcol = icons.play("icon ms color", handlePlay);
-            var rightcol = icons.list("icon ms color");
-        }
-    } else {
-        if (selected) {
-            var addcol = icons.add("icon ms white");
-        }
+        colA = icons.play(classes, handlePlay);
+        colD = icons.list(classes, handleMenu);
     }
 
-    if (currentTrack) {
-        if (currentTrack.id == track.id) {
-            if (playing) {
-                if (selected) {
-                    leftcol = icons.pause("icon ms white", pause);
-                } else {
-                    leftcol = icons.pause("icon ms color", pause);
-                }
-            } else {
-                if (selected) {
-                    leftcol = icons.play("icon ms white", resume);
-                } else {
-                    leftcol = icons.play("icon ms color", resume);
-                }
-            }
-        }
+    if (currentTrack && currentTrack.id == track.id) {
+        playing
+            ? (colA = icons.pause(classes, pause))
+            : (colA = icons.play(classes, resume));
     }
 
     return (
         <React.Fragment>
-            <div className="track-index pointer">{leftcol}</div>
-            <div className="track-title">{track.title}</div>
-            <div className="track-save">{addcol}</div>
-            <div className="track-duration">{rightcol}</div>
+            <div className="track-index">{colA}</div>
+            <div className="track-title">{colB}</div>
+            <div className="track-save ">{colC}</div>
+            <div className="track-duration">{colD}</div>
         </React.Fragment>
     );
 };

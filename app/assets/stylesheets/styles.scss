@@ -664,6 +664,7 @@ img.album-artwork {
 }
 
 .track-row {
+    position: relative;
     display: table-row;
     height: 55px;
     display: flex;
@@ -720,6 +721,28 @@ img.album-artwork {
 .track-row.selected .track-index,
 .track-row.selected .track-duration {
     color: white;
+}
+
+.track-menu {
+    position: absolute;
+    right: 50px;
+    top: 30px;
+    background-color: white;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    color: $text-color;
+    z-index: 2;
+    overflow: hidden;
+    box-shadow: $box-shadow;
+}
+
+.track-menu-item {
+    padding: 10px 20px;
+    border-bottom: 1px solid $border-color;
+}
+
+.track-menu-item:hover {
+    background-color: $gray-text;
 }
 
 .album-meta {

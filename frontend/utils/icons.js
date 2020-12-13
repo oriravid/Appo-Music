@@ -136,7 +136,7 @@ export const go = (classes) => (
     </svg>
 );
 
-export const list = (classes) => (
+export const list = (classes, action) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -144,6 +144,7 @@ export const list = (classes) => (
         width="18px"
         height="18px"
         className={classes}
+        onClick={action}
     >
         <g fill="none">
             <path d="M0 0h24v24H0V0z" />

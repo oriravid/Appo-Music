@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create] do
       resources :playlists, only: [:index]
     end
+    
     resources :playlists, except: [:index, :show, :new]
     
     # resources :user_saves, only: [:create, :destroy]

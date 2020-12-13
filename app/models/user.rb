@@ -35,8 +35,6 @@ class User < ApplicationRecord
     has_many :saved_track_albums,
         through: :saved_tracks,
         source: :album
-
-    # @user.saved_track_albums.distinct
     
     #User Auth Methods (SPIRE)
     def self.find_by_credentials(username, password)
