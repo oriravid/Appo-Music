@@ -17,6 +17,7 @@ json.tracks do
     @album.tracks.each do |track|
         json.set! track.id do
             json.extract! track, :id, :album_id, :title, :track_number, :play_count, :url, :duration
+            json.saved (current_user() && current_user().saved_tracks.find_by(id: track.id)) ? true : false
         end
     end
 end

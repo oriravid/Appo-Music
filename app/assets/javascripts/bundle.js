@@ -425,6 +425,66 @@ var deletePlaylist = function deletePlaylist(playlistId) {
 
 /***/ }),
 
+/***/ "./frontend/actions/save_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/save_actions.js ***!
+  \******************************************/
+/*! namespace exports */
+/*! export RECEIVE_SAVE [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export REMOVE_SAVE [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export receiveSave [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export removeSave [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export saveTrack [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export unsaveTrack [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_SAVE": () => /* binding */ RECEIVE_SAVE,
+/* harmony export */   "REMOVE_SAVE": () => /* binding */ REMOVE_SAVE,
+/* harmony export */   "receiveSave": () => /* binding */ receiveSave,
+/* harmony export */   "removeSave": () => /* binding */ removeSave,
+/* harmony export */   "saveTrack": () => /* binding */ saveTrack,
+/* harmony export */   "unsaveTrack": () => /* binding */ unsaveTrack
+/* harmony export */ });
+/* harmony import */ var _utils_saves_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/saves_api_utils */ "./frontend/utils/saves_api_utils.js");
+//int - utils
+
+var RECEIVE_SAVE = "RECEIVE_SAVE";
+var REMOVE_SAVE = "REMOVE_SAVE";
+var receiveSave = function receiveSave(trackId) {
+  return {
+    type: RECEIVE_SAVE,
+    trackId: trackId
+  };
+};
+var removeSave = function removeSave(trackId) {
+  return {
+    type: REMOVE_SAVE,
+    trackId: trackId
+  };
+}; // Thunk Actions
+
+var saveTrack = function saveTrack(trackId) {
+  return function (dispatch) {
+    return _utils_saves_api_utils__WEBPACK_IMPORTED_MODULE_0__.saveTrack(trackId).then(function (trackId) {
+      return dispatch(receiveSave(trackId));
+    });
+  };
+};
+var unsaveTrack = function unsaveTrack(trackId) {
+  return function (dispatch) {
+    return _utils_saves_api_utils__WEBPACK_IMPORTED_MODULE_0__.unsaveTrack(trackId).then(function (trackId) {
+      return dispatch(removeSave(trackId));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
@@ -3101,6 +3161,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/various */ "./frontend/utils/various.js");
 /* harmony import */ var _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/tracks_api_utils */ "./frontend/utils/tracks_api_utils.js");
+/* harmony import */ var _actions_save_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/save_actions */ "./frontend/actions/save_actions.js");
 //ext
 
  //int
@@ -3109,7 +3170,7 @@ __webpack_require__.r(__webpack_exports__);
  //testing!!
 
 
- // import { saveTrack, unsaveTrack } from "./utils/user_api_utils";
+
 
 document.addEventListener("DOMContentLoaded", function () {
   var preloadedState = undefined;
@@ -3130,9 +3191,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.store = store;
   window.dateSorter = _utils_various__WEBPACK_IMPORTED_MODULE_4__.dateSorter;
-  window.getAlbumTracks = _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_5__.getAlbumTracks; // window.saveTrack = saveTrack;
-
-  window.unsaveTrack = unsaveTrack;
+  window.getAlbumTracks = _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_5__.getAlbumTracks;
+  window.saveTrack = _actions_save_actions__WEBPACK_IMPORTED_MODULE_6__.saveTrack;
+  window.unsaveTrack = _actions_save_actions__WEBPACK_IMPORTED_MODULE_6__.unsaveTrack;
 });
 
 /***/ }),
@@ -3667,7 +3728,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/album_actions */ "./frontend/actions/album_actions.js");
 /* harmony import */ var _actions_artist_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/artist_actions */ "./frontend/actions/artist_actions.js");
 /* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/track_actions */ "./frontend/actions/track_actions.js");
+/* harmony import */ var _actions_save_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/save_actions */ "./frontend/actions/save_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //int
+
+
 
 
 
@@ -3676,12 +3747,26 @@ __webpack_require__.r(__webpack_exports__);
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
+  var nextState = _objectSpread({}, state);
+
   switch (action.type) {
     case _actions_album_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALBUM_DETAILS:
       return action.payload.tracks;
 
     case _actions_artist_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_ARTIST_DETAILS:
       return action.payload.tracks;
+
+    case _actions_save_actions__WEBPACK_IMPORTED_MODULE_3__.RECEIVE_SAVE:
+      nextState[action.trackId].saved = true;
+      return nextState;
+
+    case _actions_save_actions__WEBPACK_IMPORTED_MODULE_3__.REMOVE_SAVE:
+      nextState[action.trackId].saved = false;
+      return nextState;
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__.SIGNOUT_CURRENT_USER:
+      nextState = {};
+      return nextState;
 
     case _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__.CLEAR_TRACKS:
       return {};
@@ -4463,6 +4548,44 @@ var Protected = function Protected(_ref2) {
 };
 
 var ProtectedRoute = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapSTP)(Protected));
+
+/***/ }),
+
+/***/ "./frontend/utils/saves_api_utils.js":
+/*!*******************************************!*\
+  !*** ./frontend/utils/saves_api_utils.js ***!
+  \*******************************************/
+/*! namespace exports */
+/*! export saveTrack [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export unsaveTrack [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "saveTrack": () => /* binding */ saveTrack,
+/* harmony export */   "unsaveTrack": () => /* binding */ unsaveTrack
+/* harmony export */ });
+var saveTrack = function saveTrack(trackId) {
+  return $.ajax({
+    url: "/api/user_saves/",
+    method: "POST",
+    data: {
+      track_id: trackId
+    }
+  });
+};
+var unsaveTrack = function unsaveTrack(trackId) {
+  return $.ajax({
+    url: "/api/user_saves/",
+    method: "DELETE",
+    data: {
+      track_id: trackId
+    }
+  });
+};
 
 /***/ }),
 

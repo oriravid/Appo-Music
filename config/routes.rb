@@ -10,14 +10,14 @@
 #                           PUT    /api/tracks/:id(.:format)                                                                api/tracks#update {:format=>:json}
 #                api_artist GET    /api/artists/:id(.:format)                                                               api/artists#show {:format=>:json}
 #        api_user_playlists GET    /api/users/:user_id/playlists(.:format)                                                  api/playlists#index {:format=>:json}
-#       api_user_user_saves POST   /api/users/:user_id/user_saves(.:format)                                                 api/user_saves#create {:format=>:json}
-#        api_user_user_safe DELETE /api/users/:user_id/user_saves/:id(.:format)                                             api/user_saves#destroy {:format=>:json}
 #                 api_users POST   /api/users(.:format)                                                                     api/users#create {:format=>:json}
 #             api_playlists POST   /api/playlists(.:format)                                                                 api/playlists#create {:format=>:json}
 #         edit_api_playlist GET    /api/playlists/:id/edit(.:format)                                                        api/playlists#edit {:format=>:json}
 #              api_playlist PATCH  /api/playlists/:id(.:format)                                                             api/playlists#update {:format=>:json}
 #                           PUT    /api/playlists/:id(.:format)                                                             api/playlists#update {:format=>:json}
 #                           DELETE /api/playlists/:id(.:format)                                                             api/playlists#destroy {:format=>:json}
+#            api_user_saves POST   /api/user_saves(.:format)                                                                api/user_saves#create {:format=>:json}
+#                           DELETE /api/user_saves(.:format)                                                                api/user_saves#destroy {:format=>:json}
 #                      root GET    /                                                                                        root#root
 
 Rails.application.routes.draw do
@@ -38,7 +38,9 @@ Rails.application.routes.draw do
     
     resources :playlists, except: [:index, :show, :new]
     
-    # resources :user_saves, only: [:create, :destroy]
+    resources :user_saves, only: [:create]
+    delete '/user_saves/', to: 'user_saves#destroy'
+
 
   end
   

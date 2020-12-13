@@ -8,7 +8,7 @@ import Root from "./components/root";
 //testing!!
 import { dateSorter } from "./utils/various";
 import { getAlbumTracks } from "./utils/tracks_api_utils";
-// import { saveTrack, unsaveTrack } from "./utils/user_api_utils";
+import { saveTrack, unsaveTrack } from "./actions/save_actions";
 
 document.addEventListener("DOMContentLoaded", () => {
     let preloadedState = undefined;
@@ -29,6 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.store = store;
     window.dateSorter = dateSorter;
     window.getAlbumTracks = getAlbumTracks;
-    // window.saveTrack = saveTrack;
+    window.saveTrack = saveTrack;
     window.unsaveTrack = unsaveTrack;
 });
