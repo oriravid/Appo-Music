@@ -31,7 +31,9 @@ const TrackListItem = (props) => {
         colA = icons.play(classes, handlePlay);
 
         if (track.saved) {
-            colC = icons.close(classes, () => unsaveTrack(track.id));
+            colC = icons.close("icon sm red pointer", () =>
+                unsaveTrack(track.id)
+            );
         }
 
         colD = icons.list(classes, handleMenu);

@@ -112,6 +112,11 @@ h3 {
     opacity: 1;
 }
 
+.icon.red {
+    fill: $error;
+    opacity: 0.5;
+}
+
 .icon.disabled {
     opacity: 0.4;
 }
@@ -857,6 +862,23 @@ img.album-artwork {
     overflow-x: scroll;
 }
 
+.albums-shelf {
+    position: relative;
+    padding-top: 35px;
+    border-bottom: 1px solid $border-color;
+}
+
+.albums-shelf-list {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+}
+
+.albums-shelf-list-item {
+    flex: 0 1 20%;
+    margin-bottom: 35px;
+}
+
 // Album Item
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -879,6 +901,12 @@ img.album-artwork {
     border-radius: 3px;
     box-shadow: $box-shadow-light;
     border: 1px solid $border-color-light;
+}
+
+.albums-shelf-list-item .album-cover {
+    width: inherit;
+    min-width: inherit;
+    max-width: inherit;
 }
 
 .album-item .album-cover img {

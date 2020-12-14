@@ -7,7 +7,7 @@ import AlbumShowContainer from "../albums/album_show_container";
 import PlaylistShowContainer from "../playlists/playlist_show_container";
 import ArtistShowContainer from "../artists/artist_show_container";
 import BrowseContainer from "./browse_container";
-import Library from "./library";
+import LibraryContainer from "./library_container";
 import Footer from "./footer";
 //int - utils
 import { ProtectedRoute } from "../../utils/route_utils";
@@ -31,7 +31,10 @@ const Main = () => {
                             path="/playlists/:playlistId"
                             component={PlaylistShowContainer}
                         />
-                        <ProtectedRoute path="/library/" component={Library} />
+                        <ProtectedRoute
+                            path="/library/"
+                            component={LibraryContainer}
+                        />
                         <Route path="/browse" component={BrowseContainer} />
                         <Route
                             exact

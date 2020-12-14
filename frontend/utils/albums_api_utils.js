@@ -4,11 +4,11 @@ export const getAllAlbums = () =>
         method: "GET",
     });
 
-export const getUserAlbums = (userId) =>
+export const getUserAlbums = () =>
     $.ajax({
         url: "/api/albums/",
         method: "GET",
-        data: { user_id: userId },
+        data: { request_type: "user" },
     });
 
 export const getAlbumDetails = (albumId) =>

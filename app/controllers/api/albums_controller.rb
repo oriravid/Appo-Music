@@ -1,7 +1,8 @@
 class Api::AlbumsController < ApplicationController
   def index
-    if params[:user_id]
-        @albums = User.find(params[:user_id]).saved_track_albums.uniq
+    if params[:request_type]
+        @current_user = current_user()
+        @albums = User.find(@current_user.id).saved_track_albums.uniq
     else
         @albums = Album.all
     end
@@ -18,6 +19,6 @@ class Api::AlbumsController < ApplicationController
   end
   
   def playlist_params
-    params.require(:album).permit(:id, :user_id, :request_type)
+    params.require(:album).permit(:id, :request_type)
   end
 end
