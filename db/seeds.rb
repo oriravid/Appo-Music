@@ -254,7 +254,16 @@ PlaylistTrack.create([
 ])
 
 UserSave.create([
-    # {user_id: 1, track_id: 11},
-    # {user_id: 1, track_id: 15},
-    # {user_id: 1, track_id: 4},  
+    {user_id: 1, track_id: 64},
+    {user_id: 1, track_id: 1},
+    {user_id: 1, track_id: 2},
+    {user_id: 1, track_id: 3},
+    {user_id: 1, track_id: 44},
+    {user_id: 1, track_id: 45}, 
+    {user_id: 1, track_id: 49}, 
+    {user_id: 1, track_id: 15},
+    {user_id: 1, track_id: 16},
+    {user_id: 1, track_id: 19}, 
+    {user_id: 1, track_id: 32},
+    {user_id: 1, track_id: 56},
 ])

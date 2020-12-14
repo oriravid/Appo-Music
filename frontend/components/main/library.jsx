@@ -17,7 +17,17 @@ class Library extends Component {
 
     render() {
         const { albums, artists } = this.props;
-        if (!albums.length || !albums[0].savedAt) return null;
+        if (!albums.length || !albums[0].savedAt)
+            return (
+                <React.Fragment>
+                    <div className="header-section">
+                        <h1>Library</h1>
+                        <p style={{ margin: "20px 0" }}>
+                            Looks like you haven't saved any music yet :(
+                        </p>
+                    </div>
+                </React.Fragment>
+            );
 
         //sort by savedAt
         const userAlbums = [...albums].sort(savedSorter);

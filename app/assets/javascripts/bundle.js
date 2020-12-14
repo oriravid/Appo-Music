@@ -1636,7 +1636,13 @@ var Library = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           albums = _this$props.albums,
           artists = _this$props.artists;
-      if (!albums.length || !albums[0].savedAt) return null; //sort by savedAt
+      if (!albums.length || !albums[0].savedAt) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "header-section"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Library"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        style: {
+          margin: "20px 0"
+        }
+      }, "Looks like you haven't saved any music yet :("))); //sort by savedAt
 
       var userAlbums = _toConsumableArray(albums).sort(_utils_various__WEBPACK_IMPORTED_MODULE_2__.savedSorter);
 
