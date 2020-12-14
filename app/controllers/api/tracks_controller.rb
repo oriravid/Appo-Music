@@ -1,6 +1,11 @@
 class Api::TracksController < ApplicationController
   def index
-    @tracks = Track.where(album_id: params[:album_id])
+    if params[:request_type]
+      @current_user = current_user()
+      @tracks = @current_user.saved_tracks.where(album_id: params[:album_id])
+    else
+      @tracks = Track.where(album_id: params[:album_id])
+    end
   end
 
   def update

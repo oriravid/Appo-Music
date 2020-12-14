@@ -663,25 +663,31 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var AlbumsSliderItem = /*#__PURE__*/function (_Component) {
-  _inherits(AlbumsSliderItem, _Component);
+var AlbumItem = /*#__PURE__*/function (_Component) {
+  _inherits(AlbumItem, _Component);
 
-  var _super = _createSuper(AlbumsSliderItem);
+  var _super = _createSuper(AlbumItem);
 
-  function AlbumsSliderItem(props) {
-    _classCallCheck(this, AlbumsSliderItem);
+  function AlbumItem(props) {
+    _classCallCheck(this, AlbumItem);
 
     return _super.call(this, props);
   }
 
-  _createClass(AlbumsSliderItem, [{
+  _createClass(AlbumItem, [{
     key: "handlePlay",
     value: function handlePlay() {
       var _this = this;
 
-      (0,_utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_3__.getAlbumTracks)(this.props.album.id).then(function (tracks) {
-        return _this.props.addTracks(Object.values(tracks));
-      });
+      if (this.props.type) {
+        (0,_utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_3__.getSavedAlbumTracks)(this.props.album.id).then(function (tracks) {
+          return _this.props.addTracks(Object.values(tracks));
+        });
+      } else {
+        (0,_utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_3__.getAlbumTracks)(this.props.album.id).then(function (tracks) {
+          return _this.props.addTracks(Object.values(tracks));
+        });
+      }
     }
   }, {
     key: "render",
@@ -740,7 +746,7 @@ var AlbumsSliderItem = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return AlbumsSliderItem;
+  return AlbumItem;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 var mapDTP = function mapDTP(dispatch) {
@@ -751,7 +757,7 @@ var mapDTP = function mapDTP(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(null, mapDTP)(AlbumsSliderItem));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(null, mapDTP)(AlbumItem));
 
 /***/ }),
 
@@ -1414,7 +1420,8 @@ var Library = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_albums_album_item__WEBPACK_IMPORTED_MODULE_1__.default, {
           album: album,
           artist: artists ? artists[album.artistId] : undefined,
-          info: "ver"
+          info: "ver",
+          type: "lib"
         }));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4797,6 +4804,7 @@ var deleteSession = function deleteSession() {
   \********************************************/
 /*! namespace exports */
 /*! export getAlbumTracks [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export getSavedAlbumTracks [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export increasePlayCount [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
@@ -4806,12 +4814,22 @@ var deleteSession = function deleteSession() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getAlbumTracks": () => /* binding */ getAlbumTracks,
+/* harmony export */   "getSavedAlbumTracks": () => /* binding */ getSavedAlbumTracks,
 /* harmony export */   "increasePlayCount": () => /* binding */ increasePlayCount
 /* harmony export */ });
 var getAlbumTracks = function getAlbumTracks(albumId) {
   return $.ajax({
     url: "/api/albums/".concat(albumId, "/tracks"),
     method: "GET"
+  });
+};
+var getSavedAlbumTracks = function getSavedAlbumTracks(albumId) {
+  return $.ajax({
+    url: "/api/albums/".concat(albumId, "/tracks"),
+    method: "GET",
+    data: {
+      request_type: "user"
+    }
   });
 };
 var increasePlayCount = function increasePlayCount(trackId) {

@@ -5,20 +5,29 @@ import { connect } from "react-redux";
 //int - actions
 import { addTracks } from "../../actions/music_actions";
 //int - utils
-import { getAlbumTracks } from "../../utils/tracks_api_utils";
+import {
+    getAlbumTracks,
+    getSavedAlbumTracks,
+} from "../../utils/tracks_api_utils";
 import { dateFormatter } from "../../utils/various";
 
 import * as icons from "../../utils/icons";
 
-class AlbumsSliderItem extends Component {
+class AlbumItem extends Component {
     constructor(props) {
         super(props);
     }
 
     handlePlay() {
-        getAlbumTracks(this.props.album.id).then((tracks) =>
-            this.props.addTracks(Object.values(tracks))
-        );
+        if (this.props.type) {
+            getSavedAlbumTracks(this.props.album.id).then((tracks) =>
+                this.props.addTracks(Object.values(tracks))
+            );
+        } else {
+            getAlbumTracks(this.props.album.id).then((tracks) =>
+                this.props.addTracks(Object.values(tracks))
+            );
+        }
     }
 
     render() {
@@ -82,4 +91,4 @@ const mapDTP = (dispatch) => ({
     addTracks: (tracks) => dispatch(addTracks(tracks)),
 });
 
-export default connect(null, mapDTP)(AlbumsSliderItem);
+export default connect(null, mapDTP)(AlbumItem);

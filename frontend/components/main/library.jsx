@@ -28,6 +28,7 @@ class Library extends Component {
                     album={album}
                     artist={artists ? artists[album.artistId] : undefined}
                     info={"ver"}
+                    type={"lib"}
                 />
             </li>
         ));
