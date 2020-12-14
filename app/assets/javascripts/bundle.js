@@ -709,7 +709,7 @@ var AlbumsSliderItem = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
           className: "artist-or-date"
         }, bottomText)));
-      } else if (info === "ver") {
+      } else if (info === "hor") {
         var classes = "hor";
         var albumInfo = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "album-info"
@@ -3097,9 +3097,10 @@ var TrackListItem = function TrackListItem(props) {
       playing = props.playing;
   var resume = props.resume,
       pause = props.pause,
-      saveTrack = props.saveTrack,
       handlePlay = props.handlePlay,
       handleMenu = props.handleMenu;
+  var saveTrack = props.saveTrack,
+      unsaveTrack = props.unsaveTrack;
   var currentTrack = props.currentTrack,
       currentUser = props.currentUser;
   var classes;
@@ -3109,15 +3110,21 @@ var TrackListItem = function TrackListItem(props) {
   var colC = _utils_icons__WEBPACK_IMPORTED_MODULE_4__.add(classes, function () {
     return saveTrack(track.id);
   });
+  var colD = track.duration;
 
   if (track.saved) {
-    colC = "";
+    var colC = "";
   }
-
-  var colD = track.duration;
 
   if (hovered) {
     colA = _utils_icons__WEBPACK_IMPORTED_MODULE_4__.play(classes, handlePlay);
+
+    if (track.saved) {
+      colC = _utils_icons__WEBPACK_IMPORTED_MODULE_4__.close(classes, function () {
+        return unsaveTrack(track.id);
+      });
+    }
+
     colD = _utils_icons__WEBPACK_IMPORTED_MODULE_4__.list(classes, handleMenu);
   }
 
@@ -3154,6 +3161,9 @@ var mapDTP = function mapDTP(dispatch) {
     },
     saveTrack: function saveTrack(trackId) {
       return dispatch((0,_actions_save_actions__WEBPACK_IMPORTED_MODULE_3__.saveTrack)(trackId));
+    },
+    unsaveTrack: function unsaveTrack(trackId) {
+      return dispatch((0,_actions_save_actions__WEBPACK_IMPORTED_MODULE_3__.unsaveTrack)(trackId));
     }
   };
 };

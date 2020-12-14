@@ -3,13 +3,14 @@ import React from "react";
 import { connect } from "react-redux";
 //int - actions
 import { pause, play } from "../../actions/music_actions";
-import { saveTrack } from "../../actions/save_actions";
+import { saveTrack, unsaveTrack } from "../../actions/save_actions";
 //int - utils
 import * as icons from "../../utils/icons";
 
 const TrackListItem = (props) => {
     const { track, hovered, selected, playing } = props;
-    const { resume, pause, saveTrack, handlePlay, handleMenu } = props;
+    const { resume, pause, handlePlay, handleMenu } = props;
+    const { saveTrack, unsaveTrack } = props;
     const { currentTrack, currentUser } = props;
 
     let classes;
@@ -20,15 +21,19 @@ const TrackListItem = (props) => {
     var colA = track.trackNumber;
     var colB = track.title;
     var colC = icons.add(classes, () => saveTrack(track.id));
+    var colD = track.duration;
 
     if (track.saved) {
-        colC = "";
+        var colC = "";
     }
-
-    var colD = track.duration;
 
     if (hovered) {
         colA = icons.play(classes, handlePlay);
+
+        if (track.saved) {
+            colC = icons.close(classes, () => unsaveTrack(track.id));
+        }
+
         colD = icons.list(classes, handleMenu);
     }
 
@@ -58,6 +63,7 @@ const mapDTP = (dispatch) => ({
     pause: () => dispatch(pause()),
     resume: () => dispatch(play()),
     saveTrack: (trackId) => dispatch(saveTrack(trackId)),
+    unsaveTrack: (trackId) => dispatch(unsaveTrack(trackId)),
 });
 
 export default connect(mapSTP, mapDTP)(TrackListItem);

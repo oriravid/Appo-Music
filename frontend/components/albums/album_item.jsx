@@ -45,7 +45,7 @@ class AlbumsSliderItem extends Component {
                     </Link>
                 </div>
             );
-        } else if (info === "ver") {
+        } else if (info === "hor") {
             var classes = "hor";
 
             var albumInfo = (
