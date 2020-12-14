@@ -1,7 +1,7 @@
 //ext
 import { connect } from "react-redux";
 //int - containers
-import Library from "./Library";
+import Library from "./library";
 //int - actions
 import { getUserAlbums } from "../../actions/album_actions";
 
