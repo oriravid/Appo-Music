@@ -18,8 +18,7 @@ export default (state = {}, action) => {
             return nextState;
 
         case RECEIVE_ALBUMS:
-            return { ...action.payload.albums, ...state };
-
+            return action.payload.albums;
         case RECEIVE_ARTIST_DETAILS:
             return action.payload.albums;
 

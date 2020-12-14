@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 //int - containers
 import AlbumItem from "../albums/album_item";
 //int - utils
-import { dateSorter, popularSorter } from "../../utils/various";
+import { savedSorter } from "../../utils/various";
 
 class Library extends Component {
     constructor(props) {
@@ -17,12 +17,12 @@ class Library extends Component {
 
     render() {
         const { albums, artists } = this.props;
-        if (!albums.length) return null;
+        if (!albums.length || !albums[0].savedAt) return null;
 
-        //sort by releaseDate
-        const newAlbums = [...albums].sort(dateSorter);
+        //sort by savedAt
+        const userAlbums = [...albums].sort(savedSorter);
 
-        const albumsList = newAlbums.map((album) => (
+        const albumsList = userAlbums.map((album) => (
             <li key={album.id} className="albums-shelf-list-item">
                 <AlbumItem
                     album={album}

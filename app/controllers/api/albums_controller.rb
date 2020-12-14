@@ -3,6 +3,7 @@ class Api::AlbumsController < ApplicationController
     if params[:request_type]
         @current_user = current_user()
         @albums = User.find(@current_user.id).saved_track_albums.uniq
+        render :user_index
     else
         @albums = Album.all
     end

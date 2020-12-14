@@ -1403,11 +1403,11 @@ var Library = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           albums = _this$props.albums,
           artists = _this$props.artists;
-      if (!albums.length) return null; //sort by releaseDate
+      if (!albums.length || !albums[0].savedAt) return null; //sort by savedAt
 
-      var newAlbums = _toConsumableArray(albums).sort(_utils_various__WEBPACK_IMPORTED_MODULE_2__.dateSorter);
+      var userAlbums = _toConsumableArray(albums).sort(_utils_various__WEBPACK_IMPORTED_MODULE_2__.savedSorter);
 
-      var albumsList = newAlbums.map(function (album) {
+      var albumsList = userAlbums.map(function (album) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: album.id,
           className: "albums-shelf-list-item"
@@ -3396,7 +3396,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return nextState;
 
     case _actions_album_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALBUMS:
-      return _objectSpread(_objectSpread({}, action.payload.albums), state);
+      return action.payload.albums;
 
     case _actions_artist_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_ARTIST_DETAILS:
       return action.payload.albums;
@@ -4832,6 +4832,7 @@ var increasePlayCount = function increasePlayCount(trackId) {
 /*! export dateSorter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export indexPicker [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export popularSorter [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export savedSorter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeAdder [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export timeFormatter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
@@ -4842,6 +4843,7 @@ var increasePlayCount = function increasePlayCount(trackId) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "dateSorter": () => /* binding */ dateSorter,
+/* harmony export */   "savedSorter": () => /* binding */ savedSorter,
 /* harmony export */   "popularSorter": () => /* binding */ popularSorter,
 /* harmony export */   "dateFormatter": () => /* binding */ dateFormatter,
 /* harmony export */   "timeFormatter": () => /* binding */ timeFormatter,
@@ -4870,6 +4872,55 @@ var dateSorter = function dateSorter(album1, album2) {
   if (date1[2] > date2[2]) {
     return -1;
   } else if (date1[2] < date2[2]) {
+    return 1;
+  }
+
+  return 0;
+};
+var savedSorter = function savedSorter(album1, album2) {
+  var saved1 = album1.savedAt.split(" ");
+  var saved2 = album2.savedAt.split(" "); //compare dates
+
+  var date1 = saved1[0].split("-");
+  var date2 = saved2[0].split("-");
+
+  if (date1[0] > date2[0]) {
+    return -1;
+  } else if (date1[0] < date2[0]) {
+    return 1;
+  }
+
+  if (date1[1] > date2[1]) {
+    return -1;
+  } else if (date1[1] < date2[1]) {
+    return 1;
+  }
+
+  if (date1[2] > date2[2]) {
+    return -1;
+  } else if (date1[2] < date2[2]) {
+    return 1;
+  } //compare times 20:33:57 HH:MM:SS
+
+
+  var time1 = saved1[1].split(":");
+  var time2 = saved2[1].split(":");
+
+  if (time1[0] > time2[0]) {
+    return -1;
+  } else if (time1[0] < time2[0]) {
+    return 1;
+  }
+
+  if (time1[1] > time2[1]) {
+    return -1;
+  } else if (time1[1] < time2[1]) {
+    return 1;
+  }
+
+  if (time1[2] > time2[2]) {
+    return -1;
+  } else if (time1[2] < time2[2]) {
     return 1;
   }
 

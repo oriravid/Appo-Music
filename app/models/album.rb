@@ -24,4 +24,7 @@ class Album < ApplicationRecord
         foreign_key: :album_id,
         class_name: :Track
 
+    has_many :user_saves,
+        through: :tracks,
+        source: :user_saves
 end

@@ -27,6 +27,57 @@ export const dateSorter = (album1, album2) => {
     return 0;
 };
 
+export const savedSorter = (album1, album2) => {
+    const saved1 = album1.savedAt.split(" ");
+    const saved2 = album2.savedAt.split(" ");
+
+    //compare dates
+    const date1 = saved1[0].split("-");
+    const date2 = saved2[0].split("-");
+
+    if (date1[0] > date2[0]) {
+        return -1;
+    } else if (date1[0] < date2[0]) {
+        return 1;
+    }
+
+    if (date1[1] > date2[1]) {
+        return -1;
+    } else if (date1[1] < date2[1]) {
+        return 1;
+    }
+
+    if (date1[2] > date2[2]) {
+        return -1;
+    } else if (date1[2] < date2[2]) {
+        return 1;
+    }
+
+    //compare times 20:33:57 HH:MM:SS
+    const time1 = saved1[1].split(":");
+    const time2 = saved2[1].split(":");
+
+    if (time1[0] > time2[0]) {
+        return -1;
+    } else if (time1[0] < time2[0]) {
+        return 1;
+    }
+
+    if (time1[1] > time2[1]) {
+        return -1;
+    } else if (time1[1] < time2[1]) {
+        return 1;
+    }
+
+    if (time1[2] > time2[2]) {
+        return -1;
+    } else if (time1[2] < time2[2]) {
+        return 1;
+    }
+
+    return 0;
+};
+
 // play count comparison, input array of objects
 export const popularSorter = (obj1, obj2) => {
     if (obj1.playCount > obj2.playCount) {
