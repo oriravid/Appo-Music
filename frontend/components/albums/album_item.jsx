@@ -8,7 +8,7 @@ import { addTracks } from "../../actions/music_actions";
 import {
     getAlbumTracks,
     getSavedAlbumTracks,
-} from "../../utils/tracks_api_utils";
+} from "../../utils/albums_api_utils";
 import { dateFormatter } from "../../utils/various";
 
 import * as icons from "../../utils/icons";
@@ -19,7 +19,7 @@ class AlbumItem extends Component {
     }
 
     handlePlay() {
-        if (this.props.type) {
+        if (this.props.user) {
             getSavedAlbumTracks(this.props.album.id).then((tracks) =>
                 this.props.addTracks(Object.values(tracks))
             );

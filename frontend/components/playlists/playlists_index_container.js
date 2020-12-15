@@ -13,7 +13,7 @@ const mapSTP = (state) => ({
 });
 
 const mapDTP = (dispatch) => ({
-    getUserPlaylists: (userId) => dispatch(getUserPlaylists(userId)),
+    getUserPlaylists: () => dispatch(getUserPlaylists()),
     createNewPlaylist: (playlist) => dispatch(createNewPlaylist(playlist)),
 });
 

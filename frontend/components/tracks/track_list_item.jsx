@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 //int - actions
 import { pause, play } from "../../actions/music_actions";
-import { saveTrack, unsaveTrack } from "../../actions/save_actions";
+import { saveTrack, unsaveTrack } from "../../actions/track_actions";
 //int - utils
 import * as icons from "../../utils/icons";
 

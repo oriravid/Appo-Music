@@ -728,6 +728,8 @@ img.album-artwork {
     color: white;
 }
 
+//TRACK MENU
+
 .track-menu {
     position: absolute;
     right: 50px;
@@ -743,12 +745,25 @@ img.album-artwork {
 
 .track-menu-item {
     padding: 10px 20px;
-    border-bottom: 1px solid $border-color;
+    font-weight: 600;
+    border-bottom: 2px solid $border-color;
 }
 
-.track-menu-item:hover {
-    background-color: $gray-text;
+.track-menu-item.hoverable:hover,
+.playlist-list-item:hover {
+    background-color: rgba(72, 72, 78, 0.1);
 }
+
+.playlist-list {
+    max-height: 150px;
+    overflow-y: scroll;
+}
+
+.playlist-list-item {
+    padding: 10px 20px;
+}
+
+//////
 
 .album-meta {
     text-align: center;

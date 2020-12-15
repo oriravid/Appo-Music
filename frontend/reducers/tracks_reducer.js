@@ -1,8 +1,8 @@
 //int
 import { RECEIVE_ALBUM_DETAILS } from "../actions/album_actions";
 import { RECEIVE_ARTIST_DETAILS } from "../actions/artist_actions";
-import { CLEAR_TRACKS } from "../actions/track_actions";
-import { RECEIVE_SAVE, REMOVE_SAVE } from "../actions/save_actions";
+import { RECEIVE_SAVE, REMOVE_SAVE } from "../actions/track_actions";
+import { REMOVE_PLAYLIST_TRACK } from "../actions/playlist_actions";
 
 export default (state = {}, action) => {
     Object.freeze(state);
@@ -23,8 +23,9 @@ export default (state = {}, action) => {
             nextState[action.trackId].saved = false;
             return nextState;
 
-        case CLEAR_TRACKS:
-            return {};
+        case REMOVE_PLAYLIST_TRACK:
+            delete nextState[action.trackId];
+            return nextState;
 
         default:
             return state;

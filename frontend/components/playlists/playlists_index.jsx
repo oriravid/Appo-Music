@@ -33,12 +33,8 @@ class PlaylistsIndex extends Component {
     }
 
     componentDidMount() {
-        this.props.getUserPlaylists(this.props.currentUser.id);
+        this.props.getUserPlaylists();
     }
-
-    // componentWillUnmount() {
-    //     this.props.clearUserPlaylists();
-    // }
 
     render() {
         const { playlists } = this.props;

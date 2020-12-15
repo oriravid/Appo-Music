@@ -346,14 +346,20 @@ var toggleShuffle = function toggleShuffle() {
   \**********************************************/
 /*! namespace exports */
 /*! export RECEIVE_NEW_PLAYLIST [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export RECEIVE_PLAYLIST_TRACK [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export RECEIVE_USER_PLAYLISTS [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export REMOVE_PLAYLIST [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export REMOVE_PLAYLIST_TRACK [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export addTrackToPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export createNewPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export deletePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export getUserPlaylists [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export receiveNewPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export receivePlaylistTrack [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export receiveUserPlaylists [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export removePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export removePlaylistTrack [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export removeTrackFromPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export updatePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
@@ -365,13 +371,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_USER_PLAYLISTS": () => /* binding */ RECEIVE_USER_PLAYLISTS,
 /* harmony export */   "RECEIVE_NEW_PLAYLIST": () => /* binding */ RECEIVE_NEW_PLAYLIST,
 /* harmony export */   "REMOVE_PLAYLIST": () => /* binding */ REMOVE_PLAYLIST,
+/* harmony export */   "RECEIVE_PLAYLIST_TRACK": () => /* binding */ RECEIVE_PLAYLIST_TRACK,
+/* harmony export */   "REMOVE_PLAYLIST_TRACK": () => /* binding */ REMOVE_PLAYLIST_TRACK,
 /* harmony export */   "receiveUserPlaylists": () => /* binding */ receiveUserPlaylists,
 /* harmony export */   "receiveNewPlaylist": () => /* binding */ receiveNewPlaylist,
 /* harmony export */   "removePlaylist": () => /* binding */ removePlaylist,
+/* harmony export */   "receivePlaylistTrack": () => /* binding */ receivePlaylistTrack,
+/* harmony export */   "removePlaylistTrack": () => /* binding */ removePlaylistTrack,
 /* harmony export */   "getUserPlaylists": () => /* binding */ getUserPlaylists,
 /* harmony export */   "createNewPlaylist": () => /* binding */ createNewPlaylist,
 /* harmony export */   "updatePlaylist": () => /* binding */ updatePlaylist,
-/* harmony export */   "deletePlaylist": () => /* binding */ deletePlaylist
+/* harmony export */   "deletePlaylist": () => /* binding */ deletePlaylist,
+/* harmony export */   "addTrackToPlaylist": () => /* binding */ addTrackToPlaylist,
+/* harmony export */   "removeTrackFromPlaylist": () => /* binding */ removeTrackFromPlaylist
 /* harmony export */ });
 /* harmony import */ var _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/playlists_api_utils */ "./frontend/utils/playlists_api_utils.js");
 //int - utils
@@ -379,6 +391,8 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_USER_PLAYLISTS = "RECEIVE_USER_PLAYLISTS";
 var RECEIVE_NEW_PLAYLIST = "RECEIVE_NEW_PLAYLIST";
 var REMOVE_PLAYLIST = "REMOVE_PLAYLIST";
+var RECEIVE_PLAYLIST_TRACK = "RECEIVE_PLAYLIST_TRACK";
+var REMOVE_PLAYLIST_TRACK = "REMOVE_PLAYLIST_TRACK";
 var receiveUserPlaylists = function receiveUserPlaylists(playlists) {
   return {
     type: RECEIVE_USER_PLAYLISTS,
@@ -396,11 +410,23 @@ var removePlaylist = function removePlaylist(playlistId) {
     type: REMOVE_PLAYLIST,
     playlistId: playlistId
   };
+};
+var receivePlaylistTrack = function receivePlaylistTrack(trackId) {
+  return {
+    type: RECEIVE_PLAYLIST_TRACK,
+    trackId: trackId
+  };
+};
+var removePlaylistTrack = function removePlaylistTrack(trackId) {
+  return {
+    type: REMOVE_PLAYLIST_TRACK,
+    trackId: trackId
+  };
 }; // Thunk Actions
 
-var getUserPlaylists = function getUserPlaylists(userId) {
+var getUserPlaylists = function getUserPlaylists() {
   return function (dispatch) {
-    return _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__.getUserPlaylists(userId).then(function (playlists) {
+    return _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__.getUserPlaylists().then(function (playlists) {
       return dispatch(receiveUserPlaylists(playlists));
     });
   };
@@ -426,63 +452,17 @@ var deletePlaylist = function deletePlaylist(playlistId) {
     });
   };
 };
-
-/***/ }),
-
-/***/ "./frontend/actions/save_actions.js":
-/*!******************************************!*\
-  !*** ./frontend/actions/save_actions.js ***!
-  \******************************************/
-/*! namespace exports */
-/*! export RECEIVE_SAVE [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export REMOVE_SAVE [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export receiveSave [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export removeSave [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export saveTrack [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export unsaveTrack [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "RECEIVE_SAVE": () => /* binding */ RECEIVE_SAVE,
-/* harmony export */   "REMOVE_SAVE": () => /* binding */ REMOVE_SAVE,
-/* harmony export */   "receiveSave": () => /* binding */ receiveSave,
-/* harmony export */   "removeSave": () => /* binding */ removeSave,
-/* harmony export */   "saveTrack": () => /* binding */ saveTrack,
-/* harmony export */   "unsaveTrack": () => /* binding */ unsaveTrack
-/* harmony export */ });
-/* harmony import */ var _utils_saves_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/saves_api_utils */ "./frontend/utils/saves_api_utils.js");
-//int - utils
-
-var RECEIVE_SAVE = "RECEIVE_SAVE";
-var REMOVE_SAVE = "REMOVE_SAVE";
-var receiveSave = function receiveSave(trackId) {
-  return {
-    type: RECEIVE_SAVE,
-    trackId: trackId
-  };
-};
-var removeSave = function removeSave(trackId) {
-  return {
-    type: REMOVE_SAVE,
-    trackId: trackId
-  };
-}; // Thunk Actions
-
-var saveTrack = function saveTrack(trackId) {
+var addTrackToPlaylist = function addTrackToPlaylist(trackId, playlistId) {
   return function (dispatch) {
-    return _utils_saves_api_utils__WEBPACK_IMPORTED_MODULE_0__.saveTrack(trackId).then(function (trackId) {
-      return dispatch(receiveSave(trackId));
+    return _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__.addTrackToPlaylist(trackId, playlistId).then(function (trackId) {
+      return dispatch(receivePlaylistTrack(trackId));
     });
   };
 };
-var unsaveTrack = function unsaveTrack(trackId) {
+var removeTrackFromPlaylist = function removeTrackFromPlaylist(trackId, playlistId) {
   return function (dispatch) {
-    return _utils_saves_api_utils__WEBPACK_IMPORTED_MODULE_0__.unsaveTrack(trackId).then(function (trackId) {
-      return dispatch(removeSave(trackId));
+    return _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__.removeTrackFromPlaylist(trackId, playlistId).then(function (trackId) {
+      return dispatch(removePlaylistTrack(trackId));
     });
   };
 };
@@ -587,22 +567,56 @@ var signout = function signout() {
   !*** ./frontend/actions/track_actions.js ***!
   \*******************************************/
 /*! namespace exports */
-/*! export CLEAR_TRACKS [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export clearTracks [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export RECEIVE_SAVE [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export REMOVE_SAVE [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export receiveSave [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export removeSave [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export saveTrack [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export unsaveTrack [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CLEAR_TRACKS": () => /* binding */ CLEAR_TRACKS,
-/* harmony export */   "clearTracks": () => /* binding */ clearTracks
+/* harmony export */   "RECEIVE_SAVE": () => /* binding */ RECEIVE_SAVE,
+/* harmony export */   "REMOVE_SAVE": () => /* binding */ REMOVE_SAVE,
+/* harmony export */   "receiveSave": () => /* binding */ receiveSave,
+/* harmony export */   "removeSave": () => /* binding */ removeSave,
+/* harmony export */   "saveTrack": () => /* binding */ saveTrack,
+/* harmony export */   "unsaveTrack": () => /* binding */ unsaveTrack
 /* harmony export */ });
-var CLEAR_TRACKS = "CLEAR_TRACKS";
-var clearTracks = function clearTracks() {
+/* harmony import */ var _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/tracks_api_utils */ "./frontend/utils/tracks_api_utils.js");
+//int - utils
+
+var RECEIVE_SAVE = "RECEIVE_SAVE";
+var REMOVE_SAVE = "REMOVE_SAVE";
+var receiveSave = function receiveSave(trackId) {
   return {
-    type: CLEAR_TRACKS
+    type: RECEIVE_SAVE,
+    trackId: trackId
+  };
+};
+var removeSave = function removeSave(trackId) {
+  return {
+    type: REMOVE_SAVE,
+    trackId: trackId
+  };
+}; // Thunk Actions
+
+var saveTrack = function saveTrack(trackId) {
+  return function (dispatch) {
+    return _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_0__.saveTrack(trackId).then(function (trackId) {
+      return dispatch(receiveSave(trackId));
+    });
+  };
+};
+var unsaveTrack = function unsaveTrack(trackId) {
+  return function (dispatch) {
+    return _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_0__.unsaveTrack(trackId).then(function (trackId) {
+      return dispatch(removeSave(trackId));
+    });
   };
 };
 
@@ -627,7 +641,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_music_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/music_actions */ "./frontend/actions/music_actions.js");
-/* harmony import */ var _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/tracks_api_utils */ "./frontend/utils/tracks_api_utils.js");
+/* harmony import */ var _utils_albums_api_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/albums_api_utils */ "./frontend/utils/albums_api_utils.js");
 /* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/various */ "./frontend/utils/various.js");
 /* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -679,12 +693,12 @@ var AlbumItem = /*#__PURE__*/function (_Component) {
     value: function handlePlay() {
       var _this = this;
 
-      if (this.props.type) {
-        (0,_utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_3__.getSavedAlbumTracks)(this.props.album.id).then(function (tracks) {
+      if (this.props.user) {
+        (0,_utils_albums_api_utils__WEBPACK_IMPORTED_MODULE_3__.getSavedAlbumTracks)(this.props.album.id).then(function (tracks) {
           return _this.props.addTracks(Object.values(tracks));
         });
       } else {
-        (0,_utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_3__.getAlbumTracks)(this.props.album.id).then(function (tracks) {
+        (0,_utils_albums_api_utils__WEBPACK_IMPORTED_MODULE_3__.getAlbumTracks)(this.props.album.id).then(function (tracks) {
           return _this.props.addTracks(Object.values(tracks));
         });
       }
@@ -1654,7 +1668,7 @@ var Library = /*#__PURE__*/function (_Component) {
           album: album,
           artist: artists ? artists[album.artistId] : undefined,
           info: "ver",
-          type: "lib"
+          user: true
         }));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3040,11 +3054,8 @@ var PlaylistsIndex = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.getUserPlaylists(this.props.currentUser.id);
-    } // componentWillUnmount() {
-    //     this.props.clearUserPlaylists();
-    // }
-
+      this.props.getUserPlaylists();
+    }
   }, {
     key: "render",
     value: function render() {
@@ -3116,8 +3127,8 @@ var mapSTP = function mapSTP(state) {
 
 var mapDTP = function mapDTP(dispatch) {
   return {
-    getUserPlaylists: function getUserPlaylists(userId) {
-      return dispatch((0,_actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__.getUserPlaylists)(userId));
+    getUserPlaylists: function getUserPlaylists() {
+      return dispatch((0,_actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__.getUserPlaylists)());
     },
     createNewPlaylist: function createNewPlaylist(playlist) {
       return dispatch((0,_actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__.createNewPlaylist)(playlist));
@@ -3183,7 +3194,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_music_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/music_actions */ "./frontend/actions/music_actions.js");
-/* harmony import */ var _actions_save_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/save_actions */ "./frontend/actions/save_actions.js");
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
 /* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
 //ext
 
@@ -3264,10 +3275,10 @@ var mapDTP = function mapDTP(dispatch) {
       return dispatch((0,_actions_music_actions__WEBPACK_IMPORTED_MODULE_2__.play)());
     },
     saveTrack: function saveTrack(trackId) {
-      return dispatch((0,_actions_save_actions__WEBPACK_IMPORTED_MODULE_3__.saveTrack)(trackId));
+      return dispatch((0,_actions_track_actions__WEBPACK_IMPORTED_MODULE_3__.saveTrack)(trackId));
     },
     unsaveTrack: function unsaveTrack(trackId) {
-      return dispatch((0,_actions_save_actions__WEBPACK_IMPORTED_MODULE_3__.unsaveTrack)(trackId));
+      return dispatch((0,_actions_track_actions__WEBPACK_IMPORTED_MODULE_3__.unsaveTrack)(trackId));
     }
   };
 };
@@ -3292,12 +3303,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 //ext
 
+ //int
 
 var TrackMenu = function TrackMenu(_ref) {
   var trackId = _ref.trackId,
-      location = _ref.location;
+      location = _ref.location,
+      playlists = _ref.playlists;
 
   if (location === "album") {
     var plOption = "Add to Playlist";
@@ -3305,14 +3319,29 @@ var TrackMenu = function TrackMenu(_ref) {
     var plOption = "Remove from Playlist";
   }
 
+  var playlistList = playlists.map(function (playlist) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      className: "playlist-list-item pointer",
+      key: playlist.id
+    }, playlist.title);
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: "track-menu"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "track-menu-item"
-  }, plOption));
+  }, plOption), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    className: "playlist-list"
+  }, playlistList));
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TrackMenu);
+var mapSTP = function mapSTP(_ref2) {
+  var entities = _ref2.entities;
+  return {
+    playlists: Object.values(entities.playlists)
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapSTP)(TrackMenu));
 
 /***/ }),
 
@@ -3331,17 +3360,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
-/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/various */ "./frontend/utils/various.js");
-/* harmony import */ var _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils/tracks_api_utils */ "./frontend/utils/tracks_api_utils.js");
-/* harmony import */ var _actions_save_actions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./actions/save_actions */ "./frontend/actions/save_actions.js");
+/* harmony import */ var _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/playlists_api_utils */ "./frontend/utils/playlists_api_utils.js");
 //ext
 
  //int
 
 
- //testing!!
-
-
+ //testing!
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -3362,10 +3387,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }), document.getElementById("root")); //testing!!!
 
   window.store = store;
-  window.dateSorter = _utils_various__WEBPACK_IMPORTED_MODULE_4__.dateSorter;
-  window.getAlbumTracks = _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_5__.getAlbumTracks;
-  window.saveTrack = _actions_save_actions__WEBPACK_IMPORTED_MODULE_6__.saveTrack;
-  window.unsaveTrack = _actions_save_actions__WEBPACK_IMPORTED_MODULE_6__.unsaveTrack;
+  window.addTrackToPlaylist = _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_4__.addTrackToPlaylist;
+  window.removeTrackFromPlaylist = _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_4__.removeTrackFromPlaylist;
 });
 
 /***/ }),
@@ -3900,7 +3923,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/album_actions */ "./frontend/actions/album_actions.js");
 /* harmony import */ var _actions_artist_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/artist_actions */ "./frontend/actions/artist_actions.js");
 /* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/track_actions */ "./frontend/actions/track_actions.js");
-/* harmony import */ var _actions_save_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/save_actions */ "./frontend/actions/save_actions.js");
+/* harmony import */ var _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/playlist_actions */ "./frontend/actions/playlist_actions.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3926,16 +3949,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     case _actions_artist_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_ARTIST_DETAILS:
       return action.payload.tracks;
 
-    case _actions_save_actions__WEBPACK_IMPORTED_MODULE_3__.RECEIVE_SAVE:
+    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__.RECEIVE_SAVE:
       nextState[action.trackId].saved = true;
       return nextState;
 
-    case _actions_save_actions__WEBPACK_IMPORTED_MODULE_3__.REMOVE_SAVE:
+    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__.REMOVE_SAVE:
       nextState[action.trackId].saved = false;
       return nextState;
 
-    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__.CLEAR_TRACKS:
-      return {};
+    case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_3__.REMOVE_PLAYLIST_TRACK:
+      delete nextState[action.trackId];
+      return nextState;
 
     default:
       return state;
@@ -4014,7 +4038,9 @@ __webpack_require__.r(__webpack_exports__);
   \********************************************/
 /*! namespace exports */
 /*! export getAlbumDetails [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export getAlbumTracks [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export getAllAlbums [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export getSavedAlbumTracks [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export getUserAlbums [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
@@ -4025,7 +4051,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getAllAlbums": () => /* binding */ getAllAlbums,
 /* harmony export */   "getUserAlbums": () => /* binding */ getUserAlbums,
-/* harmony export */   "getAlbumDetails": () => /* binding */ getAlbumDetails
+/* harmony export */   "getAlbumDetails": () => /* binding */ getAlbumDetails,
+/* harmony export */   "getAlbumTracks": () => /* binding */ getAlbumTracks,
+/* harmony export */   "getSavedAlbumTracks": () => /* binding */ getSavedAlbumTracks
 /* harmony export */ });
 var getAllAlbums = function getAllAlbums() {
   return $.ajax({
@@ -4046,6 +4074,21 @@ var getAlbumDetails = function getAlbumDetails(albumId) {
   return $.ajax({
     url: "/api/albums/".concat(albumId),
     method: "GET"
+  });
+};
+var getAlbumTracks = function getAlbumTracks(albumId) {
+  return $.ajax({
+    url: "/api/albums/".concat(albumId, "/tracks"),
+    method: "GET"
+  });
+};
+var getSavedAlbumTracks = function getSavedAlbumTracks(albumId) {
+  return $.ajax({
+    url: "/api/albums/".concat(albumId, "/tracks"),
+    method: "GET",
+    data: {
+      request_type: "user"
+    }
   });
 };
 
@@ -4600,9 +4643,11 @@ var volume = function volume(classes, action) {
   !*** ./frontend/utils/playlists_api_utils.js ***!
   \***********************************************/
 /*! namespace exports */
+/*! export addTrackToPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export createNewPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export deletePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export getUserPlaylists [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export removeTrackFromPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export updatePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
@@ -4614,11 +4659,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getUserPlaylists": () => /* binding */ getUserPlaylists,
 /* harmony export */   "createNewPlaylist": () => /* binding */ createNewPlaylist,
 /* harmony export */   "updatePlaylist": () => /* binding */ updatePlaylist,
-/* harmony export */   "deletePlaylist": () => /* binding */ deletePlaylist
+/* harmony export */   "deletePlaylist": () => /* binding */ deletePlaylist,
+/* harmony export */   "addTrackToPlaylist": () => /* binding */ addTrackToPlaylist,
+/* harmony export */   "removeTrackFromPlaylist": () => /* binding */ removeTrackFromPlaylist
 /* harmony export */ });
-var getUserPlaylists = function getUserPlaylists(userId) {
+var getUserPlaylists = function getUserPlaylists() {
   return $.ajax({
-    url: "/api/users/".concat(userId, "/playlists"),
+    url: "/api/playlists",
     method: "GET"
   });
 };
@@ -4639,15 +4686,22 @@ var updatePlaylist = function updatePlaylist(playlist) {
       playlist: playlist
     }
   });
-}; // export const getSinglePlaylist = (id) =>
-//     $.ajax({
-//         url: `/api/playlists/${id}`,
-//         method: "GET",
-//     });
-
-var deletePlaylist = function deletePlaylist(id) {
+};
+var deletePlaylist = function deletePlaylist(playlistId) {
   return $.ajax({
-    url: "/api/playlists/".concat(id),
+    url: "/api/playlists/".concat(playlistId),
+    method: "DELETE"
+  });
+};
+var addTrackToPlaylist = function addTrackToPlaylist(trackId, playlistId) {
+  return $.ajax({
+    url: "/api/playlists/".concat(playlistId, "/tracks/").concat(trackId),
+    method: "POST"
+  });
+};
+var removeTrackFromPlaylist = function removeTrackFromPlaylist(trackId, playlistId) {
+  return $.ajax({
+    url: "/api/playlists/".concat(playlistId, "/tracks/").concat(trackId),
     method: "DELETE"
   });
 };
@@ -4720,44 +4774,6 @@ var ProtectedRoute = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.withRouter
 
 /***/ }),
 
-/***/ "./frontend/utils/saves_api_utils.js":
-/*!*******************************************!*\
-  !*** ./frontend/utils/saves_api_utils.js ***!
-  \*******************************************/
-/*! namespace exports */
-/*! export saveTrack [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export unsaveTrack [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "saveTrack": () => /* binding */ saveTrack,
-/* harmony export */   "unsaveTrack": () => /* binding */ unsaveTrack
-/* harmony export */ });
-var saveTrack = function saveTrack(trackId) {
-  return $.ajax({
-    url: "/api/user_saves/",
-    method: "POST",
-    data: {
-      track_id: trackId
-    }
-  });
-};
-var unsaveTrack = function unsaveTrack(trackId) {
-  return $.ajax({
-    url: "/api/user_saves/",
-    method: "DELETE",
-    data: {
-      track_id: trackId
-    }
-  });
-};
-
-/***/ }),
-
 /***/ "./frontend/utils/session_api_utils.js":
 /*!*********************************************!*\
   !*** ./frontend/utils/session_api_utils.js ***!
@@ -4809,9 +4825,9 @@ var deleteSession = function deleteSession() {
   !*** ./frontend/utils/tracks_api_utils.js ***!
   \********************************************/
 /*! namespace exports */
-/*! export getAlbumTracks [provided] [no usage info] [missing usage info prevents renaming] */
-/*! export getSavedAlbumTracks [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export increasePlayCount [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export saveTrack [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export unsaveTrack [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -4819,29 +4835,32 @@ var deleteSession = function deleteSession() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getAlbumTracks": () => /* binding */ getAlbumTracks,
-/* harmony export */   "getSavedAlbumTracks": () => /* binding */ getSavedAlbumTracks,
-/* harmony export */   "increasePlayCount": () => /* binding */ increasePlayCount
+/* harmony export */   "increasePlayCount": () => /* binding */ increasePlayCount,
+/* harmony export */   "saveTrack": () => /* binding */ saveTrack,
+/* harmony export */   "unsaveTrack": () => /* binding */ unsaveTrack
 /* harmony export */ });
-var getAlbumTracks = function getAlbumTracks(albumId) {
-  return $.ajax({
-    url: "/api/albums/".concat(albumId, "/tracks"),
-    method: "GET"
-  });
-};
-var getSavedAlbumTracks = function getSavedAlbumTracks(albumId) {
-  return $.ajax({
-    url: "/api/albums/".concat(albumId, "/tracks"),
-    method: "GET",
-    data: {
-      request_type: "user"
-    }
-  });
-};
 var increasePlayCount = function increasePlayCount(trackId) {
   return $.ajax({
     url: "/api/tracks/".concat(trackId),
     method: "PATCH"
+  });
+};
+var saveTrack = function saveTrack(trackId) {
+  return $.ajax({
+    url: "/api/user_saves/",
+    method: "POST",
+    data: {
+      track_id: trackId
+    }
+  });
+};
+var unsaveTrack = function unsaveTrack(trackId) {
+  return $.ajax({
+    url: "/api/user_saves/",
+    method: "DELETE",
+    data: {
+      track_id: trackId
+    }
   });
 };
 

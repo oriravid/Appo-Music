@@ -5,10 +5,11 @@ import ReactDOM from "react-dom";
 import createStore from "./store/store";
 import Root from "./components/root";
 
-//testing!!
-import { dateSorter } from "./utils/various";
-import { getAlbumTracks } from "./utils/tracks_api_utils";
-import { saveTrack, unsaveTrack } from "./actions/save_actions";
+//testing!
+import {
+    addTrackToPlaylist,
+    removeTrackFromPlaylist,
+} from "./utils/playlists_api_utils";
 
 document.addEventListener("DOMContentLoaded", () => {
     let preloadedState = undefined;
@@ -27,8 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //testing!!!
     window.store = store;
-    window.dateSorter = dateSorter;
-    window.getAlbumTracks = getAlbumTracks;
-    window.saveTrack = saveTrack;
-    window.unsaveTrack = unsaveTrack;
+    window.addTrackToPlaylist = addTrackToPlaylist;
+    window.removeTrackFromPlaylist = removeTrackFromPlaylist;
 });
