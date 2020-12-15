@@ -88,6 +88,15 @@ export const popularSorter = (obj1, obj2) => {
     return 0;
 };
 
+export const indexSorter = (obj1, obj2) => {
+    if (obj1.trackNumber > obj2.trackNumber) {
+        return 1;
+    } else if (obj1.trackNumber < obj2.trackNumber) {
+        return -1;
+    }
+    return 0;
+};
+
 ////////////// FORMATTING //////////////
 
 //input yyyy-mm-dd

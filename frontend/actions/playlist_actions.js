@@ -3,6 +3,7 @@ import * as PlaylistsAPI from "../utils/playlists_api_utils";
 
 export const RECEIVE_USER_PLAYLISTS = "RECEIVE_USER_PLAYLISTS";
 export const RECEIVE_NEW_PLAYLIST = "RECEIVE_NEW_PLAYLIST";
+export const RECEIVE_PLAYLIST_DETAILS = "RECEIVE_PLAYLIST_DETAILS";
 export const REMOVE_PLAYLIST = "REMOVE_PLAYLIST";
 export const RECEIVE_PLAYLIST_TRACK = "RECEIVE_PLAYLIST_TRACK";
 export const REMOVE_PLAYLIST_TRACK = "REMOVE_PLAYLIST_TRACK";
@@ -22,6 +23,11 @@ export const removePlaylist = (playlistId) => ({
     playlistId: playlistId,
 });
 
+export const receivePlaylistDetails = (payload) => ({
+    type: RECEIVE_PLAYLIST_DETAILS,
+    payload: payload,
+});
+
 export const receivePlaylistTrack = (trackId) => ({
     type: RECEIVE_PLAYLIST_TRACK,
     trackId: trackId,
@@ -33,10 +39,6 @@ export const removePlaylistTrack = (trackId) => ({
 });
 
 // Thunk Actions
-export const getUserPlaylists = () => (dispatch) =>
-    PlaylistsAPI.getUserPlaylists().then((playlists) =>
-        dispatch(receiveUserPlaylists(playlists))
-    );
 
 export const createNewPlaylist = (playlist) => (dispatch) =>
     PlaylistsAPI.createNewPlaylist(playlist).then((playlist) =>
@@ -51,6 +53,16 @@ export const updatePlaylist = (playlist) => (dispatch) =>
 export const deletePlaylist = (playlistId) => (dispatch) =>
     PlaylistsAPI.deletePlaylist(playlistId).then((playlistId) =>
         dispatch(removePlaylist(playlistId))
+    );
+
+export const getUserPlaylists = () => (dispatch) =>
+    PlaylistsAPI.getUserPlaylists().then((playlists) =>
+        dispatch(receiveUserPlaylists(playlists))
+    );
+
+export const getPlaylistDetails = (playlistId) => (dispatch) =>
+    PlaylistsAPI.getPlaylistDetails(playlistId).then((payload) =>
+        dispatch(receivePlaylistDetails(payload))
     );
 
 export const addTrackToPlaylist = (trackId, playlistId) => (dispatch) =>

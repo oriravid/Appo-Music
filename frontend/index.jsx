@@ -5,12 +5,6 @@ import ReactDOM from "react-dom";
 import createStore from "./store/store";
 import Root from "./components/root";
 
-//testing!
-import {
-    addTrackToPlaylist,
-    removeTrackFromPlaylist,
-} from "./utils/playlists_api_utils";
-
 document.addEventListener("DOMContentLoaded", () => {
     let preloadedState = undefined;
 
@@ -27,7 +21,5 @@ document.addEventListener("DOMContentLoaded", () => {
     ReactDOM.render(<Root store={store} />, document.getElementById("root"));
 
     //testing!!!
-    window.store = store;
-    window.addTrackToPlaylist = addTrackToPlaylist;
-    window.removeTrackFromPlaylist = removeTrackFromPlaylist;
+    // window.store = store;
 });

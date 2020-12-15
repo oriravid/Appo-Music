@@ -29,16 +29,13 @@ class AlbumShow extends Component {
         }
     }
 
-    handleTrackMenu() {
+    handleMenuOpen() {
         const { hoveredTrackId } = this.state;
-
         this.setState({ menuTrackId: hoveredTrackId });
+    }
 
-        document.addEventListener(
-            "mousedown",
-            () => this.setState({ menuTrackId: null }),
-            { once: true }
-        );
+    handleMenuClose() {
+        this.setState({ menuTrackId: null });
     }
 
     componentDidMount() {
@@ -61,7 +58,11 @@ class AlbumShow extends Component {
 
             this.state.menuTrackId == track.id
                 ? (trackMenu = (
-                      <TrackMenu trackId={track.id} location={"album"} />
+                      <TrackMenu
+                          trackId={track.id}
+                          location={"album"}
+                          handleMenuClose={this.handleMenuClose.bind(this)}
+                      />
                   ))
                 : (trackMenu = "");
 
@@ -82,7 +83,7 @@ class AlbumShow extends Component {
                         hovered={this.state.hoveredTrackId == track.id}
                         selected={this.state.selectedTrackId == track.id}
                         handlePlay={this.handlePlay.bind(this)}
-                        handleMenu={this.handleTrackMenu.bind(this)}
+                        handleMenuOpen={this.handleMenuOpen.bind(this)}
                     />
                 </div>
             );

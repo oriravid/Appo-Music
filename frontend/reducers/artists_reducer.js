@@ -4,6 +4,7 @@ import {
     RECEIVE_ALBUMS,
     RECEIVE_ALBUM_DETAILS,
 } from "../actions/album_actions";
+import { RECEIVE_PLAYLIST_DETAILS } from "../actions/playlist_actions";
 
 export default (state = {}, action) => {
     Object.freeze(state);
@@ -26,6 +27,9 @@ export default (state = {}, action) => {
 
         case RECEIVE_ALBUMS:
             return { ...action.payload.artists, ...state };
+
+        case RECEIVE_PLAYLIST_DETAILS:
+            return action.payload.artists;
 
         default:
             return state;

@@ -1,9 +1,3 @@
-export const getUserPlaylists = () =>
-    $.ajax({
-        url: `/api/playlists`,
-        method: "GET",
-    });
-
 export const createNewPlaylist = (playlist) =>
     $.ajax({
         url: "/api/playlists",
@@ -22,6 +16,18 @@ export const deletePlaylist = (playlistId) =>
     $.ajax({
         url: `/api/playlists/${playlistId}`,
         method: "DELETE",
+    });
+
+export const getUserPlaylists = () =>
+    $.ajax({
+        url: `/api/playlists`,
+        method: "GET",
+    });
+
+export const getPlaylistDetails = (playlistId) =>
+    $.ajax({
+        url: `/api/playlists/${playlistId}`,
+        method: "GET",
     });
 
 export const addTrackToPlaylist = (trackId, playlistId) =>

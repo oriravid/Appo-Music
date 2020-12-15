@@ -23,15 +23,10 @@ class Api::PlaylistsController < ApplicationController
     end
   end
   
-  # def show
-  #   @playlist = selected_playlist
-  #   if @playlist
-  #     # render :show
-  #     render json: @playlist
-  #   else
-  #     render json: ['Playlist not found'], status: 400
-  #   end
-  # end
+  def show
+    @playlist = selected_playlist
+    # @tracks = 
+  end
 
   
   def destroy
