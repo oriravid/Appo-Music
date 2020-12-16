@@ -50,6 +50,15 @@ class AlbumShow extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.currentUser != prevProps.currentUser) {
+            this.setState({ loading: true });
+            this.props
+                .getAlbumDetails(this.props.match.params.albumId)
+                .then((res) => this.setState({ loading: false }));
+        }
+    }
+
     render() {
         if (this.state.loading) {
             return <Loading />;

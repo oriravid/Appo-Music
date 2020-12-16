@@ -15,6 +15,7 @@ class PlaylistShow extends Component {
 
         this.state = {
             loading: true,
+            coverUrl: null,
             selectedTrackId: null,
             hoveredTrackId: null,
             menuTrackId: null,
@@ -114,7 +115,7 @@ class PlaylistShow extends Component {
         return (
             <div className="album-container">
                 <div className="album-cover-container">
-                    {/* <img className="album-cover" src={"www.google.com"} /> */}
+                    <img className="album-cover" src={this.state.coverUrl} />
                 </div>
                 <div className="album-header-tracks">
                     <div className="album-header">

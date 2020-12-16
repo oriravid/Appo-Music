@@ -1,5 +1,5 @@
 //ext
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 //int
 import {
@@ -7,54 +7,61 @@ import {
     removeTrackFromPlaylist,
 } from "../../actions/playlist_actions";
 
-const TrackMenu = ({
-    trackId,
-    playlistId,
-    location,
-    playlists,
-    addTrackToPlaylist,
-    removeTrackFromPlaylist,
-    handleMenuClose,
-}) => {
-    if (location === "album") {
-        const playlistList = playlists.map((playlist) => (
-            <li
-                className="playlist-list-item pointer"
-                key={playlist.id}
-                onClick={
-                    (() => addTrackToPlaylist(trackId, playlist.id),
-                    handleMenuClose)
-                }
-            >
-                {playlist.title}
-            </li>
-        ));
-
-        var menuOptions = (
-            <React.Fragment>
-                <li className="track-menu-item">Add to Playlist</li>
-                <ul className="playlist-list">{playlistList}</ul>
-            </React.Fragment>
-        );
-    } else if (location === "playlist") {
-        var menuOptions = (
-            <React.Fragment>
-                <li
-                    className="track-menu-item pointer"
-                    onClick={() => removeTrackFromPlaylist(trackId, playlistId)}
-                >
-                    Remove from Playlist
-                </li>
-            </React.Fragment>
-        );
+class TrackMenu extends Component {
+    constructor(props) {
+        super(props);
     }
 
-    return (
-        <ul className="track-menu" onMouseLeave={handleMenuClose}>
-            {menuOptions}
-        </ul>
-    );
-};
+    handleAdd(trackId, playlistId) {
+        this.props.addTrackToPlaylist(trackId, playlistId);
+        this.props.handleMenuClose;
+    }
+
+    handleRemove(trackId, playlistId) {
+        this.props.removeTrackFromPlaylist(trackId, playlistId);
+    }
+
+    render() {
+        const { trackId, playlistId, location, playlists } = this.props;
+        const { handleMenuClose } = this.props;
+
+        if (location === "album") {
+            const playlistList = playlists.map((playlist) => (
+                <li
+                    className="playlist-list-item pointer"
+                    key={playlist.id}
+                    onClick={() => this.handleAdd(trackId, playlist.id)}
+                >
+                    {playlist.title}
+                </li>
+            ));
+
+            var menuOptions = (
+                <React.Fragment>
+                    <li className="track-menu-item">Add to Playlist</li>
+                    <ul className="playlist-list">{playlistList}</ul>
+                </React.Fragment>
+            );
+        } else if (location === "playlist") {
+            var menuOptions = (
+                <React.Fragment>
+                    <li
+                        className="track-menu-item pointer"
+                        onClick={() => this.handleRemove(trackId, playlistId)}
+                    >
+                        Remove from Playlist
+                    </li>
+                </React.Fragment>
+            );
+        }
+
+        return (
+            <ul className="track-menu" onMouseLeave={handleMenuClose}>
+                {menuOptions}
+            </ul>
+        );
+    }
+}
 
 const mapSTP = ({ entities }) => ({
     playlists: Object.values(entities.playlists),

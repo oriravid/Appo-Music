@@ -2,7 +2,7 @@ json.tracks do
     @playlist.tracks.each_with_index do |track, index|
         json.set! track.id do
             json.extract! track, :id, :album_id, :title, :play_count, :url, :duration
-            json.track_number index
+            json.track_number index + 1
         end
     end
 end
