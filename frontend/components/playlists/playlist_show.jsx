@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 //int - components
+import Loading from "../main/loading";
 import TrackListItem from "../tracks/track_list_item";
 import TrackMenu from "../tracks/track_menu";
 //int - utils
@@ -13,6 +14,7 @@ class PlaylistShow extends Component {
         super(props);
 
         this.state = {
+            loading: true,
             selectedTrackId: null,
             hoveredTrackId: null,
             menuTrackId: null,
@@ -45,12 +47,29 @@ class PlaylistShow extends Component {
     }
 
     componentDidMount() {
-        this.props.getPlaylistDetails(this.props.match.params.playlistId);
+        this.props
+            .getPlaylistDetails(this.props.match.params.playlistId)
+            .then((res) => this.setState({ loading: false }));
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            this.props.match.params.playlistId !==
+            prevProps.match.params.playlistId
+        ) {
+            this.setState({ loading: true });
+            this.props
+                .getPlaylistDetails(this.props.match.params.playlistId)
+                .then((res) => this.setState({ loading: false }));
+        }
     }
 
     render() {
+        if (this.state.loading) {
+            return <Loading />;
+        }
+
         const { playlist, albums, tracks, artists } = this.props;
-        if (!playlist) return null;
 
         const trackItems = tracks.sort(indexSorter).map((track) => {
             let trackClasses, trackMenu;
@@ -95,7 +114,7 @@ class PlaylistShow extends Component {
         return (
             <div className="album-container">
                 <div className="album-cover-container">
-                    <img className="album-cover" src={"www.google.com"} />
+                    {/* <img className="album-cover" src={"www.google.com"} /> */}
                 </div>
                 <div className="album-header-tracks">
                     <div className="album-header">

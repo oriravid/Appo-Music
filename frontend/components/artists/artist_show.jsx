@@ -1,6 +1,7 @@
 //ext
 import React, { Component } from "react";
 //int - containers
+import Loading from "../main/loading";
 import AlbumsSlider from "../albums/albums_slider";
 import AlbumItem from "../albums/album_item";
 //int - util
@@ -10,6 +11,7 @@ import { dateSorter } from "../../utils/various";
 class ArtistShow extends Component {
     constructor(props) {
         super(props);
+        this.state = { loading: true };
     }
 
     handleTopTrackClick(track) {
@@ -20,12 +22,17 @@ class ArtistShow extends Component {
     }
 
     componentDidMount() {
-        this.props.getArtistDetails(this.props.match.params.artistId);
+        this.props
+            .getArtistDetails(this.props.match.params.artistId)
+            .then((res) => this.setState({ loading: false }));
     }
 
     render() {
+        if (this.state.loading) {
+            return <Loading />;
+        }
+
         const { artist, albums, tracks, addTracks, openModal } = this.props;
-        if (!artist) return null;
 
         //sort by releaseDate
         const sortedAlbums = Object.values(albums).sort(dateSorter);

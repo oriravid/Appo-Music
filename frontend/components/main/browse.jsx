@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 //int - containers
+import Loading from "./loading";
 import AlbumsSlider from "../albums/albums_slider";
 //int - utils
 import { dateSorter, popularSorter } from "../../utils/various";
@@ -9,15 +10,21 @@ import { dateSorter, popularSorter } from "../../utils/various";
 class Browse extends Component {
     constructor(props) {
         super(props);
+        this.state = { loading: true };
     }
 
     componentDidMount() {
-        this.props.getAllAlbums();
+        this.props
+            .getAllAlbums()
+            .then((res) => this.setState({ loading: false }));
     }
 
     render() {
+        if (this.state.loading) {
+            return <Loading />;
+        }
+
         const { albums, artists } = this.props;
-        if (!albums.length) return null;
 
         //sort by releaseDate
         const newAlbums = [...albums].sort(dateSorter);

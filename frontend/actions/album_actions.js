@@ -1,13 +1,8 @@
 //int - utils
 import * as AlbumsAPI from "../utils/albums_api_utils";
 
-// export const LOADING_ALBUM = "LOADING_ALBUM";
 export const RECEIVE_ALBUMS = "RECEIVE_ALBUMS";
 export const RECEIVE_ALBUM_DETAILS = "RECEIVE_ALBUM_DETAILS";
-
-// export const loadingAlbum = () => ({
-//     type: LOADING_ALBUM,
-// });
 
 export const receiveAlbums = (payload) => ({
     type: RECEIVE_ALBUMS,

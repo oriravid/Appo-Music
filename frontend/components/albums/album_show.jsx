@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 //int - components
+import Loading from "../main/loading";
 import TrackListItem from "../tracks/track_list_item";
 import TrackMenu from "../tracks/track_menu";
 //int - utils
@@ -12,6 +13,7 @@ class AlbumShow extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             selectedTrackId: null,
             hoveredTrackId: null,
             menuTrackId: null,
@@ -39,7 +41,9 @@ class AlbumShow extends Component {
     }
 
     componentDidMount() {
-        this.props.getAlbumDetails(this.props.match.params.albumId);
+        this.props
+            .getAlbumDetails(this.props.match.params.albumId)
+            .then((res) => this.setState({ loading: false }));
 
         if (this.props.selectedTrackId) {
             this.setState({ selectedTrackId: this.props.selectedTrackId });
@@ -47,8 +51,11 @@ class AlbumShow extends Component {
     }
 
     render() {
+        if (this.state.loading) {
+            return <Loading />;
+        }
+
         const { album, tracks, artist } = this.props;
-        if (!album || !album.description) return null;
 
         const trackItems = tracks.map((track) => {
             let trackClasses, trackMenu;

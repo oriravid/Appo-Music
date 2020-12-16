@@ -25,7 +25,6 @@ class Api::PlaylistsController < ApplicationController
   
   def show
     @playlist = selected_playlist
-    # @tracks = 
   end
 
   

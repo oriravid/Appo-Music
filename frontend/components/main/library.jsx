@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 //int - containers
+import Loading from "./loading";
 import AlbumItem from "../albums/album_item";
 //int - utils
 import { savedSorter } from "../../utils/various";
@@ -9,15 +10,23 @@ import { savedSorter } from "../../utils/various";
 class Library extends Component {
     constructor(props) {
         super(props);
+        this.state = { loading: true };
     }
 
     componentDidMount() {
-        this.props.getUserAlbums();
+        this.props
+            .getUserAlbums()
+            .then((res) => this.setState({ loading: false }));
     }
 
     render() {
+        if (this.state.loading) {
+            return <Loading />;
+        }
+
         const { albums, artists } = this.props;
-        if (!albums.length || !albums[0].savedAt)
+
+        if (!albums.length)
             return (
                 <React.Fragment>
                     <div className="header-section">

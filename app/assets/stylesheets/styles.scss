@@ -143,6 +143,21 @@ h3 {
     height: 34px;
 }
 
+// loading
+
+.loading {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 35vh 0;
+}
+
+.svg-loader {
+    width: 100px;
+    height: 100px;
+}
+
 // app
 ///////////////////////////////////////////////////////////////////////////////
 

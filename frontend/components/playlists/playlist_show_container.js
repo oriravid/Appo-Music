@@ -7,15 +7,8 @@ import { getPlaylistDetails } from "../../actions/playlist_actions";
 import { deletePlaylist } from "../../actions/playlist_actions";
 
 const mapSTP = (store, ownProps) => {
-    const playlistId = ownProps.match.params.playlistId;
-    let playlist;
-
-    if (store.entities.playlists[playlistId]) {
-        playlist = store.entities.playlists[playlistId];
-    }
-
     return {
-        playlist: playlist,
+        playlist: store.entities.playlists[ownProps.match.params.playlistId],
         albums: store.entities.albums,
         artists: store.entities.artists,
         tracks: Object.values(store.entities.tracks),
