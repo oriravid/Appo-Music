@@ -3069,6 +3069,7 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       loading: true,
+      editing: false,
       coverUrl: null,
       selectedTrackId: null,
       hoveredTrackId: null,
@@ -3078,6 +3079,24 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(PlaylistShow, [{
+    key: "setCoverUrl",
+    value: function setCoverUrl() {
+      var _this2 = this;
+
+      var albums = Object.values(this.props.albums);
+      this.setState({
+        coverUrl: albums[0].url
+      });
+      var albumIdx = 1;
+      setInterval(function () {
+        _this2.setState({
+          coverUrl: albums[albumIdx].url
+        });
+
+        albumIdx < albums.length - 1 ? albumIdx++ : albumIdx = 0;
+      }, 10000);
+    }
+  }, {
     key: "handlePlay",
     value: function handlePlay(trackNumber) {
       var _this$props = this.props,
@@ -3116,25 +3135,25 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.props.getPlaylistDetails(this.props.match.params.playlistId).then(function (res) {
-        return _this2.setState({
+        _this3.setState({
           loading: false
-        });
+        }), _this3.setCoverUrl();
       });
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.props.match.params.playlistId !== prevProps.match.params.playlistId || this.props.tracks.length != prevProps.tracks.length) {
         this.setState({
           loading: true
         });
         this.props.getPlaylistDetails(this.props.match.params.playlistId).then(function (res) {
-          return _this3.setState({
+          return _this4.setState({
             loading: false
           });
         });
@@ -3143,7 +3162,7 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var _this$props2 = this.props,
           playlist = _this$props2.playlist,
@@ -3158,43 +3177,43 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
         var album = albums[track.albumId];
         var artist = artists[album.artistId];
         var trackClasses, trackMenu;
-        _this4.state.selectedTrackId == track.id ? trackClasses = "track-row selected" : trackClasses = "track-row";
-        _this4.state.menuTrackId == track.id ? trackMenu = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_menu__WEBPACK_IMPORTED_MODULE_4__.default, {
+        _this5.state.selectedTrackId == track.id ? trackClasses = "track-row selected" : trackClasses = "track-row";
+        _this5.state.menuTrackId == track.id ? trackMenu = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_menu__WEBPACK_IMPORTED_MODULE_4__.default, {
           trackId: track.id,
           playlistId: playlist.id,
           location: "playlist",
-          handleMenuClose: _this4.handleMenuClose.bind(_this4)
+          handleMenuClose: _this5.handleMenuClose.bind(_this5)
         }) : trackMenu = "";
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: trackClasses,
           key: track.id,
           onClick: function onClick() {
-            return _this4.setState({
+            return _this5.setState({
               selectedTrackId: track.id
             });
           },
           onMouseEnter: function onMouseEnter() {
-            return _this4.setState({
+            return _this5.setState({
               hoveredTrackId: track.id
             });
           },
           onMouseLeave: function onMouseLeave() {
-            return _this4.setState({
+            return _this5.setState({
               hoveredTrackId: null
             });
           },
           onDoubleClick: function onDoubleClick() {
-            return _this4.handlePlay(track.trackNumber);
+            return _this5.handlePlay(track.trackNumber);
           }
         }, trackMenu, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_list_item__WEBPACK_IMPORTED_MODULE_3__.default, {
           location: "playlist",
           track: track,
           album: album,
           artist: artist,
-          hovered: _this4.state.hoveredTrackId == track.id,
-          selected: _this4.state.selectedTrackId == track.id,
-          handlePlay: _this4.handlePlay.bind(_this4),
-          handleMenuOpen: _this4.handleMenuOpen.bind(_this4)
+          hovered: _this5.state.hoveredTrackId == track.id,
+          selected: _this5.state.selectedTrackId == track.id,
+          handlePlay: _this5.handlePlay.bind(_this5),
+          handleMenuOpen: _this5.handleMenuOpen.bind(_this5)
         }));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3207,10 +3226,16 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "album-header-tracks"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "album-header"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title), _utils_icons__WEBPACK_IMPORTED_MODULE_5__.trash("icon color", this.handleDelete.bind(this)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "album-header playlist"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "playlist-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "playlist-actions"
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_5__.edit("icon color pointer", this.handleDelete.bind(this)), _utils_icons__WEBPACK_IMPORTED_MODULE_5__.trash("icon color pointer", this.handleDelete.bind(this)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "btn",
-        onClick: this.handlePlay.bind(this)
+        onClick: function onClick() {
+          return _this5.handlePlay();
+        }
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_5__.play("icon white"), "Play")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "tracks-list"
       }, trackItems), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3958,8 +3983,7 @@ __webpack_require__.r(__webpack_exports__);
   artists: _artists_reducer__WEBPACK_IMPORTED_MODULE_0__.default,
   albums: _albums_reducer__WEBPACK_IMPORTED_MODULE_1__.default,
   tracks: _tracks_reducer__WEBPACK_IMPORTED_MODULE_2__.default,
-  playlists: _playlists_reducer__WEBPACK_IMPORTED_MODULE_3__.default,
-  playlistTracks: playlistTracksReducer
+  playlists: _playlists_reducer__WEBPACK_IMPORTED_MODULE_3__.default
 }));
 
 /***/ }),
@@ -4398,7 +4422,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return nextState;
 
     case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_3__.RECEIVE_PLAYLIST_DETAILS:
-      return action.payload.tracks || nextState;
+      return action.payload.tracks || {};
 
     default:
       return state;

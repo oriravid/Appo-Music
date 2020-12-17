@@ -603,9 +603,23 @@ img.album-artwork {
     margin: 0 20px;
 }
 
+.album-header.playlist {
+    align-items: stretch;
+}
+
+.album-header.playlist .playlist-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .album-header h1 {
     font-size: 24px;
     margin-bottom: 1px;
+}
+
+.album-header .btn {
+    max-width: 90px;
 }
 
 .album-header h2 {
@@ -744,6 +758,11 @@ img.album-artwork {
 
 .track-row > .track-info a:hover {
     text-decoration: underline;
+}
+
+.track-row.selected > .track-info a {
+    font-weight: 600;
+    color: white;
 }
 
 .track-row > .track-duration {

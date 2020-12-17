@@ -16,11 +16,27 @@ class PlaylistShow extends Component {
 
         this.state = {
             loading: true,
+            editing: false,
             coverUrl: null,
             selectedTrackId: null,
             hoveredTrackId: null,
             menuTrackId: null,
         };
+    }
+
+    setCoverUrl() {
+        var albums = Object.values(this.props.albums);
+        this.setState({ coverUrl: albums[0].url });
+
+        let albumIdx = 1;
+
+        setInterval(() => {
+            this.setState({
+                coverUrl: albums[albumIdx].url,
+            });
+
+            albumIdx < albums.length - 1 ? albumIdx++ : (albumIdx = 0);
+        }, 10000);
     }
 
     handlePlay(trackNumber) {
@@ -54,7 +70,9 @@ class PlaylistShow extends Component {
     componentDidMount() {
         this.props
             .getPlaylistDetails(this.props.match.params.playlistId)
-            .then((res) => this.setState({ loading: false }));
+            .then((res) => {
+                this.setState({ loading: false }), this.setCoverUrl();
+            });
     }
 
     componentDidUpdate(prevProps) {
@@ -128,16 +146,21 @@ class PlaylistShow extends Component {
                     <img className="album-cover" src={this.state.coverUrl} />
                 </div>
                 <div className="album-header-tracks">
-                    <div className="album-header">
-                        <h1>{playlist.title}</h1>
-                        {icons.trash(
-                            "icon color",
-                            this.handleDelete.bind(this)
-                        )}
-                        <div
-                            className="btn"
-                            onClick={this.handlePlay.bind(this)}
-                        >
+                    <div className="album-header playlist">
+                        <div className="playlist-header">
+                            <h1>{playlist.title}</h1>
+                            <div className="playlist-actions">
+                                {icons.edit(
+                                    "icon color pointer",
+                                    this.handleDelete.bind(this)
+                                )}
+                                {icons.trash(
+                                    "icon color pointer",
+                                    this.handleDelete.bind(this)
+                                )}
+                            </div>
+                        </div>
+                        <div className="btn" onClick={() => this.handlePlay()}>
                             {icons.play("icon white")}
                             Play
                         </div>
