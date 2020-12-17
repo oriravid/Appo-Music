@@ -143,9 +143,7 @@ Track.create([
     {album_id: 1, track_number: 10, duration: "3:19", title: "Hands", url: "https://appomusic.com/assets/mm/cr/10.flac"},
     {album_id: 1, track_number: 11, duration: "5:30", title: "Surf", url: "https://appomusic.com/assets/mm/cr/11.flac"},
     {album_id: 1, track_number: 12, duration: "2:40", title: "Once a Day", url: "https://appomusic.com/assets/mm/cr/12.flac"},
-    {album_id: 1, track_number: 13, duration: "4:47", title: "Right", url: "https://appomusic.com/assets/mm/cr/13.flac"},
-    {album_id: 1, track_number: 14, duration: "4:14", title: "Floating", url: "https://appomusic.com/assets/mm/cr/14.flac"},
-    
+        
     #2 - Swimming
     {album_id: 2, track_number: 1, duration: "2:41", title: "Come Back to Earth", url: "https://appomusic.com/assets/mm/sw/01.mp3"},
     {album_id: 2, track_number: 2, duration: "4:05", title: "Hurt Feelings", url: "https://appomusic.com/assets/mm/sw/02.mp3", play_count: 70},

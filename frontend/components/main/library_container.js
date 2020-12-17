@@ -6,7 +6,9 @@ import Library from "./library";
 import { getUserAlbums } from "../../actions/album_actions";
 
 const mapSTP = ({ entities }) => ({
-    albums: Object.values(entities.albums),
+    albums: Object.values(entities.albums).filter(
+        (album) => album.savedAt !== undefined
+    ),
     artists: entities.artists,
     tracks: Object.values(entities.tracks),
 });

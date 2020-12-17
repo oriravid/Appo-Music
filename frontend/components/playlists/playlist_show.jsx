@@ -43,6 +43,9 @@ class PlaylistShow extends Component {
 
     setCoverUrl(albums) {
         clearInterval(this.coverSetter);
+        if (!albums) return;
+
+        var albums = Object.values(albums);
         this.setState({ coverUrl: albums[0].url });
 
         if (albums.length > 1) {
@@ -52,9 +55,8 @@ class PlaylistShow extends Component {
                 this.setState({
                     coverUrl: albums[albumIdx].url,
                 });
-
                 albumIdx < albums.length - 1 ? albumIdx++ : (albumIdx = 0);
-            }, 10000);
+            }, 3000);
         }
     }
 
@@ -91,24 +93,22 @@ class PlaylistShow extends Component {
             .getPlaylistDetails(this.props.match.params.playlistId)
             .then((res) => {
                 this.setState({ loading: false }),
-                    this.setCoverUrl(Object.values(res.payload.albums));
+                    this.setCoverUrl(res.payload.albums);
             });
     }
 
     componentDidUpdate(prevProps) {
+        const { playlistId } = this.props.match.params;
+
         if (
-            this.props.match.params.playlistId !==
-                prevProps.match.params.playlistId ||
+            playlistId !== prevProps.match.params.playlistId ||
             this.props.tracks.length != prevProps.tracks.length
         ) {
-            clearInterval(this.coverSetter);
             this.setState({ loading: true, editing: false });
-            this.props
-                .getPlaylistDetails(this.props.match.params.playlistId)
-                .then((res) => {
-                    this.setState({ loading: false }),
-                        this.setCoverUrl(Object.values(res.payload.albums));
-                });
+            this.props.getPlaylistDetails(playlistId).then((res) => {
+                this.setState({ loading: false }),
+                    this.setCoverUrl(res.payload.albums);
+            });
         }
 
         if (this.state.editing) {

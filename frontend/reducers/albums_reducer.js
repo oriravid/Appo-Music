@@ -19,13 +19,13 @@ export default (state = {}, action) => {
             return nextState;
 
         case RECEIVE_ALBUMS:
-            return action.payload.albums || {};
+            return { ...nextState, ...action.payload.albums };
 
         case RECEIVE_ARTIST_DETAILS:
             return { ...nextState, ...action.payload.albums };
 
         case RECEIVE_PLAYLIST_DETAILS:
-            return action.payload.albums || nextState;
+            return { ...nextState, ...action.payload.albums };
 
         default:
             return state;
