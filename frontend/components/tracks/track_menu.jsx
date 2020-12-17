@@ -14,7 +14,7 @@ class TrackMenu extends Component {
 
     handleAdd(trackId, playlistId) {
         this.props.addTrackToPlaylist(trackId, playlistId);
-        this.props.handleMenuClose;
+        this.props.handleMenuClose();
     }
 
     handleRemove(trackId, playlistId) {

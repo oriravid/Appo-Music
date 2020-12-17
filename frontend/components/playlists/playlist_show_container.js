@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import PlaylistShow from "./playlist_show";
 //int - actions
 import { getPlaylistDetails } from "../../actions/playlist_actions";
-import { deletePlaylist } from "../../actions/playlist_actions";
+import { updatePlaylist, deletePlaylist } from "../../actions/playlist_actions";
+import { addTracks } from "../../actions/music_actions";
 
 const mapSTP = (store, ownProps) => {
     return {
@@ -18,7 +19,11 @@ const mapSTP = (store, ownProps) => {
 const mapDTP = (dispatch) => ({
     getPlaylistDetails: (playlistId) =>
         dispatch(getPlaylistDetails(playlistId)),
+
+    updatePlaylist: (playlist) => dispatch(updatePlaylist(playlist)),
+
     deletePlaylist: (playlistId) => dispatch(deletePlaylist(playlistId)),
+
     addTracks: (tracks) => dispatch(addTracks(tracks)),
 });
 

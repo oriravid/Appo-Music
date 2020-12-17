@@ -15,8 +15,6 @@
 #             api_playlists GET    /api/playlists(.:format)                                                                 api/playlists#index {:format=>:json}
 #                           POST   /api/playlists(.:format)                                                                 api/playlists#create {:format=>:json}
 #              api_playlist GET    /api/playlists/:id(.:format)                                                             api/playlists#show {:format=>:json}
-#                           PATCH  /api/playlists/:id(.:format)                                                             api/playlists#update {:format=>:json}
-#                           PUT    /api/playlists/:id(.:format)                                                             api/playlists#update {:format=>:json}
 #                           DELETE /api/playlists/:id(.:format)                                                             api/playlists#destroy {:format=>:json}
 #            api_user_saves POST   /api/user_saves(.:format)                                                                api/user_saves#create {:format=>:json}
 #                           DELETE /api/user_saves(.:format)                                                                api/user_saves#destroy {:format=>:json}
@@ -36,7 +34,7 @@ Rails.application.routes.draw do
     resources :tracks, only: [:update]
     resources :artists, only: [:show]
 
-    resources :playlists, except: [:new, :edit] do
+    resources :playlists, except: [:new, :edit, :update] do
       post '/tracks/:track_id', to: 'tracks#create'
       delete '/tracks/:track_id', to: 'tracks#destroy'
     end

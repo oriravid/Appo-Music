@@ -95,6 +95,7 @@ class AlbumShow extends Component {
                 >
                     {trackMenu}
                     <TrackListItem
+                        location={"album"}
                         track={track}
                         hovered={this.state.hoveredTrackId == track.id}
                         selected={this.state.selectedTrackId == track.id}

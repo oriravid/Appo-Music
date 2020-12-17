@@ -6,28 +6,16 @@ class Api::PlaylistsController < ApplicationController
   def create
     @playlist = Playlist.new(playlist_params)
     if @playlist.save
-      render "api/playlists/show"
+      render json: @playlist
     else
       render json: @playlist.errors.full_messages, status: 422
     end
   end
-  
-  def update
-    @playlist = selected_playlist
-    if @playlist && @playlist.update_attributes(playlist_params)
-      render "api/playlists/show"
-    elsif !@playlist
-      render json: ['Playlist not found'], status: 400
-    else
-      render json: @playlist.errors.full_messages, status: 401
-    end
-  end
-  
+
   def show
     @playlist = selected_playlist
   end
 
-  
   def destroy
     @playlist = selected_playlist
     if @playlist

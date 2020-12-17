@@ -29,7 +29,7 @@ export default (state = {}, action) => {
             return { ...action.payload.artists, ...state };
 
         case RECEIVE_PLAYLIST_DETAILS:
-            return action.payload.artists;
+            return action.payload.artists || nextState;
 
         default:
             return state;

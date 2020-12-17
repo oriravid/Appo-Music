@@ -35,7 +35,7 @@ export default (state = {}, action) => {
             return nextState;
 
         case RECEIVE_PLAYLIST_DETAILS:
-            return action.payload.tracks;
+            return action.payload.tracks || nextState;
 
         default:
             return state;

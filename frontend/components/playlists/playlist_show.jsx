@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 //int - components
 import Loading from "../main/loading";
+import PlaylistEmpty from "./playlist_empty";
 import TrackListItem from "../tracks/track_list_item";
 import TrackMenu from "../tracks/track_menu";
 //int - utils
@@ -22,14 +23,17 @@ class PlaylistShow extends Component {
         };
     }
 
-    handlePlay() {
-        const { hoveredTrackId } = this.state;
+    handlePlay(trackNumber) {
         const { tracks, addTracks } = this.props;
 
-        if (hoveredTrackId) {
-            addTracks(tracks.filter((track) => track.id >= hoveredTrackId));
+        if (trackNumber) {
+            addTracks(
+                tracks
+                    .filter((track) => track.trackNumber >= trackNumber)
+                    .sort(indexSorter)
+            );
         } else {
-            addTracks(tracks);
+            addTracks(tracks.sort(indexSorter));
         }
     }
 
@@ -56,7 +60,8 @@ class PlaylistShow extends Component {
     componentDidUpdate(prevProps) {
         if (
             this.props.match.params.playlistId !==
-            prevProps.match.params.playlistId
+                prevProps.match.params.playlistId ||
+            this.props.tracks.length != prevProps.tracks.length
         ) {
             this.setState({ loading: true });
             this.props
@@ -66,13 +71,15 @@ class PlaylistShow extends Component {
     }
 
     render() {
-        if (this.state.loading) {
-            return <Loading />;
-        }
-
         const { playlist, albums, tracks, artists } = this.props;
 
+        if (this.state.loading) return <Loading />;
+        if (!tracks.length) return <PlaylistEmpty playlist={playlist} />;
+
         const trackItems = tracks.sort(indexSorter).map((track) => {
+            const album = albums[track.albumId];
+            const artist = artists[album.artistId];
+
             let trackClasses, trackMenu;
             this.state.selectedTrackId == track.id
                 ? (trackClasses = "track-row selected")
@@ -98,11 +105,14 @@ class PlaylistShow extends Component {
                         this.setState({ hoveredTrackId: track.id })
                     }
                     onMouseLeave={() => this.setState({ hoveredTrackId: null })}
-                    onDoubleClick={this.handlePlay.bind(this)}
+                    onDoubleClick={() => this.handlePlay(track.trackNumber)}
                 >
                     {trackMenu}
                     <TrackListItem
+                        location={"playlist"}
                         track={track}
+                        album={album}
+                        artist={artist}
                         hovered={this.state.hoveredTrackId == track.id}
                         selected={this.state.selectedTrackId == track.id}
                         handlePlay={this.handlePlay.bind(this)}
@@ -120,6 +130,10 @@ class PlaylistShow extends Component {
                 <div className="album-header-tracks">
                     <div className="album-header">
                         <h1>{playlist.title}</h1>
+                        {icons.trash(
+                            "icon color",
+                            this.handleDelete.bind(this)
+                        )}
                         <div
                             className="btn"
                             onClick={this.handlePlay.bind(this)}
@@ -150,8 +164,3 @@ class PlaylistShow extends Component {
 }
 
 export default PlaylistShow;
-
-// <div>
-//     <h1>{playlist.title}</h1>
-//     <p onClick={this.handleDelete.bind(this)}>DELETE ME</p>
-// </div>

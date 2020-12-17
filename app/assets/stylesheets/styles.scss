@@ -730,6 +730,22 @@ img.album-artwork {
     flex-basis: 35px;
 }
 
+.track-row > .track-info {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 11px;
+}
+
+.track-row > .track-info a {
+    color: $gray-text;
+}
+
+.track-row > .track-info a:hover {
+    text-decoration: underline;
+}
+
 .track-row > .track-duration {
     display: flex;
     align-items: center;

@@ -25,7 +25,7 @@ export default (state = {}, action) => {
             return action.payload.albums;
 
         case RECEIVE_PLAYLIST_DETAILS:
-            return action.payload.albums;
+            return action.payload.albums || nextState;
 
         default:
             return state;

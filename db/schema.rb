@@ -41,8 +41,7 @@ ActiveRecord::Schema.define(version: 2020_12_09_014049) do
     t.integer "track_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["playlist_id"], name: "index_playlist_tracks_on_playlist_id"
-    t.index ["track_id"], name: "index_playlist_tracks_on_track_id"
+    t.index ["playlist_id", "track_id"], name: "index_playlist_tracks_on_playlist_id_and_track_id", unique: true
   end
 
   create_table "playlists", force: :cascade do |t|

@@ -1,6 +1,7 @@
 //ext
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 //int - actions
 import { pause, play } from "../../actions/music_actions";
 import { saveTrack, unsaveTrack } from "../../actions/track_actions";
@@ -9,7 +10,8 @@ import { openModal } from "../../actions/modal_actions";
 import * as icons from "../../utils/icons";
 
 const TrackListItem = (props) => {
-    const { track, hovered, selected, playing } = props;
+    const { track, album, artist } = props;
+    const { location, hovered, selected, playing } = props;
     const { resume, pause, handlePlay } = props;
     const { saveTrack, unsaveTrack, handleMenuOpen, openModal } = props;
     const { currentTrack, currentUser } = props;
@@ -30,18 +32,31 @@ const TrackListItem = (props) => {
     var colA = track.trackNumber;
     var colB = track.title;
 
-    let colC;
-    track.saved ? (colC = "") : (colC = icons.add(classes, addAction));
+    let colC, colCClasses;
+
+    if (location === "album") {
+        colCClasses = "track-save";
+        track.saved ? (colC = "") : (colC = icons.add(classes, addAction));
+    } else if (location === "playlist") {
+        colCClasses = "track-info";
+        colC = (
+            <React.Fragment>
+                <span>
+                    <Link to={`/albums/${album.id}`}>{album.title}</Link>
+                </span>
+                <span>
+                    <Link to={`/artists/${artist.id}`}>{artist.name}</Link>
+                </span>
+            </React.Fragment>
+        );
+    }
 
     var colD = track.duration;
-
-    if (track.saved) {
-    }
 
     if (hovered) {
         colA = icons.play(classes, handlePlay);
 
-        if (track.saved) {
+        if (location === "album" && track.saved) {
             colC = icons.close("icon sm red pointer", () =>
                 unsaveTrack(track.id)
             );
@@ -60,7 +75,7 @@ const TrackListItem = (props) => {
         <React.Fragment>
             <div className="track-index">{colA}</div>
             <div className="track-title">{colB}</div>
-            <div className="track-save ">{colC}</div>
+            <div className={colCClasses}>{colC}</div>
             <div className="track-duration">{colD}</div>
         </React.Fragment>
     );
