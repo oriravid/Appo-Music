@@ -15,7 +15,7 @@ Artist.create([
     #1 - Mac Miller
     {name: "Mac Miller", 
         bio: "Though he broke through as a brash teenager, Mac Miller evolved into one of the more thoughtful and surprising rappers of the 2010s. A Pittsburgh native, Miller (born Malcolm McCormick in 1992) entered the mainstream with 2011\u2019s playful, party-ready Blue Slide Park, only the second independently distributed debut to top the Billboard 200. He grew quickly: Few artists cover as much ground between albums as Miller did from Blue Slide Park to 2016\u2019s The Divine Feminine, which saw him develop into a vocalist capable of duetting with Ariana Grande. Searching, jazzy, even philosophical, his music\u2014often self-produced under the name Larry Fisherman\u2014came to split the difference between popular appeal and creative ambition, uniting collaborators at both ends of the spectrum, from Snoop Dogg to Flying Lotus. Even when the subject matter grew dark\u2014Miller dealt openly with substance abuse before his death in September 2018 at age 26\u2014he was candid and personable about channeling his struggles into relatable art. \u201CAs long as I'm being honest first and foremost with myself, that allows me to be honest in the music,\u201D Miller told Beats 1 host Zane Lowe around the release of his fifth and final album, Swimming. \u201CYou're building a world, so you have to kind of be the architect of what you're making and not think about what the current world is doing. Because I'm just trying to make music for people who have similar thoughts or feelings as me.\u201D", 
-        url: "http://appomusic.com/assets/mm/mm.jpg"},
+        url: "https://appomusic.com/assets/mm/mm.jpg"},
    
     #2 - John Mayer
     {name: "John Mayer", 
@@ -39,7 +39,7 @@ Album.create([
         title: "Circles (Deluxe)", 
         genre: "Hip-Hop/Rap", 
         release_date: "19/03/2020", 
-        url: "http://appomusic.com/assets/mm/cr/cr.jpg", 
+        url: "https://appomusic.com/assets/mm/cr/cr.jpg", 
         description: "Circles is the sixth and final studio album by American rapper and singer Mac Miller. It was released posthumously on January 17, 2020, by REMember Music and Warner Records, and was being worked on by Miller before his death in September 2018. Production was completed by Jon Brion. Circles was supported by two singles: \"Good News\" and \"Blue World\". The album received widespread acclaim from critics and debuted at number three on the US Billboard 200."},
     
     #2 - Swimming
@@ -47,7 +47,7 @@ Album.create([
         title: "Swimming", 
         genre: "Hip-Hop/Rap", 
         release_date: "03/08/2018", 
-        url: "http://appomusic.com/assets/mm/sw/sw.jpg", 
+        url: "https://appomusic.com/assets/mm/sw/sw.jpg", 
         description: "On \u201CHurt Feelings,\u201D the second song from his fifth studio album, Swimming, Mac Miller raps, \u201CI paid the cost to see apostrophes, that means it\u2019s mine\/Keep to myself, taking my time.\u201D The Pittsburgh-born MC has always been clever; on Swimming, he's also direct\u2014particularly about the distance he\u2019s kept from the public eye following a high-profile breakup and other troubles. But this isn't a breakup album; Miller says Swimming is a more complete picture of his life. \u201CI'm just talking about things that I'm proud of myself for, things I'm afraid of, or things that are just thoughts and emotions,\u201D he told Beats 1 host Zane Lowe. \u201CAnd I'm like, 'Why is this interesting?'\u201D That same curiosity is freeing for Miller, who leans further into the singing he displayed on The Divine Feminine. Production-wise, he\u2019s riding ultra-funky basslines courtesy of Thundercat and an altogether jazzy and danceable set overseen by producer Jon Brion (Kanye West, Fiona Apple)."},
 
     #3 - The Divine Feminine
@@ -55,7 +55,7 @@ Album.create([
         title: "The Divine Feminine", 
         genre: "Hip-Hop", 
         release_date: "16/09/2016", 
-        url: "http://appomusic.com/assets/mm/df/df.jpg", 
+        url: "https://appomusic.com/assets/mm/df/df.jpg", 
         description: "The boy wonder grows into his musical imagination. Already a nimble rapper, Mac\u2019s cracked-but-sincere croon is as crucial to these songs as his rhyme skills. Infused with the musicality of gospel and R&B, \u201CPlanet God Damn\u201D and \u201CSkin\u201D show a relaxed mind gently unspooling its creative eccentricities."},
     
     #4 - The Search For Everything
@@ -125,31 +125,31 @@ Track.create([
     {album_id: 1, track_number: 14, duration: "4:14", title: "Floating", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"},
     
     #2 - Swimming
-    {album_id: 2, track_number: 1, duration: "2:41", title: "Come Back to Earth", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
-    {album_id: 2, track_number: 2, duration: "4:05", title: "Hurt Feelings", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", play_count: 70},
-    {album_id: 2, track_number: 3, duration: "4:48", title: "What's the Use?", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
-    {album_id: 2, track_number: 4, duration: "3:35", title: "Perfecto", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"},
-    {album_id: 2, track_number: 5, duration: "5:45", title: "Self Care", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", play_count: 100},
-    {album_id: 2, track_number: 6, duration: "4:10", title: "Wings", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"},
-    {album_id: 2, track_number: 7, duration: "4:47", title: "Ladders", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3", play_count: 50},
-    {album_id: 2, track_number: 8, duration: "4:31", title: "Small Worlds", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"},
-    {album_id: 2, track_number: 9, duration: "3:30", title: "Conversation, Pt. 1", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"},
-    {album_id: 2, track_number: 10, duration: "3:57", title: "Dunno", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3"},
-    {album_id: 2, track_number: 11, duration: "5:45", title: "Jet Fuel", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3"},
-    {album_id: 2, track_number: 12, duration: "5:48", title: "2009", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3", play_count: 90},
-    {album_id: 2, track_number: 13, duration: "4:12", title: "So It Goes", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-13.mp3"},
+    {album_id: 2, track_number: 1, duration: "2:41", title: "Come Back to Earth", url: "https://appomusic.com/assets/mm/sw/01.mp3"},
+    {album_id: 2, track_number: 2, duration: "4:05", title: "Hurt Feelings", url: "https://appomusic.com/assets/mm/sw/02.mp3", play_count: 70},
+    {album_id: 2, track_number: 3, duration: "4:48", title: "What's the Use?", url: "https://appomusic.com/assets/mm/sw/03.mp3"},
+    {album_id: 2, track_number: 4, duration: "3:35", title: "Perfecto", url: "https://appomusic.com/assets/mm/sw/04.mp3"},
+    {album_id: 2, track_number: 5, duration: "5:45", title: "Self Care", url: "https://appomusic.com/assets/mm/sw/05.mp3", play_count: 100},
+    {album_id: 2, track_number: 6, duration: "4:10", title: "Wings", url: "https://appomusic.com/assets/mm/sw/06.mp3"},
+    {album_id: 2, track_number: 7, duration: "4:47", title: "Ladders", url: "https://appomusic.com/assets/mm/sw/07.mp3", play_count: 50},
+    {album_id: 2, track_number: 8, duration: "4:31", title: "Small Worlds", url: "https://appomusic.com/assets/mm/sw/08.mp3"},
+    {album_id: 2, track_number: 9, duration: "3:30", title: "Conversation, Pt. 1", url: "https://appomusic.com/assets/mm/sw/09.mp3"},
+    {album_id: 2, track_number: 10, duration: "3:57", title: "Dunno", url: "https://appomusic.com/assets/mm/sw/10.mp3"},
+    {album_id: 2, track_number: 11, duration: "5:45", title: "Jet Fuel", url: "https://appomusic.com/assets/mm/sw/11.mp3"},
+    {album_id: 2, track_number: 12, duration: "5:48", title: "2009", url: "https://appomusic.com/assets/mm/sw/12.mp3", play_count: 90},
+    {album_id: 2, track_number: 13, duration: "4:12", title: "So It Goes", url: "https://appomusic.com/assets/mm/sw/13.mp3"},
 
     #3 - The Divine Feminine
-    {album_id: 3, track_number: 1, duration: "4:16", title: "Congratulations (feat. Bilal)", url: "http://appomusic.com/assets/mm/df/01.mp3"},
-    {album_id: 3, track_number: 2, duration: "5:05", title: "Dang! (feat. Anderson .Paak)", url: "http://appomusic.com/assets/mm/df/02.mp3"},
-    {album_id: 3, track_number: 3, duration: "5:26", title: "Stay", url: "http://appomusic.com/assets/mm/df/03.mp3", play_count: 60},
-    {album_id: 3, track_number: 4, duration: "4:47", title: "Skin", url: "http://appomusic.com/assets/mm/df/04.mp3"},
-    {album_id: 3, track_number: 5, duration: "8:00", title: "Cinderella (feat. Ty Dolla $ign)", url: "http://appomusic.com/assets/mm/df/05.mp3", play_count: 40},
-    {album_id: 3, track_number: 6, duration: "3:11", title: "Planet God Damn (feat. Njomza)", url: "http://appomusic.com/assets/mm/df/06.mp3"},
-    {album_id: 3, track_number: 7, duration: "4:32", title: "Soulmate", url: "http://appomusic.com/assets/mm/df/07.mp3"},
-    {album_id: 3, track_number: 8, duration: "5:19", title: "We (feat. CeeLo Green)", url: "http://appomusic.com/assets/mm/df/08.mp3"},
-    {album_id: 3, track_number: 9, duration: "3:36", title: "My Favorite Part (feat. Ariana Grande)", url: "http://appomusic.com/assets/mm/df/09.mp3"},
-    {album_id: 3, track_number: 10, duration: "8:20", title: "God is Fair, Sexy Nasty (feat. Kendrick Lamar)", url: "http://appomusic.com/assets/mm/df/10.mp3"},
+    {album_id: 3, track_number: 1, duration: "4:16", title: "Congratulations (feat. Bilal)", url: "https://appomusic.com/assets/mm/df/01.mp3"},
+    {album_id: 3, track_number: 2, duration: "5:05", title: "Dang! (feat. Anderson .Paak)", url: "https://appomusic.com/assets/mm/df/02.mp3"},
+    {album_id: 3, track_number: 3, duration: "5:26", title: "Stay", url: "https://appomusic.com/assets/mm/df/03.mp3", play_count: 60},
+    {album_id: 3, track_number: 4, duration: "4:47", title: "Skin", url: "https://appomusic.com/assets/mm/df/04.mp3"},
+    {album_id: 3, track_number: 5, duration: "8:00", title: "Cinderella (feat. Ty Dolla $ign)", url: "https://appomusic.com/assets/mm/df/05.mp3", play_count: 40},
+    {album_id: 3, track_number: 6, duration: "3:11", title: "Planet God Damn (feat. Njomza)", url: "https://appomusic.com/assets/mm/df/06.mp3"},
+    {album_id: 3, track_number: 7, duration: "4:32", title: "Soulmate", url: "https://appomusic.com/assets/mm/df/07.mp3"},
+    {album_id: 3, track_number: 8, duration: "5:19", title: "We (feat. CeeLo Green)", url: "https://appomusic.com/assets/mm/df/08.mp3"},
+    {album_id: 3, track_number: 9, duration: "3:36", title: "My Favorite Part (feat. Ariana Grande)", url: "https://appomusic.com/assets/mm/df/09.mp3"},
+    {album_id: 3, track_number: 10, duration: "8:20", title: "God is Fair, Sexy Nasty (feat. Kendrick Lamar)", url: "https://appomusic.com/assets/mm/df/10.mp3"},
     
     #4 - The Search for Everything
     {album_id: 4, track_number: 1, duration: "3:54", title: "Still Feel Like Your Man", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", play_count: 60}, 
