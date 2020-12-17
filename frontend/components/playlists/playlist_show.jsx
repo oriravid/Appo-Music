@@ -17,6 +17,7 @@ class PlaylistShow extends Component {
         this.state = {
             loading: true,
             editing: false,
+            title: "",
             coverUrl: null,
             selectedTrackId: null,
             hoveredTrackId: null,
@@ -24,19 +25,37 @@ class PlaylistShow extends Component {
         };
     }
 
-    setCoverUrl() {
-        var albums = Object.values(this.props.albums);
+    handleInput() {
+        return (e) =>
+            this.setState({
+                title: e.currentTarget.value,
+            });
+    }
+
+    handleEnter(e) {
+        if (e.key === "Enter") {
+            this.props.updatePlaylist({
+                id: this.props.playlist.id,
+                title: this.state.title,
+            }),
+                this.setState({ editing: false });
+        }
+    }
+
+    setCoverUrl(albums) {
         this.setState({ coverUrl: albums[0].url });
 
-        let albumIdx = 1;
+        if (albums.length > 1) {
+            let albumIdx = 1;
 
-        setInterval(() => {
-            this.setState({
-                coverUrl: albums[albumIdx].url,
-            });
+            this.coverSetter = setInterval(() => {
+                this.setState({
+                    coverUrl: albums[albumIdx].url,
+                });
 
-            albumIdx < albums.length - 1 ? albumIdx++ : (albumIdx = 0);
-        }, 10000);
+                albumIdx < albums.length - 1 ? albumIdx++ : (albumIdx = 0);
+            }, 10000);
+        }
     }
 
     handlePlay(trackNumber) {
@@ -71,20 +90,28 @@ class PlaylistShow extends Component {
         this.props
             .getPlaylistDetails(this.props.match.params.playlistId)
             .then((res) => {
-                this.setState({ loading: false }), this.setCoverUrl();
+                this.setState({ loading: false }),
+                    this.setCoverUrl(Object.values(res.payload.albums));
             });
     }
 
     componentDidUpdate(prevProps) {
         if (
             this.props.match.params.playlistId !==
-                prevProps.match.params.playlistId ||
-            this.props.tracks.length != prevProps.tracks.length
+            prevProps.match.params.playlistId
         ) {
-            this.setState({ loading: true });
+            clearInterval(this.coverSetter);
+            this.setState({ loading: true, editing: false });
             this.props
                 .getPlaylistDetails(this.props.match.params.playlistId)
-                .then((res) => this.setState({ loading: false }));
+                .then((res) => {
+                    this.setState({ loading: false }),
+                        this.setCoverUrl(Object.values(res.payload.albums));
+                });
+        }
+
+        if (this.state.editing) {
+            this.titleInput.focus();
         }
     }
 
@@ -92,8 +119,31 @@ class PlaylistShow extends Component {
         const { playlist, albums, tracks, artists } = this.props;
 
         if (this.state.loading) return <Loading />;
-        if (!tracks.length) return <PlaylistEmpty playlist={playlist} />;
+        if (!tracks.length)
+            return (
+                <PlaylistEmpty
+                    playlist={playlist}
+                    handleDelete={this.handleDelete.bind(this)}
+                />
+            );
 
+        if (this.state.editing) {
+            var playlistTitle = (
+                <input
+                    id="edit-playlist-field"
+                    ref={(input) => {
+                        this.titleInput = input;
+                    }}
+                    type="text"
+                    value={this.state.title}
+                    onChange={this.handleInput()}
+                    onKeyPress={this.handleEnter.bind(this)}
+                    autoComplete="off"
+                ></input>
+            );
+        } else {
+            var playlistTitle = <h1>{playlist.title}</h1>;
+        }
         const trackItems = tracks.sort(indexSorter).map((track) => {
             const album = albums[track.albumId];
             const artist = artists[album.artistId];
@@ -148,11 +198,13 @@ class PlaylistShow extends Component {
                 <div className="album-header-tracks">
                     <div className="album-header playlist">
                         <div className="playlist-header">
-                            <h1>{playlist.title}</h1>
+                            {playlistTitle}
                             <div className="playlist-actions">
-                                {icons.edit(
-                                    "icon color pointer",
-                                    this.handleDelete.bind(this)
+                                {icons.edit("icon color pointer", () =>
+                                    this.setState({
+                                        title: playlist.title,
+                                        editing: !this.state.editing,
+                                    })
                                 )}
                                 {icons.trash(
                                     "icon color pointer",

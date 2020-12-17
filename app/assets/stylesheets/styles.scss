@@ -3,7 +3,8 @@
 // Global Styles
 ///////////////////////////////////////////////////////////////////////////////
 
-html {
+html,
+input {
     font-family: "Open Sans", Helvetica, sans-serif;
     color: rgba(0, 0, 0, 0.8);
 }
@@ -141,6 +142,12 @@ h3 {
 .icon.lrg {
     width: 34px;
     height: 34px;
+}
+
+.icon.inline {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
 }
 
 // loading
@@ -613,9 +620,24 @@ img.album-artwork {
     justify-content: space-between;
 }
 
-.album-header h1 {
+.album-header h1,
+#edit-playlist-field {
     font-size: 24px;
     margin-bottom: 1px;
+}
+
+#edit-playlist-field {
+    background-color: transparent;
+    border: none;
+    font-weight: 700;
+    color: $gray-text;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+    padding: 0;
+}
+
+#edit-playlist-field:focus {
+    outline: none;
 }
 
 .album-header .btn {
@@ -689,6 +711,16 @@ img.album-artwork {
     outline: none;
 }
 
+.empty-playlist {
+    margin-top: 20px;
+}
+
+.empty-playlist h2 {
+    font-size: 18px;
+    color: $main-color;
+    font-weight: 600;
+}
+
 .tracks-list {
     margin-top: 20px;
     display: table;
@@ -712,6 +744,10 @@ img.album-artwork {
 
 .track-row:first-child {
     border-top: 1px solid $border-color;
+}
+
+.track-row:last-child {
+    border-bottom: 1px solid $border-color;
 }
 
 .track-row:hover {

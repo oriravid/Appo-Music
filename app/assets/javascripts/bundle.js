@@ -347,6 +347,7 @@ var toggleShuffle = function toggleShuffle() {
 /*! export RECEIVE_USER_PLAYLISTS [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export REMOVE_PLAYLIST [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export REMOVE_PLAYLIST_TRACK [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export UPDATE_PLAYLIST_TITLE [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export addTrackToPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export createNewPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export deletePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
@@ -360,6 +361,7 @@ var toggleShuffle = function toggleShuffle() {
 /*! export removePlaylistTrack [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export removeTrackFromPlaylist [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export updatePlaylist [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export updatePlaylistTitle [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -369,12 +371,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_USER_PLAYLISTS": () => /* binding */ RECEIVE_USER_PLAYLISTS,
 /* harmony export */   "RECEIVE_NEW_PLAYLIST": () => /* binding */ RECEIVE_NEW_PLAYLIST,
+/* harmony export */   "UPDATE_PLAYLIST_TITLE": () => /* binding */ UPDATE_PLAYLIST_TITLE,
 /* harmony export */   "RECEIVE_PLAYLIST_DETAILS": () => /* binding */ RECEIVE_PLAYLIST_DETAILS,
 /* harmony export */   "REMOVE_PLAYLIST": () => /* binding */ REMOVE_PLAYLIST,
 /* harmony export */   "RECEIVE_PLAYLIST_TRACK": () => /* binding */ RECEIVE_PLAYLIST_TRACK,
 /* harmony export */   "REMOVE_PLAYLIST_TRACK": () => /* binding */ REMOVE_PLAYLIST_TRACK,
 /* harmony export */   "receiveUserPlaylists": () => /* binding */ receiveUserPlaylists,
 /* harmony export */   "receiveNewPlaylist": () => /* binding */ receiveNewPlaylist,
+/* harmony export */   "updatePlaylistTitle": () => /* binding */ updatePlaylistTitle,
 /* harmony export */   "removePlaylist": () => /* binding */ removePlaylist,
 /* harmony export */   "receivePlaylistDetails": () => /* binding */ receivePlaylistDetails,
 /* harmony export */   "receivePlaylistTrack": () => /* binding */ receivePlaylistTrack,
@@ -392,6 +396,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var RECEIVE_USER_PLAYLISTS = "RECEIVE_USER_PLAYLISTS";
 var RECEIVE_NEW_PLAYLIST = "RECEIVE_NEW_PLAYLIST";
+var UPDATE_PLAYLIST_TITLE = "UPDATE_PLAYLIST_TITLE";
 var RECEIVE_PLAYLIST_DETAILS = "RECEIVE_PLAYLIST_DETAILS";
 var REMOVE_PLAYLIST = "REMOVE_PLAYLIST";
 var RECEIVE_PLAYLIST_TRACK = "RECEIVE_PLAYLIST_TRACK";
@@ -405,6 +410,12 @@ var receiveUserPlaylists = function receiveUserPlaylists(playlists) {
 var receiveNewPlaylist = function receiveNewPlaylist(playlist) {
   return {
     type: RECEIVE_NEW_PLAYLIST,
+    playlist: playlist
+  };
+};
+var updatePlaylistTitle = function updatePlaylistTitle(playlist) {
+  return {
+    type: UPDATE_PLAYLIST_TITLE,
     playlist: playlist
   };
 };
@@ -443,7 +454,7 @@ var createNewPlaylist = function createNewPlaylist(playlist) {
 var updatePlaylist = function updatePlaylist(playlist) {
   return function (dispatch) {
     return _utils_playlists_api_utils__WEBPACK_IMPORTED_MODULE_0__.updatePlaylist(playlist).then(function (playlist) {
-      return dispatch(receiveNewPlaylist(playlist));
+      return dispatch(updatePlaylistTitle(playlist));
     });
   };
 };
@@ -2946,18 +2957,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
 //ext
+ //int - utils
+
 
 
 var PlaylistEmpty = function PlaylistEmpty(_ref) {
-  var playlist = _ref.playlist;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "header-section"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-    style: {
-      margin: "20px 0"
-    }
-  }, "Looks like this playlist is empty :(")));
+  var playlist = _ref.playlist,
+      handleDelete = _ref.handleDelete;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "album-header playlist"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "playlist-header"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "playlist-actions"
+  }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.trash("icon color pointer", handleDelete))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "empty-playlist"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "It looks like this playlist is empty."), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "To get started, navigate to an album and select the", " ", _utils_icons__WEBPACK_IMPORTED_MODULE_1__.list("icon inline ms color"), " icon on a track you'd like to add to this playlist.")));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PlaylistEmpty);
@@ -3070,6 +3087,7 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
     _this.state = {
       loading: true,
       editing: false,
+      title: "",
       coverUrl: null,
       selectedTrackId: null,
       hoveredTrackId: null,
@@ -3079,22 +3097,47 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(PlaylistShow, [{
-    key: "setCoverUrl",
-    value: function setCoverUrl() {
+    key: "handleInput",
+    value: function handleInput() {
       var _this2 = this;
 
-      var albums = Object.values(this.props.albums);
+      return function (e) {
+        return _this2.setState({
+          title: e.currentTarget.value
+        });
+      };
+    }
+  }, {
+    key: "handleEnter",
+    value: function handleEnter(e) {
+      if (e.key === "Enter") {
+        this.props.updatePlaylist({
+          id: this.props.playlist.id,
+          title: this.state.title
+        }), this.setState({
+          editing: false
+        });
+      }
+    }
+  }, {
+    key: "setCoverUrl",
+    value: function setCoverUrl(albums) {
+      var _this3 = this;
+
       this.setState({
         coverUrl: albums[0].url
       });
-      var albumIdx = 1;
-      setInterval(function () {
-        _this2.setState({
-          coverUrl: albums[albumIdx].url
-        });
 
-        albumIdx < albums.length - 1 ? albumIdx++ : albumIdx = 0;
-      }, 10000);
+      if (albums.length > 1) {
+        var albumIdx = 1;
+        this.coverSetter = setInterval(function () {
+          _this3.setState({
+            coverUrl: albums[albumIdx].url
+          });
+
+          albumIdx < albums.length - 1 ? albumIdx++ : albumIdx = 0;
+        }, 10000);
+      }
     }
   }, {
     key: "handlePlay",
@@ -3135,34 +3178,40 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.props.getPlaylistDetails(this.props.match.params.playlistId).then(function (res) {
-        _this3.setState({
+        _this4.setState({
           loading: false
-        }), _this3.setCoverUrl();
+        }), _this4.setCoverUrl(Object.values(res.payload.albums));
       });
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this4 = this;
+      var _this5 = this;
 
-      if (this.props.match.params.playlistId !== prevProps.match.params.playlistId || this.props.tracks.length != prevProps.tracks.length) {
+      if (this.props.match.params.playlistId !== prevProps.match.params.playlistId) {
+        clearInterval(this.coverSetter);
         this.setState({
-          loading: true
+          loading: true,
+          editing: false
         });
         this.props.getPlaylistDetails(this.props.match.params.playlistId).then(function (res) {
-          return _this4.setState({
+          _this5.setState({
             loading: false
-          });
+          }), _this5.setCoverUrl(Object.values(res.payload.albums));
         });
+      }
+
+      if (this.state.editing) {
+        this.titleInput.focus();
       }
     }
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       var _this$props2 = this.props,
           playlist = _this$props2.playlist,
@@ -3171,49 +3220,67 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
           artists = _this$props2.artists;
       if (this.state.loading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_main_loading__WEBPACK_IMPORTED_MODULE_1__.default, null);
       if (!tracks.length) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_playlist_empty__WEBPACK_IMPORTED_MODULE_2__.default, {
-        playlist: playlist
+        playlist: playlist,
+        handleDelete: this.handleDelete.bind(this)
       });
+
+      if (this.state.editing) {
+        var playlistTitle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          id: "edit-playlist-field",
+          ref: function ref(input) {
+            _this6.titleInput = input;
+          },
+          type: "text",
+          value: this.state.title,
+          onChange: this.handleInput(),
+          onKeyPress: this.handleEnter.bind(this),
+          autoComplete: "off"
+        });
+      } else {
+        var playlistTitle = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title);
+      }
+
       var trackItems = tracks.sort(_utils_various__WEBPACK_IMPORTED_MODULE_6__.indexSorter).map(function (track) {
         var album = albums[track.albumId];
         var artist = artists[album.artistId];
         var trackClasses, trackMenu;
-        _this5.state.selectedTrackId == track.id ? trackClasses = "track-row selected" : trackClasses = "track-row";
-        _this5.state.menuTrackId == track.id ? trackMenu = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_menu__WEBPACK_IMPORTED_MODULE_4__.default, {
+        _this6.state.selectedTrackId == track.id ? trackClasses = "track-row selected" : trackClasses = "track-row";
+        _this6.state.menuTrackId == track.id ? trackMenu = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_menu__WEBPACK_IMPORTED_MODULE_4__.default, {
           trackId: track.id,
           playlistId: playlist.id,
           location: "playlist",
-          handleMenuClose: _this5.handleMenuClose.bind(_this5)
+          handleMenuClose: _this6.handleMenuClose.bind(_this6)
         }) : trackMenu = "";
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: trackClasses,
           key: track.id,
           onClick: function onClick() {
-            return _this5.setState({
+            return _this6.setState({
               selectedTrackId: track.id
             });
           },
           onMouseEnter: function onMouseEnter() {
-            return _this5.setState({
+            return _this6.setState({
               hoveredTrackId: track.id
             });
           },
           onMouseLeave: function onMouseLeave() {
-            return _this5.setState({
+            return _this6.setState({
               hoveredTrackId: null
             });
           },
           onDoubleClick: function onDoubleClick() {
-            return _this5.handlePlay(track.trackNumber);
+            return _this6.handlePlay(track.trackNumber);
           }
         }, trackMenu, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_list_item__WEBPACK_IMPORTED_MODULE_3__.default, {
           location: "playlist",
           track: track,
           album: album,
           artist: artist,
-          hovered: _this5.state.hoveredTrackId == track.id,
-          selected: _this5.state.selectedTrackId == track.id,
-          handlePlay: _this5.handlePlay.bind(_this5),
-          handleMenuOpen: _this5.handleMenuOpen.bind(_this5)
+          hovered: _this6.state.hoveredTrackId == track.id,
+          selected: _this6.state.selectedTrackId == track.id,
+          handlePlay: _this6.handlePlay.bind(_this6),
+          handleMenuOpen: _this6.handleMenuOpen.bind(_this6)
         }));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3229,12 +3296,17 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
         className: "album-header playlist"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "playlist-header"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, playlistTitle, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "playlist-actions"
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_5__.edit("icon color pointer", this.handleDelete.bind(this)), _utils_icons__WEBPACK_IMPORTED_MODULE_5__.trash("icon color pointer", this.handleDelete.bind(this)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_5__.edit("icon color pointer", function () {
+        return _this6.setState({
+          title: playlist.title,
+          editing: !_this6.state.editing
+        });
+      }), _utils_icons__WEBPACK_IMPORTED_MODULE_5__.trash("icon color pointer", this.handleDelete.bind(this)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "btn",
         onClick: function onClick() {
-          return _this5.handlePlay();
+          return _this6.handlePlay();
         }
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_5__.play("icon white"), "Play")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "tracks-list"
@@ -4224,6 +4296,10 @@ __webpack_require__.r(__webpack_exports__);
 
     case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_NEW_PLAYLIST:
       nextState[action.playlist.id] = action.playlist;
+      return nextState;
+
+    case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_0__.UPDATE_PLAYLIST_TITLE:
+      nextState[action.playlist.id].title = action.playlist.title;
       return nextState;
 
     case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_PLAYLIST:
@@ -5311,7 +5387,7 @@ var updatePlaylist = function updatePlaylist(playlist) {
     url: "/api/playlists/".concat(playlist.id),
     method: "PATCH",
     data: {
-      playlist: playlist
+      title: playlist.title
     }
   });
 };
