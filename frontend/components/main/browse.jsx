@@ -41,19 +41,17 @@ class Browse extends Component {
                     <Link to="/albums/8">
                         <div className="featured-container">
                             <p>NEW ALBUM</p>
-                            <h2>weird!</h2>
-                            <h2>YUNGBLUD</h2>
-                            <div className="overlay">
-                                <img src="https://images.kerrangcdn.com/YUNGBLUD-WEB-SLEEVE.jpg" />
-                            </div>
-                        </div>
-                    </Link>
-                    <Link to="/albums/2">
-                        <div className="featured-container">
-                            <p>NEW ALBUM</p>
                             <h2>Man On the Moon III: The Chosen</h2>
                             <h2>Kid Cudi</h2>
-                            <img src="https://topmovieandtv.com/wp-content/uploads/2020/12/cnewshttpshypebeast.comimage202012kid-cudi-man-on-the-moon-iii-the-chosen-album-stream-tw-860x280.jpg" />
+                            <img src="https://appomusic.com/assets/featured/01.jpg" />
+                        </div>
+                    </Link>
+                    <Link to="/">
+                        <div className="featured-container">
+                            <p>FEATURED</p>
+                            <h2>About This Project</h2>
+                            <h2>Learn More</h2>
+                            <img src="https://appomusic.com/assets/featured/02.jpg" />
                         </div>
                     </Link>
                 </div>

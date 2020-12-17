@@ -27,10 +27,15 @@ Artist.create([
         bio: "Born and raised in Kentucky, Chris Stapleton is an American musician who spent years in Nashville as a sought-after songwriter, furnishing songs for numerous artists. Easy to spot due to his signature long hair and prodigious beard, he became a major star in the autumn of 2015 when his debut solo album, Traveller, practically swept the CMAs. Traveller subsequently went platinum and Stapleton followed it up by drawing on his own vast repertoire of songs.", 
         url: "https://appomusic.com/assets/cs/cs.jpg"},
 
-    #4 - YUNGBLUD
-    {name: "YUNGBLUD", 
-        bio: "The 22-year-old singer, born Dominic Harrison, has risen quickly to become a leader of Gen Z-style pop-punk with his politically inclined lyrics, rap-derived production, and rebellious ethos. Known for his gender-bending style, signature pink socks, and wide, wolf-like grin, Yungblud has built his fanbase the old-fashioned way, through live shows and fan buzz. First came a self-titled EP last year, followed by a debut album, 21st Century Liability, and a string of 2019 singles like \u201C11 Minutes\u201D with Halsey and Travis Barker and \u201COriginal Me\u201D with Imagine Dragons\u2019 Dan Reynolds, which have helped him headline venues across the U.S. and Europe.", 
-        url: "https://appomusic.com/assets/yb/yb.jpg"},
+    #4 - Kid Cudi
+    {name: "Kid Cudi", 
+        bio: "An old soul with a livewire mind, Kid Cudi is hip-hop\u2019s patron saint of misfits and outsiders. The Cleveland native\u2014born Scott Ramon Seguro Mescudi in 1984\u2014came up fueled by the trials he'd faced early on. After he was expelled from high school, he moved to New York with dreams of becoming a successful rapper. His 2008 breakout hit, \u201CDay \u2018n\u2019 Nite,\u201D neatly encompassed his contradictions: What sounds like a bouncy party cut captured the kind of melancholy candor that would come to define the next decade in hip-hop. Soon signing to Kanye West\u2019s G.O.O.D. Music label, Cudi co-wrote several tracks on his label head\u2019s 808s & Heartbreak, further molding the future of hip-hop in his own introspective image. Over the years, Cudi\u2019s vision has become more expansive, yielding multi-part album series, deep dives into the life of the mind (2016\u2019s Passion, Pain & Demon Slayin\u2019, released after a public admission of anxiety and depression), and boundary-breaking side projects like WZRD, his alt-rock partnership with longtime producer Dot Da Genius. In 2018, Cudi and West teamed up as KIDS SEE GHOSTS. Grappling candidly with the wages of fame, the duo\u2019s track \u201CReborn,\u201D with a chorus movingly sung by Cudi, is a timeless anthem to self-love and self-improvement. For Cudi, creation is ultimately about unlocking access to a higher power. As he told Apple Music about his choice of collaborators, \u201CWe need to feel the music all around us, we need to swim in it. And the only way to do that is to connect with other like-minded people on the same mission.\u201D", 
+        url: "https://appomusic.com/assets/kc/kc.jpg"},
+
+    #5 - Alina Baraz
+    {name: "Alina Baraz", 
+        bio: "Alina Baraz\u2019s purr of a voice is deceptively vulnerable\u2014her soft-focus coo drifts within her subdued production choices, but she\u2019s always in control as she unfurls notes that sound as seductive as they do sweet. Born in 1993 in Cleveland, Ohio, the singer\/songwriter was raised on classical music until, as a teenager, she came across the pop-soul of Amy Winehouse, Corinne Bailey Rae, and Adele. Those genre-blurring influences are felt in Baraz\u2019s creations, first heard on 2015\u2019s Urban Flora, a collaborative EP with Denmark electronic producer Galimatias that featured the atmospheric, piano-guided \u201CMake You Feel.\u201D Therein, Baraz ups the intimacy by nearly whispering her way through a tale of a blossoming romance. A similarly heady interpretation of an intoxicating love, \u201CElectric,\u201D featuring Khalid at his dreamiest, appeared on 2018\u2019s The Color of You EP. In 2020, Baraz released her full-length debut, It Was Divine\u2014\u201CTo Me,\u201D a cathartic cut about love\u2019s dwindling embers, illustrates her lockstep relationship with her music. \u201CThis is the most important song in my career thus far,\u201D Baraz tells Apple Music. \u201CIt\u2019s really altered my life as a person, not even as an artist. Sometimes I find that writing gives you a second voice that you\u2019ll listen to more than yourself.\u201D", 
+        url: "https://appomusic.com/assets/ab/ab.jpg"},
 ])
 
 Album.create([
@@ -90,21 +95,38 @@ Album.create([
         url: "https://appomusic.com/assets/cs/tv/tv.jpg",
         description: "Nashville\u2019s one-man hit factory presses pause on the production line for a soulful solo debut. 13 years in the writing, the tracks on Traveller possess choruses as effortlessly infectious as anything Stapleton has gifted to high profile clients like Adele and Luke Bryan but there\u2019s a fascinating desperation to the themes here. From the wild, sleepless delirium at the heart of \u201CParachute\u201D to the bandit bluegrass on \u201COutlaw State of Mind\u201D, this is country rock that\u2019s unafraid to explore drink, drugs, and a very dark underbelly."},
 
-    #8 - weird!
+    #8 - Man On The Moon III: The Chosen
     {artist_id: 4, 
-        title: "weird!", 
-        genre: "Alternative", 
-        release_date: "4/12/2020", 
-        url: "https://www.wordsformusic.blog/wp-content/uploads/2020/12/yungblud-weird-album-cover.jpg",
-        description: "\u201CMy first record was almost like a phone call asking, \u2018Is there anyone out there who\u2019s like me?\u2019\u201D YUNGBLUD tells Apple Music. \u201CAnd it turned out there were millions of people. I found a community where I belong. And weird! is about them.\u201D If that debut, 2018\u2019s 21st Century Liability, was propelled forward by the Doncaster artist\u2019s anger at being misunderstood, weird! is an ode to optimism, as YUNGBLUD celebrates the healing power of finding your people across 12 songs inspired by his own. But weird!\u2014a dizzingly diverse album influenced by everyone from the Beastie Boys to Amy Winehouse and the Arctic Monkeys\u2014is also a deeply personal exploration of coming home to yourself after troubled times. \u201CIt was written after the weirdest 18 months of my entire existence,\u201D says YUNGBLUD, whose real name is Dominic Harrison. \u201CI nearly lost my mum in a car accident; [YUNGBLUD] got really fucking big, really fucking quickly; I fell in love and it was all over the internet, and then, when it didn\u2019t work out, that was all over the internet, too.\u201D Coming home in late 2019\u2014and playing a sold-out show at London\u2019s Brixton Academy\u2014switched the lights back on after a period of heartbreak-induced depression. \u201CAfter the show, at about four in the morning, I went up to Primrose Hill,\u201D he recalls. \u201CIn the freezing cold, the lyrics to \u2018weird!\u2019 just came out. And that's when I knew what this album was going to be about. It was going to be an album of overcoming the weirdest, hardest times of your life. And knowing that you're going to be all right in the end.\u201D"},
+        title: "Man On the Moon III: The Chosen", 
+        genre: "Hip-Hop/Rap", 
+        release_date: "11/12/2020", 
+        url: "https://appomusic.com/assets/kc/tc/tc.jpg",
+        description: "\u201CEvery time I make a record, I'm learning something new about myself,\u201D Kid Cudi tells Apple Music. \u201CI didn't realize that my father's death really had an impact on me in the way that it did until I started writing about it: 'Oh, I guess being alone is an issue for me. I guess being depressed is an issue.' I'm just making music, I'm just doing what feels right, but this shit is coming out and it's things that I probably didn't pinpoint [in the moment].\u201D The issues Cudi mentions have been emerging for him since his beginnings as the \u201Clonely stoner,\u201D a New York City-via-Cleveland cool kid who assured a generation of rappers to follow him that it was plenty OK to acknowledge your own inexplicable melancholy.\r\n\r\nMan on the Moon III: The Chosen, which returns to a naming convention Cudi hadn\u2019t utilized since 2010\u2019s Man on the Moon II: The Legend of Mr. Rager (with four solo and two collaborative albums in between), finds him in a sort of post-discovery nirvana, coming clean about his mental-health journey (\u201CMr Solo Dolo III\u201D), his relationship with his mother (\u201CElsie\u2019s Baby Boy [flashback]\u201D), and the power of his celebrity (\u201C4 Da Kidz\u201D). \u201CI was already in a really good place working on Entergalactic [his forthcoming animated series and soundtrack], going crazy on \u2018THE SCOTTS\u2019\u2014but then I was making something else that didn't fit those two projects. After two or three songs, I was like, 'Whoa, this shit really feels like a Man on the Moon. It sounds like you pick right back up where we left off 10 years ago.'\u201D\r\n\r\nTen years ago, Kid Cudi was sidestepping being pigeonholed as an \u201Cemo rapper,\u201D leaning even harder into his alias Mr. Rager, even when that meant looking at himself in the mirror after the partying was done, as reflected in Man on the Moon II\u2019s latter half. For Man on the Moon III, he\u2019s just as in touch with his feelings as he was on II\u2014along with the rest of a dependably vulnerable catalog\u2014it\u2019s just that now those feelings are a bit more positive. \u201CThe whole flow of my life is like so in tune with like everything that I want it to be,\u201D Cudi says. \u201CI'm solid with my baby\u2019s mom. I'm solid with my mom, I'm solid with my sister. I'm solid with my daughter. I'm solid with my nieces. Everything's in place. And I'm happy, you know?\u201D"},
 
-    #9 - 21st Century Liability!
+    #9 - Man On the Moon: The End of Day
     {artist_id: 4, 
-        title: "21st Century Liability", 
-        genre: "Alternative", 
-        release_date: "6/07/2018", 
-        url: "https://images.genius.com/914991c54f1fb63ecdc9b45b6fd9cab7.939x939x1.jpg",
-        description: "On 21st Century Liability, the adventurous Yorkshire artist takes the sounds bouncing in his head (electrified pop, ska, and hip-hop) and creates chart-friendly chaos. The songs leap from the speakers, YUNGBLUD lording over them like a mad professor with a handsome drawl. The title track stomps like \u201CSo What'cha Want\u201D Beasties, even vocally simulating a DJ scratch (you've got to hear it to believe it). \u201CI Love You, Will You Marry Me\u201D lets his romantic side flex over an upbeat electro-ska groove. Yet it's the poignant \u201CPolygraph Eyes\u201D\u2014a stern commentary on date-rape culture\u2014that stands out the most; behind YUNGBLUD's wild, up-for-whatever persona beats a caring heart."},
+        title: "Man On the Moon: The End of Day", 
+        genre: "Hip-Hop/Rap", 
+        release_date: "11/09/2009", 
+        url: "https://appomusic.com/assets/kc/ed/ed.jpg",
+        description: "Kid Cudi\u2019s full-length debut is a vast, ambitious concept album divided into five acts, each exploring a different aspect of Cudi\u2019s psyche. Sonically, the album takes its cues from new wave and New Romantic bands, techno, and ambient music. The contributions of Ratatat and MGMT further dissolve the boundaries between electronica, modern rock and hip-hop. The album adopts a somber tone throughout."},
+
+    #10 - It Was Divine
+    {artist_id: 5, 
+        title: "It Was Divine", 
+        genre: "R&B/Soul", 
+        release_date: "24/04/2020", 
+        url: "https://appomusic.com/assets/ab/wd/wd.jpg",
+        description: "\u201CI wanted to heal with this album,\u201D Alina Baraz tells Apple Music of It Was Divine, her first official full-length. \u201CI wanted to nourish myself, to understand myself, to mark a fresh start.\u201D The R&B-soul singer isn\u2019t new to the music business (she was formerly part of a duo with Denmark producer Galimatias), but she does want this album to serve as a new introduction. It details a painful breakup, yes, but it\u2019s also about her\u2014how she thinks, feels, writes, and processes emotions. She\u2019s big on symbols and dreams, for example, and wanted her album title to wink at divinity for its implications about power, control, and destiny. Baraz began by releasing the teaser track \u201CTrust\u201D in January, and even though it didn\u2019t make the final album, it offered a glimpse at what was to come. \u201CTrust became such a theme in my life,\u201D she says. \u201CI had to learn to trust myself, to let go, and to start over.\u201D On Divine, she uses her journey through a painful relationship\u2014from her initial butterflies to broken heart\u2014as a framework through which to tell a story about transformation and self-worth. The woman at the end of the album is stronger and more clear-eyed than the woman we meet at the start. The relationship the album details is \u201Cpretty nonexistent,\u201D Baraz says. \u201CBut the relationship with myself is thriving. I\u2019m glowing. We love it.\u201D"},
+
+    #11 - The Color of You
+    {artist_id: 5, 
+        title: "The Color of You", 
+        genre: "R&B/Soul", 
+        release_date: "06/04/2018", 
+        url: "https://appomusic.com/assets/ab/cy/cy.jpg",
+        description: "When Alina Baraz initially emerged in 2015, it was as a duo with Denmark producer Galimatias; the pair's joint EP, Urban Flora, is a package of lush, electronic slow-jams that drew comparisons to Rhye and Lana Del Rey. Here, on her first full-length, Baraz steps into the spotlight with minimalist R&B songs that put her silky soprano front and center. Experimental electronic production still plays a part\u2014\u201CI Don\u2019t Even Know Why Though\u201D is a swirling duet between her and the synthesizer\u2014but even when she\u2019s joined by breakout star Khalid (\u201CFloating,\u201D \u201CElectric\u201D), it\u2019s Baraz\u2019s smoky whisper that keeps us wanting more."},
+
 ])
 
 Track.create([
@@ -208,34 +230,73 @@ Track.create([
     {album_id: 7, track_number: 13, duration: "5:37", title: "Outlaw State of Mind", url: "https://appomusic.com/assets/cs/tv/13.mp3"},
     {album_id: 7, track_number: 14, duration: "4:00", title: "Sometimes I Cry", url: "https://appomusic.com/assets/cs/tv/14.mp3"},
 
-    #8 - weird!
-    {album_id: 8, track_number: 1, duration: "3:24", title: "teresa", url: "/assets/music/01.mp3"},
-    {album_id: 8, track_number: 2, duration: "2:47", title: "cotton candy", url: "/assets/music/02.mp3", play_count: 90},
-    {album_id: 8, track_number: 3, duration: "2:43", title: "strawberry lipstick", url: "/assets/music/03.mp3"},
-    {album_id: 8, track_number: 4, duration: "3:01", title: "mars", url: "/assets/music/04.mp3", play_count: 70},
-    {album_id: 8, track_number: 5, duration: "2:20", title: "superdeadfriends", url: "/assets/music/05.mp3"},
-    {album_id: 8, track_number: 6, duration: "4:00", title: "love song", url: "/assets/music/06.mp3"},
-    {album_id: 8, track_number: 7, duration: "3:37", title: "god save me, but don't drown me out", url: "/assets/music/07.mp3"},
-    {album_id: 8, track_number: 8, duration: "3:12", title: "ice cream man", url: "/assets/music/08.mp3"},
-    {album_id: 8, track_number: 9, duration: "3:03", title: "weird!", url: "/assets/music/09.mp3"},
-    {album_id: 8, track_number: 10, duration: "3:39", title: "charity", url: "/assets/music/10.mp3"},
-    {album_id: 8, track_number: 11, duration: "2:36", title: "it's quiet in beverly hills", url: "/assets/music/11.mp3"},
-    {album_id: 8, track_number: 12, duration: "4:27", title: "the freak show", url: "/assets/music/02.mp3"},
+    #8 - Man On The Moon III: The Chosen
+    {album_id: 8, track_number: 1, duration: "0:37", title: "Beautiful Trip", url: "https://appomusic.com/assets/kc/tc/01.flac"},
+    {album_id: 8, track_number: 2, duration: "3:13", title: "Tequila Shots", url: "https://appomusic.com/assets/kc/tc/02.flac", play_count: 100},
+    {album_id: 8, track_number: 3, duration: "3:19", title: "Another Day", url: "https://appomusic.com/assets/kc/tc/03.flac"},
+    {album_id: 8, track_number: 4, duration: "3:36", title: "She Knows This", url: "https://appomusic.com/assets/kc/tc/04.flac", play_count: 80},
+    {album_id: 8, track_number: 5, duration: "2:28", title: "Dive", url: "https://appomusic.com/assets/kc/tc/05.flac"},
+    {album_id: 8, track_number: 6, duration: "2:30", title: "Damaged", url: "https://appomusic.com/assets/kc/tc/06.flac"},
+    {album_id: 8, track_number: 7, duration: "3:21", title: "Heaven on Earth", url: "https://appomusic.com/assets/kc/tc/07.flac"},
+    {album_id: 8, track_number: 8, duration: "2:54", title: "Show Out", url: "https://appomusic.com/assets/kc/tc/08.flac", play_count: 60},
+    {album_id: 8, track_number: 9, duration: "4:02", title: "Mr. Solo Dolo III", url: "https://appomusic.com/assets/kc/tc/09.flac"},
+    {album_id: 8, track_number: 10, duration: "2:56", title: "Sad People", url: "https://appomusic.com/assets/kc/tc/10.flac"},
+    {album_id: 8, track_number: 11, duration: "3:59", title: "Elsie's Baby Boy (Flashback)", url: "https://appomusic.com/assets/kc/tc/11.flac"},
+    {album_id: 8, track_number: 12, duration: "4:09", title: "Sept. 16", url: "https://appomusic.com/assets/kc/tc/12.flac"},
+    {album_id: 8, track_number: 13, duration: "5:25", title: "The Void", url: "https://appomusic.com/assets/kc/tc/13.flac"},
+    {album_id: 8, track_number: 14, duration: "2:45", title: "Lovin' Me (feat. Phoebe Bridgers)", url: "https://appomusic.com/assets/kc/tc/14.flac"},
+    {album_id: 8, track_number: 15, duration: "2:56", title: "The Pale Moonlight", url: "https://appomusic.com/assets/kc/tc/15.flac"},
+    {album_id: 8, track_number: 16, duration: "3:51", title: "Rockstar Knights", url: "https://appomusic.com/assets/kc/tc/16.flac"},
+    {album_id: 8, track_number: 17, duration: "3:04", title: "4 Da Kidz", url: "https://appomusic.com/assets/kc/tc/17.flac"},
+    {album_id: 8, track_number: 18, duration: "3:32", title: "Lord I Know", url: "https://appomusic.com/assets/kc/tc/18.flac"},
 
-    #9 - 21st Century Liability
-    {album_id: 9, track_number: 1, duration: "0:30", title: "Eulogy", url: "/assets/music/01.mp3"},
-    {album_id: 9, track_number: 2, duration: "3:08", title: "Die for the Hype", url: "/assets/music/02.mp3"},
-    {album_id: 9, track_number: 3, duration: "3:11", title: "Doctor Doctor", url: "/assets/music/03.mp3", play_count: 80},
-    {album_id: 9, track_number: 4, duration: "3:11", title: "Medication", url: "/assets/music/04.mp3"},
-    {album_id: 9, track_number: 5, duration: "3:13", title: "Machine Gun (F**k the NRA)", url: "/assets/music/05.mp3"},
-    {album_id: 9, track_number: 6, duration: "2:47", title: "Psychotic Kids", url: "/assets/music/06.mp3"},
-    {album_id: 9, track_number: 7, duration: "2:47", title: "Anarchist", url: "/assets/music/07.mp3"},
-    {album_id: 9, track_number: 8, duration: "2:57", title: "I Love You, Will You Marry Me", url: "/assets/music/08.mp3", play_count: 100},
-    {album_id: 9, track_number: 9, duration: "3:43", title: "Polygraph Eyes", url: "/assets/music/09.mp3"},
-    {album_id: 9, track_number: 10, duration: "3:07", title: "Kill Somebody", url: "/assets/music/10.mp3"},
-    {album_id: 9, track_number: 11, duration: "3:51", title: "California", url: "/assets/music/11.mp3"},
-    {album_id: 9, track_number: 12, duration: "3:09", title: "21st Century Liability", url: "/assets/music/02.mp3"},
-])
+    #9 - Man On The Moon: The End of Day
+    {album_id: 9, track_number: 1, duration: "3:19", title: "In My Dreams (Cudder Anthem)", url: "https://appomusic.com/assets/kc/ed/01.flac"},
+    {album_id: 9, track_number: 2, duration: "3:56", title: "Soundtrack 2 My Life", url: "https://appomusic.com/assets/kc/ed/02.flac"},
+    {album_id: 9, track_number: 3, duration: "2:31", title: "Simple As...", url: "https://appomusic.com/assets/kc/ed/03.flac"},
+    {album_id: 9, track_number: 4, duration: "4:26", title: "Solo Dolo (Nightmare)", url: "https://appomusic.com/assets/kc/ed/04.flac"},
+    {album_id: 9, track_number: 5, duration: "4:21", title: "Heart of a Lion (Kid Cudi Theme Music)", url: "https://appomusic.com/assets/kc/ed/05.flac"},
+    {album_id: 9, track_number: 6, duration: "4:03", title: "My World (feat. Billy Cravens)", url: "https://appomusic.com/assets/kc/ed/06.flac"},
+    {album_id: 9, track_number: 7, duration: "3:41", title: "Day 'n' Nite", url: "https://appomusic.com/assets/kc/ed/07.flac", play_count: 90},
+    {album_id: 9, track_number: 8, duration: "3:41", title: "Sky Might Fall", url: "https://appomusic.com/assets/kc/ed/08.flac"},
+    {album_id: 9, track_number: 9, duration: "4:20", title: "Enter Galactic (Love Connection Part I)", url: "https://appomusic.com/assets/kc/ed/09.flac"},
+    {album_id: 9, track_number: 10, duration: "4:07", title: "Alive (feat. Ratatat)", url: "https://appomusic.com/assets/kc/ed/10.flac"},
+    {album_id: 9, track_number: 11, duration: "4:19", title: "Cudi Zone", url: "https://appomusic.com/assets/kc/ed/11.flac"},
+    {album_id: 9, track_number: 12, duration: "3:36", title: "Make Her Say (feat. Kanye West & Common)", url: "https://appomusic.com/assets/kc/ed/12.flac"},
+    {album_id: 9, track_number: 13, duration: "4:55", title: "Pursuit of Happiness (feat. MGMT & Ratatat)", url: "https://appomusic.com/assets/kc/ed/13.flac", play_count: 70},
+    {album_id: 9, track_number: 14, duration: "3:32", title: "Hyyerr (feat. Chip tha Ripper)", url: "https://appomusic.com/assets/kc/ed/14.flac"},
+    {album_id: 9, track_number: 15, duration: "3:47", title: "Up Up & Away", url: "https://appomusic.com/assets/kc/ed/15.flac", play_count: 50},
+
+    #10 - It Was Divine
+    {album_id: 10, track_number: 1, duration: "2:42", title: "My Whole Life", url: "https://appomusic.com/assets/ab/wd/01.flac"},
+    {album_id: 10, track_number: 2, duration: "2:21", title: "Morocco (feat. 6LACK)", url: "https://appomusic.com/assets/ab/wd/02.flac"},
+    {album_id: 10, track_number: 3, duration: "3:34", title: "Frank", url: "https://appomusic.com/assets/ab/wd/03.flac"},
+    {album_id: 10, track_number: 4, duration: "5:00", title: "Endlessly", url: "https://appomusic.com/assets/ab/wd/04.flac"},
+    {album_id: 10, track_number: 5, duration: "3:37", title: "Gimme The Wheel (feat. Smino)", url: "https://appomusic.com/assets/ab/wd/05.flac"},
+    {album_id: 10, track_number: 6, duration: "3:20", title: "Off the Grid (feat. Khalid)", url: "https://appomusic.com/assets/ab/wd/06.flac"},
+    {album_id: 10, track_number: 7, duration: "2:31", title: "More Than Enough", url: "https://appomusic.com/assets/ab/wd/07.flac", play_count: 70},
+    {album_id: 10, track_number: 8, duration: "3:23", title: "Night and Morning", url: "https://appomusic.com/assets/ab/wd/08.flac"},
+    {album_id: 10, track_number: 9, duration: "4:17", title: "To Me", url: "https://appomusic.com/assets/ab/wd/09.flac", play_count: 100},
+    {album_id: 10, track_number: 10, duration: "2:06", title: "Memo Blue", url: "https://appomusic.com/assets/ab/wd/10.flac"},
+    {album_id: 10, track_number: 11, duration: "3:33", title: "Who Got Me", url: "https://appomusic.com/assets/ab/wd/11.flac"},
+    {album_id: 10, track_number: 12, duration: "3:51", title: "Say You Know", url: "https://appomusic.com/assets/ab/wd/12.flac"},
+    {album_id: 10, track_number: 13, duration: "4:24", title: "Take It Home", url: "https://appomusic.com/assets/ab/wd/13.flac"},
+    {album_id: 10, track_number: 14, duration: "1:29", title: "Be Good", url: "https://appomusic.com/assets/ab/wd/14.flac"},
+    {album_id: 10, track_number: 15, duration: "3:44", title: "Until I Met You (feat. Nas)", url: "https://appomusic.com/assets/ab/wd/15.flac"},
+    {album_id: 10, track_number: 16, duration: "2:14", title: "The Beginning", url: "https://appomusic.com/assets/ab/wd/16.flac"},
+
+    #11 - The Color of You
+    {album_id: 11, track_number: 1, duration: "4:06", title: "Fallin", url: "https://appomusic.com/assets/ab/cy/01.mp3"},
+    {album_id: 11, track_number: 2, duration: "2:54", title: "Floating (feat. Khalid)", url: "https://appomusic.com/assets/ab/cy/02.mp3", play_count: 80},
+    {album_id: 11, track_number: 3, duration: "2:47", title: "High", url: "https://appomusic.com/assets/ab/cy/03.mp3", play_count: 50},
+    {album_id: 11, track_number: 4, duration: "3:06", title: "Coming To My Senses", url: "https://appomusic.com/assets/ab/cy/04.mp3"},
+    {album_id: 11, track_number: 5, duration: "3:22", title: "I Don't Even Know Why Though", url: "https://appomusic.com/assets/ab/cy/05.mp3", play_count: 60},
+    {album_id: 11, track_number: 6, duration: "3:32", title: "Tainted", url: "https://appomusic.com/assets/ab/cy/06.mp3"},
+    {album_id: 11, track_number: 7, duration: "3:39", title: "The One (feat. Jada)", url: "https://appomusic.com/assets/ab/cy/07.mp3"},
+    {album_id: 11, track_number: 8, duration: "3:27", title: "Yours", url: "https://appomusic.com/assets/ab/cy/08.mp3"},
+    {album_id: 11, track_number: 9, duration: "4:06", title: "Electric (feat. Khalid)", url: "https://appomusic.com/assets/ab/cy/09.mp3", play_count: 90},
+
+    ])
 
 Playlist.create([
     {user_id: 1, title: "Beach bash 2015"},

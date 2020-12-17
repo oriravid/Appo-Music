@@ -141,5 +141,7 @@
 }
 
 .modal-container.extended-text p {
+    max-height: 400px;
+    overflow-y: scroll;
     font-size: 15px;
 }

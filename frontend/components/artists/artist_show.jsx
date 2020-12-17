@@ -7,7 +7,7 @@ import AlbumsSlider from "../albums/albums_slider";
 import AlbumItem from "../albums/album_item";
 //int - util
 import * as icons from "../../utils/icons";
-import { dateSorter } from "../../utils/various";
+import { dateSorter, popularSorter } from "../../utils/various";
 
 class ArtistShow extends Component {
     constructor(props) {
@@ -41,7 +41,7 @@ class ArtistShow extends Component {
             .sort(dateSorter);
         const latestAlbum = sortedAlbums[0];
 
-        const topTracksList = tracks.map((track, index) => (
+        const topTracksList = tracks.sort(popularSorter).map((track, index) => (
             <li
                 className="top-songs-list-item pointer"
                 key={track.id}
