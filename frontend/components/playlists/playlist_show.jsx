@@ -43,6 +43,7 @@ class PlaylistShow extends Component {
     }
 
     setCoverUrl(albums) {
+        clearInterval(this.coverSetter);
         this.setState({ coverUrl: albums[0].url });
 
         if (albums.length > 1) {
@@ -98,7 +99,8 @@ class PlaylistShow extends Component {
     componentDidUpdate(prevProps) {
         if (
             this.props.match.params.playlistId !==
-            prevProps.match.params.playlistId
+                prevProps.match.params.playlistId ||
+            this.props.tracks.length != prevProps.tracks.length
         ) {
             clearInterval(this.coverSetter);
             this.setState({ loading: true, editing: false });
@@ -113,6 +115,10 @@ class PlaylistShow extends Component {
         if (this.state.editing) {
             this.titleInput.focus();
         }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.coverSetter);
     }
 
     render() {

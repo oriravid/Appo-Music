@@ -8,6 +8,7 @@ import PlaylistShowContainer from "../playlists/playlist_show_container";
 import ArtistShowContainer from "../artists/artist_show_container";
 import BrowseContainer from "./browse_container";
 import LibraryContainer from "./library_container";
+import NotFound from "./not_found";
 import Footer from "./footer";
 //int - utils
 import { ProtectedRoute } from "../../utils/route_utils";
@@ -41,6 +42,7 @@ const Main = () => {
                             path="/"
                             render={() => <Redirect to="/browse" />}
                         />
+                        <Route component={NotFound} />
                     </Switch>
                     <Footer />
                 </div>

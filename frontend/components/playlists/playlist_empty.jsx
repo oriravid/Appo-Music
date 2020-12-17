@@ -15,9 +15,9 @@ const PlaylistEmpty = ({ playlist, handleDelete }) => {
             <div className="empty-playlist">
                 <h2>It looks like this playlist is empty.</h2>{" "}
                 <p>
-                    To get started, navigate to an album and select the{" "}
-                    {icons.list("icon inline ms color")} icon on a track you'd
-                    like to add to this playlist.
+                    To get started, navigate to an album and select{" "}
+                    {icons.list("icon inline ms color")} on a track you'd like
+                    to add to this playlist.
                 </p>
             </div>
         </div>

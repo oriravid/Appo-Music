@@ -22,7 +22,7 @@ export default (state = {}, action) => {
             return action.payload.albums;
 
         case RECEIVE_ARTIST_DETAILS:
-            return action.payload.albums;
+            return { ...nextState, ...action.payload.albums };
 
         case RECEIVE_PLAYLIST_DETAILS:
             return action.payload.albums || nextState;

@@ -1,5 +1,6 @@
 //ext
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 //int - containers
 import Loading from "../main/loading";
 import AlbumsSlider from "../albums/albums_slider";
@@ -35,7 +36,9 @@ class ArtistShow extends Component {
         const { artist, albums, tracks, addTracks, openModal } = this.props;
 
         //sort by releaseDate
-        const sortedAlbums = Object.values(albums).sort(dateSorter);
+        const sortedAlbums = Object.values(albums)
+            .filter((album) => album.artistId == artist.id)
+            .sort(dateSorter);
         const latestAlbum = sortedAlbums[0];
 
         const topTracksList = tracks.map((track, index) => (

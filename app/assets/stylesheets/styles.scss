@@ -102,6 +102,7 @@ h3 {
     width: 20px;
     height: 20px;
     opacity: 0.65;
+    flex-shrink: 0;
 }
 
 .icon.color {
@@ -268,6 +269,7 @@ h3 {
 
 .nav-section-list-item .icon {
     margin-right: 10px;
+    flex-shrink: 0;
 }
 
 .nav-section a {
@@ -624,6 +626,8 @@ img.album-artwork {
 #edit-playlist-field {
     font-size: 24px;
     margin-bottom: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #edit-playlist-field {
@@ -818,10 +822,11 @@ img.album-artwork {
 
 .track-menu {
     position: absolute;
+    width: 210px;
     right: 50px;
     top: 30px;
     background-color: white;
-    border: 1px solid $border-color;
+    // border: 1px solid $border-color;
     border-radius: 5px;
     color: $text-color;
     z-index: 2;
@@ -830,8 +835,10 @@ img.album-artwork {
 }
 
 .track-menu-item {
-    padding: 10px 20px;
+    padding: 5px 10px;
     font-weight: 600;
+    color: $gray-text;
+    text-transform: uppercase;
     border-bottom: 2px solid $border-color;
 }
 
@@ -846,7 +853,9 @@ img.album-artwork {
 }
 
 .playlist-list-item {
-    padding: 10px 20px;
+    padding: 5px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 //////

@@ -246,11 +246,14 @@ Playlist.create([
 
 PlaylistTrack.create([
     {playlist_id: 1, track_id: 1},
-    {playlist_id: 1, track_id: 2},
-    {playlist_id: 1, track_id: 3},
-    {playlist_id: 2, track_id: 3},
-    {playlist_id: 2, track_id: 4},
-    {playlist_id: 2, track_id: 5},
+    {playlist_id: 1, track_id: 14},
+    {playlist_id: 1, track_id: 26},
+    {playlist_id: 1, track_id: 37},
+    {playlist_id: 1, track_id: 49},
+    {playlist_id: 1, track_id: 62},
+    {playlist_id: 1, track_id: 75},
+    {playlist_id: 1, track_id: 91},
+    {playlist_id: 1, track_id: 102},
 ])
 
 UserSave.create([

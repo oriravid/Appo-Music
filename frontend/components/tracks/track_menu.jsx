@@ -26,15 +26,17 @@ class TrackMenu extends Component {
         const { handleMenuClose } = this.props;
 
         if (location === "album") {
-            const playlistList = playlists.map((playlist) => (
-                <li
-                    className="playlist-list-item pointer"
-                    key={playlist.id}
-                    onClick={() => this.handleAdd(trackId, playlist.id)}
-                >
-                    {playlist.title}
-                </li>
-            ));
+            const playlistList = playlists
+                .sort((a, b) => (a.title > b.title ? 1 : -1))
+                .map((playlist) => (
+                    <li
+                        className="playlist-list-item pointer"
+                        key={playlist.id}
+                        onClick={() => this.handleAdd(trackId, playlist.id)}
+                    >
+                        {playlist.title}
+                    </li>
+                ));
 
             var menuOptions = (
                 <React.Fragment>
