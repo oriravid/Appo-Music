@@ -280,6 +280,7 @@ h3 {
 .nav-section-list-item {
     display: flex;
     flex-flow: row nowrap;
+    align-items: center;
 }
 
 #new-playlist-field {
@@ -715,11 +716,11 @@ img.album-artwork {
     outline: none;
 }
 
-.empty-playlist {
+.empty-section {
     margin-top: 20px;
 }
 
-.empty-playlist h2 {
+.empty-section h2 {
     font-size: 18px;
     color: $main-color;
     font-weight: 600;

@@ -1607,6 +1607,56 @@ var mapDTP = function mapDTP(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/main/empty.jsx":
+/*!********************************************!*\
+  !*** ./frontend/components/main/empty.jsx ***!
+  \********************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
+//ext
+ //int - utils
+
+
+
+var Empty = function Empty(_ref) {
+  var location = _ref.location,
+      playlist = _ref.playlist,
+      handleDelete = _ref.handleDelete;
+
+  if (location === "playlist") {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "album-header playlist"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "playlist-header"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "playlist-actions"
+    }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.trash("icon color pointer", handleDelete))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "empty-section"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "It looks like this playlist is empty."), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "To get started, navigate to an album and select", " ", _utils_icons__WEBPACK_IMPORTED_MODULE_1__.list("icon inline ms color"), " on a track you'd like to add to this playlist.")));
+  } else if (location === "library") {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "header-section"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Library")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "empty-section"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "It looks like you haven't added any music to your library yet."), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "To get started, navigate to an album and select", " ", _utils_icons__WEBPACK_IMPORTED_MODULE_1__.add("icon inline ms color"), " on a track you'd like to add to your library.")));
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Empty);
+
+/***/ }),
+
 /***/ "./frontend/components/main/footer.jsx":
 /*!*********************************************!*\
   !*** ./frontend/components/main/footer.jsx ***!
@@ -1678,8 +1728,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _loading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./loading */ "./frontend/components/main/loading.jsx");
-/* harmony import */ var _albums_album_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../albums/album_item */ "./frontend/components/albums/album_item.jsx");
-/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../utils/various */ "./frontend/utils/various.js");
+/* harmony import */ var _empty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./empty */ "./frontend/components/main/empty.jsx");
+/* harmony import */ var _albums_album_item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../albums/album_item */ "./frontend/components/albums/album_item.jsx");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
+/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/various */ "./frontend/utils/various.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -1719,7 +1771,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  //int - containers
 
 
+
  //int - utils
+
 
 
 
@@ -1754,28 +1808,21 @@ var Library = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      if (this.state.loading) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_loading__WEBPACK_IMPORTED_MODULE_1__.default, null);
-      }
-
       var _this$props = this.props,
           albums = _this$props.albums,
           artists = _this$props.artists;
-      if (!albums.length) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "header-section"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Library"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-        style: {
-          margin: "20px 0"
-        }
-      }, "Looks like you haven't saved any music yet :("))); //sort by savedAt
+      if (this.state.loading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_loading__WEBPACK_IMPORTED_MODULE_1__.default, null);
+      if (!albums.length) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_empty__WEBPACK_IMPORTED_MODULE_2__.default, {
+        location: "library"
+      }); //sort by savedAt
 
-      var userAlbums = _toConsumableArray(albums).sort(_utils_various__WEBPACK_IMPORTED_MODULE_3__.savedSorter);
+      var userAlbums = _toConsumableArray(albums).sort(_utils_various__WEBPACK_IMPORTED_MODULE_5__.savedSorter);
 
       var albumsList = userAlbums.map(function (album) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: album.id,
           className: "albums-shelf-list-item"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_albums_album_item__WEBPACK_IMPORTED_MODULE_2__.default, {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_albums_album_item__WEBPACK_IMPORTED_MODULE_3__.default, {
           album: album,
           artist: artists ? artists[album.artistId] : undefined,
           info: "ver",
@@ -2975,46 +3022,6 @@ var mapDTP = function mapDTP(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/playlists/playlist_empty.jsx":
-/*!**********************************************************!*\
-  !*** ./frontend/components/playlists/playlist_empty.jsx ***!
-  \**********************************************************/
-/*! namespace exports */
-/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
-/*! other exports [not provided] [no usage info] */
-/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
-//ext
- //int - utils
-
-
-
-var PlaylistEmpty = function PlaylistEmpty(_ref) {
-  var playlist = _ref.playlist,
-      handleDelete = _ref.handleDelete;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "album-header playlist"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "playlist-header"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, playlist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "playlist-actions"
-  }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.trash("icon color pointer", handleDelete))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "empty-playlist"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "It looks like this playlist is empty."), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "To get started, navigate to an album and select", " ", _utils_icons__WEBPACK_IMPORTED_MODULE_1__.list("icon inline ms color"), " on a track you'd like to add to this playlist.")));
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PlaylistEmpty);
-
-/***/ }),
-
 /***/ "./frontend/components/playlists/playlist_index_item.jsx":
 /*!***************************************************************!*\
   !*** ./frontend/components/playlists/playlist_index_item.jsx ***!
@@ -3068,7 +3075,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _main_loading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../main/loading */ "./frontend/components/main/loading.jsx");
-/* harmony import */ var _playlist_empty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playlist_empty */ "./frontend/components/playlists/playlist_empty.jsx");
+/* harmony import */ var _main_empty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../main/empty */ "./frontend/components/main/empty.jsx");
 /* harmony import */ var _tracks_track_list_item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tracks/track_list_item */ "./frontend/components/tracks/track_list_item.jsx");
 /* harmony import */ var _tracks_track_menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../tracks/track_menu */ "./frontend/components/tracks/track_menu.jsx");
 /* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
@@ -3096,7 +3103,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 //ext
-
  //int - components
 
 
@@ -3259,7 +3265,8 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
           tracks = _this$props2.tracks,
           artists = _this$props2.artists;
       if (this.state.loading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_main_loading__WEBPACK_IMPORTED_MODULE_1__.default, null);
-      if (!tracks.length) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_playlist_empty__WEBPACK_IMPORTED_MODULE_2__.default, {
+      if (!tracks.length) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_main_empty__WEBPACK_IMPORTED_MODULE_2__.default, {
+        location: "playlist",
         playlist: playlist,
         handleDelete: this.handleDelete.bind(this)
       });
@@ -3994,7 +4001,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return nextState;
 
     case _actions_album_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_ALBUMS:
-      return action.payload.albums;
+      return action.payload.albums || {};
 
     case _actions_artist_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_ARTIST_DETAILS:
       return _objectSpread(_objectSpread({}, nextState), action.payload.albums);

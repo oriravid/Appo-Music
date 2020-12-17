@@ -3,8 +3,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 //int - containers
 import Loading from "./loading";
+import Empty from "./empty";
 import AlbumItem from "../albums/album_item";
 //int - utils
+import * as icons from "../../utils/icons";
 import { savedSorter } from "../../utils/various";
 
 class Library extends Component {
@@ -20,23 +22,10 @@ class Library extends Component {
     }
 
     render() {
-        if (this.state.loading) {
-            return <Loading />;
-        }
-
         const { albums, artists } = this.props;
 
-        if (!albums.length)
-            return (
-                <React.Fragment>
-                    <div className="header-section">
-                        <h1>Library</h1>
-                        <p style={{ margin: "20px 0" }}>
-                            Looks like you haven't saved any music yet :(
-                        </p>
-                    </div>
-                </React.Fragment>
-            );
+        if (this.state.loading) return <Loading />;
+        if (!albums.length) return <Empty location={"library"} />;
 
         //sort by savedAt
         const userAlbums = [...albums].sort(savedSorter);

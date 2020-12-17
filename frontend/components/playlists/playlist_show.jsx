@@ -1,9 +1,8 @@
 //ext
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 //int - components
 import Loading from "../main/loading";
-import PlaylistEmpty from "./playlist_empty";
+import Empty from "../main/empty";
 import TrackListItem from "../tracks/track_list_item";
 import TrackMenu from "../tracks/track_menu";
 //int - utils
@@ -127,7 +126,8 @@ class PlaylistShow extends Component {
         if (this.state.loading) return <Loading />;
         if (!tracks.length)
             return (
-                <PlaylistEmpty
+                <Empty
+                    location={"playlist"}
                     playlist={playlist}
                     handleDelete={this.handleDelete.bind(this)}
                 />
