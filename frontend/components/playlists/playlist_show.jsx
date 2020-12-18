@@ -56,7 +56,7 @@ class PlaylistShow extends Component {
                     coverUrl: albums[albumIdx].url,
                 });
                 albumIdx < albums.length - 1 ? albumIdx++ : (albumIdx = 0);
-            }, 3000);
+            }, 10000);
         }
     }
 
