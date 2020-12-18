@@ -44,8 +44,8 @@ const Main = () => {
                         />
                         <Route component={NotFound} />
                     </Switch>
-                    <Footer />
                 </div>
+                <Footer />
             </div>
         </div>
     );

@@ -568,13 +568,17 @@ img.album-artwork {
     overflow-y: scroll;
     position: absolute;
     top: 0;
+    display: flex;
+    flex-flow: column;
     padding: 95px 40px 40px 40px;
 }
 
 .main-content-inner {
     position: relative;
+    width: 100%;
     max-width: 1680px;
     margin: 0 auto;
+    flex-grow: 1;
 }
 
 // Album
@@ -896,7 +900,10 @@ img.album-artwork {
 }
 
 .featured-container:first-child {
-    margin-right: 20px;
+    margin-right: 10px;
+}
+.featured-container:last-child {
+    margin-left: 10px;
 }
 
 .featured-container p {
@@ -1247,7 +1254,9 @@ img.album-artwork {
 ///////////////////////////////////////////////////////////////////////////////
 
 footer {
-    margin-top: 30px;
+    background-color: #fbfbfb;
+    margin: 35px -40px -40px -40px;
+    padding: 40px;
     font-size: 11px;
 }
 
