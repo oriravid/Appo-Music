@@ -249,6 +249,7 @@ var closeModal = function closeModal() {
 /*! export PAUSE [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export PLAY [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export PREV [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export TOGGLE [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export TOGGLE_LOOP [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export TOGGLE_SHUFFLE [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export addTrack [provided] [no usage info] [missing usage info prevents renaming] */
@@ -257,6 +258,7 @@ var closeModal = function closeModal() {
 /*! export pause [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export play [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export prev [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export toggle [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export toggleLoop [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export toggleShuffle [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
@@ -270,6 +272,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ADD_TRACKS": () => /* binding */ ADD_TRACKS,
 /* harmony export */   "PLAY": () => /* binding */ PLAY,
 /* harmony export */   "PAUSE": () => /* binding */ PAUSE,
+/* harmony export */   "TOGGLE": () => /* binding */ TOGGLE,
 /* harmony export */   "NEXT": () => /* binding */ NEXT,
 /* harmony export */   "PREV": () => /* binding */ PREV,
 /* harmony export */   "TOGGLE_LOOP": () => /* binding */ TOGGLE_LOOP,
@@ -278,6 +281,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "addTracks": () => /* binding */ addTracks,
 /* harmony export */   "play": () => /* binding */ play,
 /* harmony export */   "pause": () => /* binding */ pause,
+/* harmony export */   "toggle": () => /* binding */ toggle,
 /* harmony export */   "next": () => /* binding */ next,
 /* harmony export */   "prev": () => /* binding */ prev,
 /* harmony export */   "toggleLoop": () => /* binding */ toggleLoop,
@@ -287,6 +291,7 @@ var ADD_TRACK = "ADD_TRACK";
 var ADD_TRACKS = "ADD_TRACKS";
 var PLAY = "PLAY";
 var PAUSE = "PAUSE";
+var TOGGLE = "TOGGLE";
 var NEXT = "NEXT";
 var PREV = "PREV";
 var TOGGLE_LOOP = "TOGGLE_LOOP";
@@ -311,6 +316,11 @@ var play = function play() {
 var pause = function pause() {
   return {
     type: PAUSE
+  };
+};
+var toggle = function toggle() {
+  return {
+    type: TOGGLE
   };
 };
 var next = function next() {
@@ -2626,9 +2636,23 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       this.audio.volume = e.target.value;
     }
   }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      document.body.addEventListener("keydown", function (e) {
+        if (e.code === "Space" && e.target == document.body) e.preventDefault();
+      });
+      document.body.addEventListener("keyup", function (e) {
+        if (e.code === "Space" && e.target == e.currentTarget) {
+          if (_this3.props.music.on) _this3.props.toggle();
+        }
+      });
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this3 = this;
+      var _this4 = this;
 
       clearInterval(this.timeSetter);
 
@@ -2651,7 +2675,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         this.handleInterval();
 
         this.audio.onended = function () {
-          _this3.handleNext();
+          _this4.handleNext();
         };
       } else {
         this.audio.pause();
@@ -2660,7 +2684,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       var _this$props = this.props,
           music = _this$props.music,
@@ -2701,7 +2725,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           className: "slider"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           ref: function ref(scrub) {
-            _this4.scrub = scrub;
+            _this5.scrub = scrub;
           },
           type: "range",
           min: "0",
@@ -2737,7 +2761,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         className: "music-player-inner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("audio", {
         ref: function ref(audio) {
-          _this4.audio = audio;
+          _this5.audio = audio;
         },
         src: trackUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2748,7 +2772,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         return console.log("volume");
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         ref: function ref(volume) {
-          _this4.volume = volume;
+          _this5.volume = volume;
         },
         type: "range",
         min: "0",
@@ -2818,6 +2842,9 @@ var mapDTP = function mapDTP(dispatch) {
     },
     pause: function pause() {
       return dispatch((0,_actions_music_actions__WEBPACK_IMPORTED_MODULE_2__.pause)());
+    },
+    toggle: function toggle() {
+      return dispatch((0,_actions_music_actions__WEBPACK_IMPORTED_MODULE_2__.toggle)());
     },
     next: function next() {
       return dispatch((0,_actions_music_actions__WEBPACK_IMPORTED_MODULE_2__.next)());
@@ -4243,6 +4270,10 @@ var initialState = {
 
     case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.PAUSE:
       nextState.playing = false;
+      return nextState;
+
+    case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE:
+      nextState.playing = !state.playing;
       return nextState;
 
     case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.NEXT:

@@ -4,6 +4,7 @@ import {
     ADD_TRACKS,
     PLAY,
     PAUSE,
+    TOGGLE,
     NEXT,
     PREV,
     TOGGLE_LOOP,
@@ -48,6 +49,10 @@ export default (state = initialState, action) => {
 
         case PAUSE:
             nextState.playing = false;
+            return nextState;
+
+        case TOGGLE:
+            nextState.playing = !state.playing;
             return nextState;
 
         case NEXT:

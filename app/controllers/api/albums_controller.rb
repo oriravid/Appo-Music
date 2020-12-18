@@ -2,10 +2,10 @@ class Api::AlbumsController < ApplicationController
   def index
     if params[:request_type]
         @current_user = current_user()
-        @albums = User.find(@current_user.id).saved_track_albums.uniq
+        @albums = current_user().saved_track_albums.uniq
         render :user_index
     else
-        @albums = Album.all
+        @albums = Album.all.includes(:tracks, :artist)
     end
   end
 

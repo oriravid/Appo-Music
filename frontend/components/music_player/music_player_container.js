@@ -6,6 +6,7 @@ import MusicPlayer from "./music_player";
 import {
     play,
     pause,
+    toggle,
     next,
     prev,
     toggleLoop,
@@ -32,6 +33,7 @@ const mapSTP = ({ music, entities }) => {
 const mapDTP = (dispatch) => ({
     play: () => dispatch(play()),
     pause: () => dispatch(pause()),
+    toggle: () => dispatch(toggle()),
     next: () => dispatch(next()),
     prev: () => dispatch(prev()),
     toggleLoop: () => dispatch(toggleLoop()),

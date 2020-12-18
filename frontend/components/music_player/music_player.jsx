@@ -53,6 +53,19 @@ class MusicPlayer extends React.Component {
         this.audio.volume = e.target.value;
     }
 
+    componentDidMount() {
+        document.body.addEventListener("keydown", (e) => {
+            if (e.code === "Space" && e.target == document.body)
+                e.preventDefault();
+        });
+
+        document.body.addEventListener("keyup", (e) => {
+            if (e.code === "Space" && e.target == e.currentTarget) {
+                if (this.props.music.on) this.props.toggle();
+            }
+        });
+    }
+
     componentDidUpdate(prevProps) {
         clearInterval(this.timeSetter);
         if (this.props.music.on) {
