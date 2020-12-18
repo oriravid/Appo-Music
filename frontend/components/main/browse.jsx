@@ -50,7 +50,7 @@ class Browse extends Component {
                         <div className="featured-container">
                             <p>FEATURED</p>
                             <h2>About This Project</h2>
-                            <h2>Learn More</h2>
+                            <h2>Appo Music</h2>
                             <img src="https://appomusic.com/assets/featured/02.jpg" />
                         </div>
                     </Link>

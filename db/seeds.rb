@@ -36,12 +36,22 @@ Artist.create([
     {name: "Alina Baraz", 
         bio: "Alina Baraz\u2019s purr of a voice is deceptively vulnerable\u2014her soft-focus coo drifts within her subdued production choices, but she\u2019s always in control as she unfurls notes that sound as seductive as they do sweet. Born in 1993 in Cleveland, Ohio, the singer\/songwriter was raised on classical music until, as a teenager, she came across the pop-soul of Amy Winehouse, Corinne Bailey Rae, and Adele. Those genre-blurring influences are felt in Baraz\u2019s creations, first heard on 2015\u2019s Urban Flora, a collaborative EP with Denmark electronic producer Galimatias that featured the atmospheric, piano-guided \u201CMake You Feel.\u201D Therein, Baraz ups the intimacy by nearly whispering her way through a tale of a blossoming romance. A similarly heady interpretation of an intoxicating love, \u201CElectric,\u201D featuring Khalid at his dreamiest, appeared on 2018\u2019s The Color of You EP. In 2020, Baraz released her full-length debut, It Was Divine\u2014\u201CTo Me,\u201D a cathartic cut about love\u2019s dwindling embers, illustrates her lockstep relationship with her music. \u201CThis is the most important song in my career thus far,\u201D Baraz tells Apple Music. \u201CIt\u2019s really altered my life as a person, not even as an artist. Sometimes I find that writing gives you a second voice that you\u2019ll listen to more than yourself.\u201D", 
         url: "https://appomusic.com/assets/ab/ab.jpg"},
+
+    #6 - Sublime
+    {name: "Sublime", 
+        bio: "Sublime\u2019s woozy, skanky ska-punk not only represents the \u201CLBC,\u201D but also \u201890s alternative at its most defiant and decadent. Coming out of Long Beach, California, the trio of vocalist\/guitarist Bradley Nowell, bassist Eric Wilson, and drummer Bud Gaugh joined forces in 1988 and soon led the charge in spreading SoCal punk\u2014an urgent, unruly mix of rebel calls drenched in sun, surf, and stoner philosophy\u2014to unsuspecting suburban homes across the U.S. Sidestepping grunge\u2019s moody rock template, Sublime slipped their hardcore melodies with rocksteady riddims, thick dub bass, furious record scratching, and savvy hip-hop sampling, and unabashedly washed it all down with cans of malt liquor\u2014the titular inspiration for their self-released 1992 debut, 40oz. to Freedom. That album and its follow-up, 1994\u2019s Robbin\u2019 the Hood, are scrappy, lo-fi documents of coming-of-age revelations fueled by sex, drugs, and a voracious appetite for rock, reggae, and hip-hop. Sublime name-dropped Bob Marley and KRS-One, covered Grateful Dead and Toots & The Maytals, sampled Primal Scream and The Doors, and introduced Gwen Stefani (on \u201CSaw Red\u201D) at least a year before No Doubt began their rise out of Orange County. With 1996\u2019s Sublime, the band made its launch into the mainstream with career-defining hits \u201CWhat I Got,\u201D \u201CSanteria,\u201D \u201CWrong Way,\u201D and \u201CDoin\u2019 Time,\u201D all of which reveal Nowell as a sharp, sincere poet of the times with his evocative tales of unfaithful lovers, broken homes, and the sun-dazed illusion of lovin\u2019 and livin\u2019 easy. These restless anthems would prove even more potent in the wake of Nowell\u2019s death from a heroin overdose, just two months prior to the album\u2019s release. That tragic loss effectively ended the band (aside from a reboot in 2009 as Sublime with Rome)\u2014but certainly not their influence, which has since reigned over third-wave ska, rap rock, nu-metal, 21st-century genre-obliterators like twenty one pilots and Post Malone, and even Lana Del Rey.", 
+        url: "https://appomusic.com/assets/sb/sb.jpg"},
+
+    #7 - Maroon 5
+    {name: "Maroon 5", 
+        bio: "\"When the video for Maroon 5\u2019s \u201CThis Love\u201D hit MTV in 2004, the network censored two words: coming, as in \u201Ckeep her coming every night,\u201D and sinking, as in \u201Csinking my fingertips into every inch of you.\u201D It\u2019s not that the words were dirty, of course, but the context\u2014well, even as euphemism, they felt a little too R for a song so universally catchy, so G. The incident was, in a way, a precedent: Even as they ascended to megastardom, Maroon 5 has managed to retain a sense of edge and sexuality that seems incomparable with how huge they are, bringing the boudoir to the grocery store while simultaneously remaining one of the 21st century\u2019s few mainstream bands\u2014as in, that old-timey concoction of guitar, bass, drums, and a singer\u2014able to keep pace with the innovations of electronic music and hip-hop.\r\n\r\nMade up primarily of old high-school friends, the band formed in Los Angeles in the early 2000s after an earlier\u2014and musically unrelated\u2014incarnation called Kara\u2019s Flowers failed to launch. Influenced by singer Adam Levine\u2019s then-recent baptism in hip-hop music and culture, 2002\u2019s Songs About Jane was a slow burn, taking about two years to reach the upper end of the charts. The band toured relentlessly, venturing further into soul and Prince-style pop-rock for 2007\u2019s It Won\u2019t Be Soon Before Long, adding both polish and power for 2010\u2019s Hands All Over. In 2011, Levine started serving as a coach on The Voice, launching his own celebrity while expanding the band\u2019s reach even further. \"", 
+        url: "https://appomusic.com/assets/m5/m5.jpg"},
 ])
 
 Album.create([
     #1 - Circles
     {artist_id: 1, 
-        title: "Circles (Deluxe)", 
+        title: "Circles", 
         genre: "Hip-Hop/Rap", 
         release_date: "19/03/2020", 
         url: "https://appomusic.com/assets/mm/cr/cr.jpg", 
@@ -126,6 +136,46 @@ Album.create([
         release_date: "06/04/2018", 
         url: "https://appomusic.com/assets/ab/cy/cy.jpg",
         description: "When Alina Baraz initially emerged in 2015, it was as a duo with Denmark producer Galimatias; the pair's joint EP, Urban Flora, is a package of lush, electronic slow-jams that drew comparisons to Rhye and Lana Del Rey. Here, on her first full-length, Baraz steps into the spotlight with minimalist R&B songs that put her silky soprano front and center. Experimental electronic production still plays a part\u2014\u201CI Don\u2019t Even Know Why Though\u201D is a swirling duet between her and the synthesizer\u2014but even when she\u2019s joined by breakout star Khalid (\u201CFloating,\u201D \u201CElectric\u201D), it\u2019s Baraz\u2019s smoky whisper that keeps us wanting more."},
+
+    #12 - Sublime
+    {artist_id: 6, 
+        title: "Sublime", 
+        genre: "Alternative", 
+        release_date: "30/07/1996", 
+        url: "https://appomusic.com/assets/sb/sb/sb.jpg",
+        description: "Full of unruly insouciance, Sublime’s eponymous third venture packs bong-powered summertime hits that made frontman Bradley Nowell immortal. His final record—which dropped weeks after his untimely death in 1996—is driven by slacker ska-punk debauchery, taking spectators on a wild ride fueled by tales of looting liquor stores (the sly, spunky bop of “April 29, 1992 (Miami)”) and popping a cap in Sancho (the bouncy upstroke of “Santeria”). Its languorous rhythms and puerile soul beguile with the defiant spirit of ‘90s alt-rock, which this masterpiece helped define."},
+
+    #13 - Second-Hand Smoke
+    {artist_id: 6, 
+        title: "Second-Hand Smoke", 
+        genre: "Pop", 
+        release_date: "11/11/1997", 
+        url: "https://appomusic.com/assets/sb/ss/ss.jpg",
+        description: "Second-hand Smoke is a compilation album by the band Sublime. It was released in 1997 following the death of lead singer Bradley Nowell the year before. Although this is technically a compilation album, it features some unreleased material as well as recycled and remixed versions of previous tracks. It is also regarded as their final album. Even though the surviving members of Sublime (Eric Wilson and Bud Gaugh) stated that the band would not make any more albums after Nowell's death, which would result in the band's breakup, MCA bound them by their contract and made the remaining members follow out their contract with the next 3 albums. Instead of recording more albums with Sublime, Wilson and Gaugh would record together in their later projects Long Beach Dub Allstars and Sublime with Rome."},
+
+    #14 - Songs About Jane
+    {artist_id: 7, 
+        title: "Songs About Jane", 
+        genre: "Pop", 
+        release_date: "25/06/2002", 
+        url: "https://appomusic.com/assets/m5/sj/sj.jpg",
+        description: "The opening \u201CHarder to Breathe\u201D grooves on a funky rock foundation, with Levine hitting high tenor notes. \u201CThis Love\u201D is just as catchy, with dialed-down guitars and an octane boost to the band\u2019s funk engine. \u201CShe Will Be Loved\u201D simmers down for a beachy serenade before the strolling \u201CSunday Morning\u201D braids Levine\u2019s love for Jay Kay and Stevie Wonder with some Philly-flavored blue-eyed soul."},
+
+    #15 - It Wont Be Soon Before Long
+    {artist_id: 7, 
+        title: "It Wont Be Soon Before Long", 
+        genre: "Pop", 
+        release_date: "16/05/2007", 
+        url: "https://appomusic.com/assets/m5/ws/ws.jpg",
+        description: "Though it took them five years to do it, Maroon 5 more than fulfilled expectations with their sophomore album, 2007's It Won\u2019t Be Soon Before Long. Frontman Adam Levine and his cohorts concentrated on getting the essentials right by delivering expertly crafted songs buffed to an ear-catching sheen by such production notables as Spike Stent, Mike Elizondo, and Eric Valentine. Tracks like \u201CIf I Never See Your Face Again,\u201D \"Little of Your Time,\u201D and \u201CKiwi\u201D combine insistent catchiness with a cocky attitude that retains a boyish charm. The band skew toward elegant R&B on \u201CNothing Lasts Forever,\u201D fuse rock and funk on \u201CCan\u2019t Stop,\u201D and offer bittersweet acoustic balladry with \u201CBetter That We Break.\u201D"},
+
+    #16 - What Lovers Do (feat. SZA) - Single
+    {artist_id: 7, 
+        title: "What Lovers Do (feat. SZA) - Single", 
+        genre: "Pop", 
+        release_date: "30/08/2017", 
+        url: "https://appomusic.com/assets/m5/ld/ld.jpg",
+        description: "\"What Lovers Do\" is a song by the American band Maroon 5 featuring the American R&B singer SZA. It was released on August 30, 2017, as the third single from the band's sixth studio album Red Pill Blues (2017). The song contains an interpolation of the 2016 song \"Sexual\" by Neiked featuring Dyo, therefore Victor R\u00E5dstr\u00F6m, Dyo and Elina Stridh are credited as songwriters."},
 
 ])
 
@@ -294,38 +344,133 @@ Track.create([
     {album_id: 11, track_number: 8, duration: "3:27", title: "Yours", url: "https://appomusic.com/assets/ab/cy/08.mp3"},
     {album_id: 11, track_number: 9, duration: "4:06", title: "Electric (feat. Khalid)", url: "https://appomusic.com/assets/ab/cy/09.mp3", play_count: 90},
 
-    ])
+    #12 - Sublime
+    {album_id: 12, track_number: 1, duration: "4:21", title: "Garden Grove", url: "https://appomusic.com/assets/sb/sb/01.mp3"},
+    {album_id: 12, track_number: 2, duration: "2:50", title: "What I Got", url: "https://appomusic.com/assets/sb/sb/02.mp3", play_count: 150},
+    {album_id: 12, track_number: 3, duration: "2:16", title: "Wrong Way", url: "https://appomusic.com/assets/sb/sb/03.mp3", play_count: 70},
+    {album_id: 12, track_number: 4, duration: "2:36", title: "Same In The End", url: "https://appomusic.com/assets/sb/sb/04.mp3"},
+    {album_id: 12, track_number: 5, duration: "3:53", title: "April 29, 1992 (Miami)", url: "https://appomusic.com/assets/sb/sb/05.mp3"},
+    {album_id: 12, track_number: 6, duration: "3:02", title: "Santeria", url: "https://appomusic.com/assets/sb/sb/06.mp3", play_count: 130},
+    {album_id: 12, track_number: 7, duration: "2:10", title: "Seed", url: "https://appomusic.com/assets/sb/sb/07.mp3"},
+    {album_id: 12, track_number: 8, duration: "4:52", title: "Jailhouse", url: "https://appomusic.com/assets/sb/sb/08.mp3"},
+    {album_id: 12, track_number: 9, duration: "6:05", title: "Pawn Shop", url: "https://appomusic.com/assets/sb/sb/09.mp3"},
+    {album_id: 12, track_number: 10, duration: "1:15", title: "Paddle Out", url: "https://appomusic.com/assets/sb/sb/10.mp3"},
+    {album_id: 12, track_number: 11, duration: "2:11", title: "The Ballad of Johnny Butt", url: "https://appomusic.com/assets/sb/sb/11.mp3"},
+    {album_id: 12, track_number: 12, duration: "3:54", title: "Burritos", url: "https://appomusic.com/assets/sb/sb/12.mp3"},
+    {album_id: 12, track_number: 13, duration: "3:25", title: "Under My Voodoo", url: "https://appomusic.com/assets/sb/sb/13.mp3"},
+    {album_id: 12, track_number: 14, duration: "4:50", title: "Get Ready", url: "https://appomusic.com/assets/sb/sb/14.mp3"},
+    {album_id: 12, track_number: 15, duration: "3:31", title: "Caress Me Down", url: "https://appomusic.com/assets/sb/sb/15.mp3", play_count: 60},
+    {album_id: 12, track_number: 16, duration: "3:01", title: "What I Got (Reprise)", url: "https://appomusic.com/assets/sb/sb/16.mp3"},
+    {album_id: 12, track_number: 17, duration: "4:13", title: "Doin' Time", url: "https://appomusic.com/assets/sb/sb/17.mp3"},
+
+    #13 - Second-Hand Smoke
+    {album_id: 13, track_number: 1, duration: "3:47", title: "Doin' Time (Uptown Dub)", url: "https://appomusic.com/assets/sb/ss/01.mp3"},
+    {album_id: 13, track_number: 2, duration: "3:40", title: "Get Out! (Remix)", url: "https://appomusic.com/assets/sb/ss/02.mp3"},
+    {album_id: 13, track_number: 3, duration: "4:31", title: "Romeo", url: "https://appomusic.com/assets/sb/ss/03.mp3"},
+    {album_id: 13, track_number: 4, duration: "2:22", title: "New Realization", url: "https://appomusic.com/assets/sb/ss/04.mp3"},
+    {album_id: 13, track_number: 5, duration: "3:55", title: "Don't Push", url: "https://appomusic.com/assets/sb/ss/05.mp3"},
+    {album_id: 13, track_number: 6, duration: "4:22", title: "Slow Ride", url: "https://appomusic.com/assets/sb/ss/06.mp3"},
+    {album_id: 13, track_number: 7, duration: "3:16", title: "Chick on My Tip", url: "https://appomusic.com/assets/sb/ss/07.mp3"},
+    {album_id: 13, track_number: 8, duration: "3:31", title: "Had a Dat", url: "https://appomusic.com/assets/sb/ss/08.mp3"},
+    {album_id: 13, track_number: 9, duration: "1:41", title: "Trenchtown Rock", url: "https://appomusic.com/assets/sb/ss/09.mp3", play_count: 80},
+    {album_id: 13, track_number: 10, duration: "3:06", title: "Badfish", url: "https://appomusic.com/assets/sb/ss/10.mp3", play_count: 120},
+    {album_id: 13, track_number: 11, duration: "0:18", title: "Drunk Drivin'", url: "https://appomusic.com/assets/sb/ss/11.mp3"},
+    {album_id: 13, track_number: 12, duration: "1:58", title: "Saw Reed (feat. Gwen Stefani)", url: "https://appomusic.com/assets/sb/ss/12.mp3"},
+    {album_id: 13, track_number: 13, duration: "2:12", title: "Garbage Grove", url: "https://appomusic.com/assets/sb/ss/13.mp3"},
+    {album_id: 13, track_number: 14, duration: "3:47", title: "April 29th, 1992 (Leary)", url: "https://appomusic.com/assets/sb/ss/14.mp3"},
+    {album_id: 13, track_number: 15, duration: "3:17", title: "Superstar Punani", url: "https://appomusic.com/assets/sb/ss/15.mp3"},
+    {album_id: 13, track_number: 16, duration: "3:11", title: "Legal Dub", url: "https://appomusic.com/assets/sb/ss/16.mp3"},
+    {album_id: 13, track_number: 17, duration: "2:35", title: "What's Really Goin' Wrong", url: "https://appomusic.com/assets/sb/ss/17.mp3"},
+    {album_id: 13, track_number: 18, duration: "5:16", title: "Doin' Time (Eerie Splendor Remix)", url: "https://appomusic.com/assets/sb/ss/18.mp3"},
+    {album_id: 13, track_number: 19, duration: "6:29", title: "Thanx Dub", url: "https://appomusic.com/assets/sb/ss/19.mp3"},
+
+    #14 - Songs About Jane
+    {album_id: 14, track_number: 1, duration: "2:54", title: "Harder To Breathe", url: "https://appomusic.com/assets/m5/sj/01.mp3"},
+    {album_id: 14, track_number: 2, duration: "3:27", title: "This Love", url: "https://appomusic.com/assets/m5/sj/02.mp3", play_count: 110},
+    {album_id: 14, track_number: 3, duration: "3:01", title: "Shiver", url: "https://appomusic.com/assets/m5/sj/03.mp3"},
+    {album_id: 14, track_number: 4, duration: "4:18", title: "She Will Be Loved", url: "https://appomusic.com/assets/m5/sj/04.mp3", play_count: 90},
+    {album_id: 14, track_number: 5, duration: "3:18", title: "Tangled", url: "https://appomusic.com/assets/m5/sj/05.mp3"},
+    {album_id: 14, track_number: 6, duration: "4:13", title: "The Sun", url: "https://appomusic.com/assets/m5/sj/06.mp3"},
+    {album_id: 14, track_number: 7, duration: "3:58", title: "Must Get Out", url: "https://appomusic.com/assets/m5/sj/07.mp3"},
+    {album_id: 14, track_number: 8, duration: "4:03", title: "Sunday Morning", url: "https://appomusic.com/assets/m5/sj/08.mp3", play_count: 100},
+    {album_id: 14, track_number: 9, duration: "4:57", title: "Secret", url: "https://appomusic.com/assets/m5/sj/09.mp3"},
+    {album_id: 14, track_number: 10, duration: "3:02", title: "Through With You", url: "https://appomusic.com/assets/m5/sj/10.mp3"},
+    {album_id: 14, track_number: 11, duration: "4:23", title: "Not Coming Home", url: "https://appomusic.com/assets/m5/sj/11.mp3"},
+    {album_id: 14, track_number: 12, duration: "4:28", title: "Sweetest Goodbye", url: "https://appomusic.com/assets/m5/sj/12.mp3"},
+
+    #15 - It Wont Be Soon Before Long
+    {album_id: 15, track_number: 1, duration: "3:21", title: "If I Never See Your Face Again", url: "https://appomusic.com/assets/m5/ws/01.mp3"},
+    {album_id: 15, track_number: 2, duration: "3:31", title: "Makes Me Wonder", url: "https://appomusic.com/assets/m5/ws/02.mp3", play_count: 80},
+    {album_id: 15, track_number: 3, duration: "2:17", title: "Little of Your Time", url: "https://appomusic.com/assets/m5/ws/03.mp3"},
+    {album_id: 15, track_number: 4, duration: "3:20", title: "Wake Up Call", url: "https://appomusic.com/assets/m5/ws/04.mp3"},
+    {album_id: 15, track_number: 5, duration: "3:51", title: "Won't Go Home Without You", url: "https://appomusic.com/assets/m5/ws/05.mp3"},
+    {album_id: 15, track_number: 6, duration: "3:07", title: "Nothing Lasts Forver", url: "https://appomusic.com/assets/m5/ws/06.mp3"},
+    {album_id: 15, track_number: 7, duration: "2:37", title: "Can't Stop", url: "https://appomusic.com/assets/m5/ws/07.mp3"},
+    {album_id: 15, track_number: 8, duration: "4:03", title: "Goodnight Goodnight", url: "https://appomusic.com/assets/m5/ws/08.mp3"},
+    {album_id: 15, track_number: 9, duration: "4:06", title: "Not Falling Apart", url: "https://appomusic.com/assets/m5/ws/09.mp3"},
+    {album_id: 15, track_number: 10, duration: "3:34", title: "Kiwi", url: "https://appomusic.com/assets/m5/ws/10.mp3"},
+    {album_id: 15, track_number: 11, duration: "3:07", title: "Better That We Break", url: "https://appomusic.com/assets/m5/ws/11.mp3"},
+    {album_id: 15, track_number: 12, duration: "3:47", title: "Back At Your Door", url: "https://appomusic.com/assets/m5/ws/12.mp3"},
+    {album_id: 15, track_number: 13, duration: "4:27", title: "Infatuation", url: "https://appomusic.com/assets/m5/ws/13.mp3", play_count: 70},
+
+    #16 - What Lovers Do (feat. SZA) - Single
+    {album_id: 16, track_number: 1, duration: "3:19", title: "What Lovers Do (feat. SZA)", url: "https://appomusic.com/assets/m5/ld/01.mp3", play_count: 120},
+
+])
 
 Playlist.create([
-    {user_id: 1, title: "Beach bash 2015"},
-    {user_id: 1, title: "Graduation"},
-    {user_id: 1, title: "House party"},
-    {user_id: 1, title: "Rap Slapz"},
+    {user_id: 1, title: "Daydrankin'"},
+    {user_id: 1, title: "House Party Rager 2021"},
+    {user_id: 1, title: "Quarantine Feelz"},
 ])
 
 PlaylistTrack.create([
-    {playlist_id: 1, track_id: 1},
-    {playlist_id: 1, track_id: 14},
-    {playlist_id: 1, track_id: 26},
-    {playlist_id: 1, track_id: 37},
-    {playlist_id: 1, track_id: 49},
-    {playlist_id: 1, track_id: 62},
-    {playlist_id: 1, track_id: 75},
-    {playlist_id: 1, track_id: 91},
-    {playlist_id: 1, track_id: 102},
-])
+    {playlist_id: 3, track_id: 118},
+    {playlist_id: 3, track_id: 139},
+    {playlist_id: 3, track_id: 182},
+    {playlist_id: 3, track_id: 44},
+    {playlist_id: 3, track_id: 13},
+    {playlist_id: 3, track_id: 120},
+    {playlist_id: 3, track_id: 135},
+    {playlist_id: 3, track_id: 33},
+    {playlist_id: 3, track_id: 60},
+    {playlist_id: 3, track_id: 62},
+    {playlist_id: 3, track_id: 66},
+    {playlist_id: 3, track_id: 126},
+    {playlist_id: 3, track_id: 75},
+    {playlist_id: 3, track_id: 51},
+    {playlist_id: 3, track_id: 4},
+    {playlist_id: 3, track_id: 8},
+    {playlist_id: 3, track_id: 37},
+    {playlist_id: 3, track_id: 121},
 
-UserSave.create([
-    {user_id: 1, track_id: 64},
-    {user_id: 1, track_id: 1},
-    {user_id: 1, track_id: 2},
-    {user_id: 1, track_id: 3},
-    {user_id: 1, track_id: 44},
-    {user_id: 1, track_id: 45}, 
-    {user_id: 1, track_id: 49}, 
-    {user_id: 1, track_id: 15},
-    {user_id: 1, track_id: 16},
-    {user_id: 1, track_id: 19}, 
-    {user_id: 1, track_id: 32},
-    {user_id: 1, track_id: 56},
+    {playlist_id: 2, track_id: 204},
+    {playlist_id: 2, track_id: 17},
+    {playlist_id: 2, track_id: 30},
+    {playlist_id: 2, track_id: 27},
+    {playlist_id: 2, track_id: 91},
+    {playlist_id: 2, track_id: 89},
+    {playlist_id: 2, track_id: 104},
+    {playlist_id: 2, track_id: 117},
+    {playlist_id: 2, track_id: 14},
+
+    {playlist_id: 1, track_id: 204 },
+    {playlist_id: 1, track_id: 45 },
+    {playlist_id: 1, track_id: 145 },
+    {playlist_id: 1, track_id: 50 },
+    {playlist_id: 1, track_id: 119 },
+    {playlist_id: 1, track_id: 36 },
+    {playlist_id: 1, track_id: 180 },
+    {playlist_id: 1, track_id: 186 },
+    {playlist_id: 1, track_id: 73 },
+    {playlist_id: 1, track_id: 160 },
+    {playlist_id: 1, track_id: 148 },
+    {playlist_id: 1, track_id: 67 },
+    {playlist_id: 1, track_id: 74 },
+    {playlist_id: 1, track_id: 169 },
+    {playlist_id: 1, track_id: 195 },
+    {playlist_id: 1, track_id: 144 },
+    {playlist_id: 1, track_id: 203 },
+    {playlist_id: 1, track_id: 64 },
+
 ])

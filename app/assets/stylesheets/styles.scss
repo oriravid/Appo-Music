@@ -889,6 +889,14 @@ img.album-artwork {
     border-bottom: 1px solid $border-color;
 }
 
+.featured-section a:first-child {
+    margin-right: 10px;
+}
+
+.featured-section a:last-child {
+    margin-left: 10px;
+}
+
 .featured-container {
     display: inline-block;
     width: calc(50% - 20px);
@@ -897,13 +905,6 @@ img.album-artwork {
 
 .featured-container:hover img {
     filter: brightness(0.8);
-}
-
-.featured-container:first-child {
-    margin-right: 10px;
-}
-.featured-container:last-child {
-    margin-left: 10px;
 }
 
 .featured-container p {
@@ -1119,12 +1120,13 @@ img.album-artwork {
 
 .artist-header {
     position: relative;
-    height: calc(100vw / 3.35);
+    height: calc(100vw / 3);
     min-height: 325px;
-    max-height: 650px;
+    max-height: 550px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position-x: center;
+    background-position-y: 15%;
     margin: -40px -40px 0 -40px;
     padding: 25px 40px;
     display: flex;
