@@ -2609,32 +2609,27 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleScrub",
     value: function handleScrub(e) {
-      // clearInterval(this.timeSetter);
-      this.audio.currentTime = e.target.value; // this.handleInterval();
+      this.audio.currentTime = e.target.value;
     }
   }, {
-    key: "handlePrev",
-    value: function handlePrev() {
+    key: "handleNextPrev",
+    value: function handleNextPrev(action) {
       if (this.state.currentTime > this.state.timeLeft) {
         (0,_utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_3__.increasePlayCount)(this.props.currentTrack.id);
       }
 
-      this.props.prev();
-    }
-  }, {
-    key: "handleNext",
-    value: function handleNext() {
-      if (this.state.currentTime > this.state.timeLeft) {
-        (0,_utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_3__.increasePlayCount)(this.props.currentTrack.id);
+      if (this.props.music.queue.length == 1 && this.props.music.loop) {
+        this.audio.currentTime = 0;
+      } else {
+        action == "next" ? this.props.next() : this.props.prev();
       }
-
-      this.props.next();
     }
   }, {
     key: "handleVolume",
     value: function handleVolume(e) {
       this.audio.volume = e.target.value;
-    }
+    } //spacebar play/pause logic
+
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
@@ -2657,17 +2652,15 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       clearInterval(this.timeSetter);
 
       if (this.props.music.on) {
-        // this.timeSetter = null;
-        // this.scrub.value = this.scrub.value || 0;
         if (this.props.currentTrack !== prevProps.currentTrack) {
           this.audio.src = this.props.currentTrack.url;
         }
 
         this.audio.onloadedmetadata = function () {
-          this.setState({
-            duration: this.audio.duration
+          return _this4.setState({
+            duration: _this4.audio.duration
           });
-        }.bind(this);
+        };
       }
 
       if (this.props.music.playing) {
@@ -2675,7 +2668,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         this.handleInterval();
 
         this.audio.onended = function () {
-          _this4.handleNext();
+          _this4.handleNextPrev("next");
         };
       } else {
         this.audio.pause();
@@ -2766,7 +2759,11 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         src: trackUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "controls"
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.shuffle("icon sml".concat(sActive), this.props.toggleShuffle), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.previous("icon med".concat(disabled), this.handlePrev.bind(this)), playpause, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.next("icon med".concat(disabled), this.handleNext.bind(this)), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.loop("icon sml".concat(lActive), this.props.toggleLoop)), display, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.shuffle("icon sml".concat(sActive), this.props.toggleShuffle), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.previous("icon med".concat(disabled), function () {
+        return _this5.handleNextPrev("prev");
+      }), playpause, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.next("icon med".concat(disabled), function () {
+        return _this5.handleNextPrev("next");
+      }), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.loop("icon sml".concat(lActive), this.props.toggleLoop)), display, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "volume"
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.volume("icon", function () {
         return console.log("volume");

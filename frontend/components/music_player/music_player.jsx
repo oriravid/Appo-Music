@@ -1,5 +1,5 @@
 //ext
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 //int - util
 import * as icons from "../../utils/icons";
@@ -28,31 +28,26 @@ class MusicPlayer extends React.Component {
     }
 
     handleScrub(e) {
-        // clearInterval(this.timeSetter);
         this.audio.currentTime = e.target.value;
-        // this.handleInterval();
     }
 
-    handlePrev() {
+    handleNextPrev(action) {
         if (this.state.currentTime > this.state.timeLeft) {
             increasePlayCount(this.props.currentTrack.id);
         }
 
-        this.props.prev();
-    }
-
-    handleNext() {
-        if (this.state.currentTime > this.state.timeLeft) {
-            increasePlayCount(this.props.currentTrack.id);
+        if (this.props.music.queue.length == 1 && this.props.music.loop) {
+            this.audio.currentTime = 0;
+        } else {
+            action == "next" ? this.props.next() : this.props.prev();
         }
-
-        this.props.next();
     }
 
     handleVolume(e) {
         this.audio.volume = e.target.value;
     }
 
+    //spacebar play/pause logic
     componentDidMount() {
         document.body.addEventListener("keydown", (e) => {
             if (e.code === "Space" && e.target == document.body)
@@ -69,16 +64,12 @@ class MusicPlayer extends React.Component {
     componentDidUpdate(prevProps) {
         clearInterval(this.timeSetter);
         if (this.props.music.on) {
-            // this.timeSetter = null;
-            // this.scrub.value = this.scrub.value || 0;
-
             if (this.props.currentTrack !== prevProps.currentTrack) {
                 this.audio.src = this.props.currentTrack.url;
             }
 
-            this.audio.onloadedmetadata = function () {
+            this.audio.onloadedmetadata = () =>
                 this.setState({ duration: this.audio.duration });
-            }.bind(this);
         }
 
         if (this.props.music.playing) {
@@ -87,7 +78,7 @@ class MusicPlayer extends React.Component {
             this.handleInterval();
 
             this.audio.onended = () => {
-                this.handleNext();
+                this.handleNextPrev("next");
             };
         } else {
             this.audio.pause();
@@ -188,14 +179,12 @@ class MusicPlayer extends React.Component {
                             `icon sml${sActive}`,
                             this.props.toggleShuffle
                         )}
-                        {icons.previous(
-                            `icon med${disabled}`,
-                            this.handlePrev.bind(this)
+                        {icons.previous(`icon med${disabled}`, () =>
+                            this.handleNextPrev("prev")
                         )}
                         {playpause}
-                        {icons.next(
-                            `icon med${disabled}`,
-                            this.handleNext.bind(this)
+                        {icons.next(`icon med${disabled}`, () =>
+                            this.handleNextPrev("next")
                         )}
                         {icons.loop(
                             `icon sml${lActive}`,
