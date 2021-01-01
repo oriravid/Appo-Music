@@ -221,6 +221,7 @@ h3 {
 }
 
 .input-container.search {
+    position: relative;
     margin: 25px 0;
 }
 
@@ -361,6 +362,18 @@ h3 {
     font-size: 18px;
     text-transform: uppercase;
     box-shadow: $box-shadow;
+}
+
+// Search Results
+//////////////////////////////////////////////////////////////////////////////
+
+.search-results-container {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    top: 40px;
+    left: 0;
+    background-color: white;
 }
 
 // Main Container

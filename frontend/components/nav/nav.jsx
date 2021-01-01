@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 //int - components
+import SearchContainer from "./search_container";
 import PlaylistsIndexContainer from "../playlists/playlists_index_container";
 //int - util
 import * as icons from "../../utils/icons";
@@ -93,10 +94,7 @@ class Nav extends Component {
                         <h1>Music</h1>
                     </div>
                 </Link>
-                <div className="input-container search">
-                    {icons.search("icon")}
-                    <input type="text" placeholder="Search"></input>
-                </div>
+                <SearchContainer />
                 {display}
             </div>
         );

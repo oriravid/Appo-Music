@@ -20,6 +20,7 @@
 #                           DELETE /api/playlists/:id(.:format)                                                             api/playlists#destroy {:format=>:json}
 #            api_user_saves POST   /api/user_saves(.:format)                                                                api/user_saves#create {:format=>:json}
 #                           DELETE /api/user_saves(.:format)                                                                api/user_saves#destroy {:format=>:json}
+#          api_search_index GET    /api/search(.:format)                                                                    api/search#index {:format=>:json}
 #                      root GET    /                                                                                        root#root
 
 Rails.application.routes.draw do
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
     resources :user_saves, only: [:create]
     delete '/user_saves/', to: 'user_saves#destroy'
 
+    resources :search, only: [:index]
 
   end
   
