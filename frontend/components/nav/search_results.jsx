@@ -8,6 +8,7 @@ const SearchResults = ({ results, clearSearch, history }) => {
 
     const renderResults = (typeResults, type) => {
         if (!typeResults.length) return;
+
         return (
             <React.Fragment>
                 <ul className="search-results-list">
@@ -26,8 +27,12 @@ const SearchResults = ({ results, clearSearch, history }) => {
                             ></div>
                             <span>
                                 {type === "Artists"
-                                    ? result.name
-                                    : result.title}
+                                    ? result.name.length < 32
+                                        ? result.name
+                                        : result.name.slice(0, 29) + "..."
+                                    : result.title.length < 32
+                                    ? result.title
+                                    : result.title.slice(0, 29) + "..."}
                             </span>
                         </li>
                     ))}
@@ -50,7 +55,7 @@ const SearchResults = ({ results, clearSearch, history }) => {
 
     if (resultsEmpty) {
         return (
-            <div className="search-results-container">
+            <div className="search-results-container no-results">
                 <span>No results found</span>
             </div>
         );

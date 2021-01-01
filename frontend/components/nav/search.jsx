@@ -36,6 +36,11 @@ class Search extends Component {
                     type="text"
                     placeholder="Search"
                     onChange={this.handleInput.bind(this)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Escape") {
+                            this.handleClearSearch();
+                        }
+                    }}
                     value={this.state.searchQuery}
                 />
                 {this.state.searchQuery ? (

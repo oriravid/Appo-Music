@@ -3338,6 +3338,11 @@ var Search = /*#__PURE__*/function (_Component) {
         type: "text",
         placeholder: "Search",
         onChange: this.handleInput.bind(this),
+        onKeyDown: function onKeyDown(e) {
+          if (e.key === "Escape") {
+            _this3.handleClearSearch();
+          }
+        },
         value: this.state.searchQuery
       }), this.state.searchQuery ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_results__WEBPACK_IMPORTED_MODULE_1__.default, {
         results: this.props.searchResults,
@@ -3452,7 +3457,7 @@ var SearchResults = function SearchResults(_ref) {
         style: {
           backgroundImage: "url(".concat(result.url, ")")
         }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, type === "Artists" ? result.name : result.title));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, type === "Artists" ? result.name.length < 32 ? result.name : result.name.slice(0, 29) + "..." : result.title.length < 32 ? result.title : result.title.slice(0, 29) + "..."));
     })));
   };
 
@@ -3471,7 +3476,7 @@ var SearchResults = function SearchResults(_ref) {
 
   if (resultsEmpty) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "search-results-container"
+      className: "search-results-container no-results"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "No results found"));
   } else {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
