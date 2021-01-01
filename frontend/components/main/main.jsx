@@ -1,5 +1,6 @@
 //ext
 import React from "react";
+import { withRouter } from "react-router";
 import { Switch, Route, Redirect } from "react-router-dom";
 //int - components
 import MusicPlayerContainer from "../music_player/music_player_container";
@@ -13,7 +14,11 @@ import Footer from "./footer";
 //int - utils
 import { ProtectedRoute } from "../../utils/route_utils";
 
-const Main = () => {
+const Main = ({ history }) => {
+    history.listen(() => {
+        document.querySelector(".main-content").scrollTo(0, 0);
+    });
+
     return (
         <div className="main">
             <MusicPlayerContainer />

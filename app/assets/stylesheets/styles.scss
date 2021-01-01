@@ -145,6 +145,11 @@ h3 {
     height: 34px;
 }
 
+.icon.xlrg {
+    width: 38px;
+    height: 38px;
+}
+
 .icon.inline {
     display: inline-block;
     vertical-align: middle;
@@ -374,7 +379,7 @@ h3 {
 .music-player {
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 10;
     background-color: rgba(255, 255, 255, 0.97);
     border-bottom: 1px solid $border-color;
 }
@@ -899,7 +904,7 @@ img.album-artwork {
 
 .featured-container {
     display: inline-block;
-    width: calc(50% - 20px);
+    width: calc(50% - 10px);
     object-fit: cover;
 }
 
@@ -945,24 +950,23 @@ img.album-artwork {
     border-bottom: 1px solid $border-color;
 }
 
-.albums-slider::before {
-    content: "";
+.albums-slider-edges {
     position: absolute;
-    left: -15px;
-    background: linear-gradient(to right, white, transparent);
-    height: 100%;
-    width: 1.5%;
-    z-index: 2;
-}
-
-.albums-slider::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 15px;
-    background: linear-gradient(to left, white, transparent);
-    height: 100%;
-    width: 1.5%;
+    pointer-events: none;
+    top: 36px;
+    bottom: 0;
+    left: -16px;
+    right: -16px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 1%,
+        rgba(255, 255, 255, 0) 3%,
+        rgba(255, 255, 255, 0) 97%,
+        rgba(255, 255, 255, 1) 99%,
+        rgba(255, 255, 255, 1) 100%
+    );
     z-index: 2;
 }
 
@@ -972,13 +976,47 @@ img.album-artwork {
 }
 
 .albums-slider-list {
-    margin: -15px;
-    padding: 15px;
-    width: 100%;
+    position: relative;
+    margin: 0 -15px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: flex-start;
     overflow-x: scroll;
+}
+
+.albums-slider-arrow {
+    display: flex;
+    margin: 0 -10px;
+    opacity: 0;
+    flex-flow: column;
+    justify-content: center;
+    position: absolute;
+    height: (13vw);
+    min-height: 145px;
+    max-height: 250px;
+    z-index: 5;
+    transition: all 0.5s;
+}
+
+.albums-slider-arrow.left {
+    left: -25px;
+}
+
+.albums-slider-arrow.right {
+    right: -25px;
+}
+
+.albums-slider:hover .albums-slider-arrow {
+    opacity: 1;
+}
+
+.albums-slider-list > .albums-slider-list-item:first-child {
+    margin-left: 15px;
+    z-index: 4;
+}
+
+.albums-slider-list.scrolled > .albums-slider-list-item:first-child {
+    z-index: 0;
 }
 
 .albums-shelf {
