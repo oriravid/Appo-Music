@@ -1,7 +1,7 @@
 //ext
 import { connect } from "react-redux";
 //int - containers
-import Search from "./Search";
+import Search from "./search";
 //int - actions
 import { runSearch } from "../../actions/search_actions";
 
