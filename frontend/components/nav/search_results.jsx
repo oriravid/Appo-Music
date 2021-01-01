@@ -1,11 +1,68 @@
+//ext
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 
-const SearchResults = ({ searchResults }) => {
-    return (
-        <div className="search-results-container">
-            <h1>SEARCH RESULTS</h1>
-        </div>
-    );
+const SearchResults = ({ results, clearSearch, history }) => {
+    const { artists, albums, tracks } = results;
+    var resultsEmpty = Object.values(results).every((result) => !result.length);
+
+    const renderResults = (typeResults, type) => {
+        if (!typeResults.length) return;
+        return (
+            <React.Fragment>
+                <ul className="search-results-list">
+                    <span className="search-results-list-title">{type}</span>
+                    {typeResults.map((result) => (
+                        <li
+                            className="search-results-list-item pointer"
+                            key={result.id}
+                            onClick={() => handleResultClick(result, type)}
+                        >
+                            <div
+                                className="search-image"
+                                style={{
+                                    backgroundImage: `url(${result.url})`,
+                                }}
+                            ></div>
+                            <span>
+                                {type === "Artists"
+                                    ? result.name
+                                    : result.title}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </React.Fragment>
+        );
+    };
+
+    const handleResultClick = (result, type) => {
+        if (type === "Songs") {
+            history.push({
+                pathname: `/albums/${result.albumId}`,
+                trackId: result.id,
+            });
+        } else {
+            history.push(`/${type.toLowerCase()}/${result.id}`);
+        }
+        clearSearch();
+    };
+
+    if (resultsEmpty) {
+        return (
+            <div className="search-results-container">
+                <span>No results found</span>
+            </div>
+        );
+    } else {
+        return (
+            <div className="search-results-container">
+                {renderResults(artists, "Artists")}
+                {renderResults(albums, "Albums")}
+                {renderResults(tracks, "Songs")}
+            </div>
+        );
+    }
 };
 
-export default SearchResults;
+export default withRouter(SearchResults);

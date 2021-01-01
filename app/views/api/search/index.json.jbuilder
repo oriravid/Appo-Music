@@ -12,7 +12,7 @@ end
 
 json.tracks do 
     json.array!(@tracks) do |track|
-        json.extract! track, :id, :title
+        json.extract! track, :id, :title, :album_id
         json.url track.album.url
     end
 end

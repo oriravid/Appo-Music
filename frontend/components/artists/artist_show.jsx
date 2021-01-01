@@ -28,6 +28,17 @@ class ArtistShow extends Component {
             .then((res) => this.setState({ loading: false }));
     }
 
+    componentDidUpdate(prevProps) {
+        if (
+            prevProps.match.params.artistId !== this.props.match.params.artistId
+        ) {
+            this.setState({ loading: true });
+            this.props
+                .getArtistDetails(this.props.match.params.artistId)
+                .then((res) => this.setState({ loading: false }));
+        }
+    }
+
     render() {
         if (this.state.loading) {
             return <Loading />;

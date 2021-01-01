@@ -14,32 +14,43 @@ class Search extends Component {
     }
 
     handleInput(e) {
-        this.setState({ searchQuery: e.currentTarget.value });
+        this.setState({ searchQuery: e.currentTarget.value }, () => {
+            if (this.state.searchQuery) {
+                this.props.runSearch(this.state.searchQuery);
+            } else {
+                this.props.clearSearch();
+            }
+        });
     }
 
-    handleSearch(e, iconClick) {
-        if ((e.key === "Enter" || iconClick) && this.state.searchQuery) {
-            this.props.runSearch(this.state.searchQuery);
-        }
+    handleClearSearch() {
+        this.setState({ searchQuery: "" });
+        this.props.clearSearch();
     }
 
     render() {
         return (
             <div className="input-container search">
-                {icons.search("icon pointer", (e) =>
-                    this.handleSearch(e, true)
-                )}
+                {icons.search("icon")}
                 <input
                     type="text"
                     placeholder="Search"
                     onChange={this.handleInput.bind(this)}
-                    onKeyPress={this.handleSearch.bind(this)}
-                ></input>
-                {Object.values(this.props.searchResults).length ? (
-                    <SearchResults results={this.props.searchResults} />
+                    value={this.state.searchQuery}
+                />
+                {this.state.searchQuery ? (
+                    <SearchResults
+                        results={this.props.searchResults}
+                        clearSearch={this.handleClearSearch.bind(this)}
+                    />
                 ) : (
                     ""
                 )}
+                {this.state.searchQuery
+                    ? icons.close("icon pointer", () =>
+                          this.handleClearSearch()
+                      )
+                    : ""}
             </div>
         );
     }
