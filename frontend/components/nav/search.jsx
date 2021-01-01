@@ -43,7 +43,7 @@ class Search extends Component {
                     }}
                     value={this.state.searchQuery}
                 />
-                {this.state.searchQuery ? (
+                {Object.values(this.props.searchResults).length ? (
                     <SearchResults
                         results={this.props.searchResults}
                         clearSearch={this.handleClearSearch.bind(this)}

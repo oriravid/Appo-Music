@@ -3344,7 +3344,7 @@ var Search = /*#__PURE__*/function (_Component) {
           }
         },
         value: this.state.searchQuery
-      }), this.state.searchQuery ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_results__WEBPACK_IMPORTED_MODULE_1__.default, {
+      }), Object.values(this.props.searchResults).length ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_results__WEBPACK_IMPORTED_MODULE_1__.default, {
         results: this.props.searchResults,
         clearSearch: this.handleClearSearch.bind(this)
       }) : "", this.state.searchQuery ? _utils_icons__WEBPACK_IMPORTED_MODULE_2__.close("icon pointer", function () {
