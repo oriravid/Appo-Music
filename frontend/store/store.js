@@ -10,5 +10,6 @@ export default (preloadedState = {}) =>
     createStore(
         rootReducer,
         preloadedState,
-        composeWithDevTools(applyMiddleware(ReduxThunk, logger))
+        // composeWithDevTools(applyMiddleware(ReduxThunk, logger))
+        composeWithDevTools(applyMiddleware(ReduxThunk))
     );

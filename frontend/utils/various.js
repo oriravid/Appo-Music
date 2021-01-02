@@ -180,3 +180,31 @@ export const indexPicker = (queueLength, playedIndecies) => {
         return newIndex;
     }
 };
+
+//prettier-ignore
+export const consoleArt = () => {
+console.log(
+    "%c \n\
+⎜                      \n\
+⎜   APPO MUSIC                     \n\
+⎜   By Ori Ravid                     \n\
+⎜                     \n\
+⎜   Built With:\n\
+⎜    • React\n\
+⎜    • ES6\n\
+⎜    • Redux\n\
+⎜    • Rails\n\
+⎜    \n\
+⎜    This project is purley for educational purposes, \n\
+⎜    no copyright infringement intended.                  \n\
+⎜                      \n\
+⎜    Contact:                  \n\
+⎜    • oriravid@att.net\n\
+⎜    • oriravid.com\n\
+⎜                      \n\
+\n\
+",
+    "color: #00adef;"
+);
+    
+};

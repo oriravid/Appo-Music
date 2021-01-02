@@ -1424,24 +1424,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _nav_nav_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav/nav_container */ "./frontend/components/nav/nav_container.js");
 /* harmony import */ var _main_main_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main/main_container */ "./frontend/components/main/main_container.js");
 /* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
+/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/various */ "./frontend/utils/various.js");
 //ext
 
  //int - components
 
 
 
+ //int - util
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
+  (0,_utils_various__WEBPACK_IMPORTED_MODULE_4__.consoleArt)();
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
     path: "/",
     component: _nav_nav_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
     path: "/",
     component: _main_main_container__WEBPACK_IMPORTED_MODULE_2__.default
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_3__.default, null));
@@ -5287,7 +5291,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0,redux__WEBPACK_IMPORTED_MODULE_4__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__.default, preloadedState, (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_0__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_4__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_2__.default, (redux_logger__WEBPACK_IMPORTED_MODULE_1___default()))));
+  return (0,redux__WEBPACK_IMPORTED_MODULE_4__.createStore)(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__.default, preloadedState, // composeWithDevTools(applyMiddleware(ReduxThunk, logger))
+  (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_0__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_4__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_2__.default)));
 });
 
 /***/ }),
@@ -6434,6 +6439,7 @@ var toggleSetting = function toggleSetting(setting) {
   !*** ./frontend/utils/various.js ***!
   \***********************************/
 /*! namespace exports */
+/*! export consoleArt [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export dateFormatter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export dateSorter [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export indexPicker [provided] [no usage info] [missing usage info prevents renaming] */
@@ -6456,7 +6462,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "dateFormatter": () => /* binding */ dateFormatter,
 /* harmony export */   "timeFormatter": () => /* binding */ timeFormatter,
 /* harmony export */   "timeAdder": () => /* binding */ timeAdder,
-/* harmony export */   "indexPicker": () => /* binding */ indexPicker
+/* harmony export */   "indexPicker": () => /* binding */ indexPicker,
+/* harmony export */   "consoleArt": () => /* binding */ consoleArt
 /* harmony export */ });
 ////////////// SORTING //////////////
 // release date comparison, input array of objects
@@ -6630,6 +6637,29 @@ var indexPicker = function indexPicker(queueLength, playedIndecies) {
   } else {
     return newIndex;
   }
+}; //prettier-ignore
+
+var consoleArt = function consoleArt() {
+  console.log("%c \n\
+⎜                      \n\
+⎜   APPO MUSIC                     \n\
+⎜   By Ori Ravid                     \n\
+⎜                     \n\
+⎜   Built With:\n\
+⎜    • React\n\
+⎜    • ES6\n\
+⎜    • Redux\n\
+⎜    • Rails\n\
+⎜    \n\
+⎜    This project is purley for educational purposes, \n\
+⎜    no copyright infringement intended.                  \n\
+⎜                      \n\
+⎜    Contact:                  \n\
+⎜    • oriravid@att.net\n\
+⎜    • oriravid.com\n\
+⎜                      \n\
+\n\
+", "color: #00adef;");
 };
 
 /***/ }),
