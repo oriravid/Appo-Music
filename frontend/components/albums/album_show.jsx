@@ -64,7 +64,10 @@ class AlbumShow extends Component {
     componentDidMount() {
         this.props
             .getAlbumDetails(this.props.match.params.albumId)
-            .then((res) => this.setState({ loading: false }));
+            .then((res) => {
+                this.setState({ loading: false });
+                document.title = `${this.props.album.title} on Appo Music`;
+            });
 
         if (this.props.selectedTrackId) {
             this.setState({
@@ -82,7 +85,10 @@ class AlbumShow extends Component {
             this.setState({ loading: true });
             this.props
                 .getAlbumDetails(this.props.match.params.albumId)
-                .then((res) => this.setState({ loading: false }));
+                .then((res) => {
+                    this.setState({ loading: false });
+                    document.title = `${this.props.album.title} on Appo Music`;
+                });
         }
 
         if (this.state.topSongSelected && !this.state.loading) {

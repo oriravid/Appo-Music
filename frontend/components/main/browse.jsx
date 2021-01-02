@@ -14,6 +14,7 @@ class Browse extends Component {
     }
 
     componentDidMount() {
+        document.title = `Appo Music | Browse`;
         this.props
             .getAllAlbums()
             .then((res) => this.setState({ loading: false }));

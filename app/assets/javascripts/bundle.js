@@ -707,10 +707,10 @@ var receiveSave = function receiveSave(trackId) {
     trackId: trackId
   };
 };
-var removeSave = function removeSave(trackId) {
+var removeSave = function removeSave(payload) {
   return {
     type: REMOVE_SAVE,
-    trackId: trackId
+    payload: payload
   };
 }; // Thunk Actions
 
@@ -723,8 +723,8 @@ var saveTrack = function saveTrack(trackId) {
 };
 var unsaveTrack = function unsaveTrack(trackId) {
   return function (dispatch) {
-    return _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_0__.unsaveTrack(trackId).then(function (trackId) {
-      return dispatch(removeSave(trackId));
+    return _utils_tracks_api_utils__WEBPACK_IMPORTED_MODULE_0__.unsaveTrack(trackId).then(function (payload) {
+      return dispatch(removeSave(payload));
     });
   };
 };
@@ -1023,9 +1023,11 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
       var _this4 = this;
 
       this.props.getAlbumDetails(this.props.match.params.albumId).then(function (res) {
-        return _this4.setState({
+        _this4.setState({
           loading: false
         });
+
+        document.title = "".concat(_this4.props.album.title, " on Appo Music");
       });
 
       if (this.props.selectedTrackId) {
@@ -1045,9 +1047,11 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
           loading: true
         });
         this.props.getAlbumDetails(this.props.match.params.albumId).then(function (res) {
-          return _this5.setState({
+          _this5.setState({
             loading: false
           });
+
+          document.title = "".concat(_this5.props.album.title, " on Appo Music");
         });
       }
 
@@ -1530,9 +1534,11 @@ var ArtistShow = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       this.props.getArtistDetails(this.props.match.params.artistId).then(function (res) {
-        return _this2.setState({
+        _this2.setState({
           loading: false
         });
+
+        document.title = "".concat(_this2.props.artist.name, " on Appo Music");
       });
     }
   }, {
@@ -1545,9 +1551,11 @@ var ArtistShow = /*#__PURE__*/function (_Component) {
           loading: true
         });
         this.props.getArtistDetails(this.props.match.params.artistId).then(function (res) {
-          return _this3.setState({
+          _this3.setState({
             loading: false
           });
+
+          document.title = "".concat(_this3.props.artist.name, " on Appo Music");
         });
       }
     }
@@ -1774,6 +1782,7 @@ var Browse = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      document.title = "Appo Music | Browse";
       this.props.getAllAlbums().then(function (res) {
         return _this2.setState({
           loading: false
@@ -2069,6 +2078,7 @@ var Library = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      document.title = "Appo Music | Library";
       this.props.getUserAlbums().then(function (res) {
         return _this2.setState({
           loading: false
@@ -2334,6 +2344,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var NotFound = function NotFound() {
+  document.title = "Appo Music | Not Found";
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Not Found"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Oops, it looks like the page you're looking for doesn't exist."));
 };
 
@@ -3804,7 +3815,11 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
       this.props.getPlaylistDetails(this.props.match.params.playlistId).then(function (res) {
         _this4.setState({
           loading: false
-        }), _this4.setCoverUrl(res.payload.albums);
+        });
+
+        _this4.setCoverUrl(res.payload.albums);
+
+        document.title = "".concat(_this4.props.playlist.title, " on Appo Music");
       });
     }
   }, {
@@ -3822,7 +3837,11 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
         this.props.getPlaylistDetails(playlistId).then(function (res) {
           _this5.setState({
             loading: false
-          }), _this5.setCoverUrl(res.payload.albums);
+          });
+
+          _this5.setCoverUrl(res.payload.albums);
+
+          document.title = "".concat(_this5.props.playlist.title, " on Appo Music");
         });
       }
 
@@ -4308,9 +4327,15 @@ var TrackListItem = function TrackListItem(props) {
     colA = _utils_icons__WEBPACK_IMPORTED_MODULE_5__.play(classes, handlePlay);
 
     if (location === "album" && track.saved) {
-      colC = _utils_icons__WEBPACK_IMPORTED_MODULE_5__.close("icon sm red pointer", function () {
-        return unsaveTrack(track.id);
-      });
+      if (selected) {
+        colC = _utils_icons__WEBPACK_IMPORTED_MODULE_5__.close("icon sm white pointer", function () {
+          return unsaveTrack(track.id);
+        });
+      } else {
+        colC = _utils_icons__WEBPACK_IMPORTED_MODULE_5__.close("icon sm red pointer", function () {
+          return unsaveTrack(track.id);
+        });
+      }
     }
 
     colD = _utils_icons__WEBPACK_IMPORTED_MODULE_5__.list(classes, playlistAction);
@@ -4560,6 +4585,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/album_actions */ "./frontend/actions/album_actions.js");
 /* harmony import */ var _actions_artist_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/artist_actions */ "./frontend/actions/artist_actions.js");
 /* harmony import */ var _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/playlist_actions */ "./frontend/actions/playlist_actions.js");
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/track_actions */ "./frontend/actions/track_actions.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4567,6 +4593,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //int
+
 
 
 
@@ -4590,6 +4617,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_2__.RECEIVE_PLAYLIST_DETAILS:
       return _objectSpread(_objectSpread({}, nextState), action.payload.albums);
+
+    case _actions_track_actions__WEBPACK_IMPORTED_MODULE_3__.REMOVE_SAVE:
+      delete nextState[action.payload.albumId].savedAt;
+      return nextState;
 
     default:
       return state;
@@ -5176,7 +5207,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return nextState;
 
     case _actions_track_actions__WEBPACK_IMPORTED_MODULE_2__.REMOVE_SAVE:
-      nextState[action.trackId].saved = false;
+      nextState[action.payload.trackId].saved = false;
       return nextState;
 
     case _actions_playlist_actions__WEBPACK_IMPORTED_MODULE_3__.RECEIVE_PLAYLIST_TRACK:

@@ -29,7 +29,13 @@ class Api::UserSavesController < ApplicationController
 
             if @user_save
                 if @user_save.destroy
-                    render json: @user_save.track_id
+
+                    @albumStillSaved = UserSave
+                        .where(user_id: @current_user.id)
+                        .any? { |save| save.album.id == @user_save.album.id }
+
+                render 'api/user_saves/destroy';
+                
                 else
                     render json: @user_save.errors.full_messages, status: 422
                 end

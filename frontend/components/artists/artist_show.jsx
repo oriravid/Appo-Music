@@ -25,7 +25,10 @@ class ArtistShow extends Component {
     componentDidMount() {
         this.props
             .getArtistDetails(this.props.match.params.artistId)
-            .then((res) => this.setState({ loading: false }));
+            .then((res) => {
+                this.setState({ loading: false });
+                document.title = `${this.props.artist.name} on Appo Music`;
+            });
     }
 
     componentDidUpdate(prevProps) {
@@ -35,7 +38,10 @@ class ArtistShow extends Component {
             this.setState({ loading: true });
             this.props
                 .getArtistDetails(this.props.match.params.artistId)
-                .then((res) => this.setState({ loading: false }));
+                .then((res) => {
+                    this.setState({ loading: false });
+                    document.title = `${this.props.artist.name} on Appo Music`;
+                });
         }
     }
 

@@ -19,4 +19,8 @@ class UserSave < ApplicationRecord
     belongs_to :track,
         foreign_key: :track_id,
         class_name: :Track
+
+    has_one :album,
+        through: :track,
+        source: :album
 end

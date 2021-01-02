@@ -57,9 +57,15 @@ const TrackListItem = (props) => {
         colA = icons.play(classes, handlePlay);
 
         if (location === "album" && track.saved) {
-            colC = icons.close("icon sm red pointer", () =>
-                unsaveTrack(track.id)
-            );
+            if (selected) {
+                colC = icons.close("icon sm white pointer", () =>
+                    unsaveTrack(track.id)
+                );
+            } else {
+                colC = icons.close("icon sm red pointer", () =>
+                    unsaveTrack(track.id)
+                );
+            }
         }
 
         colD = icons.list(classes, playlistAction);

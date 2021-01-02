@@ -5,6 +5,7 @@ import {
 } from "../actions/album_actions";
 import { RECEIVE_ARTIST_DETAILS } from "../actions/artist_actions";
 import { RECEIVE_PLAYLIST_DETAILS } from "../actions/playlist_actions";
+import { REMOVE_SAVE } from "../actions/track_actions";
 
 export default (state = {}, action) => {
     Object.freeze(state);
@@ -26,6 +27,10 @@ export default (state = {}, action) => {
 
         case RECEIVE_PLAYLIST_DETAILS:
             return { ...nextState, ...action.payload.albums };
+
+        case REMOVE_SAVE:
+            delete nextState[action.payload.albumId].savedAt;
+            return nextState;
 
         default:
             return state;

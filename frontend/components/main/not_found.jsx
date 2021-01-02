@@ -2,6 +2,8 @@
 import React from "react";
 
 const NotFound = () => {
+    document.title = `Appo Music | Not Found`;
+
     return (
         <div>
             <h1>Not Found</h1>

@@ -24,7 +24,7 @@ export default (state = {}, action) => {
             return nextState;
 
         case REMOVE_SAVE:
-            nextState[action.trackId].saved = false;
+            nextState[action.payload.trackId].saved = false;
             return nextState;
 
         case RECEIVE_PLAYLIST_TRACK:

@@ -16,6 +16,8 @@ class Library extends Component {
     }
 
     componentDidMount() {
+        document.title = `Appo Music | Library`;
+
         this.props
             .getUserAlbums()
             .then((res) => this.setState({ loading: false }));

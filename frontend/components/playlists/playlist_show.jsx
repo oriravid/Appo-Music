@@ -92,8 +92,9 @@ class PlaylistShow extends Component {
         this.props
             .getPlaylistDetails(this.props.match.params.playlistId)
             .then((res) => {
-                this.setState({ loading: false }),
-                    this.setCoverUrl(res.payload.albums);
+                this.setState({ loading: false });
+                this.setCoverUrl(res.payload.albums);
+                document.title = `${this.props.playlist.title} on Appo Music`;
             });
     }
 
@@ -106,8 +107,9 @@ class PlaylistShow extends Component {
         ) {
             this.setState({ loading: true, editing: false });
             this.props.getPlaylistDetails(playlistId).then((res) => {
-                this.setState({ loading: false }),
-                    this.setCoverUrl(res.payload.albums);
+                this.setState({ loading: false });
+                this.setCoverUrl(res.payload.albums);
+                document.title = `${this.props.playlist.title} on Appo Music`;
             });
         }
 

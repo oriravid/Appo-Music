@@ -9,9 +9,9 @@ export const receiveSave = (trackId) => ({
     trackId: trackId,
 });
 
-export const removeSave = (trackId) => ({
+export const removeSave = (payload) => ({
     type: REMOVE_SAVE,
-    trackId: trackId,
+    payload: payload,
 });
 
 // Thunk Actions
@@ -21,6 +21,6 @@ export const saveTrack = (trackId) => (dispatch) =>
     );
 
 export const unsaveTrack = (trackId) => (dispatch) =>
-    TracksAPI.unsaveTrack(trackId).then((trackId) =>
-        dispatch(removeSave(trackId))
+    TracksAPI.unsaveTrack(trackId).then((payload) =>
+        dispatch(removeSave(payload))
     );
