@@ -218,9 +218,14 @@ class PlaylistShow extends Component {
                                 )}
                             </div>
                         </div>
-                        <div className="btn" onClick={() => this.handlePlay()}>
-                            {icons.play("icon white")}
-                            Play
+                        <div className="playlist-buttons">
+                            <div
+                                className="btn"
+                                onClick={() => this.handlePlay()}
+                            >
+                                {icons.play("icon white")}
+                                Play
+                            </div>
                         </div>
                     </div>
                     <div className="tracks-list">{trackItems}</div>

@@ -726,10 +726,6 @@ img.album-artwork {
     outline: none;
 }
 
-.album-header .btn {
-    max-width: 90px;
-}
-
 .album-header h2 {
     font-size: 24px;
     font-weight: 400;
@@ -749,8 +745,17 @@ img.album-artwork {
     margin: 0;
 }
 
-.album-header .btn {
-    margin: 15px 0;
+.album-buttons,
+.playlist-buttons {
+    margin-top: 15px;
+    display: flex;
+    line-height: 0;
+}
+
+.album-buttons .btn,
+.playlist-buttons .btn {
+    max-width: 100px;
+    margin-right: 10px;
 }
 
 .text-container {

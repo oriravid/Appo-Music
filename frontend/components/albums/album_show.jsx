@@ -32,6 +32,26 @@ class AlbumShow extends Component {
         }
     }
 
+    handleAdd() {
+        if (this.props.currentUser) {
+            this.props.tracks.forEach((track) => {
+                !track.saved ? this.props.saveTrack(track.id) : "";
+            });
+        } else {
+            this.props.openSigninModal("signin");
+        }
+    }
+
+    handleRemove() {
+        if (this.props.currentUser) {
+            this.props.tracks.forEach((track) => {
+                track.saved ? this.props.unsaveTrack(track.id) : "";
+            });
+        } else {
+            this.props.openSigninModal("signin");
+        }
+    }
+
     handleMenuOpen() {
         const { hoveredTrackId } = this.state;
         this.setState({ menuTrackId: hoveredTrackId });
@@ -80,6 +100,7 @@ class AlbumShow extends Component {
         }
 
         const { album, tracks, artist } = this.props;
+        const albumSaved = this.props.tracks.every((track) => track.saved);
 
         const trackItems = tracks.map((track) => {
             let trackClasses, trackMenu;
@@ -137,12 +158,31 @@ class AlbumShow extends Component {
                         <h3>
                             {album.genre} • {album.releaseDate.slice(0, 4)}
                         </h3>
-                        <div
-                            className="btn"
-                            onClick={this.handlePlay.bind(this)}
-                        >
-                            {icons.play("icon white")}
-                            Play
+                        <div className="album-buttons">
+                            <div
+                                className="btn"
+                                onClick={this.handlePlay.bind(this)}
+                            >
+                                {icons.play("icon white")}
+                                Play
+                            </div>
+                            {albumSaved ? (
+                                <div
+                                    className="btn"
+                                    onClick={this.handleRemove.bind(this)}
+                                >
+                                    {icons.trash("icon white")}
+                                    Remove
+                                </div>
+                            ) : (
+                                <div
+                                    className="btn"
+                                    onClick={this.handleAdd.bind(this)}
+                                >
+                                    {icons.add("icon white")}
+                                    Add
+                                </div>
+                            )}
                         </div>
                         <div className="text-container">
                             <span className="text-cutoff">
@@ -153,7 +193,7 @@ class AlbumShow extends Component {
                                 <button
                                     className="more pointer"
                                     onClick={() =>
-                                        this.props.openModal({
+                                        this.props.openTextModal({
                                             title: album.title,
                                             sub: artist.name,
                                             text: album.description,

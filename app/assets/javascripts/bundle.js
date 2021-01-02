@@ -977,6 +977,32 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
       }
     }
   }, {
+    key: "handleAdd",
+    value: function handleAdd() {
+      var _this2 = this;
+
+      if (this.props.currentUser) {
+        this.props.tracks.forEach(function (track) {
+          !track.saved ? _this2.props.saveTrack(track.id) : "";
+        });
+      } else {
+        this.props.openSigninModal("signin");
+      }
+    }
+  }, {
+    key: "handleRemove",
+    value: function handleRemove() {
+      var _this3 = this;
+
+      if (this.props.currentUser) {
+        this.props.tracks.forEach(function (track) {
+          track.saved ? _this3.props.unsaveTrack(track.id) : "";
+        });
+      } else {
+        this.props.openSigninModal("signin");
+      }
+    }
+  }, {
     key: "handleMenuOpen",
     value: function handleMenuOpen() {
       var hoveredTrackId = this.state.hoveredTrackId;
@@ -994,10 +1020,10 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      var _this4 = this;
 
       this.props.getAlbumDetails(this.props.match.params.albumId).then(function (res) {
-        return _this2.setState({
+        return _this4.setState({
           loading: false
         });
       });
@@ -1012,14 +1038,14 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this3 = this;
+      var _this5 = this;
 
       if (this.props.currentUser != prevProps.currentUser || prevProps.match.params.albumId !== this.props.match.params.albumId) {
         this.setState({
           loading: true
         });
         this.props.getAlbumDetails(this.props.match.params.albumId).then(function (res) {
-          return _this3.setState({
+          return _this5.setState({
             loading: false
           });
         });
@@ -1038,7 +1064,7 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this6 = this;
 
       if (this.state.loading) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_main_loading__WEBPACK_IMPORTED_MODULE_1__.default, null);
@@ -1048,40 +1074,43 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
           album = _this$props2.album,
           tracks = _this$props2.tracks,
           artist = _this$props2.artist;
+      var albumSaved = this.props.tracks.every(function (track) {
+        return track.saved;
+      });
       var trackItems = tracks.map(function (track) {
         var trackClasses, trackMenu;
-        _this4.state.selectedTrackId == track.id ? trackClasses = "track-row selected" : trackClasses = "track-row";
-        _this4.state.menuTrackId == track.id ? trackMenu = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_menu__WEBPACK_IMPORTED_MODULE_3__.default, {
+        _this6.state.selectedTrackId == track.id ? trackClasses = "track-row selected" : trackClasses = "track-row";
+        _this6.state.menuTrackId == track.id ? trackMenu = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_menu__WEBPACK_IMPORTED_MODULE_3__.default, {
           trackId: track.id,
           location: "album",
-          handleMenuClose: _this4.handleMenuClose.bind(_this4)
+          handleMenuClose: _this6.handleMenuClose.bind(_this6)
         }) : trackMenu = "";
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: trackClasses,
           key: track.id,
           onClick: function onClick() {
-            return _this4.setState({
+            return _this6.setState({
               selectedTrackId: track.id
             });
           },
           onMouseEnter: function onMouseEnter() {
-            return _this4.setState({
+            return _this6.setState({
               hoveredTrackId: track.id
             });
           },
           onMouseLeave: function onMouseLeave() {
-            return _this4.setState({
+            return _this6.setState({
               hoveredTrackId: null
             });
           },
-          onDoubleClick: _this4.handlePlay.bind(_this4)
+          onDoubleClick: _this6.handlePlay.bind(_this6)
         }, trackMenu, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tracks_track_list_item__WEBPACK_IMPORTED_MODULE_2__.default, {
           location: "album",
           track: track,
-          hovered: _this4.state.hoveredTrackId == track.id,
-          selected: _this4.state.selectedTrackId == track.id,
-          handlePlay: _this4.handlePlay.bind(_this4),
-          handleMenuOpen: _this4.handleMenuOpen.bind(_this4)
+          hovered: _this6.state.hoveredTrackId == track.id,
+          selected: _this6.state.selectedTrackId == track.id,
+          handlePlay: _this6.handlePlay.bind(_this6),
+          handleMenuOpen: _this6.handleMenuOpen.bind(_this6)
         }));
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1098,16 +1127,24 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, album.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
         to: "/artists/".concat(artist.id)
       }, artist.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, album.genre, " \u2022 ", album.releaseDate.slice(0, 4)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "album-buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "btn",
         onClick: this.handlePlay.bind(this)
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_4__.play("icon white"), "Play"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_4__.play("icon white"), "Play"), albumSaved ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "btn",
+        onClick: this.handleRemove.bind(this)
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_4__.trash("icon white"), "Remove") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "btn",
+        onClick: this.handleAdd.bind(this)
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_4__.add("icon white"), "Add")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "text-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "text-cutoff"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("strong", null, "About"), album.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "more pointer",
         onClick: function onClick() {
-          return _this4.props.openModal({
+          return _this6.props.openTextModal({
             title: album.title,
             sub: artist.name,
             text: album.description
@@ -1149,11 +1186,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _album_show__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./album_show */ "./frontend/components/albums/album_show.jsx");
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/album_actions */ "./frontend/actions/album_actions.js");
 /* harmony import */ var _actions_music_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/music_actions */ "./frontend/actions/music_actions.js");
-/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _actions_track_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/track_actions */ "./frontend/actions/track_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 //ext
  //int - containers
 
  // //int - actions
+
 
 
 
@@ -1185,8 +1224,17 @@ var mapDTP = function mapDTP(dispatch) {
     addTracks: function addTracks(tracks) {
       return dispatch((0,_actions_music_actions__WEBPACK_IMPORTED_MODULE_3__.addTracks)(tracks));
     },
-    openModal: function openModal(data) {
-      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.openModal)("text", data));
+    saveTrack: function saveTrack(trackId) {
+      return dispatch((0,_actions_track_actions__WEBPACK_IMPORTED_MODULE_4__.saveTrack)(trackId));
+    },
+    unsaveTrack: function unsaveTrack(trackId) {
+      return dispatch((0,_actions_track_actions__WEBPACK_IMPORTED_MODULE_4__.unsaveTrack)(trackId));
+    },
+    openSigninModal: function openSigninModal(modal) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__.openModal)(modal));
+    },
+    openTextModal: function openTextModal(data) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_5__.openModal)("text", data));
     }
   };
 };
@@ -3884,11 +3932,13 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
           editing: !_this6.state.editing
         });
       }), _utils_icons__WEBPACK_IMPORTED_MODULE_5__.trash("icon color pointer", this.handleDelete.bind(this)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "playlist-buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "btn",
         onClick: function onClick() {
           return _this6.handlePlay();
         }
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_5__.play("icon white"), "Play")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_5__.play("icon white"), "Play"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "tracks-list"
       }, trackItems), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "album-meta"
@@ -5336,6 +5386,7 @@ var getArtistDetails = function getArtistDetails(artistId) {
 /*! export signin [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export signout [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export trash [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export trashOutline [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export volume [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
@@ -5376,6 +5427,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "signin": () => /* binding */ signin,
 /* harmony export */   "signout": () => /* binding */ signout,
 /* harmony export */   "trash": () => /* binding */ trash,
+/* harmony export */   "trashOutline": () => /* binding */ trashOutline,
 /* harmony export */   "volume": () => /* binding */ volume,
 /* harmony export */   "loader1": () => /* binding */ loader1,
 /* harmony export */   "loader2": () => /* binding */ loader2
@@ -5888,6 +5940,21 @@ var trash = function trash(classes, action) {
     fill: "none"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
     d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+  }));
+};
+var trashOutline = function trashOutline(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24",
+    className: classes,
+    onClick: action
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0V0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
   }));
 };
 var volume = function volume(classes, action) {
