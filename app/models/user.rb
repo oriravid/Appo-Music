@@ -35,6 +35,10 @@ class User < ApplicationRecord
     has_many :saved_track_albums,
         through: :saved_tracks,
         source: :album
+
+    has_one :settings,
+        foreign_key: :user_id,
+        class_name: :UserSettings
     
     #User Auth Methods (SPIRE)
     def self.find_by_credentials(username, password)

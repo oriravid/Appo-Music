@@ -12,8 +12,9 @@ import {
     toggleLoop,
     toggleShuffle,
 } from "../../actions/music_actions";
+import { toggleSetting } from "../../actions/session_actions";
 
-const mapSTP = ({ music, entities }) => {
+const mapSTP = ({ music, entities, session }) => {
     let currentTrack, currentAlbum, currentArtist;
 
     if (music.currentTrack) {
@@ -27,6 +28,7 @@ const mapSTP = ({ music, entities }) => {
         currentTrack: currentTrack,
         currentAlbum: currentAlbum,
         currentArtist: currentArtist,
+        currentUser: session.currentUser,
     };
 };
 
@@ -38,6 +40,7 @@ const mapDTP = (dispatch) => ({
     prev: () => dispatch(prev()),
     toggleLoop: () => dispatch(toggleLoop()),
     toggleShuffle: () => dispatch(toggleShuffle()),
+    toggleSetting: (setting) => dispatch(toggleSetting(setting)),
 });
 
 export default connect(mapSTP, mapDTP)(MusicPlayer);

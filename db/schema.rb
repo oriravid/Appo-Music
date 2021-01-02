@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_014049) do
+ActiveRecord::Schema.define(version: 2021_01_01_225751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,14 @@ ActiveRecord::Schema.define(version: 2020_12_09_014049) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "track_id"], name: "index_user_saves_on_user_id_and_track_id", unique: true
+  end
+
+  create_table "user_settings", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.boolean "loop", default: false, null: false
+    t.boolean "shuffle", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

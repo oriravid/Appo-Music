@@ -47,8 +47,33 @@ class MusicPlayer extends React.Component {
         this.audio.volume = e.target.value;
     }
 
-    //spacebar play/pause logic
+    toggleSetting(opt) {
+        if (this.props.currentUser) {
+            this.props.toggleSetting(opt);
+        } else {
+            if (opt === "shuffle") {
+                this.props.toggleShuffle();
+            } else if (opt === "loop") {
+                this.props.toggleLoop();
+            }
+        }
+    }
+
     componentDidMount() {
+        //check user shuffle & loop settings
+        const { music, currentUser, toggleLoop, toggleShuffle } = this.props;
+
+        if (currentUser) {
+            if (music.loop !== currentUser.settings.loop) {
+                toggleLoop();
+            }
+
+            if (music.shuffle !== currentUser.settings.shuffle) {
+                toggleShuffle();
+            }
+        }
+
+        //spacebar play/pause logic
         document.body.addEventListener("keydown", (e) => {
             if (e.code === "Space" && e.target == document.body)
                 e.preventDefault();
@@ -175,9 +200,8 @@ class MusicPlayer extends React.Component {
                     />
 
                     <div className="controls">
-                        {icons.shuffle(
-                            `icon sml${sActive}`,
-                            this.props.toggleShuffle
+                        {icons.shuffle(`icon sml${sActive}`, () =>
+                            this.toggleSetting("shuffle")
                         )}
                         {icons.previous(`icon med${disabled}`, () =>
                             this.handleNextPrev("prev")
@@ -186,9 +210,8 @@ class MusicPlayer extends React.Component {
                         {icons.next(`icon med${disabled}`, () =>
                             this.handleNextPrev("next")
                         )}
-                        {icons.loop(
-                            `icon sml${lActive}`,
-                            this.props.toggleLoop
+                        {icons.loop(`icon sml${lActive}`, () =>
+                            this.toggleSetting("loop")
                         )}
                     </div>
 

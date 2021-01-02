@@ -8,8 +8,9 @@
 
 User.create([
     {username: "Demo", password: "J*Bx.Y86!R"},
-    {username: "ori_the_creator", password: "imobdeep"}
 ])
+
+UserSettings.create(user_id: 1)
 
 Artist.create([
     #1 - Mac Miller

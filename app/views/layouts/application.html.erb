@@ -17,6 +17,9 @@
         window.currentUser = {
           "id": <%= current_user.id %>,
           "username": "<%= current_user.username %>",
+          "settings": {
+            loop: <%= current_user.settings.loop %>, 
+            shuffle: <%= current_user.settings.shuffle %>}
         }
       </script>
     <% end %>

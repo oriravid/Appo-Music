@@ -564,14 +564,17 @@ var runSearch = function runSearch(searchQuery) {
 /*! export CLEAR_SESSION_ERRORS [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export RECEIVE_CURRENT_USER [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export RECEIVE_SESSION_ERRORS [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export RECEIVE_USER_SETTINGS [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export SIGNOUT_CURRENT_USER [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export clearErrors [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export receiveCurrentUser [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export receiveErrors [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export receiveUserSettings [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export signin [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export signout [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export signoutCurrentUser [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export signup [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export toggleSetting [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -583,21 +586,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "SIGNOUT_CURRENT_USER": () => /* binding */ SIGNOUT_CURRENT_USER,
 /* harmony export */   "RECEIVE_SESSION_ERRORS": () => /* binding */ RECEIVE_SESSION_ERRORS,
 /* harmony export */   "CLEAR_SESSION_ERRORS": () => /* binding */ CLEAR_SESSION_ERRORS,
+/* harmony export */   "RECEIVE_USER_SETTINGS": () => /* binding */ RECEIVE_USER_SETTINGS,
 /* harmony export */   "receiveCurrentUser": () => /* binding */ receiveCurrentUser,
 /* harmony export */   "signoutCurrentUser": () => /* binding */ signoutCurrentUser,
 /* harmony export */   "receiveErrors": () => /* binding */ receiveErrors,
 /* harmony export */   "clearErrors": () => /* binding */ clearErrors,
+/* harmony export */   "receiveUserSettings": () => /* binding */ receiveUserSettings,
 /* harmony export */   "signup": () => /* binding */ signup,
 /* harmony export */   "signin": () => /* binding */ signin,
-/* harmony export */   "signout": () => /* binding */ signout
+/* harmony export */   "signout": () => /* binding */ signout,
+/* harmony export */   "toggleSetting": () => /* binding */ toggleSetting
 /* harmony export */ });
 /* harmony import */ var _utils_session_api_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/session_api_utils */ "./frontend/utils/session_api_utils.js");
+/* harmony import */ var _utils_user_api_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/user_api_utils */ "./frontend/utils/user_api_utils.js");
 //int - utils
+
 
 var RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 var SIGNOUT_CURRENT_USER = "SIGNOUT_CURRENT_USER";
 var RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 var CLEAR_SESSION_ERRORS = "CLEAR_SESSION_ERRORS";
+var RECEIVE_USER_SETTINGS = "RECEIVE_USER_SETTING";
 var receiveCurrentUser = function receiveCurrentUser(user) {
   return {
     type: RECEIVE_CURRENT_USER,
@@ -618,6 +627,12 @@ var receiveErrors = function receiveErrors(errors) {
 var clearErrors = function clearErrors() {
   return {
     type: CLEAR_SESSION_ERRORS
+  };
+};
+var receiveUserSettings = function receiveUserSettings(settings) {
+  return {
+    type: RECEIVE_USER_SETTINGS,
+    settings: settings
   };
 }; //Thunk Actions
 
@@ -643,6 +658,13 @@ var signout = function signout() {
   return function (dispatch) {
     return _utils_session_api_utils__WEBPACK_IMPORTED_MODULE_0__.deleteSession().then(function () {
       return dispatch(signoutCurrentUser());
+    });
+  };
+};
+var toggleSetting = function toggleSetting(setting) {
+  return function (dispatch) {
+    return _utils_user_api_utils__WEBPACK_IMPORTED_MODULE_1__.toggleSetting(setting).then(function (settings) {
+      return dispatch(receiveUserSettings(settings));
     });
   };
 };
@@ -2825,12 +2847,42 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     key: "handleVolume",
     value: function handleVolume(e) {
       this.audio.volume = e.target.value;
-    } //spacebar play/pause logic
-
+    }
+  }, {
+    key: "toggleSetting",
+    value: function toggleSetting(opt) {
+      if (this.props.currentUser) {
+        this.props.toggleSetting(opt);
+      } else {
+        if (opt === "shuffle") {
+          this.props.toggleShuffle();
+        } else if (opt === "loop") {
+          this.props.toggleLoop();
+        }
+      }
+    }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this3 = this;
+
+      //check user shuffle & loop settings
+      var _this$props = this.props,
+          music = _this$props.music,
+          currentUser = _this$props.currentUser,
+          toggleLoop = _this$props.toggleLoop,
+          toggleShuffle = _this$props.toggleShuffle;
+
+      if (currentUser) {
+        if (music.loop !== currentUser.settings.loop) {
+          toggleLoop();
+        }
+
+        if (music.shuffle !== currentUser.settings.shuffle) {
+          toggleShuffle();
+        }
+      } //spacebar play/pause logic
+
 
       document.body.addEventListener("keydown", function (e) {
         if (e.code === "Space" && e.target == document.body) e.preventDefault();
@@ -2876,11 +2928,11 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this5 = this;
 
-      var _this$props = this.props,
-          music = _this$props.music,
-          currentTrack = _this$props.currentTrack,
-          currentAlbum = _this$props.currentAlbum,
-          currentArtist = _this$props.currentArtist;
+      var _this$props2 = this.props,
+          music = _this$props2.music,
+          currentTrack = _this$props2.currentTrack,
+          currentAlbum = _this$props2.currentAlbum,
+          currentArtist = _this$props2.currentArtist;
       var trackUrl, trackTitle, albumId, albumUrl, albumTitle, artistId, artistName;
 
       if (currentTrack) {
@@ -2956,11 +3008,15 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         src: trackUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "controls"
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.shuffle("icon sml".concat(sActive), this.props.toggleShuffle), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.previous("icon med".concat(disabled), function () {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.shuffle("icon sml".concat(sActive), function () {
+        return _this5.toggleSetting("shuffle");
+      }), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.previous("icon med".concat(disabled), function () {
         return _this5.handleNextPrev("prev");
       }), playpause, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.next("icon med".concat(disabled), function () {
         return _this5.handleNextPrev("next");
-      }), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.loop("icon sml".concat(lActive), this.props.toggleLoop)), display, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.loop("icon sml".concat(lActive), function () {
+        return _this5.toggleSetting("loop");
+      })), display, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "volume"
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.volume("icon", function () {
         return console.log("volume");
@@ -3003,6 +3059,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _music_player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./music_player */ "./frontend/components/music_player/music_player.jsx");
 /* harmony import */ var _actions_music_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/music_actions */ "./frontend/actions/music_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 //ext
  //int - components
 
@@ -3010,9 +3067,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var mapSTP = function mapSTP(_ref) {
   var music = _ref.music,
-      entities = _ref.entities;
+      entities = _ref.entities,
+      session = _ref.session;
   var currentTrack, currentAlbum, currentArtist;
 
   if (music.currentTrack) {
@@ -3025,7 +3084,8 @@ var mapSTP = function mapSTP(_ref) {
     music: music,
     currentTrack: currentTrack,
     currentAlbum: currentAlbum,
-    currentArtist: currentArtist
+    currentArtist: currentArtist,
+    currentUser: session.currentUser
   };
 };
 
@@ -3051,6 +3111,9 @@ var mapDTP = function mapDTP(dispatch) {
     },
     toggleShuffle: function toggleShuffle() {
       return dispatch((0,_actions_music_actions__WEBPACK_IMPORTED_MODULE_2__.toggleShuffle)());
+    },
+    toggleSetting: function toggleSetting(setting) {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__.toggleSetting)(setting));
     }
   };
 };
@@ -4424,8 +4487,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var store = (0,_store_store__WEBPACK_IMPORTED_MODULE_2__.default)(preloadedState);
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__.default, {
     store: store
-  }), document.getElementById("root")); //testing!!!
-  // window.store = store;
+  }), document.getElementById("root"));
 });
 
 /***/ }),
@@ -4661,7 +4723,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/music_actions */ "./frontend/actions/music_actions.js");
-/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/various */ "./frontend/utils/various.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/various */ "./frontend/utils/various.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4669,6 +4732,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 //int - actions
+
  //int - util
 
 
@@ -4726,7 +4790,7 @@ var initialState = {
           nextState.playedIndecies = nsPlayedIndecies;
 
           if (state.shuffle) {
-            nextState.index = (0,_utils_various__WEBPACK_IMPORTED_MODULE_1__.indexPicker)(state.queue.length, nsPlayedIndecies);
+            nextState.index = (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.indexPicker)(state.queue.length, nsPlayedIndecies);
           } else {
             nextState.index += 1;
           }
@@ -4778,6 +4842,21 @@ var initialState = {
 
     case _actions_music_actions__WEBPACK_IMPORTED_MODULE_0__.TOGGLE_SHUFFLE:
       nextState.shuffle = !state.shuffle;
+      return nextState;
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_CURRENT_USER:
+      nextState.loop = action.user.settings.loop;
+      nextState.shuffle = action.user.settings.shuffle;
+      return nextState;
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__.RECEIVE_USER_SETTINGS:
+      nextState.loop = action.settings.loop;
+      nextState.shuffle = action.settings.shuffle;
+      return nextState;
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__.SIGNOUT_CURRENT_USER:
+      nextState.loop = false;
+      nextState.shuffle = false;
       return nextState;
 
     default:
@@ -5230,6 +5309,7 @@ var getArtistDetails = function getArtistDetails(artistId) {
 /*! export arrowRight [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export browse [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export close [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export closeCircle [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export cloud [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export cloudCircle [provided] [no usage info] [missing usage info prevents renaming] */
 /*! export cloudFull [provided] [no usage info] [missing usage info prevents renaming] */
@@ -5271,6 +5351,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "arrowRight": () => /* binding */ arrowRight,
 /* harmony export */   "browse": () => /* binding */ browse,
 /* harmony export */   "close": () => /* binding */ close,
+/* harmony export */   "closeCircle": () => /* binding */ closeCircle,
 /* harmony export */   "cloud": () => /* binding */ cloud,
 /* harmony export */   "cloudFull": () => /* binding */ cloudFull,
 /* harmony export */   "cloudCircle": () => /* binding */ cloudCircle,
@@ -5404,6 +5485,22 @@ var close = function close(classes, action) {
     fill: "none"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
     d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+  }));
+};
+var closeCircle = function closeCircle(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24",
+    className: classes,
+    onClick: action
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0V0z",
+    fill: "none",
+    opacity: ".87"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"
   }));
 };
 var cloud = function cloud(classes, action) {
@@ -6201,6 +6298,33 @@ var unsaveTrack = function unsaveTrack(trackId) {
     method: "DELETE",
     data: {
       track_id: trackId
+    }
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/utils/user_api_utils.js":
+/*!******************************************!*\
+  !*** ./frontend/utils/user_api_utils.js ***!
+  \******************************************/
+/*! namespace exports */
+/*! export toggleSetting [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "toggleSetting": () => /* binding */ toggleSetting
+/* harmony export */ });
+var toggleSetting = function toggleSetting(setting) {
+  return $.ajax({
+    url: "/api/user_settings/",
+    method: "PATCH",
+    data: {
+      setting: setting
     }
   });
 };

@@ -10,6 +10,11 @@ import {
     TOGGLE_LOOP,
     TOGGLE_SHUFFLE,
 } from "../actions/music_actions";
+import {
+    RECEIVE_CURRENT_USER,
+    RECEIVE_USER_SETTINGS,
+    SIGNOUT_CURRENT_USER,
+} from "../actions/session_actions";
 //int - util
 import { indexPicker } from "../utils/various";
 
@@ -120,6 +125,21 @@ export default (state = initialState, action) => {
 
         case TOGGLE_SHUFFLE:
             nextState.shuffle = !state.shuffle;
+            return nextState;
+
+        case RECEIVE_CURRENT_USER:
+            nextState.loop = action.user.settings.loop;
+            nextState.shuffle = action.user.settings.shuffle;
+            return nextState;
+
+        case RECEIVE_USER_SETTINGS:
+            nextState.loop = action.settings.loop;
+            nextState.shuffle = action.settings.shuffle;
+            return nextState;
+
+        case SIGNOUT_CURRENT_USER:
+            nextState.loop = false;
+            nextState.shuffle = false;
             return nextState;
 
         default:
