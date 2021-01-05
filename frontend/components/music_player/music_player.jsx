@@ -114,8 +114,6 @@ class MusicPlayer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log(`audio: ${this.audio.volume} | bar: ${this.volume.value}`);
-
         clearInterval(this.timeSetter);
         if (this.props.music.on) {
             if (this.props.currentTrack !== prevProps.currentTrack) {
@@ -285,7 +283,7 @@ class MusicPlayer extends React.Component {
                     {display}
 
                     <div className="volume">
-                        {icons.volume("icon", () => console.log("volume"))}
+                        {icons.volume("icon")}
                         <input
                             ref={(volume) => {
                                 this.volume = volume;

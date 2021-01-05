@@ -12,6 +12,7 @@ json.albums do
         json.set! album.id do
             json.extract! album, :id, :artist_id, :title, :release_date, :url
             json.play_count album_plays
+            json.track_count album.tracks.length
         end
     end
 end

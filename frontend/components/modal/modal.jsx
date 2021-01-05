@@ -6,6 +6,8 @@ import { closeModal } from "../../actions/modal_actions";
 import SigninFormContainer from "./signin_form_container";
 import SignupFormContainer from "./signup_form_container";
 import ExtendedText from "./extended_text";
+import About from "./about";
+
 //int - util
 import * as icons from "../../utils/icons";
 
@@ -27,6 +29,10 @@ const Modal = ({ modal, closeModal }) => {
         case "text":
             component = <ExtendedText />;
             modalClass = "extended-text";
+            break;
+        case "about":
+            component = <About />;
+            modalClass = "about";
             break;
         default:
             return null;

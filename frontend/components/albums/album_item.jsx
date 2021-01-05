@@ -65,7 +65,9 @@ class AlbumItem extends Component {
                     <Link to={`/albums/${album.id}`}>
                         <span className="album-title">{album.title}</span>
                     </Link>
-                    <span className="album-tracks">12 Songs</span>
+                    <span className="album-tracks">{`${album.trackCount} Song${
+                        album.trackCount > 1 ? "s" : ""
+                    }`}</span>
                 </div>
             );
         }

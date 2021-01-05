@@ -854,7 +854,7 @@ var AlbumItem = /*#__PURE__*/function (_Component) {
           className: "album-title"
         }, album.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
           className: "album-tracks"
-        }, "12 Songs"));
+        }, "".concat(album.trackCount, " Song").concat(album.trackCount > 1 ? "s" : "")));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1796,6 +1796,8 @@ var Browse = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       if (this.state.loading) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_loading__WEBPACK_IMPORTED_MODULE_1__.default, null);
       }
@@ -1819,13 +1821,14 @@ var Browse = /*#__PURE__*/function (_Component) {
         className: "featured-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "NEW ALBUM"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Man On the Moon III: The Chosen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Kid Cudi"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: "https://appomusic.com/assets/featured/01.jpg"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-        to: "/"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "featured-container"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "featured-container",
+        onClick: function onClick() {
+          return _this3.props.openModal("about");
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "FEATURED"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "About This Project"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Appo Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: "https://appomusic.com/assets/featured/02.jpg"
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_albums_albums_slider__WEBPACK_IMPORTED_MODULE_2__.default, {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_albums_albums_slider__WEBPACK_IMPORTED_MODULE_2__.default, {
         title: "New Music",
         albums: newAlbums,
         artists: artists
@@ -1862,10 +1865,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _browse__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./browse */ "./frontend/components/main/browse.jsx");
 /* harmony import */ var _actions_album_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/album_actions */ "./frontend/actions/album_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 //ext
  //int - containers
 
  //int - actions
+
 
 
 
@@ -1882,6 +1887,9 @@ var mapDTP = function mapDTP(dispatch) {
   return {
     getAllAlbums: function getAllAlbums() {
       return dispatch((0,_actions_album_actions__WEBPACK_IMPORTED_MODULE_2__.getAllAlbums)());
+    },
+    openModal: function openModal(modal) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_3__.openModal)(modal));
     }
   };
 };
@@ -1946,6 +1954,7 @@ var Empty = function Empty(_ref) {
   \*********************************************/
 /*! namespace exports */
 /*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export mapDTP [provided] [no usage info] [missing usage info prevents renaming] */
 /*! other exports [not provided] [no usage info] */
 /*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
@@ -1953,44 +1962,63 @@ var Empty = function Empty(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "mapDTP": () => /* binding */ mapDTP,
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 //ext
 
+ //int - actions
 
-var Footer = function Footer() {
+
+
+var Footer = function Footer(_ref) {
+  var openModal = _ref.openModal;
+
+  var handleClick = function handleClick(e) {
+    e.preventDefault();
+    openModal("about");
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
     className: "copyright"
-  }, "Copyright \xA9 2020", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#",
-    target: "blank"
-  }, "Appo Inc."), " ", "All rights reserved."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+  }, "Copyright \xA9 2020 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    onClick: handleClick
+  }, "Appo Inc."), " All rights reserved."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: "footer-links"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "footer-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#"
+    onClick: handleClick
   }, "Internet Service Terms")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "footer-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#"
+    onClick: handleClick
   }, "Appo Music & Privacy")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "footer-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#"
+    onClick: handleClick
   }, "Cookie Warning")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "footer-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#"
+    onClick: handleClick
   }, "Support")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "footer-link"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#"
+    onClick: handleClick
   }, "Feedback"))));
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Footer);
+var mapDTP = function mapDTP(dispatch) {
+  return {
+    openModal: function openModal(modal) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_2__.openModal)(modal));
+    }
+  };
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(null, mapDTP)(Footer));
 
 /***/ }),
 
@@ -2356,6 +2384,49 @@ var NotFound = function NotFound() {
 
 /***/ }),
 
+/***/ "./frontend/components/modal/about.jsx":
+/*!*********************************************!*\
+  !*** ./frontend/components/modal/about.jsx ***!
+  \*********************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
+// ext
+ //int - util
+
+
+
+var About = function About() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "about-header"
+  }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.cloud(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Appo Music"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "by Ori Ravid")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "about-description"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Appo Music is a full-stack clone of the ever so beatiful Apple Music online streaming platform, with an aim to re-create it's core features, seamless design, and fantastic user experience."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Written from scratch in just over 10 days, this app utilizes a Ruby on Rails backend and JavaScript ES6/React/Redux frontend."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "For detailed technical information, feature highlights/walkthroughs, and more, please visit the", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "https://github.com/oriravid/Appo-Music/blob/main/README.md",
+    target: "blank"
+  }, "production readme."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "about-contact"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+    className: "thank-you"
+  }, "Thank you kindly for taking the time to view Appo Music!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Please feel free to reach out :)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    href: "mailto:oriravid@att.net"
+  }, "oriravid@att.net")));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (About);
+
+/***/ }),
+
 /***/ "./frontend/components/modal/extended_text.jsx":
 /*!*****************************************************!*\
   !*** ./frontend/components/modal/extended_text.jsx ***!
@@ -2414,10 +2485,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _signin_form_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./signin_form_container */ "./frontend/components/modal/signin_form_container.jsx");
 /* harmony import */ var _signup_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./signup_form_container */ "./frontend/components/modal/signup_form_container.jsx");
 /* harmony import */ var _extended_text__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./extended_text */ "./frontend/components/modal/extended_text.jsx");
-/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
+/* harmony import */ var _about__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./about */ "./frontend/components/modal/about.jsx");
+/* harmony import */ var _utils_icons__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utils/icons */ "./frontend/utils/icons.js");
 //ext
 
  //int
+
 
 
 
@@ -2452,6 +2525,11 @@ var Modal = function Modal(_ref) {
       modalClass = "extended-text";
       break;
 
+    case "about":
+      component = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_about__WEBPACK_IMPORTED_MODULE_6__.default, null);
+      modalClass = "about";
+      break;
+
     default:
       return null;
   }
@@ -2464,7 +2542,7 @@ var Modal = function Modal(_ref) {
     onClick: function onClick(e) {
       return e.stopPropagation();
     }
-  }, _utils_icons__WEBPACK_IMPORTED_MODULE_6__.close("icon close pointer", closeModal), component));
+  }, _utils_icons__WEBPACK_IMPORTED_MODULE_7__.close("icon close pointer", closeModal), component));
 };
 
 var mapSTP = function mapSTP(state) {
@@ -2992,7 +3070,6 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this6 = this;
 
-      console.log("audio: ".concat(this.audio.volume, " | bar: ").concat(this.volume.value));
       clearInterval(this.timeSetter);
 
       if (this.props.music.on) {
@@ -3142,9 +3219,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         return _this7.toggleSetting("loop");
       })), display, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "volume"
-      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.volume("icon", function () {
-        return console.log("volume");
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.volume("icon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         ref: function ref(volume) {
           _this7.volume = volume;
         },
@@ -3831,14 +3906,11 @@ var PlaylistShow = /*#__PURE__*/function (_Component) {
       });
 
       if (albums.length > 1) {
-        var albumIdx = 1;
         this.coverSetter = setInterval(function () {
           _this3.setState({
-            coverUrl: albums[albumIdx].url
+            coverUrl: albums[Math.floor(Math.random() * albums.length)].url
           });
-
-          albumIdx < albums.length - 1 ? albumIdx++ : albumIdx = 0;
-        }, 10000);
+        }, 7500);
       }
     }
   }, {
@@ -4557,11 +4629,11 @@ var TrackMenu = /*#__PURE__*/function (_Component) {
         }, playlistList));
       } else if (location === "playlist") {
         var menuOptions = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-          className: "track-menu-item pointer",
+          className: "track-menu-item playlist pointer",
           onClick: function onClick() {
             return _this.handleRemove(trackId, playlistId);
           }
-        }, "Remove from Playlist"));
+        }, "Remove from playlist"));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {

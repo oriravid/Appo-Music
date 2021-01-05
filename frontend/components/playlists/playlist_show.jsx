@@ -49,14 +49,12 @@ class PlaylistShow extends Component {
         this.setState({ coverUrl: albums[0].url });
 
         if (albums.length > 1) {
-            let albumIdx = 1;
-
             this.coverSetter = setInterval(() => {
                 this.setState({
-                    coverUrl: albums[albumIdx].url,
+                    coverUrl:
+                        albums[Math.floor(Math.random() * albums.length)].url,
                 });
-                albumIdx < albums.length - 1 ? albumIdx++ : (albumIdx = 0);
-            }, 10000);
+            }, 7500);
         }
     }
 

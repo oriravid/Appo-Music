@@ -48,10 +48,10 @@ class TrackMenu extends Component {
             var menuOptions = (
                 <React.Fragment>
                     <li
-                        className="track-menu-item pointer"
+                        className="track-menu-item playlist pointer"
                         onClick={() => this.handleRemove(trackId, playlistId)}
                     >
-                        Remove from Playlist
+                        Remove from playlist
                     </li>
                 </React.Fragment>
             );

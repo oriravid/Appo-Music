@@ -171,6 +171,17 @@ h3 {
     height: 100px;
 }
 
+// animation
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 // app
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -381,6 +392,8 @@ h3 {
     background-color: white;
     box-shadow: $box-shadow;
     padding: 10px;
+    animation-name: fade-in;
+    animation-duration: 0.3s;
 }
 
 .search-results-container.no-results {
@@ -726,6 +739,20 @@ img.album-artwork {
     justify-content: space-between;
 }
 
+.playlist-actions svg {
+    width: 23px;
+    height: 23px;
+    transition: all 0.3s;
+}
+
+.playlist-actions svg:first-child {
+    margin-right: 10px;
+}
+
+.playlist-actions svg:hover {
+    fill: black;
+}
+
 .album-header h1,
 #edit-playlist-field {
     font-size: 24px;
@@ -909,6 +936,10 @@ img.album-artwork {
     text-decoration: underline;
 }
 
+.track-row > .track-info span:first-child a {
+    font-weight: 600;
+}
+
 .track-row.selected > .track-info a {
     font-weight: 600;
     color: white;
@@ -941,14 +972,23 @@ img.album-artwork {
     z-index: 2;
     overflow: hidden;
     box-shadow: $box-shadow;
+    animation-name: fade-in;
+    animation-duration: 0.3s;
 }
 
 .track-menu-item {
     padding: 5px 10px;
     font-weight: 600;
+    font-size: 14px;
     color: $gray-text;
-    text-transform: uppercase;
-    border-bottom: 2px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    margin: 7.5px;
+}
+
+.track-menu-item.playlist {
+    text-align: center;
+    border-bottom: none;
+    color: $error;
 }
 
 .track-menu-item.hoverable:hover,
@@ -959,12 +999,16 @@ img.album-artwork {
 .playlist-list {
     max-height: 150px;
     overflow-y: scroll;
+    padding: 7.5px;
+    padding-top: 0;
 }
 
 .playlist-list-item {
-    padding: 5px 10px;
+    padding: 10px 10px;
     overflow: hidden;
     text-overflow: ellipsis;
+    border-radius: 7.5px;
+    transition: background-color 0.2s;
 }
 
 //////
@@ -1428,6 +1472,7 @@ footer {
 
 .footer-link a:hover,
 .copyright a:hover {
+    cursor: pointer;
     color: $main-color;
     text-decoration: underline;
 }

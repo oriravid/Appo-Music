@@ -1,35 +1,44 @@
 //ext
 import React from "react";
+import { connect } from "react-redux";
+//int - actions
+import { openModal } from "../../actions/modal_actions";
 
-const Footer = () => {
+const Footer = ({ openModal }) => {
+    const handleClick = (e) => {
+        e.preventDefault();
+        openModal("about");
+    };
+
     return (
         <footer>
             <p className="copyright">
-                Copyright © 2020{" "}
-                <a href="#" target="blank">
-                    Appo Inc.
-                </a>{" "}
-                All rights reserved.
+                Copyright © 2020 <a onClick={handleClick}>Appo Inc.</a> All
+                rights reserved.
             </p>
             <ul className="footer-links">
                 <li className="footer-link">
-                    <a href="#">Internet Service Terms</a>
+                    <a onClick={handleClick}>Internet Service Terms</a>
                 </li>
                 <li className="footer-link">
-                    <a href="#">Appo Music & Privacy</a>
+                    <a onClick={handleClick}>Appo Music & Privacy</a>
                 </li>
                 <li className="footer-link">
-                    <a href="#">Cookie Warning</a>
+                    <a onClick={handleClick}>Cookie Warning</a>
                 </li>
                 <li className="footer-link">
-                    <a href="#">Support</a>
+                    <a onClick={handleClick}>Support</a>
                 </li>
                 <li className="footer-link">
-                    <a href="#">Feedback</a>
+                    <a onClick={handleClick}>Feedback</a>
                 </li>
             </ul>
         </footer>
     );
 };
 
-export default Footer;
+export const mapDTP = (dispatch) => ({
+    openModal: (modal) => dispatch(openModal(modal)),
+});
+
+export default connect(null, mapDTP)(Footer);

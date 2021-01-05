@@ -29,6 +29,8 @@
     position: relative;
     width: 550px;
     padding: 30px;
+    animation-name: fade-in;
+    animation-duration: 0.25s;
 }
 
 .modal-container .icon {
@@ -122,8 +124,20 @@
 }
 
 .session-form-options p:first-child {
+    font-weight: 600;
     margin-bottom: 10px;
     color: $link;
+    animation-name: fade-in;
+    animation-duration: 2.5s;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 // Text Modal
@@ -145,4 +159,79 @@
     max-height: 400px;
     overflow-y: scroll;
     font-size: 15px;
+}
+
+// About Modal
+///////////////////////////////////////////////////////////////////////////////
+
+.modal-container.about {
+    align-items: center;
+    text-align: center;
+    width: 800px;
+    // height: 560px;
+}
+
+.modal-container.about a {
+    transition: all 0.5s;
+}
+
+.about-header {
+    text-align: center;
+    border-bottom: 2px solid $border-color;
+    margin-bottom: 25px;
+    animation-name: fade-in;
+    animation-duration: 1.5s;
+}
+
+.about-header svg {
+    height: 55px;
+    width: 55px;
+    opacity: 0.5;
+    -webkit-filter: drop-shadow($box-shadow);
+    filter: drop-shadow($box-shadow);
+}
+
+.about-header h1 {
+    color: $main-color;
+    margin-bottom: 15px;
+}
+
+.about-header h2 {
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 25px;
+    color: $gray-text;
+    text-transform: uppercase;
+    letter-spacing: 1.25px;
+}
+
+.about-description {
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 25px;
+}
+
+.about-description,
+.about-contact {
+    max-width: 55%;
+}
+
+.about-description p {
+    margin-bottom: 20px;
+}
+
+.about-description p:last-child {
+    margin-bottom: 25px;
+}
+
+.about-contact {
+    margin-bottom: 15px;
+}
+
+.about-contact .thank-you {
+    font-weight: 600;
+}
+
+.about-contact span {
+    display: block;
+    margin-bottom: 15px;
 }

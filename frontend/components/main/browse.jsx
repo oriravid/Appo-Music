@@ -47,14 +47,15 @@ class Browse extends Component {
                             <img src="https://appomusic.com/assets/featured/01.jpg" />
                         </div>
                     </Link>
-                    <Link to="/">
-                        <div className="featured-container">
-                            <p>FEATURED</p>
-                            <h2>About This Project</h2>
-                            <h2>Appo Music</h2>
-                            <img src="https://appomusic.com/assets/featured/02.jpg" />
-                        </div>
-                    </Link>
+                    <div
+                        className="featured-container"
+                        onClick={() => this.props.openModal("about")}
+                    >
+                        <p>FEATURED</p>
+                        <h2>About This Project</h2>
+                        <h2>Appo Music</h2>
+                        <img src="https://appomusic.com/assets/featured/02.jpg" />
+                    </div>
                 </div>
                 <AlbumsSlider
                     title={"New Music"}
