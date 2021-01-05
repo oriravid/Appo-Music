@@ -24,7 +24,7 @@ class MusicPlayer extends React.Component {
                 currentTime: this.audio.currentTime,
                 timeLeft: this.state.duration - this.audio.currentTime,
             });
-        }, 500);
+        }, 250);
     }
 
     handleScrub(e) {
@@ -49,6 +49,7 @@ class MusicPlayer extends React.Component {
 
     //Fade in for logged out users
     handleFadeIn() {
+        if (this.audio.volume === 0) return;
         this.fadingIn = true;
         this.audio.volume = 0;
 
@@ -59,18 +60,19 @@ class MusicPlayer extends React.Component {
                 this.fadingIn = false;
                 clearInterval(this.fadeIn);
             }
-        }, 20);
+        }, 40);
     }
 
     //Fade out for logged out users
     handleFadeOut() {
+        if (this.audio.volume === 0) return;
         this.fadingOut = true;
 
         this.fadeOut = setInterval(() => {
             if (Math.round(this.audio.volume * 100) > 1) {
                 this.audio.volume -= 0.01;
             }
-        }, 20);
+        }, 40);
     }
 
     //Hits db for logged in users, hits store for logged out users
@@ -114,6 +116,10 @@ class MusicPlayer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        // console.log(
+        //     `Audio Volume: ${this.audio.volume} | Volume Fader: ${this.volume.value}`
+        // );
+
         clearInterval(this.timeSetter);
         if (this.props.music.on) {
             if (this.props.currentTrack !== prevProps.currentTrack) {
@@ -126,7 +132,8 @@ class MusicPlayer extends React.Component {
 
         if (this.props.music.playing) {
             //Preview logic
-            if (!this.props.currentUser) {
+
+            if (!this.props.currentUser && this.audio.duration > 60) {
                 const previewStart = this.audio.duration * 0.25;
                 const previewEnd = previewStart + 30;
 

@@ -2964,7 +2964,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           currentTime: _this2.audio.currentTime,
           timeLeft: _this2.state.duration - _this2.audio.currentTime
         });
-      }, 500);
+      }, 250);
     }
   }, {
     key: "handleScrub",
@@ -2995,6 +2995,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     value: function handleFadeIn() {
       var _this3 = this;
 
+      if (this.audio.volume === 0) return;
       this.fadingIn = true;
       this.audio.volume = 0;
       this.fadeIn = setInterval(function () {
@@ -3004,7 +3005,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           _this3.fadingIn = false;
           clearInterval(_this3.fadeIn);
         }
-      }, 20);
+      }, 40);
     } //Fade out for logged out users
 
   }, {
@@ -3012,12 +3013,13 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     value: function handleFadeOut() {
       var _this4 = this;
 
+      if (this.audio.volume === 0) return;
       this.fadingOut = true;
       this.fadeOut = setInterval(function () {
         if (Math.round(_this4.audio.volume * 100) > 1) {
           _this4.audio.volume -= 0.01;
         }
-      }, 20);
+      }, 40);
     } //Hits db for logged in users, hits store for logged out users
 
   }, {
@@ -3070,6 +3072,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     value: function componentDidUpdate(prevProps) {
       var _this6 = this;
 
+      // console.log(
+      //     `Audio Volume: ${this.audio.volume} | Volume Fader: ${this.volume.value}`
+      // );
       clearInterval(this.timeSetter);
 
       if (this.props.music.on) {
@@ -3086,7 +3091,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
       if (this.props.music.playing) {
         //Preview logic
-        if (!this.props.currentUser) {
+        if (!this.props.currentUser && this.audio.duration > 60) {
           var previewStart = this.audio.duration * 0.25;
           var previewEnd = previewStart + 30;
 
