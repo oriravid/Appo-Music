@@ -48,7 +48,7 @@ class Browse extends Component {
                         </div>
                     </Link>
                     <div
-                        className="featured-container"
+                        className="featured-container pointer"
                         onClick={() => this.props.openModal("about")}
                     >
                         <p>FEATURED</p>
