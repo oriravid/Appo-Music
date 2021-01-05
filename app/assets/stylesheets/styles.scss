@@ -720,6 +720,7 @@ img.album-artwork {
 
 .album-header-tracks {
     flex: 1;
+    max-width: 75%;
 }
 
 .album-header {
@@ -739,6 +740,10 @@ img.album-artwork {
     justify-content: space-between;
 }
 
+.playlist-actions {
+    display: flex;
+}
+
 .playlist-actions svg {
     width: 23px;
     height: 23px;
@@ -746,7 +751,7 @@ img.album-artwork {
 }
 
 .playlist-actions svg:first-child {
-    margin-right: 10px;
+    margin: 0 10px;
 }
 
 .playlist-actions svg:hover {
@@ -759,6 +764,8 @@ img.album-artwork {
     margin-bottom: 1px;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
 }
 
 #edit-playlist-field {
