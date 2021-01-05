@@ -1007,6 +1007,7 @@ img.album-artwork {
     padding: 10px 10px;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
     border-radius: 7.5px;
     transition: background-color 0.2s;
 }

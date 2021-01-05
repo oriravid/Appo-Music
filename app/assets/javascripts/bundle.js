@@ -3120,6 +3120,14 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         };
       } else {
         this.audio.pause();
+      } //Clean up fade functions and makes sure volume is set properly
+      //when user logs in
+
+
+      if (!prevProps.currentUser && this.props.currentUser) {
+        clearInterval(this.fadeIn);
+        clearInterval(this.fadeOut);
+        this.audio.volume = this.volume.value;
       }
     }
   }, {
