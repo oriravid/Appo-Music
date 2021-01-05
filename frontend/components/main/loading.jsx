@@ -7,7 +7,8 @@ const Loading = () => {
     return (
         <React.Fragment>
             <div className="loading">
-                {icons.loader1("svg-loader", "rgba(62, 156, 181, 0.6)")}
+                {icons.loader1("svg-loader", "rgba(0,0,0,0.4)")}
+                {icons.cloud("loading-cloud")}
             </div>
         </React.Fragment>
     );

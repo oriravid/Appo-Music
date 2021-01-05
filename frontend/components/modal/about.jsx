@@ -13,10 +13,10 @@ const About = () => {
             </div>
             <div className="about-description">
                 <p>
-                    Appo Music is a full-stack clone of the ever so beatiful
-                    Apple Music online streaming platform, with an aim to
-                    re-create it's core features, seamless design, and fantastic
-                    user experience.
+                    Appo Music is a full-stack clone of the incredible Apple
+                    Music online streaming platform, with an aim to re-create
+                    it's core features, seamless design, and excellent user
+                    experience.
                 </p>
                 <p>
                     Written from scratch in just over 10 days, this app utilizes
@@ -39,7 +39,9 @@ const About = () => {
                     Thank you kindly for taking the time to view Appo Music!
                 </span>
                 <span>Please feel free to reach out :)</span>
-                <a href="mailto:oriravid@att.net">oriravid@att.net</a>
+                <a href="mailto:oriravid@att.net">
+                    <div className="btn pointer">Contact Me</div>
+                </a>
             </div>
         </React.Fragment>
     );

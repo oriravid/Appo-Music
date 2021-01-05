@@ -28,12 +28,24 @@ class Nav extends Component {
             <React.Fragment>
                 <div className="nav-section-container">
                     <div className="nav-section">
+                        <ul className="nav-section-list">
+                            <NavLink to="/browse">
+                                <li className="nav-section-list-item">
+                                    {icons.browse("icon color")}
+                                    <span>Browse</span>
+                                </li>
+                            </NavLink>
+                        </ul>
+                    </div>
+                </div>
+                <div className="nav-section-container">
+                    <div className="nav-section">
                         <h2>Library</h2>
                         <ul className="nav-section-list">
                             <NavLink to="/library">
                                 <li className="nav-section-list-item">
                                     {icons.recent("icon color")}
-                                    <span>Recently Added</span>
+                                    <span>Recently Saved</span>
                                 </li>
                             </NavLink>
                         </ul>
@@ -57,6 +69,12 @@ class Nav extends Component {
                 <div className="nav-section-container">
                     <div className="nav-section">
                         <ul className="nav-section-list">
+                            <NavLink to="/browse">
+                                <li className="nav-section-list-item">
+                                    {icons.browse("icon color")}
+                                    <span>Browse</span>
+                                </li>
+                            </NavLink>
                             <li
                                 className="nav-section-list-item pointer"
                                 onClick={this.handleSignin.bind(this)}
@@ -64,12 +82,6 @@ class Nav extends Component {
                                 {icons.signin("icon color")}
                                 <span>Sign In</span>
                             </li>
-                            <NavLink to="/browse">
-                                <li className="nav-section-list-item">
-                                    {icons.browse("icon color")}
-                                    <span>Browse</span>
-                                </li>
-                            </NavLink>
                         </ul>
                     </div>
                 </div>
@@ -77,7 +89,7 @@ class Nav extends Component {
                     <h2>All the music you love.</h2>
                     <span>Sign up today and get 3 months on us.</span>
                     <div
-                        className="btn wide"
+                        className="btn-round pointer"
                         onClick={() => openModal("signup")}
                     >
                         Try It Free

@@ -548,7 +548,7 @@ export const loader1 = (classes, fill) => (
                         type="rotate"
                         from="0 18 18"
                         to="360 18 18"
-                        dur="0.9s"
+                        dur="1.2s"
                         repeatCount="indefinite"
                     />
                 </path>
@@ -558,7 +558,7 @@ export const loader1 = (classes, fill) => (
                         type="rotate"
                         from="0 18 18"
                         to="360 18 18"
-                        dur="0.9s"
+                        dur="1.2s"
                         repeatCount="indefinite"
                     />
                 </circle>

@@ -76,6 +76,8 @@ h3 {
     outline: none;
 }
 
+//buttons
+
 .btn {
     display: flex;
     align-items: center;
@@ -91,11 +93,28 @@ h3 {
     font-weight: 600;
     letter-spacing: 0.04em;
     background-color: $main-color;
-    border: 1px solid $border-color;
+    transition: all 0.3s;
 }
 
-.btn.wide {
-    width: 100%;
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-round {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(253, 253, 253);
+    padding: 7.5px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: $box-shadow;
+    transition: all 0.3s;
+}
+
+.btn-round:hover {
+    background-color: #f3f3f3;
 }
 
 .icon {
@@ -163,12 +182,22 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 35vh 0;
+    height: 100%;
 }
 
 .svg-loader {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
+}
+
+.loading-cloud {
+    position: absolute;
+    height: 65px;
+    width: 65px;
+    opacity: 0.5;
+    -webkit-filter: drop-shadow($box-shadow);
+    filter: drop-shadow($box-shadow);
+    // animation: loading 2s infinite;
 }
 
 // animation
@@ -179,6 +208,18 @@ h3 {
     }
     to {
         opacity: 1;
+    }
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
@@ -355,24 +396,10 @@ h3 {
 }
 
 .trial-container span {
+    display: block;
     color: white;
     font-weight: 600;
-}
-
-.trial-container .btn {
-    background: rgb(255, 255, 255);
-    background: linear-gradient(
-        160deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgb(236, 230, 230) 100%
-    );
-    color: rgba(0, 0, 0, 0.6);
-    font-weight: 700;
-    height: 40px;
-    margin-top: 20px;
-    font-size: 18px;
-    text-transform: uppercase;
-    box-shadow: $box-shadow;
+    margin-bottom: 20px;
 }
 
 // Search Results
