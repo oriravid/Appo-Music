@@ -952,7 +952,7 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
     _this = _super.call(this, props);
     _this.state = {
       loading: true,
-      topSongSelected: false,
+      externalSongClick: false,
       selectedTrackId: null,
       hoveredTrackId: null,
       menuTrackId: null
@@ -1032,7 +1032,7 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
 
       if (this.props.selectedTrackId) {
         this.setState({
-          topSongSelected: true,
+          externalSongClick: true,
           selectedTrackId: this.props.selectedTrackId
         });
       }
@@ -1055,13 +1055,13 @@ var AlbumShow = /*#__PURE__*/function (_Component) {
         });
       }
 
-      if (this.state.topSongSelected && !this.state.loading) {
+      if (this.state.externalSongClick && !this.state.loading) {
         document.querySelector(".track-row.selected").scrollIntoView({
           behavior: "smooth",
           block: "end"
         });
         this.setState({
-          topSongSelected: false
+          externalSongClick: false
         });
       }
     }
@@ -2910,7 +2910,38 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
     key: "handleVolume",
     value: function handleVolume(e) {
       this.audio.volume = e.target.value;
-    }
+    } //Fade in for logged out users
+
+  }, {
+    key: "handleFadeIn",
+    value: function handleFadeIn() {
+      var _this3 = this;
+
+      this.fadingIn = true;
+      this.audio.volume = 0;
+      this.fadeIn = setInterval(function () {
+        if (Math.round(_this3.audio.volume * 100) < _this3.volume.value * 99) {
+          _this3.audio.volume += 0.01;
+        } else {
+          _this3.fadingIn = false;
+          clearInterval(_this3.fadeIn);
+        }
+      }, 20);
+    } //Fade out for logged out users
+
+  }, {
+    key: "handleFadeOut",
+    value: function handleFadeOut() {
+      var _this4 = this;
+
+      this.fadingOut = true;
+      this.fadeOut = setInterval(function () {
+        if (Math.round(_this4.audio.volume * 100) > 1) {
+          _this4.audio.volume -= 0.01;
+        }
+      }, 20);
+    } //Hits db for logged in users, hits store for logged out users
+
   }, {
     key: "toggleSetting",
     value: function toggleSetting(opt) {
@@ -2927,7 +2958,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this3 = this;
+      var _this5 = this;
 
       //check user shuffle & loop settings
       var _this$props = this.props,
@@ -2952,15 +2983,16 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       });
       document.body.addEventListener("keyup", function (e) {
         if (e.code === "Space" && e.target == e.currentTarget) {
-          if (_this3.props.music.on) _this3.props.toggle();
+          if (_this5.props.music.on) _this5.props.toggle();
         }
       });
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      var _this4 = this;
+      var _this6 = this;
 
+      console.log("audio: ".concat(this.audio.volume, " | bar: ").concat(this.volume.value));
       clearInterval(this.timeSetter);
 
       if (this.props.music.on) {
@@ -2969,18 +3001,40 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         }
 
         this.audio.onloadedmetadata = function () {
-          return _this4.setState({
-            duration: _this4.audio.duration
+          return _this6.setState({
+            duration: _this6.audio.duration
           });
         };
       }
 
       if (this.props.music.playing) {
+        //Preview logic
+        if (!this.props.currentUser) {
+          var previewStart = this.audio.duration * 0.25;
+          var previewEnd = previewStart + 30;
+
+          if (this.audio.currentTime < previewStart) {
+            this.audio.currentTime = previewStart;
+            if (!this.fadingIn) this.handleFadeIn();
+          }
+
+          if (this.audio.currentTime > previewEnd - 5) {
+            if (!this.fadingOut) this.handleFadeOut();
+          }
+
+          if (this.audio.currentTime > previewEnd) {
+            this.handleNextPrev("next");
+            clearInterval(this.fadeOut);
+            this.fadingOut = false;
+          }
+        } //Start playback, set scrubber interval, set next callback
+
+
         this.audio.play();
         this.handleInterval();
 
         this.audio.onended = function () {
-          _this4.handleNextPrev("next");
+          _this6.handleNextPrev("next");
         };
       } else {
         this.audio.pause();
@@ -2989,7 +3043,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this7 = this;
 
       var _this$props2 = this.props,
           music = _this$props2.music,
@@ -3011,10 +3065,12 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       if (music.on) {
         var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "display"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+          to: "/albums/".concat(albumId)
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
           src: albumUrl,
-          className: "album-artwork"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "album-artwork pointer"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "display-inner"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "song-info"
@@ -3030,16 +3086,21 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           className: "slider"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           ref: function ref(scrub) {
-            _this5.scrub = scrub;
+            _this7.scrub = scrub;
           },
           type: "range",
           min: "0",
           max: this.state.duration,
-          onChange: this.handleScrub.bind(this),
-          className: "slider-input pointer"
+          onChange: this.props.currentUser ? this.handleScrub.bind(this) : function () {},
+          className: "slider-input".concat(this.props.currentUser ? " pointer" : "")
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "times"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.currentTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "-", (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.timeLeft)))));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.currentTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "-", (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.timeLeft)))), this.props.currentUser ? "" : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "music-preview pointer",
+          onClick: function onClick() {
+            return _this7.props.openSigninModal();
+          }
+        }, "PREVIEW"));
       } else {
         var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "display off"
@@ -3066,26 +3127,26 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
         className: "music-player-inner"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("audio", {
         ref: function ref(audio) {
-          _this5.audio = audio;
+          _this7.audio = audio;
         },
         src: trackUrl
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "controls"
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.shuffle("icon sml".concat(sActive), function () {
-        return _this5.toggleSetting("shuffle");
+        return _this7.toggleSetting("shuffle");
       }), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.previous("icon med".concat(disabled), function () {
-        return _this5.handleNextPrev("prev");
+        return _this7.handleNextPrev("prev");
       }), playpause, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.next("icon med".concat(disabled), function () {
-        return _this5.handleNextPrev("next");
+        return _this7.handleNextPrev("next");
       }), _utils_icons__WEBPACK_IMPORTED_MODULE_1__.loop("icon sml".concat(lActive), function () {
-        return _this5.toggleSetting("loop");
+        return _this7.toggleSetting("loop");
       })), display, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "volume"
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.volume("icon", function () {
         return console.log("volume");
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         ref: function ref(volume) {
-          _this5.volume = volume;
+          _this7.volume = volume;
         },
         type: "range",
         min: "0",
@@ -3123,10 +3184,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _music_player__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./music_player */ "./frontend/components/music_player/music_player.jsx");
 /* harmony import */ var _actions_music_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/music_actions */ "./frontend/actions/music_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
 //ext
  //int - components
 
  //int - actions
+
 
 
 
@@ -3177,6 +3240,9 @@ var mapDTP = function mapDTP(dispatch) {
     },
     toggleSetting: function toggleSetting(setting) {
       return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__.toggleSetting)(setting));
+    },
+    openSigninModal: function openSigninModal() {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_4__.openModal)("signin"));
     }
   };
 };

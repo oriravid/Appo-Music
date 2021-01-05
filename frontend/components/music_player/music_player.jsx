@@ -47,6 +47,33 @@ class MusicPlayer extends React.Component {
         this.audio.volume = e.target.value;
     }
 
+    //Fade in for logged out users
+    handleFadeIn() {
+        this.fadingIn = true;
+        this.audio.volume = 0;
+
+        this.fadeIn = setInterval(() => {
+            if (Math.round(this.audio.volume * 100) < this.volume.value * 99) {
+                this.audio.volume += 0.01;
+            } else {
+                this.fadingIn = false;
+                clearInterval(this.fadeIn);
+            }
+        }, 20);
+    }
+
+    //Fade out for logged out users
+    handleFadeOut() {
+        this.fadingOut = true;
+
+        this.fadeOut = setInterval(() => {
+            if (Math.round(this.audio.volume * 100) > 1) {
+                this.audio.volume -= 0.01;
+            }
+        }, 20);
+    }
+
+    //Hits db for logged in users, hits store for logged out users
     toggleSetting(opt) {
         if (this.props.currentUser) {
             this.props.toggleSetting(opt);
@@ -87,6 +114,8 @@ class MusicPlayer extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        console.log(`audio: ${this.audio.volume} | bar: ${this.volume.value}`);
+
         clearInterval(this.timeSetter);
         if (this.props.music.on) {
             if (this.props.currentTrack !== prevProps.currentTrack) {
@@ -98,10 +127,30 @@ class MusicPlayer extends React.Component {
         }
 
         if (this.props.music.playing) {
+            //Preview logic
+            if (!this.props.currentUser) {
+                const previewStart = this.audio.duration * 0.25;
+                const previewEnd = previewStart + 30;
+
+                if (this.audio.currentTime < previewStart) {
+                    this.audio.currentTime = previewStart;
+                    if (!this.fadingIn) this.handleFadeIn();
+                }
+
+                if (this.audio.currentTime > previewEnd - 5) {
+                    if (!this.fadingOut) this.handleFadeOut();
+                }
+
+                if (this.audio.currentTime > previewEnd) {
+                    this.handleNextPrev("next");
+                    clearInterval(this.fadeOut);
+                    this.fadingOut = false;
+                }
+            }
+
+            //Start playback, set scrubber interval, set next callback
             this.audio.play();
-
             this.handleInterval();
-
             this.audio.onended = () => {
                 this.handleNextPrev("next");
             };
@@ -134,7 +183,9 @@ class MusicPlayer extends React.Component {
         if (music.on) {
             var display = (
                 <div className="display">
-                    <img src={albumUrl} className="album-artwork" />
+                    <Link to={`/albums/${albumId}`}>
+                        <img src={albumUrl} className="album-artwork pointer" />
+                    </Link>
                     <div className="display-inner">
                         <div className="song-info">
                             <span className="track-title">{trackTitle}</span>
@@ -156,8 +207,14 @@ class MusicPlayer extends React.Component {
                                 type="range"
                                 min="0"
                                 max={this.state.duration}
-                                onChange={this.handleScrub.bind(this)}
-                                className="slider-input pointer"
+                                onChange={
+                                    this.props.currentUser
+                                        ? this.handleScrub.bind(this)
+                                        : () => {}
+                                }
+                                className={`slider-input${
+                                    this.props.currentUser ? " pointer" : ""
+                                }`}
                             />
                         </div>
                         <div className="times">
@@ -165,6 +222,16 @@ class MusicPlayer extends React.Component {
                             <span>-{timeFormatter(this.state.timeLeft)}</span>
                         </div>
                     </div>
+                    {this.props.currentUser ? (
+                        ""
+                    ) : (
+                        <div
+                            className="music-preview pointer"
+                            onClick={() => this.props.openSigninModal()}
+                        >
+                            PREVIEW
+                        </div>
+                    )}
                 </div>
             );
         } else {

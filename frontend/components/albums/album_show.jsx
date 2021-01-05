@@ -14,7 +14,7 @@ class AlbumShow extends Component {
         super(props);
         this.state = {
             loading: true,
-            topSongSelected: false,
+            externalSongClick: false,
             selectedTrackId: null,
             hoveredTrackId: null,
             menuTrackId: null,
@@ -71,7 +71,7 @@ class AlbumShow extends Component {
 
         if (this.props.selectedTrackId) {
             this.setState({
-                topSongSelected: true,
+                externalSongClick: true,
                 selectedTrackId: this.props.selectedTrackId,
             });
         }
@@ -91,12 +91,12 @@ class AlbumShow extends Component {
                 });
         }
 
-        if (this.state.topSongSelected && !this.state.loading) {
+        if (this.state.externalSongClick && !this.state.loading) {
             document.querySelector(".track-row.selected").scrollIntoView({
                 behavior: "smooth",
                 block: "end",
             });
-            this.setState({ topSongSelected: false });
+            this.setState({ externalSongClick: false });
         }
     }
 

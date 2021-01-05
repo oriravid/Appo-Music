@@ -13,6 +13,7 @@ import {
     toggleShuffle,
 } from "../../actions/music_actions";
 import { toggleSetting } from "../../actions/session_actions";
+import { openModal } from "../../actions/modal_actions";
 
 const mapSTP = ({ music, entities, session }) => {
     let currentTrack, currentAlbum, currentArtist;
@@ -41,6 +42,7 @@ const mapDTP = (dispatch) => ({
     toggleLoop: () => dispatch(toggleLoop()),
     toggleShuffle: () => dispatch(toggleShuffle()),
     toggleSetting: (setting) => dispatch(toggleSetting(setting)),
+    openSigninModal: () => dispatch(openModal("signin")),
 });
 
 export default connect(mapSTP, mapDTP)(MusicPlayer);
