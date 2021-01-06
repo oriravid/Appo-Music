@@ -211,6 +211,15 @@ h3 {
     }
 }
 
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 @keyframes loading {
     0% {
         opacity: 0;
@@ -222,6 +231,45 @@ h3 {
         opacity: 0;
     }
 }
+
+// welcome
+///////////////////////////////////////////////////////////////////////////////
+//import * as icons from "../utils/icons";
+/* <div id="welcome">
+    {icons.cloud()}
+    <h1>Music</h1>
+</div> */
+
+// #welcome {
+//     position: absolute;
+//     top: 0;
+//     bottom: 0;
+//     right: 0;
+//     left: 0;
+//     background-color: white;
+//     z-index: 1000;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     animation: 1s fade-out 1.25s forwards ease-in;
+//     pointer-events: none;
+// }
+
+// #welcome h1 {
+//     font-size: 58px;
+//     font-weight: 600;
+//     letter-spacing: -2px;
+//     margin-top: -2px;
+//     color: black;
+//     text-shadow: $box-shadow;
+// }
+
+// #welcome svg {
+//     width: 50px;
+//     height: 50px;
+//     -webkit-filter: drop-shadow($box-shadow);
+//     filter: drop-shadow($box-shadow);
+// }
 
 // app
 ///////////////////////////////////////////////////////////////////////////////
