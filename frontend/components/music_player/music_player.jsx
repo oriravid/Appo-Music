@@ -161,7 +161,7 @@ class MusicPlayer extends React.Component {
 
             //Start playback, set scrubber interval, set next callback
             this.audio.play();
-            this.audio.oncanplay = () => this.bufferNext();
+            // this.audio.oncanplay = () => this.bufferNext();
             this.handleInterval();
             this.audio.onended = () => {
                 this.handleNextPrev("next");
