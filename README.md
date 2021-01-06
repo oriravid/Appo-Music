@@ -13,6 +13,7 @@ Appo Music is a full-stack clone of the incredible Apple Music online streaming 
 -   Loop/shuffle functionality (setting saved for next session if logged in)
 -   "LCD" display with current playback information and relevant links to song artist & album
 -   30 Second previews for logged out users
+-   Space bar support to play/pause from keyboard
 
 <img src="/readme/musicplayer.gif">
 
@@ -54,3 +55,8 @@ Appo Music is a full-stack clone of the incredible Apple Music online streaming 
 -   Demo user provided with automatic login functionality
 
 <img src="/readme/auth.gif">
+
+## `Future Features`
+
+-  Up/arrow/enter key functionality on album/playlist pages
+-  Improved mobile compatibility
