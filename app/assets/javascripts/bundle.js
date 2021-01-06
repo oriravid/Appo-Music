@@ -2969,6 +2969,12 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
       }, 250);
     }
   }, {
+    key: "bufferNext",
+    value: function bufferNext() {
+      var music = this.props.music;
+      if (music.index + 1 < music.queue.length) new Audio(music.queue[music.index + 1].url);
+    }
+  }, {
     key: "handleScrub",
     value: function handleScrub(e) {
       this.audio.currentTime = e.target.value;
@@ -3115,6 +3121,11 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
 
 
         this.audio.play();
+
+        this.audio.oncanplay = function () {
+          return _this6.bufferNext();
+        };
+
         this.handleInterval();
 
         this.audio.onended = function () {

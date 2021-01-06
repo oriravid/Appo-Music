@@ -27,6 +27,12 @@ class MusicPlayer extends React.Component {
         }, 250);
     }
 
+    bufferNext() {
+        const { music } = this.props;
+        if (music.index + 1 < music.queue.length)
+            new Audio(music.queue[music.index + 1].url);
+    }
+
     handleScrub(e) {
         this.audio.currentTime = e.target.value;
     }
@@ -155,6 +161,7 @@ class MusicPlayer extends React.Component {
 
             //Start playback, set scrubber interval, set next callback
             this.audio.play();
+            this.audio.oncanplay = () => this.bufferNext();
             this.handleInterval();
             this.audio.onended = () => {
                 this.handleNextPrev("next");

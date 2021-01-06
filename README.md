@@ -58,5 +58,5 @@ Appo Music is a full-stack clone of the incredible Apple Music online streaming 
 
 ## `Future Features`
 
--  Up/arrow/enter key functionality on album/playlist pages
--  Improved mobile compatibility
+-   Up/arrow/enter key functionality on album/playlist pages
+-   Improved mobile compatibility
