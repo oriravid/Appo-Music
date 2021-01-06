@@ -14,8 +14,10 @@ Appo Music is a full-stack clone of the incredible Apple Music online streaming 
 * "LCD" display with current playback information and relevant links to song artist & album
 * 30 Second previews for logged out users
 
+![Image](https://appomusic.com/assets/readme/musicplayer.gif)
+
 ### Search
-* Ability to search the entire database
+* Live search the entire database
 * Results seperated by appropriate categories
 * Selecting a result leads to relevant page
 
