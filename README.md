@@ -31,18 +31,26 @@ Appo Music is a full-stack clone of the incredible Apple Music online streaming 
     -   Selecting a top songs leads to album that contains it, hightlights song, and brings it into view for easy selection
 -   Artist description modal
 
+<img src="/readme/artist.gif">
+
 ### Album Page
 
 -   Displays album track listing and information
 -   Ability to save individual songs or entire album to user library
 -   Ability to add song to playlist
 
+<img src="/readme/album.gif">
+
 ### Playlist CRUD
 
 -   User can create, rename, delete and add songs to playlist
 -   Playlist page contains all playlist song with a rotating display of their album's cover artwork
 
+<img src="/readme/playlist.gif">
+
 ### User Authentication
 
 -   Simple, yet elegant modal for user account creation and login
 -   Demo user provided with automatic login functionality
+
+<img src="/readme/auth.gif">
