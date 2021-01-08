@@ -38,6 +38,8 @@ Frontend:
 -   Displays most recent release and chronological discography
 -   Live list of top songs – calculated by play count
     -   Selecting a top songs leads to album that contains it, hightlights song, and brings it into view for easy selection
+-   Quickplay
+    -   Start playback of artist's most popular songs
 -   Artist description modal
 
 <img src="/readme/artist.gif">
