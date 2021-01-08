@@ -5,9 +5,11 @@
 Appo Music is a full-stack clone of the incredible Apple Music online streaming platform, with an aim to re-create it's core features, seamless design, and excellent user experience.
 
 Backend:
+
 -   Ruby on Rails
 
 Frontend:
+
 -   JavaScrip ES6
 -   React
 -   Redux
@@ -55,7 +57,7 @@ Frontend:
 ### Playlist CRUD
 
 -   User can create, rename, delete and add songs to playlist
--   Playlist page contains all playlist song with a rotating display of their album's cover artwork
+-   Playlist page contains all playlist songs with a rotating display of their album's cover artwork
 
 <img src="/readme/playlist.gif">
 
