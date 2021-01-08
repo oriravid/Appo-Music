@@ -3117,6 +3117,8 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
             clearInterval(this.fadeOut);
             this.fadingOut = false;
           }
+        } else {
+          this.audio.volume = this.volume.value;
         } //Start playback, set scrubber interval, set next callback
 
 
