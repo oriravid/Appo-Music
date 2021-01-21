@@ -568,6 +568,10 @@ h3 {
     justify-content: center;
 }
 
+.music-player-inner > .controls > .icon:first-child {
+    transform: rotate(270deg);
+}
+
 .music-player-inner > .display {
     flex: 2 1 40%;
     border: 1px solid $border-color;
