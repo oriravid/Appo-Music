@@ -43,17 +43,27 @@ class PlaylistShow extends Component {
 
     setCoverUrl(albums) {
         clearInterval(this.coverSetter);
-        if (!albums) return;
 
-        var albums = Object.values(albums);
+        if (!albums) return;
+        albums = Object.values(albums);
+
         this.setState({ coverUrl: albums[0].url });
 
         if (albums.length > 1) {
+            // setTimeout(() => this.albumCover.classList.add("animating"), 6500);
             this.coverSetter = setInterval(() => {
+                // setTimeout(
+                //     () => this.albumCover.classList.remove("animating"),
+                //     1000
+                // );
                 this.setState({
                     coverUrl:
                         albums[Math.floor(Math.random() * albums.length)].url,
                 });
+                // setTimeout(
+                //     () => this.albumCover.classList.add("animating"),
+                //     6500
+                // );
             }, 7500);
         }
     }
@@ -199,7 +209,11 @@ class PlaylistShow extends Component {
         return (
             <div className="album-container">
                 <div className="album-cover-container">
-                    <img className="album-cover" src={this.state.coverUrl} />
+                    <img
+                        className="album-cover playlist"
+                        src={this.state.coverUrl}
+                        // ref={(img) => (this.albumCover = img)}
+                    />
                 </div>
                 <div className="album-header-tracks">
                     <div className="album-header playlist">

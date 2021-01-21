@@ -797,6 +797,22 @@ img.album-artwork {
     box-shadow: $box-shadow-2;
 }
 
+// .album-cover.animating {
+//     animation: cover-fade 2000ms;
+// }
+
+// @keyframes cover-fade {
+//     0% {
+//         opacity: 1;
+//     }
+//     50% {
+//         opacity: 0;
+//     }
+//     100% {
+//         opacity: 1;
+//     }
+// }
+
 .album-header-tracks {
     flex: 1;
     max-width: 75%;
