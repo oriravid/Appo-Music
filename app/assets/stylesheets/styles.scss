@@ -749,6 +749,13 @@ img.album-artwork {
     opacity: 0.7;
 }
 
+.music-warning {
+    position: absolute;
+    bottom: -5px;
+    right: 0;
+    z-index: 3;
+}
+
 // Main Content
 ///////////////////////////////////////////////////////////////////////////////
 

@@ -2991,7 +2991,9 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             return _this7.props.openSigninModal();
           }
-        }, "PREVIEW"));
+        }, "PREVIEW"), !isChrome ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "music-warning"
+        }, _utils_icons__WEBPACK_IMPORTED_MODULE_1__.warning("icon ")) : "");
       } else {
         var display = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "display off"
@@ -5271,6 +5273,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "trash": () => /* binding */ trash,
 /* harmony export */   "trashOutline": () => /* binding */ trashOutline,
 /* harmony export */   "volume": () => /* binding */ volume,
+/* harmony export */   "warning": () => /* binding */ warning,
 /* harmony export */   "loader1": () => /* binding */ loader1,
 /* harmony export */   "loader2": () => /* binding */ loader2
 /* harmony export */ });
@@ -5812,6 +5815,21 @@ var volume = function volume(classes, action) {
     fill: "none"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
     d: "M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
+  }));
+};
+var warning = function warning(classes, action) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24",
+    viewBox: "0 0 24 24",
+    width: "24",
+    className: classes,
+    onClick: action
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M0 0h24v24H0z",
+    fill: "none"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
   }));
 }; //LOADER
 

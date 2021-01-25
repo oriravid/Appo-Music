@@ -270,6 +270,13 @@ class MusicPlayer extends React.Component {
                             PREVIEW
                         </div>
                     )}
+                    {!isChrome ? (
+                        <div className="music-warning">
+                            {icons.warning("icon ")}
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </div>
             );
         } else {
