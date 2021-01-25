@@ -184,6 +184,10 @@ class MusicPlayer extends React.Component {
     render() {
         const { music, currentTrack, currentAlbum, currentArtist } = this.props;
 
+        const isChrome =
+            !!window.chrome &&
+            (!!window.chrome.webstore || !!window.chrome.runtime);
+
         let trackUrl,
             trackTitle,
             albumId,
@@ -221,28 +225,40 @@ class MusicPlayer extends React.Component {
                                 </Link>
                             </span>
                         </div>
-                        <div className="slider">
-                            <input
-                                ref={(scrub) => {
-                                    this.scrub = scrub;
-                                }}
-                                type="range"
-                                min="0"
-                                max={this.state.duration}
-                                onChange={
-                                    this.props.currentUser
-                                        ? this.handleScrub.bind(this)
-                                        : () => {}
-                                }
-                                className={`slider-input${
-                                    this.props.currentUser ? " pointer" : ""
-                                }`}
-                            />
-                        </div>
-                        <div className="times">
-                            <span>{timeFormatter(this.state.currentTime)}</span>
-                            <span>-{timeFormatter(this.state.timeLeft)}</span>
-                        </div>
+                        {isChrome ? (
+                            <React.Fragment>
+                                <div className="slider">
+                                    <input
+                                        ref={(scrub) => {
+                                            this.scrub = scrub;
+                                        }}
+                                        type="range"
+                                        min="0"
+                                        max={this.state.duration}
+                                        onChange={
+                                            this.props.currentUser
+                                                ? this.handleScrub.bind(this)
+                                                : () => {}
+                                        }
+                                        className={`slider-input${
+                                            this.props.currentUser
+                                                ? " pointer"
+                                                : ""
+                                        }`}
+                                    />
+                                </div>
+                                <div className="times">
+                                    <span>
+                                        {timeFormatter(this.state.currentTime)}
+                                    </span>
+                                    <span>
+                                        -{timeFormatter(this.state.timeLeft)}
+                                    </span>
+                                </div>
+                            </React.Fragment>
+                        ) : (
+                            ""
+                        )}
                     </div>
                     {this.props.currentUser ? (
                         ""

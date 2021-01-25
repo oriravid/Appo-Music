@@ -2940,6 +2940,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           currentTrack = _this$props2.currentTrack,
           currentAlbum = _this$props2.currentAlbum,
           currentArtist = _this$props2.currentArtist;
+      var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
       var trackUrl, trackTitle, albumId, albumUrl, albumTitle, artistId, artistName;
 
       if (currentTrack) {
@@ -2972,7 +2973,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           to: "/artists/".concat(artistId)
         }, artistName), " — ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
           to: "/albums/".concat(albumId)
-        }, albumTitle))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, albumTitle))), isChrome ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "slider"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           ref: function ref(scrub) {
@@ -2985,7 +2986,7 @@ var MusicPlayer = /*#__PURE__*/function (_React$Component) {
           className: "slider-input".concat(this.props.currentUser ? " pointer" : "")
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "times"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.currentTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "-", (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.timeLeft)))), this.props.currentUser ? "" : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.currentTime)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "-", (0,_utils_various__WEBPACK_IMPORTED_MODULE_2__.timeFormatter)(this.state.timeLeft)))) : ""), this.props.currentUser ? "" : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "music-preview pointer",
           onClick: function onClick() {
             return _this7.props.openSigninModal();
