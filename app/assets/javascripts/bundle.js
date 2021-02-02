@@ -1290,12 +1290,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _nav_nav_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav/nav_container */ "./frontend/components/nav/nav_container.js");
-/* harmony import */ var _main_main_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./main/main_container */ "./frontend/components/main/main_container.js");
-/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
-/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/various */ "./frontend/utils/various.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
+/* harmony import */ var _nav_nav_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./nav/nav_container */ "./frontend/components/nav/nav_container.js");
+/* harmony import */ var _main_main_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./main/main_container */ "./frontend/components/main/main_container.js");
+/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
+/* harmony import */ var _utils_various__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/various */ "./frontend/utils/various.js");
 //ext
+
 
  //int - components
 
@@ -1305,16 +1307,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
-  (0,_utils_various__WEBPACK_IMPORTED_MODULE_4__.consoleArt)();
+  //console artwork render
+  (0,_utils_various__WEBPACK_IMPORTED_MODULE_5__.consoleArt)(); //google analytics
+
+  var initializeReactGA = function initializeReactGA() {
+    react_ga__WEBPACK_IMPORTED_MODULE_1__.default.initialize("G-M13FPZ170P");
+    react_ga__WEBPACK_IMPORTED_MODULE_1__.default.pageview("/");
+  };
+
+  initializeReactGA(); //change google analytics pageview on history change
+
+  (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useHistory)().listen(function (history) {
+    ga("set", "page", history.pathname);
+    ga("send", "pageview");
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "app"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/",
-    component: _nav_nav_container__WEBPACK_IMPORTED_MODULE_1__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+    component: _nav_nav_container__WEBPACK_IMPORTED_MODULE_2__.default
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Route, {
     path: "/",
-    component: _main_main_container__WEBPACK_IMPORTED_MODULE_2__.default
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_3__.default, null));
+    component: _main_main_container__WEBPACK_IMPORTED_MODULE_3__.default
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_4__.default, null));
 });
 
 /***/ }),
@@ -3263,7 +3278,7 @@ var Nav = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "nav"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-        to: "/"
+        to: "/browse"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "logo"
       }, _utils_icons__WEBPACK_IMPORTED_MODULE_3__.cloud(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Music"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_search_container__WEBPACK_IMPORTED_MODULE_1__.default, null), display);
@@ -4458,23 +4473,14 @@ var mapDTP = function mapDTP(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_ga__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-ga */ "./node_modules/react-ga/dist/esm/index.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
+/* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 //ext
-
 
  //int
 
 
 
-
-var initializeReactGA = function initializeReactGA() {
-  react_ga__WEBPACK_IMPORTED_MODULE_2__.default.initialize("2273514016");
-  react_ga__WEBPACK_IMPORTED_MODULE_2__.default.pageview("/");
-};
-
-initializeReactGA();
 document.addEventListener("DOMContentLoaded", function () {
   var preloadedState = undefined;
 
@@ -4487,8 +4493,8 @@ document.addEventListener("DOMContentLoaded", function () {
     delete window.currentUser;
   }
 
-  var store = (0,_store_store__WEBPACK_IMPORTED_MODULE_3__.default)(preloadedState);
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_4__.default, {
+  var store = (0,_store_store__WEBPACK_IMPORTED_MODULE_2__.default)(preloadedState);
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__.default, {
     store: store
   }), document.getElementById("root"));
 });

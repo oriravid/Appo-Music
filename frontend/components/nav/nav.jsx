@@ -100,7 +100,7 @@ class Nav extends Component {
 
         return (
             <div className="nav">
-                <Link to="/">
+                <Link to="/browse">
                     <div className="logo">
                         {icons.cloud()}
                         <h1>Music</h1>

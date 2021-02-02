@@ -1,6 +1,7 @@
 //ext
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
+import ReactGA from "react-ga";
 //int - components
 import NavContainer from "./nav/nav_container";
 import MainContainer from "./main/main_container";
@@ -9,7 +10,21 @@ import Modal from "./modal/modal";
 import { consoleArt } from "../utils/various";
 
 export default () => {
+    //console artwork render
     consoleArt();
+
+    //google analytics
+    const initializeReactGA = () => {
+        ReactGA.initialize("G-M13FPZ170P");
+        ReactGA.pageview("/");
+    };
+    initializeReactGA();
+
+    //change google analytics pageview on history change
+    useHistory().listen((history) => {
+        ga("set", "page", history.pathname);
+        ga("send", "pageview");
+    });
 
     return (
         <div className="app">
