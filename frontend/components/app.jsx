@@ -15,7 +15,7 @@ export default () => {
 
     //google analytics
     const initializeReactGA = () => {
-        ReactGA.initialize("G-M13FPZ170P");
+        ReactGA.initialize("UA-50867458-2");
         ReactGA.pageview("/");
     };
     initializeReactGA();
