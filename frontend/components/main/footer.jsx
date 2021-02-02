@@ -13,8 +13,8 @@ const Footer = ({ openModal }) => {
     return (
         <footer>
             <p className="copyright">
-                Copyright © 2020 <a onClick={handleClick}>Appo Inc.</a> All
-                rights reserved.
+                Copyright © {new Date().getFullYear()}{" "}
+                <a onClick={handleClick}>Appo Inc.</a> All rights reserved.
             </p>
             <ul className="footer-links">
                 <li className="footer-link">

@@ -168,76 +168,76 @@
     align-items: center;
     text-align: center;
     width: 800px;
-    // height: 560px;
-}
 
-.modal-container.about a {
-    transition: all 0.5s;
-}
+    > * {
+        max-width: 55%;
+    }
 
-.about-header {
-    text-align: center;
-    border-bottom: 2px solid $border-color;
-    margin-bottom: 25px;
-    animation-name: fade-in;
-    animation-duration: 1.5s;
-}
+    .about-header {
+        text-align: center;
+        border-bottom: 2px solid $border-color;
+        margin-bottom: 25px;
+        animation-name: fade-in;
+        animation-duration: 1.5s;
 
-.about-header svg {
-    height: 55px;
-    width: 55px;
-    opacity: 0.5;
-    -webkit-filter: drop-shadow($box-shadow);
-    filter: drop-shadow($box-shadow);
-}
+        svg {
+            height: 55px;
+            width: 55px;
+            opacity: 0.5;
+            -webkit-filter: drop-shadow($box-shadow);
+            filter: drop-shadow($box-shadow);
+        }
 
-.about-header h1 {
-    color: $main-color;
-    margin-bottom: 15px;
-}
+        h1 {
+            color: $main-color;
+            margin-bottom: 15px;
+        }
 
-.about-header h2 {
-    font-weight: 700;
-    font-size: 17px;
-    margin-bottom: 25px;
-    color: $gray-text;
-    text-transform: uppercase;
-    letter-spacing: 1.25px;
-}
+        h2 {
+            font-weight: 700;
+            font-size: 17px;
+            margin-bottom: 25px;
+            color: $gray-text;
+            text-transform: uppercase;
+            letter-spacing: 1.25px;
+        }
+    }
 
-.about-description {
-    border-bottom: 1px solid $border-color;
-    margin-bottom: 25px;
-}
+    .about-description {
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 25px;
 
-.about-description,
-.about-contact {
-    max-width: 55%;
-}
+        p {
+            margin-bottom: 20px;
+        }
 
-.about-description p {
-    margin-bottom: 20px;
-}
+        p:last-child {
+            margin-bottom: 25px;
+        }
+    }
 
-.about-description p:last-child {
-    margin-bottom: 25px;
-}
+    .about-contact {
+        margin-bottom: 15px;
 
-.about-contact {
-    margin-bottom: 15px;
-}
+        .thank-you {
+            font-weight: 600;
+        }
 
-.about-contact .thank-you {
-    font-weight: 600;
-}
+        span {
+            display: block;
+            margin-bottom: 15px;
+        }
 
-.about-contact span {
-    display: block;
-    margin-bottom: 15px;
-}
+        .button-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-.about-contact .btn {
-    max-width: 150px;
-    padding: 20px 0;
-    margin: 0 auto;
+            .btn {
+                margin: 0 5px;
+                max-width: 150px;
+                padding: 20px 0;
+            }
+        }
+    }
 }
