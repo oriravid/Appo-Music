@@ -39,18 +39,41 @@ const About = () => {
                     Thank you kindly for taking the time to view Appo Music!
                 </span>
                 <span>Please feel free to reach out :)</span>
-                <div className="button-group">
-                    <a
-                        href="https://www.oriravid.com"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <div className="btn pointer">Website</div>
-                    </a>
-                    <a href="mailto:ori@oriravid.com">
-                        <div className="btn pointer">E-Mail</div>
-                    </a>
-                </div>
+                <ul>
+                    <li>
+                        <a href="mailto:ori@oriravid.com">E-Mail</a>
+                    </li>
+                    <li>•</li>
+                    <li>
+                        <a
+                            href="https://www.oriravid.com"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Portfolio
+                        </a>
+                    </li>
+                    <li>•</li>
+                    <li>
+                        <a
+                            href="https://www.linkedin.com/in/oriravid/"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            LinkedIn
+                        </a>
+                    </li>
+                    <li>•</li>
+                    <li>
+                        <a
+                            href="https://github.com/oriravid"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            GitHub
+                        </a>
+                    </li>
+                </ul>
             </div>
         </React.Fragment>
     );

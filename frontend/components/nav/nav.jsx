@@ -35,6 +35,13 @@ class Nav extends Component {
                                     <span>Browse</span>
                                 </li>
                             </NavLink>
+                            <li
+                                className="nav-section-list-item pointer"
+                                onClick={() => this.props.openModal("about")}
+                            >
+                                {icons.about("icon color")}
+                                <span>About</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -75,6 +82,13 @@ class Nav extends Component {
                                     <span>Browse</span>
                                 </li>
                             </NavLink>
+                            <li
+                                className="nav-section-list-item pointer"
+                                onClick={() => this.props.openModal("about")}
+                            >
+                                {icons.about("icon color")}
+                                <span>About</span>
+                            </li>
                             <li
                                 className="nav-section-list-item pointer"
                                 onClick={this.handleSignin.bind(this)}

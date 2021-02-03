@@ -173,6 +173,14 @@
         max-width: 55%;
     }
 
+    a {
+        transition: 0.2s;
+
+        &:hover {
+            color: $text-color;
+        }
+    }
+
     .about-header {
         text-align: center;
         border-bottom: 2px solid $border-color;
@@ -228,15 +236,13 @@
             margin-bottom: 15px;
         }
 
-        .button-group {
+        ul {
             display: flex;
             align-items: center;
             justify-content: center;
 
-            .btn {
+            li {
                 margin: 0 5px;
-                max-width: 150px;
-                padding: 20px 0;
             }
         }
     }

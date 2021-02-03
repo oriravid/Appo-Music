@@ -4,6 +4,24 @@ import React from "react";
 // export const MED = "0 0 30 30";
 // export const SML = "0 0 24 24";
 
+export const about = (classes) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        enable-background="new 0 0 24 24"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        className={classes}
+    >
+        <g>
+            <path d="M0,0h24v24H0V0z" fill="none" />
+        </g>
+        <g>
+            <path d="M16,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V8L16,3z M19,19H5V5h10v4h4V19z M7,17h10v-2H7V17z M12,7H7 v2h5V7z M7,13h10v-2H7V13z" />
+        </g>
+    </svg>
+);
+
 export const add = (classes, action) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -190,6 +208,19 @@ export const go = (classes) => (
             <rect fill="none" height="24" width="24" />
             <path d="M12,4c4.41,0,8,3.59,8,8s-3.59,8-8,8s-8-3.59-8-8S7.59,4,12,4 M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10 c5.52,0,10-4.48,10-10C22,6.48,17.52,2,12,2L12,2z M13,12l0-4h-2l0,4H8l4,4l4-4H13z" />
         </g>
+    </svg>
+);
+
+export const help = (classes) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        className={classes}
+    >
+        <path d="M0 0h24v24H0V0z" fill="none" />
+        <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z" />
     </svg>
 );
 
