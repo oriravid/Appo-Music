@@ -41,10 +41,6 @@ const About = () => {
                 <span>Please feel free to reach out :)</span>
                 <ul>
                     <li>
-                        <a href="mailto:ori@oriravid.com">E-Mail</a>
-                    </li>
-                    <li>•</li>
-                    <li>
                         <a
                             href="https://www.oriravid.com"
                             target="_blank"
